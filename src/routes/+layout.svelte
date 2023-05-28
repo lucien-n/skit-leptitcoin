@@ -1,10 +1,20 @@
-<script lang='ts'>
-	// The ordering of these imports is critical to your app working properly
+<script lang="ts">
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
+
+	import { Toast, Modal, AppShell } from '@skeletonlabs/skeleton';
+	import NavigationBar from '$lib/components/NavigationBar.svelte';
 </script>
 
-<slot />
+<svelte:head><title>LePtitCoin</title></svelte:head>
+
+<Toast position="tr" />
+<Modal />
+
+<AppShell>
+	<svelte:fragment slot="header">
+		<NavigationBar />
+	</svelte:fragment>
+	<slot />
+</AppShell>
