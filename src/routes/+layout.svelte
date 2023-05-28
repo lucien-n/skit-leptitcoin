@@ -2,6 +2,7 @@
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
+	import '../dark-theme.postcss';
 
 	import { Toast, Modal, AppShell } from '@skeletonlabs/skeleton';
 	import NavigationBar from '$lib/components/NavigationBar.svelte';
