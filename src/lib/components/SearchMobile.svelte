@@ -97,8 +97,8 @@
 		{#if showAdvancedSearchOption}
 			<div class="p-2 visible md:hidden mt-4 gap-4">
 				<label for="price" class="h3 py-1">Price</label>
-				<section id="price" class="input-group grid-cols-12">
-					<div class="input-group-shim">
+				<section id="price" class="input-group grid-cols-6">
+					<div class="input-group-shim col-span-1">
 						<label for="minimum-price">Min</label>
 					</div>
 					<input
@@ -108,11 +108,11 @@
 						step="5"
 						id="minimum-price"
 						placeholder="Min"
-						class="col-span-5"
+						class="col-span-2"
 						aria-label="minimum price (in euros)"
 						tabindex="3"
 					/>
-					<div class="input-group-shim">
+					<div class="input-group-shim col-span-1">
 						<label for="maximum-price">Max</label>
 					</div>
 					<input
@@ -121,7 +121,7 @@
 						min="5"
 						step="5"
 						id="maximum-price"
-						class="col-span-5"
+						class="col-span-2"
 						placeholder="Max"
 						aria-label="maximum price (in euros)"
 						tabindex="4"
