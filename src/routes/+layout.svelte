@@ -2,7 +2,10 @@
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
+<<<<<<< HEAD
 	import '../dark-theme.postcss';
+=======
+>>>>>>> bee74c2 (wip: navbar)
 
 	import { Toast, Modal, AppShell } from '@skeletonlabs/skeleton';
 	import NavigationBar from '$lib/components/NavigationBar.svelte';
