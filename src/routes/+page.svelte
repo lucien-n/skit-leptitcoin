@@ -1,6 +1,42 @@
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Le Ptit Coin - FKIT Stack</h1>
-		<p>Leboncoin wanna be</p>
-	</div>
+<script lang="ts">
+	import { listingsStore, searchStore } from '$lib/store';
+	import type { ListingProp } from '$lib/types/listing';
+	import Listing from '$lib/components/Listing.svelte';
+
+	export let data;
+	listingsStore.set(data.listings);
+
+	let getListings: Promise<ListingProp[]>;
+
+	async function filterListings(
+		params: SearchParams
+	): Promise<ListingProp[]> {
+		let filteredListings: ListingProp[] = [];
+
+		let _ = listingsStore.subscribe((listings) => {
+			filteredListings = listings.filter((listing) => {
+				return true;
+			});
+		});
+		return filteredListings;
+	}
+
+	const _ = searchStore.subscribe((params: SearchParams) => {
+		getListings = filterListings(params);
+	});
+</script>
+
+<div class="container h-full mx-auto flex mt-10">
+	<section
+		id="listings"
+		class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 h-fit"
+	>
+		{#await getListings}
+			<h1>Searching listings</h1>
+		{:then listings}
+			{#each listings as listing}
+				<Listing {listing} />
+			{/each}
+		{/await}
+	</section>
 </div>

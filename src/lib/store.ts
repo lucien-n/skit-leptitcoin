@@ -1,11 +1,5 @@
 import { writable, type Writable } from "svelte/store";
+import type { ListingProp } from "$lib/types/listing";
 
 export const searchStore: Writable<SearchParams> = writable({})
-
-
-interface SearchParams {
-    search?: string,
-    category?: string,
-    price_min?: number,
-    price_max?: number
-}
+export const listingsStore: Writable<ListingProp[]> = writable([])

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
+	import CategorySelector from './CategorySelector.svelte';
 
 	export let showAdvancedSearchOption: boolean = false;
 
@@ -129,19 +130,7 @@
 				</section>
 				<label for="category" class="h3 py-1">Category</label>
 				<section id="category">
-					<select
-						class="select"
-						name="category"
-						id="category-select"
-						tabindex="5"
-						bind:value={$searchStore.category}
-					>
-						<option value="vehicles">Vehicles</option>
-						<option value="fashion">Fashion</option>
-						<option value="housing">Housing</option>
-						<option value="multimedia">Multimedia</option>
-						<option value="recreational">Recreational</option>
-					</select>
+					<CategorySelector bind:value={$searchStore.category} />
 				</section>
 			</div>
 			<hr />

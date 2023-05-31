@@ -4,7 +4,7 @@
 
 <form
 	class="flex flex-col gap-6 card p-5 w-1/4"
-	action="/auth/signin"
+	action="/auth?/signup"
 	method="POST"
 >
 	<p class="text-center">

@@ -47,7 +47,7 @@
 							d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"
 						/><path d="M9 22V12h6v10" /></svg
 					>
-					<h4 class="h4 hidden md:visible">LePtitCoin</h4>
+					<h4 class="h4 hidden md:flex">LePtitCoin</h4>
 				</a>
 			</div>
 		</svelte:fragment>
@@ -56,6 +56,25 @@
 		<SearchMobile />
 
 		<svelte:fragment slot="trail">
+			<div class="hidden md:flex flex-row items-center gap-2">
+				<a href="/new" class="flex items-center gap-2">
+					<svg
+						data-testid="geist-icon"
+						fill="none"
+						height="24"
+						shape-rendering="geometricPrecision"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="1.5"
+						viewBox="0 0 24 24"
+						width="24"
+						style="color:var(--geist-foreground)"
+						><path d="M12 5v14" /><path d="M5 12h14" /></svg
+					>
+					<h4 class="h4 mb-[1px] hidden md:flex">New</h4>
+				</a>
+			</div>
 			<div class="hidden md:flex flex-row items-center gap-2">
 				<a href="/auth/signin" class="flex items-center gap-1">
 					<svg
@@ -74,7 +93,7 @@
 							d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
 						/><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /></svg
 					>
-					<h4 class="h4 mb-[1px] hidden md:visible">Sign In</h4>
+					<h4 class="h4 mb-[1px] hidden md:flex">Sign In</h4>
 				</a>
 			</div>
 		</svelte:fragment>
