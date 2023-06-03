@@ -2,6 +2,7 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
+	import { userStore } from '$lib/store';
 
 	function openDrawer(): void {
 		drawerStore.open();
@@ -56,46 +57,75 @@
 		<SearchMobile />
 
 		<svelte:fragment slot="trail">
-			<div class="hidden md:flex flex-row items-center gap-2">
-				<a href="/new" class="flex items-center gap-2">
-					<svg
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground)"
-						><path d="M12 5v14" /><path d="M5 12h14" /></svg
-					>
-					<h4 class="h4 mb-[1px] hidden md:flex">New</h4>
-				</a>
-			</div>
-			<div class="hidden md:flex flex-row items-center gap-2">
-				<a href="/auth/signin" class="flex items-center gap-1">
-					<svg
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground)"
-						><path
-							d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
-						/><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /></svg
-					>
-					<h4 class="h4 mb-[1px] hidden md:flex">Sign In</h4>
-				</a>
-			</div>
+			{#if $userStore}
+				<div class="hidden md:flex flex-row items-center gap-2">
+					<a href="/new" class="flex items-center gap-2">
+						<svg
+							data-testid="geist-icon"
+							fill="none"
+							height="24"
+							shape-rendering="geometricPrecision"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							width="24"
+							style="color:var(--geist-foreground)"
+							><path d="M12 5v14" /><path d="M5 12h14" /></svg
+						>
+						<h4 class="h4 mb-[1px] hidden md:flex">New</h4>
+					</a>
+				</div>
+				<div class="hidden md:flex flex-row items-center gap-2">
+					<button class="flex items-center gap-1">
+						<svg
+							data-testid="geist-icon"
+							fill="none"
+							height="24"
+							shape-rendering="geometricPrecision"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							width="24"
+							style="color:var(--geist-foreground)"
+							><path
+								d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
+							/><path d="M10 17l5-5-5-5" /><path
+								d="M15 12H3"
+							/></svg
+						>
+						<h4 class="h4 mb-[1px] hidden md:flex">Sign Out</h4>
+					</button>
+				</div>
+			{/if}
+			{#if !$userStore}
+				<div class="hidden md:flex flex-row items-center gap-2">
+					<a href="/auth/signin" class="flex items-center gap-1">
+						<svg
+							data-testid="geist-icon"
+							fill="none"
+							height="24"
+							shape-rendering="geometricPrecision"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							width="24"
+							style="color:var(--geist-foreground)"
+							><path
+								d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
+							/><path d="M10 17l5-5-5-5" /><path
+								d="M15 12H3"
+							/></svg
+						>
+						<h4 class="h4 mb-[1px] hidden md:flex">Sign In</h4>
+					</a>
+				</div>
+			{/if}
 		</svelte:fragment>
 	</AppBar>
 </nav>

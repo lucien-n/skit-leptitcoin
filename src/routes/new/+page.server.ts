@@ -3,12 +3,6 @@ import type { ListingProp } from '$lib/types/listing.js';
 import { redirect } from '@sveltejs/kit';
 import { to_number } from 'svelte/internal';
 
-export function load({ locals }) {
-    if (!locals.user) {
-        throw redirect(307, '/auth/signin')
-    }
-}
-
 export const actions = {
     new: async ({ cookies, request }) => {
         const data = await request.formData();

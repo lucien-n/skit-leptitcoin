@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CategorySelector from '$lib/components/CategorySelector.svelte';
 </script>
 
 <div class="w-full h-full flex md:items-center justify-center">
