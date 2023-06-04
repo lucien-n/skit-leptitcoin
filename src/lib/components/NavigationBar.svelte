@@ -3,9 +3,15 @@
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
 	import { isLoggedIn, userStore } from '$lib/store';
+	import { signOut } from '@firebase/auth';
+	import { auth } from '$lib/firebase';
 
 	function openDrawer(): void {
 		drawerStore.open();
+	}
+
+	function logout() {
+		signOut(auth);
 	}
 </script>
 
@@ -78,7 +84,7 @@
 					</a>
 				</div>
 				<div class="hidden md:flex flex-row items-center gap-2">
-					<button class="flex items-center gap-1">
+					<button class="flex items-center gap-1" on:click={logout}>
 						<svg
 							data-testid="geist-icon"
 							fill="none"

@@ -10,7 +10,8 @@
 		<img
 			src={listing.images
 				? listing.images[0]
-				: 'https://placehold.co/600x400/000000/FFFFFF'}
+				: 'https://placehold.co/600x400/000000/FFFFFF?text=' +
+				  listing.title.split(' ')[0]}
 			alt="listing"
 		/>
 	</header>

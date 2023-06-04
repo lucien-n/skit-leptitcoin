@@ -2,22 +2,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from '@firebase/auth'
 import { getFirestore } from '@firebase/firestore'
-import {
-    FB_API_KEY,
-    FB_AUTH_DOMAIN,
-    FB_PROJECT_ID,
-    FB_STORAGE_BUCKET,
-    FB_MESSAGING_SENDER_ID,
-    FB_APP_ID
-} from '$env/static/private'
 
 const firebaseConfig = {
-    apiKey: FB_API_KEY,
-    authDomain: FB_AUTH_DOMAIN,
-    projectId: FB_PROJECT_ID,
-    storageBucket: FB_STORAGE_BUCKET,
-    messagingSenderId: FB_MESSAGING_SENDER_ID,
-    appId: FB_APP_ID
+    apiKey: "AIzaSyB8Pp3t1YyopjCattnoPfZJv9k5_6ShU4Q",
+    authDomain: "fkit-le-ptit-coin.firebaseapp.com",
+    projectId: "fkit-le-ptit-coin",
+    storageBucket: "fkit-le-ptit-coin.appspot.com",
+    messagingSenderId: "279879282715",
+    appId: "1:279879282715:web:94645318f83d917ad048be"
 };
 
 // Initialize Firebase
