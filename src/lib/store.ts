@@ -5,3 +5,4 @@ export const searchStore: Writable<SearchParams> = writable({})
 export const listingsStore: Writable<ListingProp[]> = writable([])
 
 export const userStore = writable({})
+export const isLoggedIn = writable(false)

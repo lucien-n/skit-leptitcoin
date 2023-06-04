@@ -1,12 +1,33 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { auth } from '$lib/firebase';
+	import { isLoggedIn, userStore } from '$lib/store';
+	import { createUserWithEmailAndPassword } from '@firebase/auth';
 	let showPassword: boolean = false;
+
+	let email: string;
+	let password: string;
+
+	async function signUp() {
+		const user = await createUserWithEmailAndPassword(
+			auth,
+			email,
+			password
+		);
+
+		userStore.set(user);
+		isLoggedIn.set(true);
+
+		goto('/');
+	}
+
+	function handlePasswordChange(e: any) {
+		if (e.target == null) return;
+		password += e.target.value;
+	}
 </script>
 
-<form
-	class="flex flex-col gap-6 card p-5 w-1/4"
-	action="/auth?/signup"
-	method="POST"
->
+<form class="flex flex-col gap-6 card p-5 w-1/4">
 	<p class="text-center">
 		Already have an account yet? <a href="/auth/signin" class="anchor"
 			>Sign In.</a
@@ -23,6 +44,7 @@
 			autofocus
 			autocomplete="email"
 			required
+			bind:value={email}
 		/>
 	</section>
 
@@ -36,6 +58,7 @@
 				class="w-full"
 				autocomplete="current-password"
 				required
+				on:input={handlePasswordChange}
 			/>
 			<button
 				type="button"
@@ -80,7 +103,9 @@
 		</div>
 	</section>
 
-	<button type="submit" class="btn variant-ghost-surface w-fit mx-auto"
-		>Sign Up</button
+	<button
+		type="button"
+		on:click={signUp}
+		class="btn variant-ghost-surface w-fit mx-auto">Sign Up</button
 	>
 </form>

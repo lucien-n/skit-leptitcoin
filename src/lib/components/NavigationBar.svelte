@@ -2,7 +2,7 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
-	import { userStore } from '$lib/store';
+	import { isLoggedIn, userStore } from '$lib/store';
 
 	function openDrawer(): void {
 		drawerStore.open();
@@ -57,7 +57,7 @@
 		<SearchMobile />
 
 		<svelte:fragment slot="trail">
-			{#if $userStore}
+			{#if $isLoggedIn}
 				<div class="hidden md:flex flex-row items-center gap-2">
 					<a href="/new" class="flex items-center gap-2">
 						<svg
@@ -101,7 +101,7 @@
 					</button>
 				</div>
 			{/if}
-			{#if !$userStore}
+			{#if !$isLoggedIn}
 				<div class="hidden md:flex flex-row items-center gap-2">
 					<a href="/auth/signin" class="flex items-center gap-1">
 						<svg
