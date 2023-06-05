@@ -3,6 +3,7 @@
 	import { auth } from '$lib/firebase';
 	import { isLoggedIn, userStore } from '$lib/store';
 	import { signInWithEmailAndPassword } from '@firebase/auth';
+	import { toastStore } from '@skeletonlabs/skeleton';
 	let showPassword: boolean = false;
 
 	let email: string;
@@ -17,6 +18,12 @@
 
 		userStore.set(user_credentials.user);
 		isLoggedIn.set(true);
+
+		toastStore.trigger({
+			message: 'Logged in!',
+			background: 'variant-glass-success',
+			autohide: true,
+		});
 
 		goto('/');
 	}
