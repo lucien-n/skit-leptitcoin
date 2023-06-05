@@ -21,7 +21,7 @@
 					d="M9 22V12h6v10"
 				/></svg
 			>
-			<h4 class="h4">LePtitCoin</h4>
+			<h4 class="h4 hidden">LePtitCoin</h4>
 		</DrawerLink>
 		<DrawerLink href="/auth/signin">
 			<svg
@@ -40,7 +40,7 @@
 					d="M10 17l5-5-5-5"
 				/><path d="M15 12H3" /></svg
 			>
-			<h4 class="h4 mb-[1px]">Sign In</h4>
+			<h4 class="h4 mb-[1px] hidden">Sign In</h4>
 		</DrawerLink>
 	</ul>
 </nav>

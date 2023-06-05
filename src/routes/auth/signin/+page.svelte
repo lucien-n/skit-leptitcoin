@@ -9,9 +9,13 @@
 	let password: string;
 
 	async function signIn() {
-		const user = await signInWithEmailAndPassword(auth, email, password);
+		const user_credentials = await signInWithEmailAndPassword(
+			auth,
+			email,
+			password
+		);
 
-		userStore.set(user);
+		userStore.set(user_credentials.user);
 		isLoggedIn.set(true);
 
 		goto('/');

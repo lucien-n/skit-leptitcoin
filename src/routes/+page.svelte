@@ -29,7 +29,7 @@
 <div class="container h-full mx-auto flex mt-10">
 	<section
 		id="listings"
-		class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 h-fit"
+		class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 h-fit"
 	>
 		{#await getListings}
 			<h1>Searching listings</h1>

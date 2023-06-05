@@ -6,12 +6,16 @@
 	import { signOut } from '@firebase/auth';
 	import { auth } from '$lib/firebase';
 
+	const hideActionText = true;
+
 	function openDrawer(): void {
 		drawerStore.open();
 	}
 
 	function logout() {
 		signOut(auth);
+		userStore.set({});
+		isLoggedIn.set(false);
 	}
 </script>
 
@@ -27,7 +31,7 @@
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="h-7 w-7"
+							class="w-8 h-8"
 						>
 							<path
 								stroke-linecap="round"
@@ -50,11 +54,12 @@
 						viewBox="0 0 24 24"
 						width="24"
 						style="color:var(--geist-foreground)"
+						class="w-8 h-8"
 						><path
 							d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"
 						/><path d="M9 22V12h6v10" /></svg
 					>
-					<h4 class="h4 hidden md:flex">LePtitCoin</h4>
+					<h4 class="h4" class:hidden={hideActionText}>LePtitCoin</h4>
 				</a>
 			</div>
 		</svelte:fragment>
@@ -78,9 +83,12 @@
 							viewBox="0 0 24 24"
 							width="24"
 							style="color:var(--geist-foreground)"
+							class="w-8 h-8"
 							><path d="M12 5v14" /><path d="M5 12h14" /></svg
 						>
-						<h4 class="h4 mb-[1px] hidden md:flex">New</h4>
+						<h4 class="h4 mb-[1px]" class:hidden={hideActionText}>
+							New
+						</h4>
 					</a>
 				</div>
 				<div class="hidden md:flex flex-row items-center gap-2">
@@ -96,18 +104,20 @@
 							stroke-width="1.5"
 							viewBox="0 0 24 24"
 							width="24"
-							style="color:var(--geist-foreground)"
+							style="color:var(--geist-foreground);width:24px;height:24px"
+							class="w-8 h-8"
 							><path
-								d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
-							/><path d="M10 17l5-5-5-5" /><path
-								d="M15 12H3"
+								d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"
+							/><path d="M16 17l5-5-5-5" /><path
+								d="M21 12H9"
 							/></svg
 						>
-						<h4 class="h4 mb-[1px] hidden md:flex">Sign Out</h4>
+						<h4 class="h4 mb-[1px]" class:hidden={hideActionText}>
+							Sign Out
+						</h4>
 					</button>
 				</div>
-			{/if}
-			{#if !$isLoggedIn}
+			{:else}
 				<div class="hidden md:flex flex-row items-center gap-2">
 					<a href="/auth/signin" class="flex items-center gap-1">
 						<svg
@@ -122,13 +132,16 @@
 							viewBox="0 0 24 24"
 							width="24"
 							style="color:var(--geist-foreground)"
+							class="w-8 h-8"
 							><path
 								d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
 							/><path d="M10 17l5-5-5-5" /><path
 								d="M15 12H3"
 							/></svg
 						>
-						<h4 class="h4 mb-[1px] hidden md:flex">Sign In</h4>
+						<h4 class="h4 mb-[1px]" class:hidden={hideActionText}>
+							Sign In
+						</h4>
 					</a>
 				</div>
 			{/if}

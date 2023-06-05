@@ -9,13 +9,13 @@
 	let password: string;
 
 	async function signUp() {
-		const user = await createUserWithEmailAndPassword(
+		const user_credentials = await createUserWithEmailAndPassword(
 			auth,
 			email,
 			password
 		);
 
-		userStore.set(user);
+		userStore.set(user_credentials.user);
 		isLoggedIn.set(true);
 
 		goto('/');
