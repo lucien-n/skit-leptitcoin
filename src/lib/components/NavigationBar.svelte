@@ -2,7 +2,7 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
-	import { isLoggedIn, userStore } from '$lib/store';
+	import { isLoggedIn } from '$lib/store';
 	import { signOut } from '@firebase/auth';
 	import { auth } from '$lib/firebase';
 
@@ -14,8 +14,6 @@
 
 	function logout() {
 		signOut(auth);
-		userStore.set({});
-		isLoggedIn.set(false);
 	}
 </script>
 

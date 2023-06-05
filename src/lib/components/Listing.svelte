@@ -33,7 +33,7 @@
 				{listing.category}
 			</p>
 			<p>
-				{listing.author_id} - {formatDate(listing.created_at)}
+				{listing.author_name} - {formatDate(listing.created_at)}
 			</p>
 		</div>
 	</div>

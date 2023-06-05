@@ -1,5 +1,5 @@
 import type { ListingProp } from '$lib/types/listing';
-import { fs } from '$lib/firebase';
+import { auth, fs } from '$lib/firebase';
 import {
     collection,
     doc,
@@ -14,14 +14,17 @@ export async function getFireListings(): Promise<ListingProp[]> {
 
     const q = query(collection(fs, 'listings'));
     const querySnap = await getDocs(q);
+
+    const author_name = "";
+
     querySnap.forEach((doc) => {
         const listing: ListingProp = {
             id: doc.get('id'),
             author_id: doc.get('author_id'),
+            author_name: author_name,
             category: doc.get('category'),
             title: doc.get('title'),
             price: doc.get('price'),
-
             description: doc.get('description'),
             images: doc.get('images'),
             created_at: doc.get('created_at'),

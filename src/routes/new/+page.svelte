@@ -1,4 +1,43 @@
 <script lang="ts">
+	import { postFireListing } from '$lib/firestore.js';
+	import { isLoggedIn, userStore } from '$lib/store';
+	import type { ListingProp } from '$lib/types/listing.js';
+	import { toastStore } from '@skeletonlabs/skeleton';
+
+	let title: string;
+	let description: string;
+	let price: number;
+	let category: string;
+
+	function postListing() {
+		if (!$isLoggedIn) {
+			toastStore.trigger({
+				message: 'You must be logged in',
+				background: 'bg-variant-error',
+				autohide: true,
+			});
+			return;
+		}
+
+		if (
+			title === undefined ||
+			category === undefined ||
+			price === undefined
+		)
+			return;
+
+		const listing: ListingProp = {
+			id: new Date().getTime().toString(),
+			author_id: $userStore.uid,
+			title: title,
+			description: description,
+			price: price,
+			category: category,
+			created_at: new Date().getTime(),
+		};
+
+		postFireListing(listing);
+	}
 </script>
 
 <div class="w-full h-full flex md:items-center justify-center">
@@ -10,7 +49,13 @@
 	>
 		<section>
 			<label for="title">Title</label>
-			<input type="text" id="title" name="title" class="input" />
+			<input
+				type="text"
+				id="title"
+				name="title"
+				class="input"
+				bind:value={title}
+			/>
 		</section>
 		<section>
 			<label for="description">Description</label>
@@ -19,16 +64,27 @@
 				id="description"
 				rows="5"
 				class="textarea"
+				bind:value={description}
 			/>
 		</section>
 		<section>
 			<label for="price">Price (€)</label>
-			<input type="number" id="price" name="price" class="input" />
+			<input
+				type="number"
+				id="price"
+				name="price"
+				class="input"
+				bind:value={price}
+			/>
 		</section>
 		<section>
 			<label for="category">Category</label>
-
-			<select id="category" name="category" class="select">
+			<select
+				id="category"
+				name="category"
+				class="select"
+				bind:value={category}
+			>
 				<option value="vehicles">Vehicles</option>
 				<option value="fashion">Fashion</option>
 				<option value="housing">Housing</option>
@@ -36,8 +92,10 @@
 				<option value="recreational">Recreational</option>
 			</select>
 		</section>
-		<button type="submit" class="btn variant-ghost-surface w-fit mx-auto"
-			>Create</button
+		<button
+			type="button"
+			on:click={postListing}
+			class="btn variant-ghost-surface w-fit mx-auto">Create</button
 		>
 	</form>
 </div>
