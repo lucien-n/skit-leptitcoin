@@ -3,7 +3,6 @@ import { isLoggedIn, userStore } from '$lib/store.js';
 
 
 auth.onAuthStateChanged(async (user) => {
-    console.log(auth.currentUser)
     if (!user) {
         userStore.set({});
         isLoggedIn.set(false);

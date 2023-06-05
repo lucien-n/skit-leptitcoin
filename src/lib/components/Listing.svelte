@@ -5,7 +5,7 @@
 	export let listing: ListingProp;
 </script>
 
-<section id="listing-{listing.id}" class="card w-full">
+<section id="listing-{listing.id}" class="card w-full h-full flex flex-col">
 	<header>
 		<img
 			src={listing.images
@@ -16,16 +16,18 @@
 		/>
 	</header>
 	<div class="card-header">
-		<h1>{listing.title}</h1>
-		<p>
-			{listing.price} €
-		</p>
-	</div>
-
-	<div class="card-footer">
+		<div class="flex gap-2">
+			<h1>{listing.title}</h1>
+			<p class="opacity-80 italic">
+				{listing.price} €
+			</p>
+		</div>
 		<p>
 			{listing.description}
 		</p>
+	</div>
+
+	<div class="card-footer mt-auto">
 		<div class="flex flex-row justify-between opacity-70 italic">
 			<p>
 				{listing.category}
