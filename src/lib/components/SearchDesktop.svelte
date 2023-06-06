@@ -2,6 +2,7 @@
 	import { searchStore } from '$lib/store';
 
 	export const tabIndexOffset: number = 0;
+	let searchInputElement: HTMLInputElement;
 
 	function executeSearch(): void {
 		console.group('search');
@@ -11,7 +12,16 @@
 		console.log('Price Max:    ', $searchStore.price_max);
 		console.groupEnd();
 	}
+
+	function handleKeyPress(event: KeyboardEvent) {
+		event.preventDefault();
+		if (event.ctrlKey && event.key === 'f') {
+			searchInputElement.focus();
+		}
+	}
 </script>
+
+<svelte:window on:keydown={handleKeyPress} />
 
 <div id="search" class="w-full lg:w-4/5 mx-auto hidden md:flex">
 	<!-- Search fields -->
@@ -25,6 +35,7 @@
 			placeholder="Search"
 			class="col-span-6"
 			aria-label="search query"
+			bind:this={searchInputElement}
 			bind:value={$searchStore.search}
 		/>
 		<input
