@@ -18,13 +18,14 @@
 </script>
 
 <nav id="navigation-bar">
+	<!-- svelte-ignore a11y-autofocus -->
 	<AppBar padding="p-0 py-4 md:p-4">
 		<svelte:fragment slot="lead">
 			<a
 				href="#main"
-				aria-label="jump to content"
-				class="mx-2"
-				tabindex="0">jump to content</a
+				aria-label="skip to content"
+				class="absolute -top-40 focus:top-0"
+				tabindex="0">skip to content</a
 			>
 			<div class="flex flex-row items-center md:gap-2">
 				<button class="btn btn-sm md:hidden" on:click={openDrawer}>
@@ -72,7 +73,7 @@
 			</div>
 		</svelte:fragment>
 
-		<SearchDesktop tabIndexOffset={1} />
+		<SearchDesktop tabIndexOffset={10} />
 		<SearchMobile tabIndexOffset={1} />
 
 		<svelte:fragment slot="trail">

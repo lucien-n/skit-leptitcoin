@@ -12,10 +12,19 @@
 		params: SearchParams
 	): Promise<ListingProp[]> {
 		let filteredListings: ListingProp[] = [];
+		const regex = new RegExp(`${$searchStore.search}`, 'i');
 
 		let _ = listingsStore.subscribe((listings) => {
 			filteredListings = listings.filter((listing) => {
-				return true;
+				return (
+					regex.test(listing.title) &&
+					($searchStore.price_min
+						? listing.price > $searchStore.price_min
+						: true) &&
+					($searchStore.price_max
+						? listing.price < $searchStore.price_max
+						: true)
+				);
 			});
 		});
 		return filteredListings;
