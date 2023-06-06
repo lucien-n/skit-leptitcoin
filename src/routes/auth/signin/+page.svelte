@@ -37,8 +37,10 @@
 <section id="signin" class="w-full h-full flex md:items-center justify-center">
 	<form class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3">
 		<p class="text-center">
-			Don't have an account yet? <a href="/auth/signup" class="anchor"
-				>Create one.</a
+			Don't have an account yet? <a
+				href="/auth/signup"
+				class="anchor"
+				aria-label="create an account">Create one.</a
 			>
 		</p>
 		<section>
@@ -51,6 +53,7 @@
 				class="input"
 				autofocus
 				autocomplete="email"
+				aria-label="email"
 				required
 				bind:value={email}
 			/>
@@ -65,6 +68,7 @@
 					name="password"
 					class="w-full"
 					autocomplete="current-password"
+					aria-label="password"
 					required
 					on:input={handlePasswordChange}
 				/>
@@ -109,12 +113,17 @@
 					{/if}
 				</button>
 			</div>
-			<a href="/auth/forgot-password" class="anchor">Forgot password ?</a>
+			<a
+				href="/auth/forgot-password"
+				class="anchor"
+				aria-label="forgot password?">Forgot password ?</a
+			>
 		</section>
 
 		<button
 			type="button"
 			on:click={signIn}
+			aria-label="sign in"
 			class="btn variant-ghost-surface w-fit mx-auto">Sign In</button
 		>
 	</form>

@@ -20,6 +20,12 @@
 <nav id="navigation-bar">
 	<AppBar padding="p-0 py-4 md:p-4">
 		<svelte:fragment slot="lead">
+			<a
+				href="#main"
+				aria-label="jump to content"
+				class="mx-2"
+				tabindex="0">jump to content</a
+			>
 			<div class="flex flex-row items-center md:gap-2">
 				<button class="btn btn-sm md:hidden" on:click={openDrawer}>
 					<span>
@@ -39,7 +45,11 @@
 						</svg>
 					</span>
 				</button>
-				<a href="/" class="items-center gap-1 hidden md:flex">
+				<a
+					href="/"
+					class="items-center gap-1 hidden md:flex"
+					aria-label="homepage"
+				>
 					<svg
 						data-testid="geist-icon"
 						fill="none"
@@ -62,13 +72,17 @@
 			</div>
 		</svelte:fragment>
 
-		<SearchDesktop />
-		<SearchMobile />
+		<SearchDesktop tabIndexOffset={1} />
+		<SearchMobile tabIndexOffset={1} />
 
 		<svelte:fragment slot="trail">
 			{#if $isLoggedIn}
 				<div class="hidden md:flex flex-row items-center gap-2">
-					<a href="/new" class="flex items-center gap-2">
+					<a
+						href="/new"
+						class="flex items-center gap-2"
+						aria-label="new listing"
+					>
 						<svg
 							data-testid="geist-icon"
 							fill="none"
@@ -90,7 +104,11 @@
 					</a>
 				</div>
 				<div class="hidden md:flex flex-row items-center gap-2">
-					<button class="flex items-center gap-1" on:click={logout}>
+					<button
+						class="flex items-center gap-1"
+						on:click={logout}
+						aria-label="sign out"
+					>
 						<svg
 							data-testid="geist-icon"
 							fill="none"
@@ -117,7 +135,11 @@
 				</div>
 			{:else}
 				<div class="hidden md:flex flex-row items-center gap-2">
-					<a href="/auth/signin" class="flex items-center gap-1">
+					<a
+						href="/auth/signin"
+						class="flex items-center gap-1"
+						aria-label="sign in"
+					>
 						<svg
 							data-testid="geist-icon"
 							fill="none"

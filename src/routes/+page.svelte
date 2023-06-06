@@ -26,7 +26,7 @@
 	});
 </script>
 
-<div class="container h-full mx-auto flex mt-10">
+<main id="main" class="container h-full mx-auto flex mt-10">
 	<section
 		id="listings"
 		class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 h-fit"
@@ -34,9 +34,9 @@
 		{#await getListings}
 			<h1>Searching listings</h1>
 		{:then listings}
-			{#each listings as listing}
-				<Listing {listing} />
+			{#each listings as listing, index}
+				<Listing {listing} {index} />
 			{/each}
 		{/await}
 	</section>
-</div>
+</main>

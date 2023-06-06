@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
 
+	export const tabIndexOffset: number = 0;
+
 	function executeSearch(): void {
 		console.group('search');
 		console.log('Search:       ', $searchStore.search);
@@ -22,17 +24,19 @@
 			type="search"
 			placeholder="Search"
 			class="col-span-6"
+			aria-label="search query"
 			bind:value={$searchStore.search}
-			autofocus
 		/>
 		<input
 			bind:value={$searchStore.price_min}
 			type="text"
+			aria-label="search min price"
 			placeholder="Min €"
 		/>
 		<input
 			bind:value={$searchStore.price_max}
 			type="text"
+			aria-label="search max price"
 			placeholder="Max €"
 		/>
 	</div>

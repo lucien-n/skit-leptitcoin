@@ -4,11 +4,16 @@
 	import { isLoggedIn, userStore } from '$lib/store';
 
 	export let listing: ListingProp;
+	export let index: number;
 </script>
 
-<section
+<a
+	href="/l/{listing.id}"
 	id="listing-{listing.id}"
 	class="card relative w-full h-full flex flex-col"
+	tabindex={index + 1}
+	aria-label="listing {index +
+		1}, title: {listing.title}, category: {listing.category}, price: {listing.price}€"
 >
 	{#if $isLoggedIn && listing.author_id == $userStore.uid}
 		<div class="absolute -right-2 -top-2 flex flex-col gap-2">
@@ -65,8 +70,9 @@
 				{listing.category}
 			</p>
 			<p>
-				{listing.author_name} - {formatDate(listing.created_at)}
+				{listing.author_name}
+				{formatDate(listing.created_at)}
 			</p>
 		</div>
 	</div>
-</section>
+</a>
