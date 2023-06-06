@@ -1,4 +1,4 @@
-import { query, collection, getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc } from 'firebase/firestore';
 import { auth, fs } from '$lib/firebase'
 import type { FireListing } from '$lib/types/fire_listing.js';
 
@@ -7,6 +7,7 @@ export const load = async ({ params }) => {
 
     const q = doc(fs, "listings", listing_id)
     const data = (await getDoc(q)).data() as FireListing
+
 
     if (data.author_id === auth.currentUser?.uid) {
         return {

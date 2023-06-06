@@ -6,8 +6,10 @@
 	const listing = data.listing;
 	const message = data.message;
 
+	console.group('+page.svelte');
 	console.log(listing);
 	console.log(message);
+	console.groupEnd();
 </script>
 
 <div class="w-full h-full flex items-center justify-center">
