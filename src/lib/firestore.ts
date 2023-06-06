@@ -6,7 +6,7 @@ import {
     getDocs,
     query,
     setDoc,
-} from '@firebase/firestore';
+} from 'firebase/firestore';
 
 
 export async function getFireListings(): Promise<ListingProp[]> {

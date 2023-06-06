@@ -3,7 +3,7 @@
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
 	import { isLoggedIn } from '$lib/store';
-	import { signOut } from '@firebase/auth';
+	import { signOut } from 'firebase/auth';
 	import { auth } from '$lib/firebase';
 
 	const hideActionText = true;

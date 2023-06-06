@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { postFireListing } from '$lib/firestore.js';
 	import { isLoggedIn, userStore } from '$lib/store';
 	import type { ListingProp } from '$lib/types/listing.js';
 	import { toastStore } from '@skeletonlabs/skeleton';
+	import { v4 as uuid } from 'uuid';
 
 	let title: string;
 	let description: string;
@@ -27,7 +29,7 @@
 			return;
 
 		const listing: ListingProp = {
-			id: new Date().getTime().toString(),
+			id: uuid(),
 			author_id: $userStore.uid,
 			title: title,
 			description: description,
@@ -37,6 +39,7 @@
 		};
 
 		postFireListing(listing);
+		goto('/');
 	}
 </script>
 

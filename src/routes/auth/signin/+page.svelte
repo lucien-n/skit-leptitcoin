@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { auth } from '$lib/firebase';
 	import { isLoggedIn, userStore } from '$lib/store';
-	import { signInWithEmailAndPassword } from '@firebase/auth';
+	import { signInWithEmailAndPassword } from 'firebase/auth';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	let showPassword: boolean = false;
 

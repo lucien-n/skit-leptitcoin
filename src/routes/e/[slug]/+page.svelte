@@ -1,0 +1,17 @@
+<script lang="ts">
+	import type { FireListing } from '$lib/types/fire_listing';
+
+	export let data: { listing: FireListing | null; message: string | null };
+
+	const listing = data.listing;
+	const message = data.message;
+
+	console.log(listing);
+	console.log(message);
+</script>
+
+<div class="w-full h-full flex items-center justify-center">
+	<h1>
+		{listing}
+	</h1>
+</div>
