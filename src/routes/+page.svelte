@@ -12,7 +12,7 @@
 		params: SearchParams
 	): Promise<ListingProp[]> {
 		let filteredListings: ListingProp[] = [];
-		const regex = new RegExp(`${params.search}`, 'i');
+		const regex = new RegExp(`${params.search || ''}`, 'i');
 
 		let _ = listingsStore.subscribe((listings) => {
 			filteredListings = listings.filter((listing) => {

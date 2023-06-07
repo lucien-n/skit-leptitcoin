@@ -3,7 +3,6 @@
 	import CategorySelector from './CategorySelector.svelte';
 
 	export let showAdvancedSearchOption: boolean = false;
-	export const tabIndexOffset: number = 0;
 
 	function executeSearch(): void {
 		showAdvancedSearchOption = false;
@@ -27,13 +26,13 @@
 				placeholder="Search"
 				class="w-full"
 				bind:value={$searchStore.search}
-				tabindex={1 + tabIndexOffset}
+				tabindex={1.1}
 			/>
 			<button
 				type="button"
 				aria-label="toggle advanced search options"
 				class="btn mx-auto"
-				tabindex={2 + tabIndexOffset}
+				tabindex={1.2}
 				on:click={() =>
 					(showAdvancedSearchOption = !showAdvancedSearchOption)}
 			>
@@ -111,7 +110,7 @@
 						placeholder="Min"
 						class="col-span-2"
 						aria-label="minimum price (in euros)"
-						tabindex={3 + tabIndexOffset}
+						tabindex={1.3}
 					/>
 					<div class="input-group-shim col-span-1">
 						<label for="maximum-price">Max</label>
@@ -125,7 +124,7 @@
 						class="col-span-2"
 						placeholder="Max"
 						aria-label="maximum price (in euros)"
-						tabindex={4 + tabIndexOffset}
+						tabindex={1.4}
 					/>
 				</section>
 				<label for="category" class="h3 py-1">Category</label>
@@ -138,7 +137,7 @@
 				<button
 					type="button"
 					aria-label="execute search"
-					tabindex={5 + tabIndexOffset}
+					tabindex={1.5}
 					class="btn variant-ghost-surface"
 					on:click={executeSearch}>Search</button
 				>

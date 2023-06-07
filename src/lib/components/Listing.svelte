@@ -5,21 +5,23 @@
 
 	export let listing: ListingProp;
 	export let index: number;
+	index += 1;
 </script>
 
 <a
 	href="/l/{listing.id}"
 	id="listing-{listing.id}"
 	class="card relative w-full h-full flex flex-col"
-	tabindex={index + 1}
-	aria-label="listing {index +
-		1}, title: {listing.title}, category: {listing.category}, price: {listing.price}€"
+	tabindex={index}
+	aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 >
 	{#if $isLoggedIn && listing.author_id == $userStore.uid}
 		<div class="absolute -right-2 -top-2 flex flex-col gap-2">
 			<a
 				href="/e/{listing.id}"
 				class="btn btn-sm variant-glass-tertiary aspect-square p-2"
+				aria-label="edit"
+				tabindex={index + 0.1}
 			>
 				<svg
 					class="with-icon_icon__aLCKg"

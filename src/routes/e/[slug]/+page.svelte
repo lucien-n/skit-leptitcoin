@@ -14,6 +14,6 @@
 
 <div class="w-full h-full flex items-center justify-center">
 	<h1>
-		{listing}
+		{listing?.id}
 	</h1>
 </div>
