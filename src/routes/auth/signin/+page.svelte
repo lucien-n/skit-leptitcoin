@@ -1,31 +1,20 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { auth } from '$lib/firebase';
-	import { isLoggedIn, userStore } from '$lib/store';
-	import { signInWithEmailAndPassword } from 'firebase/auth';
 	import { toastStore } from '@skeletonlabs/skeleton';
+	import { signInWithFirebase } from '$lib/auth';
+
 	let showPassword: boolean = false;
 
 	let email: string;
 	let password: string;
 
 	async function signIn() {
-		const user_credentials = await signInWithEmailAndPassword(
-			auth,
-			email,
-			password
-		);
-
-		userStore.set(user_credentials.user);
-		isLoggedIn.set(true);
-
-		toastStore.trigger({
-			message: 'Logged in!',
-			background: 'variant-glass-success',
-			autohide: true,
-		});
-
-		goto('/');
+		const user = await signInWithFirebase(email, password);
+		if (user)
+			toastStore.trigger({
+				message: 'Logged in!',
+				background: 'variant-glass-success',
+				autohide: true,
+			});
 	}
 
 	function handlePasswordChange(e: any) {

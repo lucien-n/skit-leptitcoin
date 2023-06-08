@@ -14,6 +14,6 @@
 
 <div class="w-full h-full flex items-center justify-center">
 	<h1>
-		{listing?.id}
+		{listing ? listing.title : data.message}
 	</h1>
 </div>

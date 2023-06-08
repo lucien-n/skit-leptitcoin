@@ -1,21 +1,26 @@
 import { getDoc, doc } from 'firebase/firestore';
 import { auth, fs } from '$lib/firebase'
 import type { FireListing } from '$lib/types/fire_listing.js';
+import { admin } from '$lib/firebase_admin.js';
+import { error } from '@sveltejs/kit';
 
-export const load = async ({ params }) => {
+export const load = async ({ params, cookies }) => {
     const listing_id = params.slug;
 
     const q = doc(fs, "listings", listing_id)
     const data = (await getDoc(q)).data() as FireListing
 
+    const sessionCookie = cookies.get("session")
 
-    if (data.author_id === auth.currentUser?.uid) {
+    if (!sessionCookie) throw error(401, "Unauthorized")
+
+    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true)
+
+    if (data.author_id === decodedClaims.user_id) {
         return {
             listing: data
         }
     }
 
-    return {
-        message: 'You are not the author of this listing'
-    }
+    throw error(401, "You are not the author")
 }
