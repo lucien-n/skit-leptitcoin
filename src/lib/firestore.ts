@@ -42,7 +42,7 @@ export async function postFireListing(listing: ListingProp): Promise<void> {
     await setDoc(doc(fs, 'listings', listing.id), listing)
 }
 
-export async function getUser(user_id: string): Promise<FireUser | null> {
+export async function getFireUser(user_id: string): Promise<FireUser | null> {
     const q = doc(fs, "users", user_id)
     const querySnap = await getDoc(q)
     const data = querySnap.data()
