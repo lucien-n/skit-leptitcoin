@@ -14,12 +14,16 @@ export const load = async ({ params, cookies }) => {
 
     if (!sessionCookie) throw error(401, "Unauthorized")
 
-    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true)
+    try {
+        const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true)
 
-    if (data.author_id === decodedClaims.user_id) {
-        return {
-            listing: data
+        if (data.author_id === decodedClaims.user_id) {
+            return {
+                listing: data
+            }
         }
+    } catch (e) {
+        console.error(e)
     }
 
     throw error(401, "You are not the author")

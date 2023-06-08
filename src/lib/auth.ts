@@ -1,5 +1,8 @@
 import { isLoggedIn, userStore } from "$lib/store";
-import { getAuth, signInWithEmailAndPassword, type User } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, type User } from "firebase/auth";
+import type { FireUser } from "./types/fire_user";
+import { doc, setDoc } from "firebase/firestore";
+import { fs } from "./firebase";
 
 export async function signInWithFirebase(email: string, password: string): Promise<User> {
     const user_credentials = await signInWithEmailAndPassword(
@@ -8,13 +11,47 @@ export async function signInWithFirebase(email: string, password: string): Promi
         password
     );
 
+    const user = user_credentials.user
 
-    userStore.set(user_credentials.user);
-    if (user_credentials) {
+    userStore.set(user);
+    if (user_credentials)
         isLoggedIn.set(true);
-    }
+    createSession(user)
 
-    user_credentials.user.getIdToken()
+    return user;
+}
+
+export async function signUpWithFirebase(email: string, password: string): Promise<User> {
+    const user_credentials = await createUserWithEmailAndPassword(
+        getAuth(),
+        email,
+        password
+    );
+
+    const user = user_credentials.user
+    const now = new Date().getTime();
+    const fireUser: FireUser = {
+        uid: user.uid,
+        email: user.email || '',
+        verified: user.emailVerified,
+        username: 'Default',
+        role: 0,
+        created_at: now,
+        updated_at: now,
+    };
+    setDoc(doc(fs, 'users', user.uid), fireUser);
+
+
+    userStore.set(user);
+    if (user_credentials)
+        isLoggedIn.set(true);
+    createSession(user)
+
+    return user
+}
+
+export async function createSession(user: User) {
+    user.getIdToken()
         .then(async (idToken) => {
             fetch("http://localhost:5173/auth/session", {
                 "method": "POST",
@@ -24,8 +61,4 @@ export async function signInWithFirebase(email: string, password: string): Promi
                 })
             });
         })
-
-    console.log("session")
-
-    return user_credentials.user;
 }

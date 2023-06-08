@@ -1,23 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { auth } from '$lib/firebase';
+	import { auth, fs } from '$lib/firebase';
 	import { isLoggedIn, userStore } from '$lib/store';
 	import { createUserWithEmailAndPassword } from 'firebase/auth';
 	import { toastStore } from '@skeletonlabs/skeleton';
+	import { doc, setDoc } from 'firebase/firestore';
+	import type { FireUser } from '$lib/types/fire_user';
+	import { signUpWithFirebase } from '$lib/auth';
 	let showPassword: boolean = false;
 
 	let email: string;
 	let password: string;
 
 	async function signUp() {
-		const user_credentials = await createUserWithEmailAndPassword(
-			auth,
-			email,
-			password
-		);
-
-		userStore.set(user_credentials.user);
-		isLoggedIn.set(true);
+		const user = await signUpWithFirebase(email, password);
 
 		toastStore.trigger({
 			message: 'Signed in!',

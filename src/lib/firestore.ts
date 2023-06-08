@@ -3,10 +3,13 @@ import { auth, fs } from '$lib/firebase';
 import {
     collection,
     doc,
+    getDoc,
     getDocs,
     query,
     setDoc,
+    type DocumentData,
 } from 'firebase/firestore';
+import type { FireUser } from './types/fire_user';
 
 
 export async function getFireListings(): Promise<ListingProp[]> {
@@ -37,4 +40,12 @@ export async function getFireListings(): Promise<ListingProp[]> {
 
 export async function postFireListing(listing: ListingProp): Promise<void> {
     await setDoc(doc(fs, 'listings', listing.id), listing)
+}
+
+export async function getUser(user_id: string): Promise<FireUser | null> {
+    const q = doc(fs, "users", user_id)
+    const querySnap = await getDoc(q)
+    const data = querySnap.data()
+    const user = (data as FireUser) || null
+    return user
 }

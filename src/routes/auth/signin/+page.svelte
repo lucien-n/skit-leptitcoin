@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { signInWithFirebase } from '$lib/auth';
+	import { goto } from '$app/navigation';
 
 	let showPassword: boolean = false;
 
@@ -9,12 +10,15 @@
 
 	async function signIn() {
 		const user = await signInWithFirebase(email, password);
+
 		if (user)
 			toastStore.trigger({
 				message: 'Logged in!',
 				background: 'variant-glass-success',
 				autohide: true,
 			});
+
+		goto('/');
 	}
 
 	function handlePasswordChange(e: any) {
