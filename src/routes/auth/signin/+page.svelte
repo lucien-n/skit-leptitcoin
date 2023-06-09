@@ -5,11 +5,14 @@
 
 	let showPassword: boolean = false;
 
-	let email: string;
-	let password: string;
+	$: email = '';
+	$: password = '';
 
 	async function signIn() {
-		const user = await signInWithFirebase(email, password);
+		const user = await signInWithFirebase(
+			'lucien.neuhoff@protonmail.com',
+			'luluIGN2005*'
+		);
 
 		if (user)
 			toastStore.trigger({
@@ -23,7 +26,7 @@
 
 	function handlePasswordChange(e: any) {
 		if (e.target == null) return;
-		password += e.target.value;
+		password = e.target.value;
 	}
 </script>
 

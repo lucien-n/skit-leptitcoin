@@ -17,11 +17,10 @@ export const load = async ({ params, cookies }) => {
     try {
         const decodedClaims = await admin_auth.verifySessionCookie(sessionCookie, true)
 
-        if (data.author_id === decodedClaims.user_id) {
+        if (data.author_id === decodedClaims.user_id)
             return {
                 listing: data
             }
-        }
     } catch (e) {
         console.error(e)
     }
