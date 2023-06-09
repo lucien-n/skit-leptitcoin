@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { listingsStore, searchStore } from '$lib/store';
-	import type { ListingProp } from '$lib/types/listing';
 	import Listing from '$lib/components/Listing.svelte';
+	import type { FireListing } from '$lib/types/fire_listing.js';
 
 	export let data;
 	listingsStore.set(data.listings);
 
-	let getListings: Promise<ListingProp[]>;
+	let getListings: Promise<FireListing[]>;
 
 	async function filterListings(
 		params: SearchParams
-	): Promise<ListingProp[]> {
-		let filteredListings: ListingProp[] = [];
+	): Promise<FireListing[]> {
+		let filteredListings: FireListing[] = [];
 		const regex = new RegExp(`${params.search || ''}`, 'i');
 
 		let _ = listingsStore.subscribe((listings) => {

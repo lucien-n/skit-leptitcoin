@@ -12,8 +12,16 @@ export async function signInWithFirebase(email: string, password: string): Promi
     );
 
     const user = user_credentials.user
+    const fireUser: FireUser = {
+        fake: false,
+        uid: user.uid,
+        email: user.email || '',
+        verified: user.emailVerified,
+        username: 'Default',
+        role: 0,
+    };
 
-    userStore.set(user);
+    userStore.set(fireUser);
     if (user_credentials)
         isLoggedIn.set(true);
     createSession(user)
@@ -31,6 +39,7 @@ export async function signUpWithFirebase(email: string, password: string): Promi
     const user = user_credentials.user
     const now = new Date().getTime();
     const fireUser: FireUser = {
+        fake: false,
         uid: user.uid,
         email: user.email || '',
         verified: user.emailVerified,
@@ -42,7 +51,7 @@ export async function signUpWithFirebase(email: string, password: string): Promi
     setDoc(doc(fs, 'users', user.uid), fireUser);
 
 
-    userStore.set(user);
+    userStore.set(fireUser);
     if (user_credentials)
         isLoggedIn.set(true);
     createSession(user)

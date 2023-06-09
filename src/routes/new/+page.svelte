@@ -2,7 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { postFireListing } from '$lib/firestore.js';
 	import { isLoggedIn, userStore } from '$lib/store';
-	import type { ListingProp } from '$lib/types/listing.js';
+	import type { FireListing } from '$lib/types/fire_listing';
+	import type { FireUser } from '$lib/types/fire_user';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { v4 as uuid } from 'uuid';
 
@@ -28,9 +29,9 @@
 		)
 			return;
 
-		const listing: ListingProp = {
+		const listing: FireListing = {
 			id: uuid(),
-			author_id: $userStore.uid,
+			author: $userStore,
 			title: title,
 			description: description,
 			price: price,

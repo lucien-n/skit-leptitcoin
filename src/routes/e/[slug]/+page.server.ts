@@ -1,14 +1,12 @@
-import { getDoc, doc } from 'firebase/firestore';
-import { fs } from '$lib/firebase';
-import type { FireListing } from '$lib/types/fire_listing.js';
 import { admin_auth } from '$lib/firebase_admin.js';
 import { error } from '@sveltejs/kit';
+import { getFireListing } from '$lib/firestore.js';
 
 export const load = async ({ params, cookies }) => {
     const listing_id = params.slug;
 
-    const q = doc(fs, "listings", listing_id)
-    const data = (await getDoc(q)).data() as FireListing
+    const listing = await getFireListing(listing_id)
+    if (!listing) throw error(404, "Listing not found")
 
     const sessionCookie = cookies.get("session")
 
@@ -17,9 +15,9 @@ export const load = async ({ params, cookies }) => {
     try {
         const decodedClaims = await admin_auth.verifySessionCookie(sessionCookie, true)
 
-        if (data.author_id === decodedClaims.user_id)
+        if (listing.author && listing.author.uid === decodedClaims.user_id)
             return {
-                listing: data
+                listing: listing
             }
     } catch (e) {
         console.error(e)

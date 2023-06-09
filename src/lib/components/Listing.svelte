@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { ListingProp } from '$lib/types/listing';
 	import { formatDate } from '$lib/helper';
 	import { isLoggedIn, userStore } from '$lib/store';
+	import type { FireListing } from '$lib/types/fire_listing';
 
-	export let listing: ListingProp;
+	export let listing: FireListing;
 	export let index: number;
 	index += 1;
 </script>
@@ -15,7 +15,7 @@
 	tabindex={index}
 	aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 >
-	{#if $isLoggedIn && listing.author_id == $userStore.uid}
+	{#if $isLoggedIn && listing.author.uid == $userStore.uid}
 		<div class="absolute -right-2 -top-2 flex flex-col gap-2">
 			<a
 				href="/e/{listing.id}"
@@ -72,7 +72,7 @@
 				{listing.category}
 			</p>
 			<p>
-				{listing.author_name}
+				{listing.author.username}
 				{formatDate(listing.created_at)}
 			</p>
 		</div>
