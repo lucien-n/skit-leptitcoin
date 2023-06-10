@@ -2,8 +2,7 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from './SearchDesktop.svelte';
 	import SearchMobile from './SearchMobile.svelte';
-	import { isLoggedIn } from '$lib/store';
-	import { signOut } from '$lib/auth';
+	import { authStore, authHandlers } from '$lib/store';
 
 	const hideActionText = true;
 
@@ -12,7 +11,7 @@
 	}
 
 	function logout() {
-		signOut();
+		authHandlers.signOut();
 	}
 </script>
 
@@ -78,7 +77,7 @@
 
 		<svelte:fragment slot="trail">
 			<div class="flex gap-2">
-				{#if $isLoggedIn}
+				{#if $authStore.currentUser}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a
 							href="/new"

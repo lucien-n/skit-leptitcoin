@@ -7,3 +7,4 @@ const admin = adm.initializeApp({
 })
 
 export const admin_auth = admin.auth();
+export const admin_store = admin.firestore();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { toastStore } from '@skeletonlabs/skeleton';
-	import { signUpWithFirebase } from '$lib/auth';
+	import { authHandlers, authStore } from '$lib/store';
 
 	let showPassword: boolean = false;
 
@@ -9,13 +9,18 @@
 	$: password = '';
 
 	async function signUp() {
-		await signUpWithFirebase(email, password);
+		try {
+			await authHandlers.signup(email, password);
+		} catch (error) {
+			console.error(error);
+		}
 
-		toastStore.trigger({
-			message: 'Signed in!',
-			background: 'variant-glass-success',
-			autohide: true,
-		});
+		if ($authStore.currentUser)
+			toastStore.trigger({
+				message: 'Signed in!',
+				background: 'variant-glass-success',
+				autohide: true,
+			});
 
 		goto('/');
 	}

@@ -15,7 +15,7 @@ export const load = async ({ params, cookies }) => {
     try {
         const decodedClaims = await admin_auth.verifySessionCookie(sessionCookie, true)
 
-        if (listing.author && listing.author.uid === decodedClaims.user_id)
+        if (listing.author_uid === decodedClaims.user_id)
             return {
                 listing: listing
             }

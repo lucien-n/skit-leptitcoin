@@ -1,8 +1,7 @@
-import type { FireUser } from "./fire_user";
-
 export type FireListing = {
     id: string,
-    author: FireUser,
+    author_uid: string,
+    author_username: string,
     title: string,
     description: string,
     price: number,

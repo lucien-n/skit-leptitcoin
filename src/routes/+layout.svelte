@@ -7,6 +7,21 @@
 	import { Toast, Modal, AppShell, Drawer } from '@skeletonlabs/skeleton';
 	import NavigationBar from '$lib/components/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/NavigationDrawer.svelte';
+	import { authStore } from '$lib/store';
+	import { auth } from '$lib/firebase';
+	import { onMount } from 'svelte';
+	import type { User } from 'firebase/auth';
+
+	onMount(() => {
+		const unsubscribe = auth.onAuthStateChanged(
+			async (user: User | null) => {
+				authStore.update((curr) => {
+					return { ...curr, isLoading: false, currentUser: user };
+				});
+			}
+		);
+		return unsubscribe;
+	});
 </script>
 
 <svelte:head><title>LePtitCoin</title></svelte:head>

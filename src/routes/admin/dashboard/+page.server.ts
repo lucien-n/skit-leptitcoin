@@ -1,5 +1,4 @@
-import { admin_auth } from "$lib/firebase_admin"
-import { getFireUser } from "$lib/firestore.js"
+import { admin_auth, admin_store } from "$lib/firebase_admin"
 import { error } from "@sveltejs/kit"
 
 export const load = async ({ params, cookies }) => {
@@ -11,7 +10,7 @@ export const load = async ({ params, cookies }) => {
 
     const user_id = decodedClaims.uid
 
-    const user = await getFireUser(user_id)
+    const data = await admin_store.doc(`users/${user_id}`).get()
 
-    if (!user || !(user.role > 0)) throw error(401, "Unauthorized");
+    if (!(data.get("role") > 0)) throw error(401, "Unauthorized");
 }

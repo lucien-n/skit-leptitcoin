@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { postFireListing } from '$lib/firestore.js';
-	import { isLoggedIn, userStore } from '$lib/store';
+	import { authStore } from '$lib/store';
 	import type { FireListing } from '$lib/types/fire_listing';
-	import type { FireUser } from '$lib/types/fire_user';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { v4 as uuid } from 'uuid';
 
@@ -13,7 +12,7 @@
 	let category: string;
 
 	function postListing() {
-		if (!$isLoggedIn) {
+		if (!$authStore.currentUser) {
 			toastStore.trigger({
 				message: 'You must be logged in',
 				background: 'bg-variant-error',
@@ -31,7 +30,8 @@
 
 		const listing: FireListing = {
 			id: uuid(),
-			author: $userStore,
+			author_uid: $authStore.currentUser?.uid,
+			author_username: $authStore.additionnalInfo.username,
 			title: title,
 			description: description,
 			price: price,

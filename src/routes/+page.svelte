@@ -2,18 +2,17 @@
 	import { listingsStore, searchStore } from '$lib/store';
 	import Listing from '$lib/components/Listing.svelte';
 	import type { FireListing } from '$lib/types/fire_listing.js';
+	import { onMount } from 'svelte';
 
 	export let data;
 	listingsStore.set(data.listings);
 
-	let getListings: Promise<FireListing[]>;
+	let getListings: any;
 
-	async function filterListings(
-		params: SearchParams
-	): Promise<FireListing[]> {
+	async function filterListings(params: SearchParams) {
 		let filteredListings: FireListing[] = [];
-		const regex = new RegExp(`${params.search || ''}`, 'i');
 
+		const regex = new RegExp(`${params.search || ''}`, 'i');
 		let _ = listingsStore.subscribe((listings) => {
 			filteredListings = listings.filter((listing) => {
 				return (
@@ -25,12 +24,15 @@
 				);
 			});
 		});
+
 		return filteredListings;
 	}
 
 	const _ = searchStore.subscribe((params: SearchParams) => {
 		getListings = filterListings(params);
 	});
+
+	onMount(() => searchStore.set({ search: ' ' }));
 </script>
 
 <main id="main" class="container h-full mx-auto flex mt-10">
