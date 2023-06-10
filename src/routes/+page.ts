@@ -1,6 +1,6 @@
 import { getFireListings } from '$lib/firestore.js';
 
-export async function load({ params }) {
+export const load = async () => {
     return {
         listings: await getFireListings()
     }

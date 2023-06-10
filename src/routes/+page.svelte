@@ -5,9 +5,8 @@
 	import { onMount } from 'svelte';
 
 	export let data;
-	listingsStore.set(data.listings);
-
 	let getListings: any;
+	listingsStore.set(data.listings);
 
 	async function filterListings(params: SearchParams) {
 		let filteredListings: FireListing[] = [];
@@ -31,8 +30,6 @@
 	const _ = searchStore.subscribe((params: SearchParams) => {
 		getListings = filterListings(params);
 	});
-
-	onMount(() => searchStore.set({ search: ' ' }));
 </script>
 
 <main id="main" class="container h-full mx-auto flex mt-10">
