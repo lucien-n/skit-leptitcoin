@@ -5,7 +5,7 @@ import type { FireUserInfo } from "$lib/types/fire_user_info";
 import { auth, fs } from "$lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-export const searchStore: Writable<SearchParams> = writable({})
+export const searchStore: Writable<SearchParams> = writable({ reload: 0 })
 export const listingsStore: Writable<FireListing[]> = writable([])
 
 export const authStore: Writable<{ isLoading: boolean, currentUser: User | null, additionnalInfo: FireUserInfo }> = writable({
@@ -34,19 +34,17 @@ export const authHandlers = {
     },
     createSession: async () => {
         if (!auth.currentUser) return;
-        auth.currentUser.getIdToken()
-            .then(async (idToken) => {
-                fetch("http://localhost:5173/auth/session", {
-                    "method": "POST",
-                    "credentials": "include",
-                    "body": JSON.stringify({
-                        "idToken": idToken,
-                    })
-                });
+        const idToken = await auth.currentUser.getIdToken()
+        fetch("http://localhost:5173/auth/session", {
+            "method": "POST",
+            "credentials": "include",
+            "body": JSON.stringify({
+                "idToken": idToken,
             })
+        });
     },
     deleteSession: async () => {
-        await fetch("http://localhost:5173/auth/session", {
+        fetch("http://localhost:5173/auth/session", {
             "method": "DELETE",
             "credentials": "include",
         });

@@ -6,8 +6,6 @@
 	export let listing: FireListing;
 	export let index: number;
 	index += 1;
-
-	console.log(listing);
 </script>
 
 <a

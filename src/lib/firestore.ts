@@ -15,8 +15,10 @@ export async function getFireListings(): Promise<FireListing[]> {
 
     const querySnap = await getDocs(query(collection(fs, 'listings')));
 
-    querySnap.forEach(async (doc) => {
-        const fireListing = await getFireListing(doc.get("id"))
+    querySnap.forEach(async (listing) => {
+        const fireListing = listing.data() as FireListing
+        const author = await getDoc(doc(fs, "uusers", listing.get("author_uid")))
+        fireListing.author_username = author.get("username")
         if (fireListing)
             listings.push(fireListing);
     });

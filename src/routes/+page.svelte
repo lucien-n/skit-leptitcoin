@@ -1,27 +1,28 @@
 <script lang="ts">
-	import { listingsStore, searchStore } from '$lib/store';
+	import { searchStore } from '$lib/store';
 	import Listing from '$lib/components/Listing.svelte';
 	import type { FireListing } from '$lib/types/fire_listing.js';
 	import { onMount } from 'svelte';
+	import { getFireListings } from '$lib/firestore';
 
-	export let data;
+	// export let data;
 	let getListings: any;
-	listingsStore.set(data.listings);
+	let listings: FireListing[] = [];
 
-	async function filterListings(params: SearchParams) {
+	onMount(async () => {
+		listings = await getFireListings();
+	});
+	function filterListings(params: SearchParams) {
 		let filteredListings: FireListing[] = [];
 
-		const regex = new RegExp(`${params.search || ''}`, 'i');
-		let _ = listingsStore.subscribe((listings) => {
-			filteredListings = listings.filter((listing) => {
-				return (
-					regex.test(listing.title) &&
-					(params.price_min
-						? listing.price > params.price_min
-						: true) &&
-					(params.price_max ? listing.price < params.price_max : true)
-				);
-			});
+		const searchRegex = new RegExp(`${params.search || ''}`, 'i');
+
+		filteredListings = listings.filter((listing) => {
+			return (
+				searchRegex.test(listing.title) &&
+				(params.price_min ? listing.price > params.price_min : true) &&
+				(params.price_max ? listing.price < params.price_max : true)
+			);
 		});
 
 		return filteredListings;
@@ -37,9 +38,7 @@
 		id="listings"
 		class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 h-fit"
 	>
-		{#await getListings}
-			<h1>Searching listings</h1>
-		{:then listings}
+		{#await getListings then listings}
 			{#each listings as listing, index}
 				<Listing {listing} {index} />
 			{/each}
