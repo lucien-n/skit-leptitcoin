@@ -1,7 +1,5 @@
-import { getFireListings } from '$lib/firestore.js';
-
 export const load = async () => {
+    // Querry and return listings
     return {
-        listings: await getFireListings()
     }
 }

@@ -1,19 +1,14 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
 	import Listing from '$lib/components/Listing.svelte';
-	import type { FireListing } from '$lib/types/fire_listing.js';
 	import { onMount } from 'svelte';
-	import { getFireListings } from '$lib/firestore';
+	import type { SupaListing } from '$lib/types/supa_listing';
 
-	// export let data;
 	let getListings: any;
-	let listings: FireListing[] = [];
+	let listings: SupaListing[] = [];
 
-	onMount(async () => {
-		listings = await getFireListings();
-	});
 	function filterListings(params: SearchParams) {
-		let filteredListings: FireListing[] = [];
+		let filteredListings: SupaListing[] = [];
 
 		const searchRegex = new RegExp(`${params.search || ''}`, 'i');
 

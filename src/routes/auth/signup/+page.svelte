@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { toastStore } from '@skeletonlabs/skeleton';
-	import { authHandlers, authStore } from '$lib/store';
 
 	let showPassword: boolean = false;
 
@@ -10,12 +9,13 @@
 
 	async function signUp() {
 		try {
-			await authHandlers.signup(email, password);
+			// TODO: signup
 		} catch (error) {
 			console.error(error);
 		}
 
-		if ($authStore.currentUser)
+		// If use connected
+		if (false)
 			toastStore.trigger({
 				message: 'Signed in!',
 				background: 'variant-glass-success',

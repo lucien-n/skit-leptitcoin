@@ -7,20 +7,24 @@
 	import { Toast, Modal, AppShell, Drawer } from '@skeletonlabs/skeleton';
 	import NavigationBar from '$lib/components/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/NavigationDrawer.svelte';
-	import { authStore } from '$lib/store';
-	import { auth } from '$lib/firebase';
 	import { onMount } from 'svelte';
-	import type { User } from 'firebase/auth';
+	import { invalidate } from '$app/navigation';
+
+	export let data;
+
+	let { supabase, session } = data;
+	$: ({ supabase, session } = data);
 
 	onMount(() => {
-		const unsubscribe = auth.onAuthStateChanged(
-			async (user: User | null) => {
-				authStore.update((curr) => {
-					return { ...curr, isLoading: false, currentUser: user };
-				});
+		const { data } = supabase.auth.onAuthStateChange(
+			(event: any, _session: any) => {
+				if (_session?.expires_at !== session?.expires_at) {
+					invalidate('supabase:auth');
+				}
 			}
 		);
-		return unsubscribe;
+
+		return () => data.subscription.unsubscribe();
 	});
 </script>
 

@@ -1,4 +1,4 @@
-export type FireListing = {
+export type SupaListing = {
     id: string,
     author_uid: string,
     author_username: string,

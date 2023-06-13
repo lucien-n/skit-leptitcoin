@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { formatDate } from '$lib/helper';
-	import { authStore } from '$lib/store';
-	import type { FireListing } from '$lib/types/fire_listing';
+	import type { SupaListing } from '$lib/types/supa_listing';
 
-	export let listing: FireListing;
+	export let listing: SupaListing;
 	export let index: number;
 	index += 1;
 </script>
@@ -15,7 +14,8 @@
 	tabindex={index}
 	aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 >
-	{#if $authStore.currentUser && listing.author_uid == $authStore.currentUser.uid}
+	<!-- TODO: If user is author -->
+	{#if false}
 		<div class="absolute -right-2 -top-2 flex flex-col gap-2">
 			<a
 				href="/e/{listing.id}"

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { postFireListing } from '$lib/firestore.js';
-	import { authStore } from '$lib/store';
-	import type { FireListing } from '$lib/types/fire_listing';
+	import type { SupaListing } from '$lib/types/supa_listing';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { v4 as uuid } from 'uuid';
 
@@ -12,7 +10,8 @@
 	let category: string;
 
 	function postListing() {
-		if (!$authStore.currentUser) {
+		// If not user
+		if (false) {
 			toastStore.trigger({
 				message: 'You must be logged in',
 				background: 'bg-variant-error',
@@ -28,10 +27,10 @@
 		)
 			return;
 
-		const listing: FireListing = {
+		const listing: SupaListing = {
 			id: uuid(),
-			author_uid: $authStore.currentUser?.uid,
-			author_username: $authStore.additionnalInfo.username,
+			author_uid: 'test-uuid',
+			author_username: 'Someone',
 			title: title,
 			description: description,
 			price: price,
@@ -39,7 +38,7 @@
 			created_at: new Date().getTime(),
 		};
 
-		postFireListing(listing);
+		// TODOx²: post listing
 		goto('/');
 	}
 </script>
