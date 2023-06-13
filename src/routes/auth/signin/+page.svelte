@@ -5,8 +5,8 @@
 	export let data;
 </script>
 
-<div class="row flex-center flex">
-	<div class="col-6 form-widget">
+<div class="w-full h-full flex items-center justify-center">
+	<div class="w-1/4">
 		<Auth
 			supabaseClient={data.supabase}
 			appearance={{ theme: ThemeSupa }}
