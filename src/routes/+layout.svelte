@@ -39,7 +39,7 @@
 
 <AppShell slotSidebarLeft="w-0 md:w-80 lg:w-1/4 bg-surface-500/10">
 	<svelte:fragment slot="header">
-		<NavigationBar />
+		<NavigationBar {session} />
 	</svelte:fragment>
 	<slot />
 </AppShell>

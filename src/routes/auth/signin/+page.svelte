@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/supabase.js';
+	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
+	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
 
 	$: email = '';
 	$: password = '';
@@ -18,11 +21,7 @@
 			password: password,
 		});
 
-		console.group('Sign In');
-		console.log(user);
-		console.log(await supabase.auth.getSession());
-		console.log(await supabase.auth.getUser());
-		console.groupEnd();
+		if (user) goto('/');
 	}
 </script>
 
@@ -70,27 +69,9 @@
 					on:click={() => (showPassword = !showPassword)}
 				>
 					{#if showPassword}
-						<img
-							src="$statis/svgs/eye-closed.svg"
-							alt="closed eye"
-						/>
+						{@html closedEyeSvg}
 					{:else}
-						<svg
-							data-testid="geist-icon"
-							fill="none"
-							height="24"
-							shape-rendering="geometricPrecision"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="1.5"
-							viewBox="0 0 24 24"
-							width="24"
-							style="color:var(--geist-foreground)"
-							><path
-								d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-							/><circle cx="12" cy="12" r="3" /></svg
-						>
+						{@html openedEyeSvg}
 					{/if}
 				</button>
 			</div>

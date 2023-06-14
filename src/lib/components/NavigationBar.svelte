@@ -2,6 +2,10 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from '$lib/components/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/SearchMobile.svelte';
+	import { supabase } from '$lib/supabase';
+	import type { Session } from '@supabase/supabase-js';
+
+	export let session: Session | null;
 
 	const hideActionText = true;
 
@@ -9,7 +13,9 @@
 		drawerStore.open();
 	}
 
-	function logout(): void {}
+	function logout(): void {
+		supabase.auth.signOut();
+	}
 </script>
 
 <nav id="navigation-bar">
@@ -74,8 +80,7 @@
 
 		<svelte:fragment slot="trail">
 			<div class="flex gap-2">
-				<!-- If user logged in -->
-				{#if false}
+				{#if session}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a
 							href="/new"
