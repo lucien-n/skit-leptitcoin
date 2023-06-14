@@ -11,22 +11,18 @@
 	}
 
 	async function signIn() {
-		const authToken = await supabase.auth.signInWithPassword({
+		const {
+			data: { user },
+		} = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password,
 		});
 
-		if (!authToken) return;
-		const user = authToken.data.user;
-
-		if (!user) return;
-		const username = await supabase
-			.from('users')
-			.select('username')
-			.eq('uid', user.id)
-			.limit(1);
-
-		console.log(username);
+		console.group('Sign In');
+		console.log(user);
+		console.log(await supabase.auth.getSession());
+		console.log(await supabase.auth.getUser());
+		console.groupEnd();
 	}
 </script>
 

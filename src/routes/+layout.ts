@@ -1,6 +1,7 @@
 // src/routes/+layout.ts
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit'
 import type { Database } from '$lib/DatabaseDefinitions'
+import { userStore } from '$lib/store.js'
 
 export const load = async ({ fetch, data, depends }) => {
     depends('supabase:auth')
@@ -15,6 +16,10 @@ export const load = async ({ fetch, data, depends }) => {
     const {
         data: { session },
     } = await supabase.auth.getSession()
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    userStore.set(user)
 
     return { supabase, session }
 }

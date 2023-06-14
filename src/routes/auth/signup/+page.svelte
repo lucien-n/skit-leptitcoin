@@ -1,15 +1,33 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { supabase } from '$lib/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 
 	let showPassword: boolean = false;
 
 	$: email = '';
 	$: password = '';
+	$: username = '';
 
 	async function signUp() {
 		try {
-			// TODO: signup
+			const {
+				data: { user },
+			} = await supabase.auth.signUp({
+				email: email,
+				password: password,
+				options: {
+					data: {
+						username: username,
+					},
+				},
+			});
+
+			console.group('Sign Up');
+			console.log(user);
+			console.log(await supabase.auth.getSession());
+			console.log(await supabase.auth.getUser());
+			console.groupEnd();
 		} catch (error) {
 			console.error(error);
 		}
@@ -37,10 +55,25 @@
 >
 	<form class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3">
 		<p class="text-center">
-			Already have an account yet? <a href="/auth/signin" class="anchor"
+			Already have an account? <a href="/auth/signin" class="anchor"
 				>Sign In.</a
 			>
 		</p>
+		<section>
+			<label for="name">Name</label>
+			<!-- svelte-ignore a11y-autofocus -->
+			<input
+				type="text"
+				id="name"
+				name="name"
+				class="input"
+				autofocus
+				autocomplete="additional-name"
+				required
+				bind:value={username}
+			/>
+		</section>
+
 		<section>
 			<label for="email">Email</label>
 			<!-- svelte-ignore a11y-autofocus -->
@@ -49,7 +82,6 @@
 				id="email"
 				name="email"
 				class="input"
-				autofocus
 				autocomplete="email"
 				required
 				bind:value={email}
