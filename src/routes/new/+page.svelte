@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import type { SupaListing } from '$lib/types/supa_listing';
+	import { userStore } from '$lib/store';
 	import { toastStore } from '@skeletonlabs/skeleton';
-	import { v4 as uuid } from 'uuid';
+
+	let formElement: HTMLFormElement;
 
 	let title: string;
 	let description: string;
 	let price: number;
 	let category: string;
 
-	function postListing() {
+	async function postListing(event: SubmitEvent) {
+		event.preventDefault();
 		// If not user
-		if (false) {
+		if (!$userStore) {
 			toastStore.trigger({
 				message: 'You must be logged in',
 				background: 'bg-variant-error',
@@ -20,26 +21,28 @@
 			return;
 		}
 
-		if (
-			title === undefined ||
-			category === undefined ||
-			price === undefined
-		)
+		if (title === undefined) {
+			toastStore.trigger({
+				message: 'Please enter a title',
+			});
 			return;
+		}
 
-		const listing: SupaListing = {
-			id: uuid(),
-			author_uid: 'test-uuid',
-			author_username: 'Someone',
-			title: title,
-			description: description,
-			price: price,
-			category: category,
-			created_at: new Date().getTime(),
-		};
+		if (description === undefined) {
+			toastStore.trigger({
+				message: 'Please enter a description',
+			});
+			return;
+		}
 
-		// TODOx²: post listing
-		goto('/');
+		if (price === undefined) {
+			toastStore.trigger({
+				message: 'Please enter a price',
+			});
+			return;
+		}
+
+		formElement.submit();
 	}
 </script>
 
@@ -49,6 +52,7 @@
 		method="POST"
 		class="flex flex-col card gap-6 w-full md:w-1/2 card p-5 h-fit m-4 md:m-0"
 		id="new-listing"
+		bind:this={formElement}
 	>
 		<section>
 			<label for="title">Title</label>
@@ -96,8 +100,8 @@
 			</select>
 		</section>
 		<button
-			type="button"
-			on:click={postListing}
+			type="submit"
+			on:submit={postListing}
 			class="btn variant-ghost-surface w-fit mx-auto">Create</button
 		>
 	</form>

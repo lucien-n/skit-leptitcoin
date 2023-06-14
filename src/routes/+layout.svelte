@@ -9,6 +9,7 @@
 	import NavigationDrawer from '$lib/components/NavigationDrawer.svelte';
 	import { onMount } from 'svelte';
 	import { invalidate } from '$app/navigation';
+	import { userStore } from '$lib/store';
 
 	export let data;
 
@@ -39,7 +40,7 @@
 
 <AppShell slotSidebarLeft="w-0 md:w-80 lg:w-1/4 bg-surface-500/10">
 	<svelte:fragment slot="header">
-		<NavigationBar {session} />
+		<NavigationBar />
 	</svelte:fragment>
 	<slot />
 </AppShell>

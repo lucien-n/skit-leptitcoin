@@ -3,6 +3,8 @@
 	import { supabase } from '$lib/supabase.js';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
+	import { redirect } from '@sveltejs/kit';
+	import { toastStore } from '@skeletonlabs/skeleton';
 
 	$: email = '';
 	$: password = '';
@@ -21,7 +23,9 @@
 			password: password,
 		});
 
-		if (user) goto('/');
+		if (user) {
+			goto('/');
+		}
 	}
 </script>
 

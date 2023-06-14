@@ -3,9 +3,7 @@
 	import SearchDesktop from '$lib/components/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/SearchMobile.svelte';
 	import { supabase } from '$lib/supabase';
-	import type { Session } from '@supabase/supabase-js';
-
-	export let session: Session | null;
+	import { userStore } from '$lib/store';
 
 	const hideActionText = true;
 
@@ -80,7 +78,7 @@
 
 		<svelte:fragment slot="trail">
 			<div class="flex gap-2">
-				{#if session}
+				{#if $userStore}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a
 							href="/new"
