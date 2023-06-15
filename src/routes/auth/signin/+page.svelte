@@ -3,34 +3,45 @@
 	import { supabase } from '$lib/supabase.js';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
-	import { redirect } from '@sveltejs/kit';
-	import { toastStore } from '@skeletonlabs/skeleton';
+	import { info, warn } from '$lib/helper';
+
+	let showPassword: boolean = false;
+	let formElement: HTMLFormElement;
 
 	$: email = '';
 	$: password = '';
-	let showPassword: boolean = false;
 
 	function handlePasswordChange(event: any) {
 		if (event.target === null) return;
 		password = event.target.value;
 	}
 
-	async function signIn() {
-		const {
-			data: { user },
-		} = await supabase.auth.signInWithPassword({
-			email: email,
-			password: password,
-		});
+	async function signIn(event: SubmitEvent) {
+		event.preventDefault();
 
-		if (user) {
-			goto('/');
+		if (!email) {
+			warn('Please enter a valid email');
+			return;
 		}
+
+		if (!password) {
+			warn('Please enter a password');
+			return;
+		}
+
+		info('All fields correct');
+
+		formElement.submit();
 	}
 </script>
 
 <section id="signin" class="w-full h-full flex md:items-center justify-center">
-	<form class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3">
+	<form
+		action="/auth/signin"
+		method="post"
+		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
+		bind:this={formElement}
+	>
 		<p class="text-center">
 			Don't have an account yet? <a
 				href="/auth/signup"
@@ -87,8 +98,8 @@
 		</section>
 
 		<button
-			type="button"
-			on:click={signIn}
+			type="submit"
+			on:submit={signIn}
 			aria-label="sign in"
 			class="btn variant-ghost-surface w-fit mx-auto">Sign In</button
 		>

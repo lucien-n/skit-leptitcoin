@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { formatDate } from '$lib/helper';
+	import { userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let listing: SupaListing;
@@ -8,17 +9,17 @@
 </script>
 
 <a
-	href="/l/{listing.id}"
-	id="listing-{listing.id}"
+	href="/l/{listing.uid}"
+	id="listing-{listing.uid}"
 	class="card relative w-full h-full flex flex-col"
 	tabindex={index}
 	aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 >
 	<!-- TODO: If user is author -->
-	{#if false}
+	{#if listing.author_uid === $userStore?.id}
 		<div class="absolute -right-2 -top-2 flex flex-col gap-2">
 			<a
-				href="/e/{listing.id}"
+				href="/e/{listing.uid}"
 				class="btn btn-sm variant-glass-tertiary aspect-square p-2"
 				aria-label="edit"
 				tabindex={index + 0.1}

@@ -1,14 +1,14 @@
 <script lang="ts">
-	export let data: { listing_id: string };
+	export let data: { listing_uid: string };
 
-	const listing_id = data.listing_id;
+	const listing_uid = data.listing_uid;
 </script>
 
 <section
-	id="listing-{listing_id}"
+	id="listing-{listing_uid}"
 	class="w-full h-full flex items-center justify-center"
 >
 	<h1>
-		{listing_id}
+		{listing_uid}
 	</h1>
 </section>

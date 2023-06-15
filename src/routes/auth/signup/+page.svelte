@@ -1,48 +1,36 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { supabase } from '$lib/supabase';
-	import { toastStore } from '@skeletonlabs/skeleton';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
+	import { info, warn } from '$lib/helper';
 
 	let showPassword: boolean = false;
+	let formElement: HTMLFormElement;
 
 	$: email = '';
 	$: password = '';
 	$: username = '';
 
-	async function signUp() {
-		try {
-			const {
-				data: { user },
-			} = await supabase.auth.signUp({
-				email: email,
-				password: password,
-				options: {
-					data: {
-						username: username,
-					},
-				},
-			});
+	async function signUp(event: SubmitEvent) {
+		event.preventDefault();
 
-			console.group('Sign Up');
-			console.log(user);
-			console.log(await supabase.auth.getSession());
-			console.log(await supabase.auth.getUser());
-			console.groupEnd();
-		} catch (error) {
-			console.error(error);
+		if (!email) {
+			warn('Please enter a valid email');
+			return;
 		}
 
-		// If use connected
-		if (false)
-			toastStore.trigger({
-				message: 'Signed in!',
-				background: 'variant-glass-success',
-				autohide: true,
-			});
+		if (!password) {
+			warn('Please enter a password');
+			return;
+		}
 
-		goto('/');
+		if (!username) {
+			warn('Please enter a username');
+			return;
+		}
+
+		info('All fields correct');
+
+		formElement.submit();
 	}
 
 	function handlePasswordChange(e: any) {
@@ -55,7 +43,12 @@
 	id="signup"
 	class="w-full h-full flex self-center items-center justify-center"
 >
-	<form class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3">
+	<form
+		action="/auth/signup"
+		method="post"
+		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
+		bind:this={formElement}
+	>
 		<p class="text-center">
 			Already have an account? <a href="/auth/signin" class="anchor"
 				>Sign In.</a
@@ -117,8 +110,8 @@
 		</section>
 
 		<button
-			type="button"
-			on:click={signUp}
+			type="submit"
+			on:submit={signUp}
 			class="btn variant-ghost-surface w-fit mx-auto">Sign Up</button
 		>
 	</form>
