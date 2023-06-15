@@ -73,8 +73,8 @@
 				{listing.category}
 			</p>
 			<p>
-				{listing.author_username}
-				{formatDate(listing.created_at)}
+				{listing.author}
+				{formatDate(listing.created_at || new Date().getTime())}
 			</p>
 		</div>
 	</div>

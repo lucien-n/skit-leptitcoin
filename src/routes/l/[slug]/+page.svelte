@@ -1,14 +1,23 @@
 <script lang="ts">
-	export let data: { listing_uid: string };
+	import type { SupaListing } from '$lib/types/supa_listing';
 
-	const listing_uid = data.listing_uid;
+	export let data: { listing: SupaListing };
+
+	const listing = data.listing;
+
+	console.log(listing);
 </script>
 
 <section
-	id="listing-{listing_uid}"
-	class="w-full h-full flex items-center justify-center"
+	id="listing-{listing.uid}"
+	class=" w-full h-full flex items-center justify-center"
 >
-	<h1>
-		{listing_uid}
-	</h1>
+	<div class="flex-col items-center flex">
+		<h1 class="h1">
+			{listing.author}
+		</h1>
+		<h3 class="h3">
+			{listing.uid}
+		</h3>
+	</div>
 </section>

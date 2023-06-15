@@ -1,6 +1,8 @@
+import { getListing } from '$lib/supabase.js'
 
 export const load = async ({ params }) => {
-    // TODO: querry and return listing
+    const listing_uid = params.slug
     return {
+        listing: await getListing(listing_uid)
     }
 }

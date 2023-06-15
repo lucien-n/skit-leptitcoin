@@ -6,4 +6,6 @@ export type SupaListing = {
     price: number,
     images?: string[],
     category: string,
+    author?: string
+    created_at?: number
 }
