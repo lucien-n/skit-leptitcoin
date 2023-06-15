@@ -21,7 +21,6 @@ export const actions: Actions = {
                 password: password,
             });
         } catch (e) {
-            console.error(e);
             throw error(500, { message: "Internal server error" });
         }
 

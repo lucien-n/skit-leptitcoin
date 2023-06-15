@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { supabase } from '$lib/supabase.js';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
-	import { info, warn } from '$lib/helper';
+	import { enhance } from '$app/forms';
+	import type { SubmitFunction } from './$types';
 
 	let showPassword: boolean = false;
-	let formElement: HTMLFormElement;
+	let loading = false;
 
 	$: email = '';
 	$: password = '';
@@ -16,23 +15,19 @@
 		password = event.target.value;
 	}
 
-	async function signIn(event: SubmitEvent) {
-		event.preventDefault();
-
-		if (!email) {
-			warn('Please enter a valid email');
-			return;
-		}
-
-		if (!password) {
-			warn('Please enter a password');
-			return;
-		}
-
-		info('All fields correct');
-
-		formElement.submit();
-	}
+	const handleSubmit: SubmitFunction = ({
+		formElement,
+		formData,
+		action,
+		cancel,
+		submitter,
+	}) => {
+		loading = true;
+		return async ({ update }: { update: any }) => {
+			loading = false;
+			update();
+		};
+	};
 </script>
 
 <section id="signin" class="w-full h-full flex md:items-center justify-center">
@@ -40,7 +35,7 @@
 		action="/auth/signin"
 		method="post"
 		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
-		bind:this={formElement}
+		use:enhance={handleSubmit}
 	>
 		<p class="text-center">
 			Don't have an account yet? <a
@@ -99,9 +94,9 @@
 
 		<button
 			type="submit"
-			on:submit={signIn}
 			aria-label="sign in"
-			class="btn variant-ghost-surface w-fit mx-auto">Sign In</button
+			class="btn variant-ghost-surface w-fit mx-auto"
+			disabled={loading}>{loading ? 'Loading... ' : 'Sign In'}</button
 		>
 	</form>
 </section>

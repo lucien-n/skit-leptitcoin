@@ -8,8 +8,6 @@ export const actions: Actions = {
         const password: string = formData.get('password')?.toString() || ""
         const username: string = formData.get('username')?.toString() || ""
 
-        // if (!email || !password || !username) throw error(400, { message: "Missing fields" });
-
         if (!email) {
             throw fail(400, { email, missing: true })
         }
@@ -23,7 +21,7 @@ export const actions: Actions = {
         }
 
         try {
-            const authToken = await supabase.auth.signUp({
+            await supabase.auth.signUp({
                 email: email,
                 password: password,
                 options: {
@@ -32,9 +30,7 @@ export const actions: Actions = {
                     },
                 },
             })
-            console.log(authToken)
         } catch (e) {
-            console.error(e)
             throw error(500, { message: "Internal server error" })
         }
 

@@ -23,7 +23,7 @@
 
 	const handleSignOut = () => {
 		loading = true;
-		return async ({ update }) => {
+		return async ({ update }: { update: any }) => {
 			loading = false;
 			update();
 		};

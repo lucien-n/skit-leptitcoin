@@ -1,42 +1,34 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
-	import { info, warn } from '$lib/helper';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let showPassword: boolean = false;
-	let formElement: HTMLFormElement;
+	let loading = false;
 
 	$: email = '';
 	$: password = '';
 	$: username = '';
 
-	async function signUp(event: SubmitEvent) {
-		event.preventDefault();
-
-		if (!email) {
-			warn('Please enter a valid email');
-			return;
-		}
-
-		if (!password) {
-			warn('Please enter a password');
-			return;
-		}
-
-		if (!username) {
-			warn('Please enter a username');
-			return;
-		}
-
-		info('All fields correct');
-
-		formElement.submit();
-	}
-
 	function handlePasswordChange(e: any) {
 		if (e.target == null) return;
 		password += e.target.value;
 	}
+
+	const handleSubmit: SubmitFunction = ({
+		formElement,
+		formData,
+		action,
+		cancel,
+		submitter,
+	}) => {
+		loading = true;
+		return async ({ update }: { update: any }) => {
+			loading = false;
+			update();
+		};
+	};
 </script>
 
 <section
@@ -47,7 +39,7 @@
 		action="/auth/signup"
 		method="post"
 		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
-		bind:this={formElement}
+		use:enhance={handleSubmit}
 	>
 		<p class="text-center">
 			Already have an account? <a href="/auth/signin" class="anchor"
@@ -111,8 +103,8 @@
 
 		<button
 			type="submit"
-			on:submit={signUp}
-			class="btn variant-ghost-surface w-fit mx-auto">Sign Up</button
+			class="btn variant-ghost-surface w-fit mx-auto"
+			disabled={loading}>{loading ? 'Loading...' : 'Sign Up'}</button
 		>
 	</form>
 </section>
