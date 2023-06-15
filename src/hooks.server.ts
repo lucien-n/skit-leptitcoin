@@ -1,6 +1,5 @@
 import type { Handle } from "@sveltejs/kit";
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
-import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const handle: Handle = async ({ event, resolve }) => {
     event.locals.supabase = createSupabaseServerClient({

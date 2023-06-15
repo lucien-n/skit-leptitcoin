@@ -2,14 +2,9 @@ import { redirect, type Actions, error } from "@sveltejs/kit";
 import { v4 as uuid } from 'uuid';
 import type { SupaListing } from '$lib/types/supa_listing';
 
-export const load = async ({ locals: { supabase, getSession } }) => {
-    console.log("load", await supabase.auth.getSession())
-}
-
 export const actions: Actions = {
     new: async ({ request, locals: { supabase, getSession } }) => {
         const session = await getSession()
-        console.log(session)
         if (!session) throw error(401, { message: "Unauthorized" })
 
         const formData = await request.formData()
@@ -23,7 +18,11 @@ export const actions: Actions = {
             category: formData.get('category')?.toString() || "misc",
         };
 
-        supabase.from('listings').insert(listing)
+        try {
+            await supabase.from('listings').insert(listing)
+        } catch (e) {
+            console.error(e)
+        }
 
         throw redirect(303, '/')
     }
