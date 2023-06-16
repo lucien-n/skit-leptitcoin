@@ -7,14 +7,6 @@
 	let showPassword: boolean = false;
 	let loading = false;
 
-	$: email = '';
-	$: password = '';
-
-	function handlePasswordChange(event: any) {
-		if (event.target === null) return;
-		password = event.target.value;
-	}
-
 	const handleSubmit: SubmitFunction = ({
 		formElement,
 		formData,
@@ -56,7 +48,6 @@
 				autocomplete="email"
 				aria-label="email"
 				required
-				bind:value={email}
 			/>
 		</section>
 
@@ -71,7 +62,6 @@
 					autocomplete="current-password"
 					aria-label="password"
 					required
-					on:input={handlePasswordChange}
 				/>
 				<button
 					type="button"

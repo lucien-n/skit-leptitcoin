@@ -4,17 +4,10 @@
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
+	export let form;
+
 	let showPassword: boolean = false;
 	let loading = false;
-
-	$: email = '';
-	$: password = '';
-	$: username = '';
-
-	function handlePasswordChange(e: any) {
-		if (e.target == null) return;
-		password += e.target.value;
-	}
 
 	const handleSubmit: SubmitFunction = ({
 		formElement,
@@ -35,10 +28,14 @@
 	id="signup"
 	class="w-full h-full flex self-center items-center justify-center"
 >
+	{#if form?.missing}
+		<p>Please fill out all fields</p>
+	{/if}
+
 	<form
 		action="/auth/signup"
 		method="post"
-		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
+		class="flex-col flex gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
 		use:enhance={handleSubmit}
 	>
 		<p class="text-center">
@@ -47,17 +44,17 @@
 			>
 		</p>
 		<section>
-			<label for="name">Name</label>
+			<label for="username">Name</label>
 			<!-- svelte-ignore a11y-autofocus -->
 			<input
 				type="text"
-				id="name"
-				name="name"
+				id="username"
+				name="username"
 				class="input"
 				autofocus
 				autocomplete="additional-name"
+				value={form?.username || ''}
 				required
-				bind:value={username}
 			/>
 		</section>
 
@@ -70,8 +67,8 @@
 				name="email"
 				class="input"
 				autocomplete="email"
+				value={form?.email || ''}
 				required
-				bind:value={email}
 			/>
 		</section>
 
@@ -84,8 +81,8 @@
 					name="password"
 					class="w-full"
 					autocomplete="current-password"
+					value={form?.password || ''}
 					required
-					on:input={handlePasswordChange}
 				/>
 				<button
 					type="button"

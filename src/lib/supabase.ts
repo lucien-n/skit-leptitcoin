@@ -13,8 +13,6 @@ export async function getListing(listing_uid: string) {
         const { data: author } = await supabase.auth.admin.getUserById(listing.author_uid)
         if (!author) return
 
-        console.log(author)
-
         return {
             uid: listing.uid,
             author_uid: listing.author_uid,
