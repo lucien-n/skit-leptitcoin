@@ -8,17 +8,17 @@ export const actions: Actions = {
         const password: string = formData.get('password')?.toString() || ""
         const username: string = formData.get('username')?.toString() || ""
 
-        if (!email) {
+        if (!email || email === "") {
             console.log("Missing email")
             return fail(400, { email, missing: true })
         }
 
-        if (!password) {
+        if (!password || password === "") {
             console.log("Missing password")
             return fail(400, { password, missing: true })
         }
 
-        if (!username) {
+        if (!username || username === "") {
             console.log("Missing username")
             return fail(400, { username, missing: true })
         }
