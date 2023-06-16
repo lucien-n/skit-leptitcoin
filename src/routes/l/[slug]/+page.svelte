@@ -4,8 +4,6 @@
 	export let data: { listing: SupaListing };
 
 	const listing = data.listing;
-
-	console.log(listing);
 </script>
 
 <section

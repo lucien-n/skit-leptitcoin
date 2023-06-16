@@ -56,9 +56,9 @@
 		/>
 	</header>
 	<div class="card-header">
-		<div class="flex gap-2">
+		<div class="flex justify-between w-full">
 			<h1>{listing.title}</h1>
-			<p class="opacity-80 italic">
+			<p class="text-base italic badge variant-ghost">
 				{listing.price} €
 			</p>
 		</div>
@@ -69,7 +69,7 @@
 
 	<div class="card-footer mt-auto">
 		<div class="flex flex-row justify-between opacity-70 italic">
-			<p>
+			<p class="">
 				{listing.category}
 			</p>
 			<p>
