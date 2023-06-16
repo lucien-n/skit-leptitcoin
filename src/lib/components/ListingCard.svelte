@@ -47,16 +47,17 @@
 	{/if}
 	<header>
 		<img
-			src={listing.images
-				? listing.images[0]
+			src={listing.picture
+				? listing.picture[0]
 				: 'https://placehold.co/600x400/000000/FFFFFF?text=' +
 				  listing.title.split(' ')[0]}
 			alt="listing"
+			class="w-full h-full object-cover"
 		/>
 	</header>
 	<div class="card-header">
 		<div class="flex justify-between w-full">
-			<h1>{listing.title}</h1>
+			<h3 class="h3">{listing.title}</h3>
 			<p class="text-base italic badge variant-ghost">
 				{listing.price} €
 			</p>

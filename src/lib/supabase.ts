@@ -42,6 +42,42 @@ export async function getUsername(user_uid: string): Promise<string> {
     return res[0].username || "unknown"
 }
 
+async function likeListing(listing_uid: string, user_uid: string) {
+    try {
+        await supabase.from('likes').insert({ user_uid: user_uid, listing_uid: listing_uid })
+    } catch (e) {
+        console.warn(e)
+    }
+}
+
+async function dislikeListing(listing_uid: string, user_uid: string) {
+    try {
+        await supabase.from('likes').delete().match({ user_uid: user_uid, listing_uid: listing_uid })
+    } catch (e) {
+        console.warn(e)
+    }
+}
+
+export async function isListingLikedByUser(listing_uid: string, user_uid: string) {
+    try {
+        const { data: res } = await supabase.from('likes').select('id').match({ user_uid: user_uid, listing_uid: listing_uid })
+        return res?.length !== 0
+    } catch (e) {
+        console.warn(e)
+    }
+}
+
+export async function toggleListingLike(listing_uid: string, user_uid: string) {
+    try {
+        if (await isListingLikedByUser(listing_uid, user_uid))
+            await dislikeListing(listing_uid, user_uid)
+        else
+            await likeListing(listing_uid, user_uid)
+    } catch (e) {
+        console.warn(e)
+    }
+}
+
 async function parseListing(listingData) {
     return {
         uid: listingData.uid,
@@ -50,6 +86,7 @@ async function parseListing(listingData) {
         description: listingData.description,
         price: listingData.price,
         category: listingData.category,
+        picture: listingData.picture,
         created_at: listingData.created_at,
         author: await getUsername(listingData.author_uid)
     } satisfies SupaListing

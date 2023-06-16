@@ -7,6 +7,6 @@
 	const listing = data.listing;
 </script>
 
-<div class="w-3/5 h-full flex items-center justify-center">
+<section id="listing-{listing.uid}" class="w-full h-full">
 	<Listing {listing} />
-</div>
+</section>

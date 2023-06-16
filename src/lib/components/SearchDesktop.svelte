@@ -26,7 +26,7 @@
 	<!-- Search fields -->
 	<div
 		id="search-input-field"
-		class="input-group input-group-divider grid-cols-7"
+		class="input-group input-group-divider grid-cols-9 lg:grid-cols-7"
 	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<section class="col-span-5 flex w-full">
@@ -44,7 +44,7 @@
 				tabindex={1.1}
 			/>
 		</section>
-		<section class="col-span-1 flex w-full">
+		<section class="col-span-2 lg:col-span-1 flex w-full">
 			<div class="input-group-shim">
 				<label for="minimum-price">Min</label>
 			</div>
@@ -58,7 +58,7 @@
 				tabindex={1.2}
 			/>
 		</section>
-		<section class="col-span-1 flex w-full">
+		<section class="col-span-2 lg:col-span-1 flex w-full">
 			<div class="input-group-shim">
 				<label for="maximum-price">Max</label>
 			</div>

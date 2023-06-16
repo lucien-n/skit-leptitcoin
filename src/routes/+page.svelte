@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import ListingCard fr$lib/components/ListingCard.svelted.svelte';
+	import ListingCard from '$lib/components/ListingCard.svelte';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let data;
