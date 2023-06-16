@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Listing from '$lib/components/Listing.svelte';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let data: { listing: SupaListing };
@@ -6,16 +7,6 @@
 	const listing = data.listing;
 </script>
 
-<section
-	id="listing-{listing.uid}"
-	class=" w-full h-full flex items-center justify-center"
->
-	<div class="flex-col items-center flex">
-		<h1 class="h1">
-			{listing.author}
-		</h1>
-		<h3 class="h3">
-			{listing.uid}
-		</h3>
-	</div>
-</section>
+<div class="w-3/5 h-full flex items-center justify-center">
+	<Listing {listing} />
+</div>

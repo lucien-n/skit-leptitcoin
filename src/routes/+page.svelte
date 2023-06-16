@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import Listing from '$lib/components/Listing.svelte';
+	import ListingCard fr$lib/components/ListingCard.svelted.svelte';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let data;
@@ -36,7 +36,7 @@
 	>
 		{#await getListings then listings}
 			{#each listings as listing, index}
-				<Listing {listing} {index} />
+				<ListingCard {listing} {index} />
 			{/each}
 		{/await}
 	</section>
