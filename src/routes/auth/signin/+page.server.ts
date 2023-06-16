@@ -7,12 +7,12 @@ export const actions: Actions = {
         const email: string = formData.get('email')?.toString() || "";
         const password: string = formData.get('password')?.toString() || "";
 
-        if (!email) {
-            throw fail(400, { email, missing: true });
+        if (!email || email === "") {
+            return fail(400, { email, missing: true });
         }
 
-        if (!password) {
-            throw fail(400, { password, missing: true });
+        if (!password || password === "") {
+            return fail(400, { password, missing: true });
         }
 
         try {

@@ -24,7 +24,7 @@ export const actions: Actions = {
         }
 
         try {
-            const res = await supabase.auth.signUp({
+            await supabase.auth.signUp({
                 email: email,
                 password: password,
                 options: {
@@ -33,7 +33,6 @@ export const actions: Actions = {
                     }
                 }
             })
-            console.log(res)
         } catch (e) {
             throw error(500, { message: "Internal server error" })
         }

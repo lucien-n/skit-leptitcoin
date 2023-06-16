@@ -4,6 +4,8 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from './$types';
 
+	export let form;
+
 	let showPassword: boolean = false;
 	let loading = false;
 
@@ -23,6 +25,9 @@
 </script>
 
 <section id="signin" class="w-full h-full flex md:items-center justify-center">
+	{#if form?.missing}
+		<p>Please fill out all fields</p>
+	{/if}
 	<form
 		action="/auth/signin"
 		method="post"
@@ -47,6 +52,7 @@
 				autofocus
 				autocomplete="email"
 				aria-label="email"
+				value={form?.email || ''}
 				required
 			/>
 		</section>
@@ -61,6 +67,7 @@
 					class="w-full"
 					autocomplete="current-password"
 					aria-label="password"
+					value={form?.password || ''}
 					required
 				/>
 				<button
