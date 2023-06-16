@@ -6,7 +6,7 @@
 	export let data;
 
 	let getListings: any;
-	let listings: SupaListing[] = data.listings || [];
+	let listings: SupaListing[] = data.listings;
 
 	function filterListings(params: SearchParams) {
 		let filteredListings: SupaListing[] = [];
