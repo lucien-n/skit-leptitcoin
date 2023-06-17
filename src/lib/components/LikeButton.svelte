@@ -32,6 +32,7 @@
 <button
 	on:click|stopPropagation={toggleLike}
 	class="variant-glass-secondary aspect-square btn md:p-2 w-16 md:w-12"
+	aria-label={liked ? 'dislike' : 'like'}
 >
 	{#if liked}
 		{@html heartFillSvg}

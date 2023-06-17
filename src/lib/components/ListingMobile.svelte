@@ -42,6 +42,9 @@
 				<a
 					href="/u/{listing.author_uid}"
 					class="flex gap-3 hover:underline"
+					aria-label="{listing.author
+						?.username}'s profile - rated {listing.author
+						?.rating} out of 5"
 				>
 					<Avatar
 						initials={listing.author
@@ -55,7 +58,10 @@
 						<p>{listing.author?.rating}/5</p>
 					</div>
 				</a>
-				<button class="btn h-fit self-center variant-ghost-success">
+				<button
+					class="btn h-fit self-center variant-ghost-success"
+					aria-label="contact {listing.author?.username}"
+				>
 					Contact
 				</button>
 			</div>
@@ -64,7 +70,7 @@
 				<button
 					on:click={buy}
 					class="variant-ghost-tertiary btn w-full text-xl"
-					>Buy</button
+					aria-label="buy">Buy</button
 				>
 			</div>
 		</div>
