@@ -1,36 +1,17 @@
 <script lang="ts">
 	import { formatDate } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import heartFillSvg from '$lib/assets/heart-fill.svg?raw';
-	import heartSvg from '$lib/assets/heart.svg?raw';
+
 	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
 	import { userStore } from '$lib/store';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
+	import LikeButton from './LikeButton.svelte';
 
 	export let listing: SupaListing;
-	let liked = false;
-
-	const _ = userStore.subscribe(async (user) => {
-		if (!user) return;
-		if (await isListingLikedByUser(listing.uid, user.id)) liked = true;
-	});
 
 	function buy() {
 		console.log('buy ', listing.uid);
-	}
-
-	async function toggleLike() {
-		if (!$userStore) {
-			toastStore.trigger({
-				message: 'You must be signed in',
-				background: 'variant-glass-warn',
-			});
-			return;
-		}
-
-		liked = !liked;
-		await toggleListingLike(listing.uid, $userStore.id);
 	}
 </script>
 
@@ -48,16 +29,7 @@
 			<button on:click={buy} class="variant-ghost-tertiary btn text-lg"
 				>Buy</button
 			>
-			<button
-				on:click={toggleLike}
-				class="variant-ghost-secondary btn p-3 text-lg"
-			>
-				{#if liked}
-					{@html heartFillSvg}
-				{:else}
-					{@html heartSvg}
-				{/if}
-			</button>
+			<LikeButton listing_uid={listing.uid} />
 		</div>
 	</header>
 	<div class="card-header flex flex-col gap-3">
