@@ -22,7 +22,7 @@
 
 <svelte:window on:keydown={handleKeyPress} />
 
-<div id="search" class="w-full lg:w-4/5 mx-auto hidden md:flex">
+<div id="search" class="w-full xl:w-4/5 mx-auto hidden md:flex">
 	<!-- Search fields -->
 	<div
 		id="search-input-field"

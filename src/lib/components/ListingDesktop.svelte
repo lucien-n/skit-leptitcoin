@@ -11,7 +11,9 @@
 	}
 </script>
 
-<div class="card flex flex-col gap-2 m-2 w-[70%] mx-auto">
+<div
+	class="card flex-col gap-2 m-2 lg:w-[80%] xl:w-[70%] lg:mx-auto hidden md:flex"
+>
 	<header class="w-full flex overflow-hidden">
 		<img
 			src={listing.picture
@@ -63,8 +65,8 @@
 		</div>
 		<p>{formatDate(listing.created_at || 0)}</p>
 		<hr />
-		<h5 class="h5">Description</h5>
-		<p>{listing.description}</p>
+		<h4 class="h4">Description</h4>
+		<p class="ts-lg">{listing.description}</p>
 		<br />
 	</div>
 </div>

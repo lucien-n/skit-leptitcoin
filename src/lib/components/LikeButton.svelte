@@ -31,7 +31,7 @@
 
 <button
 	on:click|stopPropagation={toggleLike}
-	class="variant-glass-secondary aspect-square btn btn-sm p-2 z-10"
+	class="variant-glass-secondary aspect-square btn md:p-2 w-16 md:w-12"
 >
 	{#if liked}
 		{@html heartFillSvg}
