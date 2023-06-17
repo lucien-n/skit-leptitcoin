@@ -7,9 +7,15 @@
 	export let listing: SupaListing;
 	export let index: number;
 	index += 1;
+
+	let hovered: boolean = false;
 </script>
 
-<div class="card relative w-full h-full flex flex-col">
+<div
+	class="card relative w-full h-full flex flex-col"
+	on:mouseenter={() => (hovered = true)}
+	on:mouseleave={() => (hovered = false)}
+>
 	<header class="relative z-30">
 		<img
 			src={listing.picture
@@ -59,7 +65,7 @@
 	>
 		<div class="card-header">
 			<div class="flex justify-between w-full">
-				<h3 class="h3">{listing.title}</h3>
+				<h3 class="h3" class:underline={hovered}>{listing.title}</h3>
 				<p class="text-base italic badge variant-ghost">
 					{listing.price} €
 				</p>
@@ -75,7 +81,7 @@
 					{listing.category}
 				</p>
 				<p>
-					{listing.author}
+					{listing.author?.username}
 					{formatDate(listing.created_at || new Date().getTime())}
 				</p>
 			</div>

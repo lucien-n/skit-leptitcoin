@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
-
-	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
-	import { userStore } from '$lib/store';
-	import { toastStore } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
+	import { Avatar } from '@skeletonlabs/skeleton';
 	import LikeButton from './LikeButton.svelte';
 
 	export let listing: SupaListing;
@@ -15,21 +11,47 @@
 	}
 </script>
 
-<div class="card flex flex-col gap-2 m-2">
-	<header class="relative w-full h-2/3 overflow-hidden">
+<div class="card flex flex-col gap-2 m-2 w-[70%] mx-auto">
+	<header class="w-full flex overflow-hidden">
 		<img
 			src={listing.picture
 				? listing.picture
 				: 'https://placehold.co/600x400/000000/FFFFFF?text=' +
 				  listing.title.split(' ')[0]}
 			alt="listing"
-			class="h-full w-full object-cover"
+			class="w-2/3 object-cover"
 		/>
-		<div class="absolute right-5 bottom-5 flex items-center gap-3">
-			<button on:click={buy} class="variant-ghost-tertiary btn text-lg"
-				>Buy</button
-			>
-			<LikeButton listing_uid={listing.uid} />
+		<div class="flex flex-col w-1/3 h-full m-4 gap-3">
+			<div class="flex justify-between w-full">
+				<a
+					href="/u/{listing.author_uid}"
+					class="flex gap-3 hover:underline"
+				>
+					<Avatar
+						initials={listing.author
+							? listing.author.username[0]
+							: 'UN'}
+					/>
+					<div class="flex flex-col">
+						<p class="h3 self-center">
+							{listing.author?.username}
+						</p>
+						<p>{listing.author?.rating}/5</p>
+					</div>
+				</a>
+				<button class="btn h-fit self-center variant-ghost-success">
+					Contact
+				</button>
+			</div>
+			<hr />
+			<div class="flex w-full gap-3">
+				<button
+					on:click={buy}
+					class="variant-ghost-tertiary btn w-full text-lg"
+					>Buy</button
+				>
+				<LikeButton listing_uid={listing.uid} />
+			</div>
 		</div>
 	</header>
 	<div class="card-header flex flex-col gap-3">

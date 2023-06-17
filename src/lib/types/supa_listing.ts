@@ -1,3 +1,5 @@
+import type { SupaUser } from "./supa_user"
+
 export type SupaListing = {
     uid: string,
     author_uid: string,
@@ -6,6 +8,6 @@ export type SupaListing = {
     price: number,
     picture: string,
     category: string,
-    author?: string
+    author?: SupaUser
     created_at?: number
 }

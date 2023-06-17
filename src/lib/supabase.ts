@@ -1,5 +1,6 @@
-import { createClient } from '@supabase/supabase-js'
-import type { SupaListing } from './types/supa_listing'
+import { createClient } from '@supabase/supabase-js';
+import type { SupaListing } from './types/supa_listing';
+import type { SupaUser } from './types/supa_user';
 
 export const supabase = createClient('https://zcxdsoyihrxxudqdnvwu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjeGRzb3lpaHJ4eHVkcWRudnd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODY1MDE1MjksImV4cCI6MjAwMjA3NzUyOX0.MkivgwBMLXu1kMDDGTOeDjHPtIFT3J2XyZG89libt8k')
 
@@ -36,10 +37,13 @@ export async function getListing(listing_uid: string) {
     }
 }
 
-export async function getUsername(user_uid: string): Promise<string> {
-    const { data: res } = await supabase.from('profiles').select('username').eq('uid', user_uid)
-    if (!res) return "Unknown"
-    return res[0].username || "unknown"
+export async function getSupaUser(user_uid: string) {
+    try {
+        const { data: [{ uid, created_at: createdAt, username, rating, picture }] } = await supabase.from('profiles').select('*').eq('uid', user_uid)
+        return { uid: user_uid, username: username, rating: rating, picture: picture, createdAt: createdAt } satisfies SupaUser
+    } catch (e) {
+        console.warn(e)
+    }
 }
 
 async function likeListing(listing_uid: string, user_uid: string) {
@@ -88,6 +92,6 @@ async function parseListing(listingData) {
         category: listingData.category,
         picture: listingData.picture,
         created_at: listingData.created_at,
-        author: await getUsername(listingData.author_uid)
+        author: await getSupaUser(listingData.author_uid)
     } satisfies SupaListing
 }
