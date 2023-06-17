@@ -3,6 +3,7 @@
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import LikeButton from './LikeButton.svelte';
+	import { userStore } from '$lib/store';
 
 	export let listing: SupaListing;
 
@@ -52,14 +53,20 @@
 				</button>
 			</div>
 			<hr />
-			<div class="flex w-full gap-3">
-				<button
-					on:click={buy}
-					class="variant-ghost-tertiary btn w-full text-lg"
-					aria-label="buy">Buy</button
-				>
-				<LikeButton listing_uid={listing.uid} />
-			</div>
+			{#if $userStore?.id === listing.author_uid}
+				<h3 class="h3 text-center">
+					You are the author of this listing
+				</h3>
+			{:else}
+				<div class="flex w-full gap-3">
+					<button
+						on:click={buy}
+						class="variant-ghost-tertiary btn w-full text-lg"
+						aria-label="buy">Buy</button
+					>
+					<LikeButton listing_uid={listing.uid} />
+				</div>
+			{/if}
 		</div>
 	</header>
 	<div class="card-header flex flex-col gap-3">
