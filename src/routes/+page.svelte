@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { searchStore } from '$lib/store';
 	import ListingCard from '$lib/components/ListingCard.svelte';
+	import { searchStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let data;
 
 	let getListings: any;
-	let listings: SupaListing[] = data.listings;
+	let listings: SupaListing[] = data.listings || [];
 
 	function filterListings(params: SearchParams) {
 		let filteredListings: SupaListing[] = [];

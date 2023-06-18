@@ -1,6 +1,6 @@
-import { redirect, type Actions, error } from "@sveltejs/kit";
-import { v4 as uuid } from 'uuid';
 import type { SupaListing } from '$lib/types/supa_listing';
+import { error, redirect, type Actions } from "@sveltejs/kit";
+import { v4 as uuid } from 'uuid';
 
 export const actions: Actions = {
     new: async ({ request, locals: { supabase, getSession } }) => {
@@ -16,6 +16,7 @@ export const actions: Actions = {
             description: formData.get('description')?.toString() || "",
             price: parseFloat(formData.get('price')?.toString() || "0"),
             category: formData.get('category')?.toString() || "misc",
+            picture: "https://placehold.co/300x200/orange/white"
         };
 
         try {
