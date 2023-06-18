@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import SearchDesktop from '$lib/components/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/SearchMobile.svelte';
-	import { supabase } from '$lib/supabase';
 	import { userStore } from '$lib/store';
+	import { supabase } from '$lib/supabase';
+	import { AppBar, LightSwitch, drawerStore } from '@skeletonlabs/skeleton';
 
 	const hideActionText = true;
 
@@ -78,6 +78,9 @@
 
 		<svelte:fragment slot="trail">
 			<div class="flex gap-2">
+				<div class="self-center">
+					<LightSwitch />
+				</div>
 				{#if $userStore}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a

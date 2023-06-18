@@ -1,14 +1,13 @@
 <script lang="ts">
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	import '@skeletonlabs/skeleton/themes/theme-modern.css';
-	import '../app.postcss';
-	import '../dark-theme.postcss';
-
 	import { invalidate } from '$app/navigation';
 	import NavigationBar from '$lib/components/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/NavigationDrawer.svelte';
 	import { AppShell, Drawer, Modal, Toast } from '@skeletonlabs/skeleton';
+	import '@skeletonlabs/skeleton/styles/skeleton.css';
+	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import { onMount } from 'svelte';
+	import '../app.postcss';
+	import '../dark-theme.postcss';
 
 	export let data;
 
