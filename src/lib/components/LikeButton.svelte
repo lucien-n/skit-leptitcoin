@@ -1,6 +1,6 @@
 <script lang="ts">
-	import heartFillSvg from '$lib/assets/heart-fill.svg?raw';
-	import heartSvg from '$lib/assets/heart.svg?raw';
+	import HeartFillSvg from '$lib/assets/heart-fill.svg?raw';
+	import HeartSvg from '$lib/assets/heart.svg?raw';
 	import { userStore } from '$lib/store';
 	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
@@ -35,8 +35,8 @@
 	aria-label={liked ? 'dislike' : 'like'}
 >
 	{#if liked}
-		{@html heartFillSvg}
+		{@html HeartFillSvg}
 	{:else}
-		{@html heartSvg}
+		{@html HeartSvg}
 	{/if}
 </button>

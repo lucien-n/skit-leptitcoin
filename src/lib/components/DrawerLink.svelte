@@ -9,7 +9,7 @@
 </script>
 
 <li>
-	<a {href} class="flex items-center gap-1" on:click={closeDrawer}>
+	<a {href} class="flex w-full gap-1" on:click={closeDrawer}>
 		<slot />
 	</a>
 </li>

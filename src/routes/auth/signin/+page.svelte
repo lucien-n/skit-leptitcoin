@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
 	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
-	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from './$types';
 
 	export let form;
@@ -31,7 +31,7 @@
 	<form
 		action="/auth/signin"
 		method="post"
-		class="flex flex-col gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
+		class="flex flex-col gap-6 card w-full h-fit mt-3 md:mt-0 mx-2 p-5 md:w-2/3 lg:w-1/3"
 		use:enhance={handleSubmit}
 	>
 		<p class="text-center">
