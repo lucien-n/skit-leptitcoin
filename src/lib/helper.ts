@@ -36,3 +36,11 @@ export function info(message: string, autohide = true) {
         autohide: autohide,
     });
 }
+
+export const listingStates = [
+    'New',
+    'Very good condition',
+    'Good condition',
+    'Satisfactory condition',
+    'For parts',
+];

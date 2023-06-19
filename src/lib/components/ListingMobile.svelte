@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate } from '$lib/helper';
+	import { formatDate, listingStates } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import LikeButton from './LikeButton.svelte';
@@ -29,7 +29,7 @@
 		{/if}
 	</header>
 	<div class="card-header flex flex-col gap-3">
-		<div class="flex justify-between">
+		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
 			<h3 class="text-lg badge variant-ghost">
 				{listing.price}€
@@ -39,6 +39,10 @@
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
+		<hr />
+		<div class="w-fit text-sm badge variant-ghost-secondary">
+			{listingStates[listing.state]}
+		</div>
 		<hr />
 		<div class="flex flex-col w-full p-4 gap-3">
 			<div class="flex justify-between w-full">

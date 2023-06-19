@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { listingStates } from '$lib/helper';
 	import { userStore } from '$lib/store';
-	import { toastStore } from '@skeletonlabs/skeleton';
+	import { RadioGroup, RadioItem, toastStore } from '@skeletonlabs/skeleton';
 
 	let formElement: HTMLFormElement;
 
@@ -8,6 +9,7 @@
 	let description: string;
 	let price: number;
 	let category: string;
+	let listingState: number;
 
 	async function postListing(event: SubmitEvent) {
 		event.preventDefault();
@@ -98,6 +100,19 @@
 				<option value="multimedia">Multimedia</option>
 				<option value="recreational">Recreational</option>
 			</select>
+		</section>
+		<section>
+			<RadioGroup>
+				{#each listingStates as state, i}
+					<RadioItem
+						bind:group={listingState}
+						value={i}
+						name="listing_state"
+					>
+						{state}
+					</RadioItem>
+				{/each}
+			</RadioGroup>
 		</section>
 		<button
 			type="submit"

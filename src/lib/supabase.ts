@@ -91,7 +91,8 @@ async function parseListing(listingData) {
         price: listingData.price,
         category: listingData.category,
         picture: listingData.picture,
+        state: listingData.state,
         created_at: listingData.created_at,
-        author: await getSupaUser(listingData.author_uid)
+        author: await getSupaUser(listingData.author_uid),
     } satisfies SupaListing
 }

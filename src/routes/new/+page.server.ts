@@ -16,7 +16,8 @@ export const actions: Actions = {
             description: formData.get('description')?.toString() || "",
             price: parseFloat(formData.get('price')?.toString() || "0"),
             category: formData.get('category')?.toString() || "misc",
-            picture: "https://placehold.co/300x200/orange/white"
+            picture: "https://placehold.co/300x200/orange/white",
+            state: parseInt(formData.get('listing_state')?.toString() || "2") || 2
         };
 
         try {
