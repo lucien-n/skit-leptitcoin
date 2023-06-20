@@ -10,5 +10,5 @@ export type SupaListing = {
     category: string,
     state: number,
     author?: SupaUser
-    created_at?: number,
+    createdAt?: number,
 }

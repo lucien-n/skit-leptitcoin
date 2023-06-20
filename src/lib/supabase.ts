@@ -39,8 +39,9 @@ export async function getListing(listing_uid: string) {
 
 export async function getSupaUser(user_uid: string) {
     try {
-        const { data: [{ uid, created_at: createdAt, username, rating, picture }] } = await supabase.from('profiles').select('*').eq('uid', user_uid)
-        return { uid: user_uid, username: username, rating: rating, picture: picture, createdAt: createdAt } satisfies SupaUser
+        const { data: user } = await supabase.from('profiles').select('*').eq('uid', user_uid)
+        if (!user) return null
+        return (await parseUser(user[0]))
     } catch (e) {
         console.warn(e)
     }
@@ -85,6 +86,7 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 
 
 async function parseListing(listingData) {
+    const author = await getSupaUser(listingData.author_uid)
     return {
         uid: listingData.uid,
         author_uid: listingData.author_uid,
@@ -94,7 +96,17 @@ async function parseListing(listingData) {
         category: listingData.category,
         picture: listingData.picture,
         state: listingData.state,
-        created_at: listingData.created_at,
-        author: await getSupaUser(listingData.author_uid),
+        createdAt: listingData.created_at,
+        author: author || { username: "unknown", uid: "unknown", rating: 0.0, picture: "unknown", createdAt: new Date().getTime() } satisfies SupaUser,
     } satisfies SupaListing
+}
+
+async function parseUser(userData) {
+    return {
+        uid: userData.uid,
+        username: userData.username,
+        picture: userData.picture,
+        rating: userData.rating,
+        createdAt: userData.created_at,
+    } satisfies SupaUser
 }

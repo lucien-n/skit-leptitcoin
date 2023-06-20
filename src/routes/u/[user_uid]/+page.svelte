@@ -9,7 +9,6 @@
 	$: ({ user, anonymous } = data);
 
 	let userRating = user.rating;
-	console.log(userRating);
 </script>
 
 <section id="user-profile-{user.uid}" class="w-[70%] h-full flex m-4 mx-auto">

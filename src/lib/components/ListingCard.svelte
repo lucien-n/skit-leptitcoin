@@ -83,7 +83,7 @@
 				</p>
 				<p>
 					{listing.author?.username}
-					{formatDate(listing.created_at || new Date().getTime())}
+					{formatDate(listing.createdAt || new Date().getTime())}
 				</p>
 			</div>
 		</div>

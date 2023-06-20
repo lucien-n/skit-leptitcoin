@@ -35,7 +35,7 @@
 				{listing.price}€
 			</h3>
 		</div>
-		<p>{formatDate(listing.created_at || 0)}</p>
+		<p>{formatDate(listing.createdAt || 0)}</p>
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
