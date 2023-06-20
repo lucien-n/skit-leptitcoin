@@ -82,6 +82,8 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
     }
 }
 
+
+
 async function parseListing(listingData) {
     return {
         uid: listingData.uid,

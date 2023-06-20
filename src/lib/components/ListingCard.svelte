@@ -61,6 +61,7 @@
 		href="/l/{listing.uid}"
 		id="listing-{listing.uid}"
 		tabindex={index}
+		class="h-full flex flex-col justify-between"
 		aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 	>
 		<div class="card-header">
@@ -75,7 +76,7 @@
 			</p>
 		</div>
 
-		<div class="card-footer mt-auto">
+		<div class="card-footer">
 			<div class="flex flex-row justify-between opacity-70 italic">
 				<p class="">
 					{listing.category}
