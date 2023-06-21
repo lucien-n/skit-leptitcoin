@@ -1,12 +1,13 @@
 <script lang="ts">
-	import HeartFillSvg from '$lib/assets/heart-fill.svg?raw';
-	import HeartSvg from '$lib/assets/heart.svg?raw';
 	import { userStore } from '$lib/store';
 	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
+	import HeartFillSvg from '$lib/components/svgs/HeartFillSvg.svelte';
+	import HeartSvg from '$lib/components/svgs/HeartSvg.svelte';
 
 	export let listing_uid: string;
+	export let index: number = 1;
 	let liked = false;
 
 	const unsubscribe = userStore.subscribe(async (user) => {
@@ -33,10 +34,11 @@
 	on:click|stopPropagation={toggleLike}
 	class="variant-glass-secondary aspect-square btn md:p-2 w-16 md:w-12"
 	aria-label={liked ? 'dislike' : 'like'}
+	tabindex={index}
 >
 	{#if liked}
-		{@html HeartFillSvg}
+		<HeartFillSvg />
 	{:else}
-		{@html HeartSvg}
+		<HeartSvg />
 	{/if}
 </button>

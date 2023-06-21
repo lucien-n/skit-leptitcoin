@@ -4,11 +4,11 @@
 	import { userStore } from '$lib/store';
 	import { supabase } from '$lib/supabase';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
-	import PlusSvg from '$lib/assets/plus.svg?raw';
-	import LogOutSvg from '$lib/assets/log-out.svg?raw';
-	import LogInSvg from '$lib/assets/log-in.svg?raw';
-	import HomeSvg from '$lib/assets/home.svg?raw';
-	import HamburgerSvg from '$lib/assets/hamburger.svg?raw';
+	import HamburgerSvg from '$lib/components/svgs/HamburgerSvg.svelte';
+	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
+	import LogOutSvg from '$lib/components/svgs/LogOutSvg.svelte';
+	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
+	import PlusSvg from '$lib/components/svgs/PlusSvg.svelte';
 
 	const hideActionText = true;
 
@@ -35,7 +35,7 @@
 			<div class="flex flex-row items-center md:gap-2">
 				<button class="btn btn-sm md:hidden" on:click={openDrawer}>
 					<span>
-						{@html HamburgerSvg}
+						<HamburgerSvg />
 					</span>
 				</button>
 				<a
@@ -44,7 +44,7 @@
 					aria-label="homepage"
 					tabindex={1.02}
 				>
-					{@html HomeSvg}
+					<HomeSvg />
 					<h4 class="h4" class:hidden={hideActionText}>LePtitCoin</h4>
 				</a>
 			</div>
@@ -66,7 +66,7 @@
 							aria-label="new listing"
 							tabindex={1.91}
 						>
-							{@html PlusSvg}
+							<PlusSvg />
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}
@@ -82,7 +82,7 @@
 							aria-label="sign out"
 							tabindex={1.92}
 						>
-							{@html LogOutSvg}
+							<LogOutSvg />
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}
@@ -99,7 +99,7 @@
 							aria-label="sign in"
 							tabindex={1.91}
 						>
-							{@html LogInSvg}
+							<LogInSvg />
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}

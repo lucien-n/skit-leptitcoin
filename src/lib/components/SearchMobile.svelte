@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
 	import CategorySelector from '$lib/components/CategorySelector.svelte';
-	import ChevronUpSvg from '$lib/assets/chevron-up.svg?raw';
-	import ChevronDownSvg from '$lib/assets/chevron-down.svg?raw';
-	import SearchSvg from '$lib/assets/search.svg?raw';
+	import ChevronUpSvg from '$lib/components/svgs/ChevronUpSvg.svelte';
+	import ChevronDownSvg from '$lib/components/svgs/ChevronDownSvg.svelte';
+	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';
 
 	export let showAdvancedSearchOption: boolean = false;
 
@@ -23,7 +23,6 @@
 	<div id="search-input-fields" class="flex">
 		<!-- Search fields -->
 		<div class="input-group input-group-divider flex">
-			<!-- svelte-ignore a11y-autofocus -->
 			<input
 				type="search"
 				placeholder="Search"
@@ -39,7 +38,11 @@
 				on:click={() =>
 					(showAdvancedSearchOption = !showAdvancedSearchOption)}
 			>
-				{#if showAdvancedSearchOption}{@html ChevronUpSvg}{:else}{@html ChevronDownSvg}{/if}
+				{#if showAdvancedSearchOption}
+					<ChevronUpSvg />
+				{:else}
+					<ChevronDownSvg />
+				{/if}
 			</button>
 		</div>
 		<!-- Execute Search Button -->
@@ -49,7 +52,7 @@
 			aria-label="execute search"
 			tabindex="100"
 		>
-			{@html SearchSvg}
+			<SearchSvg />
 		</button>
 	</div>
 	<div id="advanced-search-options">

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import closedEyeSvg from '$lib/assets/eye-closed.svg?raw';
-	import openedEyeSvg from '$lib/assets/eye-opened.svg?raw';
+	import EyeClosedSvg from '$lib/components/svgs/EyeClosedSvg.svelte';
+	import EyeOpenedSvg from '$lib/components/svgs/EyeOpenedSvg.svelte';
 	import type { SubmitFunction } from './$types';
 
 	export let form;
@@ -76,9 +76,9 @@
 					on:click={() => (showPassword = !showPassword)}
 				>
 					{#if showPassword}
-						{@html closedEyeSvg}
+						<EyeClosedSvg />
 					{:else}
-						{@html openedEyeSvg}
+						<EyeOpenedSvg />
 					{/if}
 				</button>
 			</div>

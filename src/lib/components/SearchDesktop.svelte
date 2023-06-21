@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import SearchSvg from '$lib/assets/search.svg?raw';
+	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';
 
 	let searchInputElement: HTMLInputElement;
 
@@ -81,6 +81,6 @@
 		aria-label="execute search"
 		tabindex={1.4}
 	>
-		{@html SearchSvg}
+		<SearchSvg />
 	</button>
 </div>

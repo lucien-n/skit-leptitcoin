@@ -3,7 +3,7 @@
 	import { userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import LikeButton from '$lib/components/LikeButton.svelte';
-	import EditSvg from '$lib/assets/edit.svg?raw';
+	import EditButton from '$lib/components/EditButton.svelte';
 
 	export let listing: SupaListing;
 	export let index: number;
@@ -12,11 +12,7 @@
 	let hovered: boolean = false;
 </script>
 
-<div
-	class="card relative w-full h-full flex flex-col"
-	on:mouseenter={() => (hovered = true)}
-	on:mouseleave={() => (hovered = false)}
->
+<div class="card relative w-full h-full flex flex-col">
 	<header class="relative z-30">
 		<img
 			src={listing.picture
@@ -24,21 +20,14 @@
 				: 'https://placehold.co/600x400/000000/FFFFFF?text=' +
 				  listing.title.split(' ')[0]}
 			alt="listing"
-			class="w-full h-full object-cover"
+			class="w-full h-full object-cover rounded-t-[4px]"
 		/>
 		<div class="absolute right-3 bottom-3 flex items-center gap-3 z-20">
 			{#if listing.author_uid === $userStore?.id}
-				<a
-					href="/e/{listing.uid}"
-					class="btn btn-sm variant-glass-tertiary aspect-square p-2"
-					aria-label="edit"
-					tabindex={index + 0.1}
-				>
-					{@html EditSvg}
-				</a>
+				<EditButton listing_uid={listing.uid} index={index + 0.1} />
 			{/if}
 			{#if $userStore}
-				<LikeButton listing_uid={listing.uid} />
+				<LikeButton listing_uid={listing.uid} index={index + 0.2} />
 			{/if}
 		</div>
 	</header>
@@ -48,6 +37,8 @@
 		tabindex={index}
 		class="h-full flex flex-col justify-between"
 		aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
+		on:mouseenter={() => (hovered = true)}
+		on:mouseleave={() => (hovered = false)}
 	>
 		<div class="card-header">
 			<div class="flex justify-between w-full">
