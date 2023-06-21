@@ -2,8 +2,8 @@
 	import { formatDate } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import LikeButton from '$lib/components/LikeButton.svelte';
-	import EditButton from '$lib/components/EditButton.svelte';
+	import LikeButton from '$lib/components/button/LikeButton.svelte';
+	import EditButton from '$lib/components/button/EditButton.svelte';
 
 	export let listing: SupaListing;
 	export let index: number;

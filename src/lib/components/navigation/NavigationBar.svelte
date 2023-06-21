@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SearchDesktop from '$lib/components/SearchDesktop.svelte';
-	import SearchMobile from '$lib/components/SearchMobile.svelte';
+	import SearchDesktop from '$lib/components/navigation/SearchDesktop.svelte';
+	import SearchMobile from '$lib/components/navigation/SearchMobile.svelte';
 	import { userStore } from '$lib/store';
 	import { supabase } from '$lib/supabase';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';

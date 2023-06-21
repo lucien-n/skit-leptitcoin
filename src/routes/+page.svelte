@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ListingCard from '$lib/components/ListingCard.svelte';
+	import ListingCard from '$lib/components/listing/ListingCard.svelte';
 	import { searchStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 

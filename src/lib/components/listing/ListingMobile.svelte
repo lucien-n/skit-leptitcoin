@@ -2,7 +2,7 @@
 	import { formatDate, listingStates } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import { Avatar } from '@skeletonlabs/skeleton';
-	import LikeButton from './LikeButton.svelte';
+	import LikeButton from '$lib/components/button/LikeButton.svelte';
 	import { userStore } from '$lib/store';
 
 	export let listing: SupaListing;

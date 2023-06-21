@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import CategorySelector from '$lib/components/CategorySelector.svelte';
+	import CategorySelector from '$lib/components/navigation/CategorySelector.svelte';
 	import ChevronUpSvg from '$lib/components/svgs/ChevronUpSvg.svelte';
 	import ChevronDownSvg from '$lib/components/svgs/ChevronDownSvg.svelte';
 	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';

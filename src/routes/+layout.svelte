@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
-	import NavigationBar from '$lib/components/NavigationBar.svelte';
-	import NavigationDrawer from '$lib/components/NavigationDrawer.svelte';
+	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
+	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
 	import { AppShell, Drawer, Modal, Toast } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
