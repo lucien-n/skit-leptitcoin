@@ -17,7 +17,7 @@
 		<img
 			src={listing.picture
 				? listing.picture
-				: 'https://placehold.co/600x400/000000/FFFFFF?text=' +
+				: 'https://placehold.co/30x20/000000/FFFFFF?text=' +
 				  listing.title.split(' ')[0]}
 			alt="listing"
 			class="w-full h-full object-cover rounded-t-[4px]"

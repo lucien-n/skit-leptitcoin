@@ -2,12 +2,19 @@
 	import { invalidate } from '$app/navigation';
 	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import { AppShell, Drawer, Modal, Toast } from '@skeletonlabs/skeleton';
+	import {
+		AppShell,
+		Drawer,
+		Modal,
+		Toast,
+		drawerStore,
+	} from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 	import '../dark-theme.postcss';
+	import User from '$lib/components/navigation/User.svelte';
 
 	export let data;
 
@@ -33,11 +40,15 @@
 <Modal />
 
 <Drawer>
-	<NavigationDrawer />
+	{#if $drawerStore.id === 'user'}
+		<User />
+	{:else}
+		<NavigationDrawer />
+	{/if}
 </Drawer>
 
 <AppShell slotSidebarLeft="w-0 md:w-80 lg:w-1/4 bg-surface-500/10">
-	<svelte:fragment slot="header">
+	<svelte:fragment slot="pageHeader">
 		<NavigationBar />
 	</svelte:fragment>
 	<slot />

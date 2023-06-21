@@ -6,19 +6,14 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import HamburgerSvg from '$lib/components/svgs/HamburgerSvg.svelte';
 	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
-	import LogOutSvg from '$lib/components/svgs/LogOutSvg.svelte';
 	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
 	import PlusSvg from '$lib/components/svgs/PlusSvg.svelte';
+	import UserDrawer from '$lib/components/navigation/User.svelte';
 
 	const hideActionText = true;
 
 	function openDrawer(): void {
 		drawerStore.open();
-	}
-
-	function logout(): void {
-		supabase.auth.signOut();
-		userStore.set(null);
 	}
 </script>
 
@@ -54,7 +49,7 @@
 		<SearchMobile />
 
 		<svelte:fragment slot="trail">
-			<div class="flex gap-2">
+			<div class="flex gap-2 w-full">
 				<!-- <div class="self-center">
 					<LightSwitch />
 				</div> -->
@@ -75,22 +70,7 @@
 							</h4>
 						</a>
 					</div>
-					<div class="hidden md:flex flex-row items-center gap-2">
-						<a
-							class="flex items-center gap-1"
-							href="/auth/signout"
-							aria-label="sign out"
-							tabindex={1.92}
-						>
-							<LogOutSvg />
-							<h4
-								class="h4 mb-[1px]"
-								class:hidden={hideActionText}
-							>
-								Sign Out
-							</h4>
-						</a>
-					</div>
+					<UserDrawer />
 				{:else}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a

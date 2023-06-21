@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UserCard from '$lib/components/UserCard.svelte';
+	import UserCard from '$lib/components/user/UserCard.svelte';
 	import { TITLE } from '$lib/helper';
 	import type { SupaUser } from '$lib/types/supa_user';
 
