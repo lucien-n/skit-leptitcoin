@@ -3,5 +3,6 @@ export type SupaUser = {
     username: string,
     rating: number,
     picture: string,
-    createdAt: number
+    createdAt: number,
+    role: number
 }

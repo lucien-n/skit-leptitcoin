@@ -108,5 +108,6 @@ async function parseUser(userData) {
         picture: userData.picture,
         rating: userData.rating,
         createdAt: userData.created_at,
+        role: userData.role
     } satisfies SupaUser
 }

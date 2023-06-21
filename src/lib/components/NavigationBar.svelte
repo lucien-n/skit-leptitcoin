@@ -4,6 +4,9 @@
 	import { userStore } from '$lib/store';
 	import { supabase } from '$lib/supabase';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
+	import PlusSvg from '$lib/assets/plus.svg?raw';
+	import LogOutSvg from '$lib/assets/log-out.svg?raw';
+	import LogInSvg from '$lib/assets/log-in.svg?raw';
 
 	const hideActionText = true;
 
@@ -90,21 +93,7 @@
 							aria-label="new listing"
 							tabindex={1.91}
 						>
-							<svg
-								data-testid="geist-icon"
-								fill="none"
-								height="24"
-								shape-rendering="geometricPrecision"
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="1.5"
-								viewBox="0 0 24 24"
-								width="24"
-								style="color:var(--geist-foreground)"
-								class="w-8 h-8"
-								><path d="M12 5v14" /><path d="M5 12h14" /></svg
-							>
+							{@html PlusSvg}
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}
@@ -120,25 +109,7 @@
 							aria-label="sign out"
 							tabindex={1.92}
 						>
-							<svg
-								data-testid="geist-icon"
-								fill="none"
-								height="24"
-								shape-rendering="geometricPrecision"
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="1.5"
-								viewBox="0 0 24 24"
-								width="24"
-								style="color:var(--geist-foreground);width:24px;height:24px"
-								class="w-8 h-8"
-								><path
-									d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"
-								/><path d="M16 17l5-5-5-5" /><path
-									d="M21 12H9"
-								/></svg
-							>
+							{@html LogOutSvg}
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}
@@ -155,25 +126,7 @@
 							aria-label="sign in"
 							tabindex={1.91}
 						>
-							<svg
-								data-testid="geist-icon"
-								fill="none"
-								height="24"
-								shape-rendering="geometricPrecision"
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="1.5"
-								viewBox="0 0 24 24"
-								width="24"
-								style="color:var(--geist-foreground)"
-								class="w-8 h-8"
-								><path
-									d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
-								/><path d="M10 17l5-5-5-5" /><path
-									d="M15 12H3"
-								/></svg
-							>
+							{@html LogInSvg}
 							<h4
 								class="h4 mb-[1px]"
 								class:hidden={hideActionText}
