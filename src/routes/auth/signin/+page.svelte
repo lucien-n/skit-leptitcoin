@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import EyeClosedSvg from '$lib/components/svgs/EyeClosedSvg.svelte';
 	import EyeOpenedSvg from '$lib/components/svgs/EyeOpenedSvg.svelte';
+	import { TITLE } from '$lib/helper';
 	import type { SubmitFunction } from './$types';
 
 	export let form;
@@ -24,6 +25,9 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{TITLE} Sign In</title>
+</svelte:head>
 <section id="signin" class="w-full h-full flex md:items-center justify-center">
 	{#if form?.missing}
 		<p>Please fill out all fields</p>

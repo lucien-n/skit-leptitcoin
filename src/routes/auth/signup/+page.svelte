@@ -24,6 +24,9 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{TITLE} Sign Up</title>
+</svelte:head>
 <section
 	id="signup"
 	class="w-full h-full flex self-center items-center justify-center"

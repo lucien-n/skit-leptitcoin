@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { listingStates } from '$lib/helper';
+	import { TITLE, listingStates } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import { RadioGroup, RadioItem, toastStore } from '@skeletonlabs/skeleton';
 
@@ -48,6 +48,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{TITLE} New</title>
+</svelte:head>
 <div class="w-full h-full flex md:items-center justify-center">
 	<form
 		action="?/new"
