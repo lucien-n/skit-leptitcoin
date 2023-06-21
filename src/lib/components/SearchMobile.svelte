@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import CategorySelector from './CategorySelector.svelte';
+	import CategorySelector from '$lib/components/CategorySelector.svelte';
+	import ChevronUpSvg from '$lib/assets/chevron-up.svg?raw';
+	import ChevronDownSvg from '$lib/assets/chevron-down.svg?raw';
+	import SearchSvg from '$lib/assets/search.svg?raw';
 
 	export let showAdvancedSearchOption: boolean = false;
 
@@ -36,36 +39,7 @@
 				on:click={() =>
 					(showAdvancedSearchOption = !showAdvancedSearchOption)}
 			>
-				{#if showAdvancedSearchOption}
-					<svg
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground)"
-						><path d="M18 15l-6-6-6 6" /></svg
-					>{:else}
-					<svg
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground)"
-						><path d="M6 9l6 6 6-6" /></svg
-					>
-				{/if}
+				{#if showAdvancedSearchOption}{@html ChevronUpSvg}{:else}{@html ChevronDownSvg}{/if}
 			</button>
 		</div>
 		<!-- Execute Search Button -->
@@ -75,22 +49,7 @@
 			aria-label="execute search"
 			tabindex="100"
 		>
-			<svg
-				data-testid="geist-icon"
-				fill="none"
-				height="24"
-				shape-rendering="geometricPrecision"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				width="24"
-				style="color:var(--geist-foreground)"
-				><path
-					d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"
-				/><path d="M16 16l4.5 4.5" /></svg
-			>
+			{@html SearchSvg}
 		</button>
 	</div>
 	<div id="advanced-search-options">

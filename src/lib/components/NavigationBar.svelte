@@ -7,6 +7,8 @@
 	import PlusSvg from '$lib/assets/plus.svg?raw';
 	import LogOutSvg from '$lib/assets/log-out.svg?raw';
 	import LogInSvg from '$lib/assets/log-in.svg?raw';
+	import HomeSvg from '$lib/assets/home.svg?raw';
+	import HamburgerSvg from '$lib/assets/hamburger.svg?raw';
 
 	const hideActionText = true;
 
@@ -33,20 +35,7 @@
 			<div class="flex flex-row items-center md:gap-2">
 				<button class="btn btn-sm md:hidden" on:click={openDrawer}>
 					<span>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-8 h-8"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
+						{@html HamburgerSvg}
 					</span>
 				</button>
 				<a
@@ -55,23 +44,7 @@
 					aria-label="homepage"
 					tabindex={1.02}
 				>
-					<svg
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground)"
-						class="w-8 h-8"
-						><path
-							d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-						/><path d="M9 22V12h6v10" /></svg
-					>
+					{@html HomeSvg}
 					<h4 class="h4" class:hidden={hideActionText}>LePtitCoin</h4>
 				</a>
 			</div>

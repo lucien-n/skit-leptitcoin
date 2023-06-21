@@ -2,7 +2,8 @@
 	import { formatDate } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import LikeButton from './LikeButton.svelte';
+	import LikeButton from '$lib/components/LikeButton.svelte';
+	import EditSvg from '$lib/assets/edit.svg?raw';
 
 	export let listing: SupaListing;
 	export let index: number;
@@ -33,26 +34,8 @@
 					aria-label="edit"
 					tabindex={index + 0.1}
 				>
-					<svg
-						class="with-icon_icon__aLCKg"
-						data-testid="geist-icon"
-						fill="none"
-						height="24"
-						shape-rendering="geometricPrecision"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="1.5"
-						viewBox="0 0 24 24"
-						width="24"
-						style="color:var(--geist-foreground);width:24px;height:24px"
-						><path
-							d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"
-						/><path
-							d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
-						/></svg
-					></a
-				>
+					{@html EditSvg}
+				</a>
 			{/if}
 			{#if $userStore}
 				<LikeButton listing_uid={listing.uid} />
