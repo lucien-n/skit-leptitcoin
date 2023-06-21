@@ -1,7 +1,7 @@
 <script lang="ts">
-	import StarSvg from '$lib/assets/star.svg?raw';
-	import StarFilledSvg from '$lib/assets/star-filled.svg?raw';
 	import { createEventDispatcher } from 'svelte';
+	import StarFilledSvg from '$lib/components/svgs/StarFilledSvg.svelte';
+	import StarSvg from '$lib/components/svgs/StarSvg.svelte';
 
 	export let rating: number;
 	export let ratedUserUid: string;
@@ -20,9 +20,9 @@
 	{#each { length: 5 } as _, i}
 		<button on:click={() => rate(i)}>
 			{#if rating > i}
-				{@html StarFilledSvg}
+				<StarFilledSvg />
 			{:else}
-				{@html StarSvg}
+				<StarSvg />
 			{/if}
 		</button>
 	{/each}

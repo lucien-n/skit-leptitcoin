@@ -26,7 +26,7 @@
 			{#if listing.author_uid === $userStore?.id}
 				<EditButton listing_uid={listing.uid} index={index + 0.1} />
 			{/if}
-			{#if $userStore}
+			{#if $userStore && listing.author_uid !== $userStore.id}
 				<LikeButton listing_uid={listing.uid} index={index + 0.2} />
 			{/if}
 		</div>
