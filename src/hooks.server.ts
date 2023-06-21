@@ -1,5 +1,5 @@
+import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 import type { Handle } from "@sveltejs/kit";
-import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
 
 export const handle: Handle = async ({ event, resolve }) => {
     event.locals.supabase = createSupabaseServerClient({
@@ -11,6 +11,20 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.getSession = async () => {
         const { data: { session } } = await event.locals.supabase.auth.getSession()
         return session
+    }
+
+    event.locals.getRole = async (user_uid: string): Promise<number> => {
+        try {
+            const { data: [{ role }] } = await event.locals.supabase.from('profiles').select('role').eq('uid', user_uid)
+            return parseInt(role)
+        } catch (e) {
+            console.warn(e)
+        }
+        return 0
+    }
+
+    event.locals.roles = {
+        ADMIN: 8
     }
 
     return resolve(event, {

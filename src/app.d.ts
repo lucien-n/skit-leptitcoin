@@ -1,4 +1,4 @@
-import { SupabaseClient, Session } from '@supabase/supabase-js'
+import { Session, SupabaseClient } from '@supabase/supabase-js'
 
 
 
@@ -10,6 +10,10 @@ declare global {
 		interface Locals {
 			supabase: SupabaseClient
 			getSession(): Promise<Session | null>
+			getRole(user_uid: string): Promise<number>
+			roles: {
+				ADMIN: number
+			}
 		}
 		interface PageData {
 			session: Session | null

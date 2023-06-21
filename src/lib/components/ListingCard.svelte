@@ -54,7 +54,9 @@
 					></a
 				>
 			{/if}
-			<LikeButton listing_uid={listing.uid} />
+			{#if $userStore}
+				<LikeButton listing_uid={listing.uid} />
+			{/if}
 		</div>
 	</header>
 	<a

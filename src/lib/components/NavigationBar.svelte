@@ -13,6 +13,7 @@
 
 	function logout(): void {
 		supabase.auth.signOut();
+		userStore.set(null);
 	}
 </script>
 
@@ -113,9 +114,9 @@
 						</a>
 					</div>
 					<div class="hidden md:flex flex-row items-center gap-2">
-						<button
+						<a
 							class="flex items-center gap-1"
-							on:click={logout}
+							href="/auth/signout"
 							aria-label="sign out"
 							tabindex={1.92}
 						>
@@ -144,7 +145,7 @@
 							>
 								Sign Out
 							</h4>
-						</button>
+						</a>
 					</div>
 				{:else}
 					<div class="hidden md:flex flex-row items-center gap-2">
