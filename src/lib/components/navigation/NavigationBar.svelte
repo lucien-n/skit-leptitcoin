@@ -1,20 +1,32 @@
 <script lang="ts">
 	import SearchDesktop from '$lib/components/navigation/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/navigation/SearchMobile.svelte';
-	import { userStore } from '$lib/store';
-	import { supabase } from '$lib/supabase';
-	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import HamburgerSvg from '$lib/components/svgs/HamburgerSvg.svelte';
 	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
 	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
 	import PlusSvg from '$lib/components/svgs/PlusSvg.svelte';
-	import UserDrawer from '$lib/components/navigation/User.svelte';
+	import { userStore } from '$lib/store';
+	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
+	import UserSvg from '../svgs/UserSvg.svelte';
 
 	const hideActionText = true;
 
 	function openDrawer(): void {
 		drawerStore.open();
 	}
+
+	const toggleUserDrawer = () => {
+		drawerStore.open({
+			id: 'user',
+			bgDrawer: 'variant-glass',
+			// bgBackdrop:
+			// 	'bg-gradient-to-tr from-indigo-500/50 via-purple-500/50 to-pink-500/50',
+			width: 'w-[280px] md:w-[480px]',
+			padding: 'p-4',
+			rounded: 'rounded-xl',
+			position: 'right',
+		});
+	};
 </script>
 
 <nav id="navigation-bar">
@@ -50,9 +62,6 @@
 
 		<svelte:fragment slot="trail">
 			<div class="flex gap-2 w-full">
-				<!-- <div class="self-center">
-					<LightSwitch />
-				</div> -->
 				{#if $userStore}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a
@@ -70,7 +79,12 @@
 							</h4>
 						</a>
 					</div>
-					<UserDrawer />
+					<button
+						class="flex self-center"
+						on:click={toggleUserDrawer}
+					>
+						<UserSvg />
+					</button>
 				{:else}
 					<div class="hidden md:flex flex-row items-center gap-2">
 						<a

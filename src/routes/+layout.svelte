@@ -2,6 +2,7 @@
 	import { invalidate } from '$app/navigation';
 	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
+	import User from '$lib/components/navigation/User.svelte';
 	import {
 		AppShell,
 		Drawer,
@@ -14,7 +15,6 @@
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 	import '../dark-theme.postcss';
-	import User from '$lib/components/navigation/User.svelte';
 
 	export let data;
 
@@ -48,7 +48,7 @@
 </Drawer>
 
 <AppShell slotSidebarLeft="w-0 md:w-80 lg:w-1/4 bg-surface-500/10">
-	<svelte:fragment slot="pageHeader">
+	<svelte:fragment slot="header">
 		<NavigationBar />
 	</svelte:fragment>
 	<slot />
