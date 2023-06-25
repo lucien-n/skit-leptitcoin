@@ -2,7 +2,8 @@
 	import { invalidate } from '$app/navigation';
 	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import User from '$lib/components/navigation/User.svelte';
+	import UserDrawer from '$lib/components/navigation/UserDrawer.svelte';
+	import { userStore } from '$lib/store';
 	import {
 		AppShell,
 		Drawer,
@@ -21,12 +22,18 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
+	$: {
+		userStore.set(session ? session.user : null);
+	}
+
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange(
 			(event: any, _session: any) => {
 				if (_session?.expires_at !== session?.expires_at) {
 					invalidate('supabase:auth');
 				}
+				userStore.set(_session ? _session.user : null);
+				console.log($userStore);
 			}
 		);
 
@@ -41,7 +48,7 @@
 
 <Drawer>
 	{#if $drawerStore.id === 'user'}
-		<User />
+		<UserDrawer />
 	{:else}
 		<NavigationDrawer />
 	{/if}

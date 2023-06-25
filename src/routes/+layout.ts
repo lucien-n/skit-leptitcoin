@@ -1,6 +1,4 @@
 // src/routes/+layout.ts
-import { userStore } from '$lib/store.js'
-import { supabase } from '$lib/supabase.js'
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit'
 
 export const load = async ({ fetch, data, depends }) => {
@@ -17,7 +15,3 @@ export const load = async ({ fetch, data, depends }) => {
 
     return { supabase, session }
 }
-
-supabase.auth.onAuthStateChange((event, _session) => {
-    userStore.set(_session ? _session.user : null)
-})

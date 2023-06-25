@@ -5,9 +5,9 @@
 	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
 	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
 	import PlusSvg from '$lib/components/svgs/PlusSvg.svelte';
+	import UserSvg from '$lib/components/svgs/UserSvg.svelte';
 	import { userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
-	import UserSvg from '../svgs/UserSvg.svelte';
 
 	const hideActionText = true;
 
@@ -29,81 +29,85 @@
 	};
 </script>
 
-<nav id="navigation-bar">
-	<!-- svelte-ignore a11y-autofocus -->
-	<AppBar padding="p-0 py-4 md:p-4">
-		<svelte:fragment slot="lead">
-			<a
-				href="/#main"
-				aria-label="skip to content"
-				class="absolute -top-40 focus:top-0"
-				tabindex={1.01}>skip to content</a
-			>
-			<div class="flex flex-row items-center md:gap-2">
-				<button class="btn btn-sm md:hidden" on:click={openDrawer}>
-					<span>
-						<HamburgerSvg />
-					</span>
-				</button>
+{#key $userStore}
+	<nav id="navigation-bar">
+		<!-- svelte-ignore a11y-autofocus -->
+		<AppBar padding="p-0 py-4 md:p-4">
+			<svelte:fragment slot="lead">
 				<a
-					href="/"
-					class="items-center gap-1 hidden md:flex"
-					aria-label="homepage"
-					tabindex={1.02}
+					href="/#main"
+					aria-label="skip to content"
+					class="absolute -top-40 focus:top-0"
+					tabindex={1.01}>skip to content</a
 				>
-					<HomeSvg />
-					<h4 class="h4" class:hidden={hideActionText}>LePtitCoin</h4>
-				</a>
-			</div>
-		</svelte:fragment>
-
-		<SearchDesktop />
-		<SearchMobile />
-
-		<svelte:fragment slot="trail">
-			<div class="flex gap-2 w-full">
-				{#if $userStore}
-					<div class="hidden md:flex flex-row items-center gap-2">
-						<a
-							href="/new"
-							class="flex items-center gap-2"
-							aria-label="new listing"
-							tabindex={1.91}
-						>
-							<PlusSvg />
-							<h4
-								class="h4 mb-[1px]"
-								class:hidden={hideActionText}
-							>
-								New
-							</h4>
-						</a>
-					</div>
-					<button
-						class="flex self-center"
-						on:click={toggleUserDrawer}
-					>
-						<UserSvg />
+				<div class="flex flex-row items-center md:gap-2">
+					<button class="btn btn-sm md:hidden" on:click={openDrawer}>
+						<span>
+							<HamburgerSvg />
+						</span>
 					</button>
-				{:else}
-					<div class="hidden md:flex flex-row items-center gap-2">
-						<a
-							href="/auth/signin"
-							class="flex items-center gap-1"
-							aria-label="sign in"
-							tabindex={1.91}
-						>
-							<LogInSvg />
-							<h4
-								class="h4 mb-[1px]"
-								class:hidden={hideActionText}
+					<a
+						href="/"
+						class="items-center gap-1 hidden md:flex"
+						aria-label="homepage"
+						tabindex={1.02}
+					>
+						<HomeSvg />
+						<h4 class="h4" class:hidden={hideActionText}>
+							LePtitCoin
+						</h4>
+					</a>
+				</div>
+			</svelte:fragment>
+
+			<SearchDesktop />
+			<SearchMobile />
+
+			<svelte:fragment slot="trail">
+				<div class="flex gap-2 w-full">
+					{#if $userStore}
+						<div class="hidden md:flex flex-row items-center gap-2">
+							<a
+								href="/new"
+								class="flex items-center gap-2"
+								aria-label="new listing"
+								tabindex={1.91}
 							>
-								Sign In
-							</h4>
-						</a>
-					</div>
-				{/if}
-			</div>
-		</svelte:fragment>
-	</AppBar>
-</nav>
+								<PlusSvg />
+								<h4
+									class="h4 mb-[1px]"
+									class:hidden={hideActionText}
+								>
+									New
+								</h4>
+							</a>
+						</div>
+						<button
+							class="flex self-center"
+							on:click={toggleUserDrawer}
+						>
+							<UserSvg />
+						</button>
+					{:else}
+						<div class="hidden md:flex flex-row items-center gap-2">
+							<a
+								href="/auth/signin"
+								class="flex items-center gap-1"
+								aria-label="sign in"
+								tabindex={1.91}
+							>
+								<LogInSvg />
+								<h4
+									class="h4 mb-[1px]"
+									class:hidden={hideActionText}
+								>
+									Sign In
+								</h4>
+							</a>
+						</div>
+					{/if}
+				</div>
+			</svelte:fragment>
+		</AppBar>
+	</nav>
+{/key}

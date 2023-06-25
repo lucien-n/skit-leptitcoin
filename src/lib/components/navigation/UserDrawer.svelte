@@ -6,7 +6,7 @@
 
 <section class="list-nav h-full w-full p-4 flex flex-col justify-between">
 	<DrawerLinkGroup>
-		<DrawerLink href="/auth/signout">
+		<DrawerLink href="/auth/signout" reload={true}>
 			<LogOutSvg />
 			<h4 class="h4">Sign Out</h4>
 		</DrawerLink>
