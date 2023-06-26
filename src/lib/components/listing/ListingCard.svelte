@@ -1,15 +1,13 @@
 <script lang="ts">
+	import EditButton from '$lib/components/button/EditButton.svelte';
+	import LikeButton from '$lib/components/button/LikeButton.svelte';
 	import { formatDate } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import LikeButton from '$lib/components/button/LikeButton.svelte';
-	import EditButton from '$lib/components/button/EditButton.svelte';
 
 	export let listing: SupaListing;
 	export let index: number;
 	index += 1;
-
-	let hovered: boolean = false;
 </script>
 
 <div class="card relative w-full h-full flex flex-col">
@@ -35,14 +33,14 @@
 		href="/l/{listing.uid}"
 		id="listing-{listing.uid}"
 		tabindex={index}
-		class="h-full flex flex-col justify-between"
+		class="h-full flex flex-col justify-between group/listing-card"
 		aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
-		on:mouseenter={() => (hovered = true)}
-		on:mouseleave={() => (hovered = false)}
 	>
 		<div class="card-header">
 			<div class="flex justify-between w-full">
-				<h3 class="h3" class:underline={hovered}>{listing.title}</h3>
+				<h3 class="h3 group-hover/listing-card:underline">
+					{listing.title}
+				</h3>
 				<p class="text-base italic badge variant-ghost">
 					{listing.price} €
 				</p>
