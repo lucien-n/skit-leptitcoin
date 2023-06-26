@@ -4,98 +4,96 @@ settings:
   autoInstallPeers: fals
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@supabase/auth-helpers-sveltekit':
+    specifier: ^0.9.4
+    version: 0.9.4(@supabase/supabase-js@2.26.0)(@sveltejs/kit@1.20.5)
+  '@supabase/auth-ui-shared':
+    specifier: ^0.1.6
+    version: 0.1.6(@supabase/supabase-js@2.26.0)
+  '@supabase/auth-ui-svelte':
+    specifier: ^0.2.2
+    version: 0.2.2(@supabase/supabase-js@2.26.0)
+  '@supabase/supabase-js':
+    specifier: ^2.26.0
+    version: 2.26.0
+  supabase:
+    specifier: ^1.68.6
+    version: 1.68.6
+  uuid:
+    specifier: ^9.0.0
+    version: 9.0.0
 
-  .:
-    dependencies:
-      '@supabase/auth-helpers-sveltekit':
-        specifier: ^0.9.4
-        version: 0.9.4(@supabase/supabase-js@2.26.0)(@sveltejs/kit@1.20.5)
-      '@supabase/auth-ui-shared':
-        specifier: ^0.1.6
-        version: 0.1.6(@supabase/supabase-js@2.26.0)
-      '@supabase/auth-ui-svelte':
-        specifier: ^0.2.2
-        version: 0.2.2(@supabase/supabase-js@2.26.0)
-      '@supabase/supabase-js':
-        specifier: ^2.26.0
-        version: 2.26.0
-      supabase:
-        specifier: ^1.68.6
-        version: 1.68.6
-      uuid:
-        specifier: ^9.0.0
-        version: 9.0.0
-    devDependencies:
-      '@floating-ui/dom':
-        specifier: ^1.4.2
-        version: 1.4.2
-      '@playwright/test':
-        specifier: ^1.35.1
-        version: 1.35.1
-      '@skeletonlabs/skeleton':
-        specifier: ^1.8.0
-        version: 1.8.0
-      '@sveltejs/adapter-auto':
-        specifier: ^2.1.0
-        version: 2.1.0(@sveltejs/kit@1.20.5)
-      '@sveltejs/kit':
-        specifier: ^1.20.5
-        version: 1.20.5(svelte@4.0.0)(vite@4.3.9)
-      '@tailwindcss/forms':
-        specifier: ^0.5.3
-        version: 0.5.3(tailwindcss@3.3.2)
-      '@tailwindcss/typography':
-        specifier: ^0.5.9
-        version: 0.5.9(tailwindcss@3.3.2)
-      '@types/uuid':
-        specifier: ^9.0.2
-        version: 9.0.2
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^5.60.1
-        version: 5.60.1(@typescript-eslint/parser@5.60.1)(eslint@8.43.0)(typescript@5.1.3)
-      '@typescript-eslint/parser':
-        specifier: ^5.60.1
-        version: 5.60.1(eslint@8.43.0)(typescript@5.1.3)
-      autoprefixer:
-        specifier: ^10.4.14
-        version: 10.4.14(postcss@8.4.24)
-      eslint:
-        specifier: ^8.43.0
-        version: 8.43.0
-      eslint-plugin-svelte:
-        specifier: ^2.31.1
-        version: 2.31.1(eslint@8.43.0)(svelte@4.0.0)
-      highlight.js:
-        specifier: ^11.8.0
-        version: 11.8.0
-      postcss:
-        specifier: ^8.4.24
-        version: 8.4.24
-      rome:
-        specifier: ^12.1.3
-        version: 12.1.3
-      svelte:
-        specifier: ^4.0.0
-        version: 4.0.0
-      svelte-check:
-        specifier: ^3.4.4
-        version: 3.4.4(postcss@8.4.24)(svelte@4.0.0)
-      tailwindcss:
-        specifier: ^3.3.2
-        version: 3.3.2
-      tslib:
-        specifier: ^2.5.3
-        version: 2.5.3
-      typescript:
-        specifier: ^5.1.3
-        version: 5.1.3
-      vite:
-        specifier: ^4.3.9
-        version: 4.3.9(@types/node@20.3.1)
-      vitest:
-        specifier: ^0.25.8
-        version: 0.25.8
+devDependencies:
+  '@floating-ui/dom':
+    specifier: ^1.4.2
+    version: 1.4.2
+  '@playwright/test':
+    specifier: ^1.35.1
+    version: 1.35.1
+  '@skeletonlabs/skeleton':
+    specifier: ^1.8.0
+    version: 1.8.0
+  '@sveltejs/adapter-auto':
+    specifier: ^2.1.0
+    version: 2.1.0(@sveltejs/kit@1.20.5)
+  '@sveltejs/kit':
+    specifier: ^1.20.5
+    version: 1.20.5(svelte@4.0.0)(vite@4.3.9)
+  '@tailwindcss/forms':
+    specifier: ^0.5.3
+    version: 0.5.3(tailwindcss@3.3.2)
+  '@tailwindcss/typography':
+    specifier: ^0.5.9
+    version: 0.5.9(tailwindcss@3.3.2)
+  '@types/uuid':
+    specifier: ^9.0.2
+    version: 9.0.2
+  '@typescript-eslint/eslint-plugin':
+    specifier: ^5.60.1
+    version: 5.60.1(@typescript-eslint/parser@5.60.1)(eslint@8.43.0)(typescript@5.1.3)
+  '@typescript-eslint/parser':
+    specifier: ^5.60.1
+    version: 5.60.1(eslint@8.43.0)(typescript@5.1.3)
+  autoprefixer:
+    specifier: ^10.4.14
+    version: 10.4.14(postcss@8.4.24)
+  eslint:
+    specifier: ^8.43.0
+    version: 8.43.0
+  eslint-plugin-svelte:
+    specifier: ^2.31.1
+    version: 2.31.1(eslint@8.43.0)(svelte@4.0.0)
+  highlight.js:
+    specifier: ^11.8.0
+    version: 11.8.0
+  postcss:
+    specifier: ^8.4.24
+    version: 8.4.24
+  rome:
+    specifier: ^12.1.3
+    version: 12.1.3
+  svelte:
+    specifier: ^4.0.0
+    version: 4.0.0
+  svelte-check:
+    specifier: ^3.4.4
+    version: 3.4.4(postcss@8.4.24)(svelte@4.0.0)
+  tailwindcss:
+    specifier: ^3.3.2
+    version: 3.3.2
+  tslib:
+    specifier: ^2.5.3
+    version: 2.5.3
+  typescript:
+    specifier: ^5.1.3
+    version: 5.1.3
+  vite:
+    specifier: ^4.3.9
+    version: 4.3.9(@types/node@20.3.1)
+  vitest:
+    specifier: ^0.25.8
+    version: 0.25.8
 
 packages:
 
