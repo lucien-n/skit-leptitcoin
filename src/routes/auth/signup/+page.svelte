@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import EyeClosedSvg from '$lib/components/svgs/EyeClosedSvg.svelte';
 	import EyeOpenedSvg from '$lib/components/svgs/EyeOpenedSvg.svelte';
+	import { TITLE } from '$lib/helper.js';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
 	export let form;
