@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ListingCard from '$lib/components/listing/ListingCard.svelte';
+  import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 
@@ -29,6 +30,7 @@
 	});
 </script>
 
+<svelte:head><title>LePtitCoin</title></svelte:head>
 <main id="main" class="container h-full mx-auto flex mt-10">
 	<section
 		id="listings"

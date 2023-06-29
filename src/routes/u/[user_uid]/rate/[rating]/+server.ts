@@ -13,8 +13,8 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
     const ratedUserUid = params.user_uid;
     if (ratedUserUid === user.id) throw error(401, { message: "not-allowed" })
 
-    const { data: [{ rating: userRating }] } = await supabase.from('profiles').select('rating').eq('uid', ratedUserUid)
-    if (!userRating) throw error(404, { message: 'user-not-found' })
+    const { data: [{ uid: userUid }] } = await supabase.from('profiles').select('uid').eq('uid', ratedUserUid)
+    if (userUid !== ratedUserUid) throw error(404, { message: 'user-not-found' })
 
     try {
         await supabase.from('ratings').upsert({ rated: ratedUserUid, rater: user.id, value: rating })

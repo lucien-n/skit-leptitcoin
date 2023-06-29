@@ -33,7 +33,6 @@
 					invalidate('supabase:auth');
 				}
 				userStore.set(_session ? _session.user : null);
-				console.log($userStore);
 			}
 		);
 

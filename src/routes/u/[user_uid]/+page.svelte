@@ -13,5 +13,5 @@
 	<title>{TITLE} User - {user.username}</title>
 </svelte:head>
 <section id="user-profile-{user.uid}" class="w-[70%] h-full flex m-4 mx-auto">
-	<UserCard {user} {anonymous} showAnonymous={false} />
+	<UserCard {user} {anonymous} showAnonymous={true} />
 </section>

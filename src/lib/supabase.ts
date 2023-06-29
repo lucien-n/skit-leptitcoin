@@ -97,7 +97,7 @@ async function parseListing(listingData) {
         picture: listingData.picture,
         state: listingData.state,
         createdAt: listingData.created_at,
-        author: author || { username: "unknown", uid: "unknown", rating: 0.0, picture: "unknown", createdAt: new Date().getTime() } satisfies SupaUser,
+        author: author || { username: "unknown", uid: "unknown", rating: 0.0, ratingCount: 0, picture: "unknown", createdAt: new Date().getTime(), role: -1 } satisfies SupaUser,
     } satisfies SupaListing
 }
 
@@ -107,6 +107,7 @@ async function parseUser(userData) {
         username: userData.username,
         picture: userData.picture,
         rating: userData.rating,
+        ratingCount: userData.rating_count,
         createdAt: userData.created_at,
         role: userData.role
     } satisfies SupaUser
