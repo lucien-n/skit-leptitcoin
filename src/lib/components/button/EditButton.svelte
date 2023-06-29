@@ -1,15 +1,15 @@
 <script lang="ts">
-	import EditSvg from '$lib/components/svgs/EditSvg.svelte';
+  import EditSvg from "$lib/components/svgs/EditSvg.svelte";
 
-	export let listing_uid: string;
-	export let index: number = 1;
+  export let listing_uid: string;
+  export let index: number = 1;
 </script>
 
 <a
-	href="/e/{listing_uid}"
-	class="variant-glass-tertiary aspect-square btn md:p-2 w-16 md:w-12"
-	aria-label="edit"
-	tabindex={index}
+  href="/e/{listing_uid}"
+  class="variant-glass-tertiary aspect-square btn p-2"
+  aria-label="edit"
+  tabindex={index}
 >
-	<EditSvg />
+  <EditSvg />
 </a>

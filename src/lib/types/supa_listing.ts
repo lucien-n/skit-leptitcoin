@@ -8,7 +8,7 @@ export type SupaListing = {
     price: number,
     picture: string,
     category: string,
-    state: number,
+    condition: number,
     author?: SupaUser
     createdAt?: number,
 }

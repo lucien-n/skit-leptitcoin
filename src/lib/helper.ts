@@ -1,6 +1,6 @@
 import { toastStore } from "@skeletonlabs/skeleton";
 
-export const TITLE: string = "LPC |"
+export const TITLE: string = "LePtitCoin"
 
 export function formatDate(milliseconds: number): string {
     const date = new Date(milliseconds);
