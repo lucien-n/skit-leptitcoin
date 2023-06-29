@@ -23,5 +23,5 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
         throw error(500, { message: 'internal-error' })
     }
 
-    throw redirect(303, '/');
-};
+    return new Response()
+}

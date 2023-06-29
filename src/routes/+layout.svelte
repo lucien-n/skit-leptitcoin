@@ -3,7 +3,7 @@
   import NavigationBar from "$lib/components/navigation/NavigationBar.svelte";
   import NavigationDrawer from "$lib/components/navigation/NavigationDrawer.svelte";
   import UserDrawer from "$lib/components/navigation/UserDrawer.svelte";
-  import { userStore } from "$lib/store";
+  import { supaUserStore, userStore } from "$lib/store";
   import {
     AppShell,
     Drawer,
@@ -16,6 +16,7 @@
   import { onMount } from "svelte";
   import "../app.postcss";
   import "../dark-theme.postcss";
+  import { getSupaUser } from "$lib/supabase";
 
   export let data;
 
@@ -28,11 +29,13 @@
 
   onMount(() => {
     const { data } = supabase.auth.onAuthStateChange(
-      (event: any, _session: any) => {
+      async (event: any, _session: any) => {
         if (_session?.expires_at !== session?.expires_at) {
           invalidate("supabase:auth");
         }
         userStore.set(_session ? _session.user : null);
+        if (_session.user)
+          supaUserStore.set(await getSupaUser(_session.user.id));
       }
     );
 

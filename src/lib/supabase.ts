@@ -7,13 +7,13 @@ export const supabase = createClient(
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjeGRzb3lpaHJ4eHVkcWRudnd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODY1MDE1MjksImV4cCI6MjAwMjA3NzUyOX0.MkivgwBMLXu1kMDDGTOeDjHPtIFT3J2XyZG89libt8k",
 );
 
-export async function getListings(limit = 10) {
+export async function getListings(limit = 10, offset = 0) {
 	try {
 		const supaListings: SupaListing[] = [];
 		const { data: listings } = await supabase
 			.from("listings")
 			.select("*")
-			.limit(limit);
+			.range(offset, limit);
 
 		if (!listings) return supaListings;
 
