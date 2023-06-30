@@ -17,7 +17,8 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
     if (userUid !== ratedUserUid) throw error(404, { message: 'user-not-found' })
 
     try {
-        await supabase.from('ratings').upsert({ rated: ratedUserUid, rater: user.id, value: rating })
+        const { status, statusText } = await supabase.from('ratings').upsert({ rated: ratedUserUid, rater: user.id, value: rating })
+        console.log(status === 201 ? 'Successfuly rated' : statusText)
     } catch (e) {
         console.warn(e)
         throw error(500, { message: 'internal-error' })
