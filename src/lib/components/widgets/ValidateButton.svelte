@@ -8,14 +8,14 @@
 	const dispatch = createEventDispatcher();
 
 	const validateListing = () => {
-		fetch(`/d/${listing_uid}`);
+		fetch(`/admin/validate/${listing_uid}`);
 		dispatch('click');
 	};
 </script>
 
 <button
 	on:click={validateListing}
-	class="variant-success-error btn p-2"
+	class="variant-glass-success btn p-2"
 	aria-label="validate"
 	tabindex={index}
 >

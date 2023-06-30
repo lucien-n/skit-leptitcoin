@@ -55,7 +55,7 @@
 				// window.location.href = window.location.href;
 			}}
 		/>
-		{#if $supaUserStore && $supaUserStore?.role >= 8}
+		{#if !listing.isValidated && $supaUserStore && $supaUserStore?.role >= 8}
 			<ValidateButton listing_uid={listing.uid} />
 		{/if}
 	</div>
