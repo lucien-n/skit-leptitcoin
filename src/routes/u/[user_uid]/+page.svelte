@@ -3,19 +3,17 @@
   import UserCard from "$lib/components/user/UserCard.svelte";
   import { TITLE } from "$lib/helper";
   import { userStore } from "$lib/store";
-  import { getUserListings } from "$lib/supabase";
   import type { SupaListing } from "$lib/types/supa_listing";
   import type { SupaUser } from "$lib/types/supa_user";
 
-  export let data: { user: SupaUser; anonymous: boolean };
-
-  let { user, anonymous } = data;
-  $: ({ user, anonymous } = data);
-
-  const userListings = async (): Promise<SupaListing[]> => {
-    let listings = await getUserListings(user.uid);
-    return listings || [];
+  export let data: {
+    user: SupaUser;
+    anonymous: boolean;
+    listings: SupaListing[];
   };
+
+  let { user, anonymous, listings } = data;
+  $: ({ user, anonymous, listings } = data);
 </script>
 
 <svelte:head>
@@ -28,13 +26,8 @@
 >
   <UserCard {user} {anonymous} />
   <br />
-  {#await userListings()}
-    <h1>
-      Loading {$userStore?.id === user.uid ? "your" : `${user.username}'s`} listings
-    </h1>
-  {:then listings}
-    {#each listings as listing}
-      <ListingRow {listing} />
-    {/each}
-  {/await}
+
+  {#each listings as listing}
+    <ListingRow {listing} />
+  {/each}
 </section>
