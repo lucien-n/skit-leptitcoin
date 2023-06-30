@@ -1,8 +1,12 @@
 <script lang="ts">
   import ListingRow from "$lib/components/listing/ListingRow.svelte";
+  import { supaUserStore, userStore } from "$lib/store";
   import { getListings } from "$lib/supabase";
 
   export let data: { message: string | undefined };
+
+  let { message } = data;
+  $: ({ message } = data);
 </script>
 
 <section
@@ -10,7 +14,7 @@
   class="w-full md:w-[70%] mt-4 h-full flex flex-col mx-auto"
 >
   <h3 class="h3 mx-auto">
-    {data.message ? data.message : "Admin Dashboard"}
+    {message ? message : `Admin Dashboard - ${$supaUserStore?.username}`}
   </h3>
 
   <div class="flex flex-col gap-2 mt-5">

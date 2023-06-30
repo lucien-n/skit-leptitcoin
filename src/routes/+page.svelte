@@ -4,10 +4,12 @@
   import { searchStore } from "$lib/store";
   import type { SupaListing } from "$lib/types/supa_listing";
 
-  export let data;
+  export let data: { listings: SupaListing[] };
+
+  let { listings } = data;
+  $: ({ listings } = data);
 
   let getListings: any;
-  let listings: SupaListing[] = data.listings || [];
 
   function filterListings(params: SearchParams) {
     let filteredListings: SupaListing[] = [];
