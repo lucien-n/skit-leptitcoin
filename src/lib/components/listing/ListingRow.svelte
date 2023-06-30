@@ -44,7 +44,12 @@
       />
     </div>
   </a>
-  <div class="flex self-end gap-2">
+  <div
+    class="flex self-end gap-2"
+    class:hidden={$supaUserStore &&
+      $supaUserStore.uid !== listing.author_uid &&
+      $supaUserStore?.role < 8}
+  >
     <EditButton listing_uid={listing.uid} />
     <DeleteButton
       listing_uid={listing.uid}
