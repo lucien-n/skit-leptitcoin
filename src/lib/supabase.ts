@@ -127,7 +127,7 @@ async function parseListing(listingData) {
 		price: listingData.price,
 		category: listingData.category,
 		picture: listingData.picture,
-		condition: listingData.state,
+		condition: listingData.condition,
 		createdAt: listingData.created_at,
 		author:
 			author ||

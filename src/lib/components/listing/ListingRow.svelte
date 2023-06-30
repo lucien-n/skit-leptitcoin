@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { formatDate, listingStates } from "$lib/helper";
+  import { formatDate } from "$lib/helper";
   import { supaUserStore, userStore } from "$lib/store";
   import type { SupaListing } from "$lib/types/supa_listing";
-  import DeleteButton from "../button/DeleteButton.svelte";
-  import EditButton from "../button/EditButton.svelte";
-  import ConditionBadge from "./ConditionBadge.svelte";
+  import DeleteButton from "$lib/components/widgets/DeleteButton.svelte";
+  import EditButton from "$lib/components/widgets/EditButton.svelte";
+  import ConditionBadge from "$lib/components/listing/ConditionBadge.svelte";
 
   export let listing: SupaListing;
 

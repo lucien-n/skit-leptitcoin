@@ -2,7 +2,7 @@
   import { formatDate, listingStates } from "$lib/helper";
   import type { SupaListing } from "$lib/types/supa_listing";
   import { Avatar } from "@skeletonlabs/skeleton";
-  import LikeButton from "$lib/components/button/LikeButton.svelte";
+  import LikeButton from "$lib/components/widgets/LikeButton.svelte";
   import { userStore } from "$lib/store";
   import ConditionBadge from "./ConditionBadge.svelte";
 

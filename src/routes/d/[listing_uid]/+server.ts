@@ -9,7 +9,7 @@ export const GET = async ({ params, locals: { supabase, getSession, getRole, rol
 
     const { data: [{ author_uid }] } = await supabase.from('listings').select('author_uid').eq('uid', listing_uid)
 
-    const user_uid = (await getSession()).user.id
+    const user_uid = (await getSession())?.user.id
 
     const user_role = await getRole(user.id)
     if (user_uid !== author_uid && user_role < roles.ADMIN)

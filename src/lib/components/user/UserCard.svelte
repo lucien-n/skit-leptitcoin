@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Rating from "$lib/components/Rating.svelte";
+  import Rating from "$lib/components/widgets/Rating.svelte";
   import { userStore } from "$lib/store";
   import type { SupaUser } from "$lib/types/supa_user";
   import { Avatar } from "@skeletonlabs/skeleton";
