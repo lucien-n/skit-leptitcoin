@@ -51,9 +51,7 @@ export async function getListing(listing_uid: string) {
 			.limit(1);
 		if (!listings) return;
 
-		const listing = await parseListing(listings[0]);
-
-		return listing;
+		return await parseListing(listings[0]);
 	} catch (e) {
 		console.warn(e);
 	}

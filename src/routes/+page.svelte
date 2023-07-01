@@ -40,8 +40,8 @@
 </script>
 
 <svelte:head><title>{TITLE}</title></svelte:head>
-<main id="main" class="container h-full mx-auto flex mt-10">
-	<section id="listings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 h-fit">
+<main id="main" class="container mx-auto mt-10 flex h-full">
+	<section id="listings" class="grid h-fit w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 		{#await getListings}
 			{#each { length: 6 } as _}
 				<ListingCardGhost />

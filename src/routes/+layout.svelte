@@ -27,7 +27,7 @@
 				invalidate('supabase:auth');
 			}
 			userStore.set(_session ? _session.user : null);
-			if (_session.user) supaUserStore.set(await getSupaUser(_session.user.id));
+			if (_session && _session.user) supaUserStore.set(await getSupaUser(_session.user.id));
 		});
 
 		return () => data.subscription.unsubscribe();
