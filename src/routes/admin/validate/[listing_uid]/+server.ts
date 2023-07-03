@@ -14,7 +14,7 @@ export const GET: RequestHandler = async ({
 	if (currentUserRole < roles.ADMIN) throw error(401, { message: 'Unauthorized' });
 
 	try {
-		const resp = await supabase
+		const { error } = await supabase
 			.from('listings')
 			.update({
 				is_validated: true,
@@ -22,7 +22,7 @@ export const GET: RequestHandler = async ({
 				validated_by: currentUser.id
 			})
 			.match({ uid: listing_uid });
-		console.log(resp);
+		if (error) console.error('Error while validating "', listing_uid, '": ', error)
 	} catch (e) {
 		console.log(e);
 	}
