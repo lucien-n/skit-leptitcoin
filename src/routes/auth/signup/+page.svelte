@@ -10,13 +10,7 @@
 	let showPassword: boolean = false;
 	let loading = false;
 
-	const handleSubmit: SubmitFunction = ({
-		formElement,
-		formData,
-		action,
-		cancel,
-		submitter,
-	}) => {
+	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
 		return async ({ update }: { update: any }) => {
 			loading = false;
@@ -28,24 +22,18 @@
 <svelte:head>
 	<title>{TITLE} Sign Up</title>
 </svelte:head>
-<section
-	id="signup"
-	class="w-full h-full flex self-center items-center justify-center"
->
-	{#if form?.missing}
-		<p>Please fill out all fields</p>
-	{/if}
-
+<section id="signup" class="flex h-full w-full items-center justify-center self-center">
 	<form
 		action="/auth/signup"
 		method="post"
-		class="flex-col flex gap-6 card w-full mx-2 p-5 md:w-2/3 lg:w-1/3"
+		class="card mx-2 flex w-full flex-col gap-6 p-5 md:w-2/3 lg:w-1/3"
 		use:enhance={handleSubmit}
 	>
+		{#if form?.message}
+			<p class="mx-auto text-error-500">{form.message}</p>
+		{/if}
 		<p class="text-center">
-			Already have an account? <a href="/auth/signin" class="anchor"
-				>Sign In.</a
-			>
+			Already have an account? <a href="/auth/signin" class="anchor">Sign In.</a>
 		</p>
 		<section>
 			<label for="username">Name</label>
@@ -102,10 +90,8 @@
 			</div>
 		</section>
 
-		<button
-			type="submit"
-			class="btn variant-ghost-surface w-fit mx-auto"
-			disabled={loading}>{loading ? 'Loading...' : 'Sign Up'}</button
+		<button type="submit" class="btn variant-ghost-surface mx-auto w-fit" disabled={loading}
+			>{loading ? 'Loading...' : 'Sign Up'}</button
 		>
 	</form>
 </section>

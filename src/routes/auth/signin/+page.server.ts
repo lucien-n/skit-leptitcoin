@@ -1,3 +1,4 @@
+import { AuthApiError, AuthError } from "@supabase/supabase-js";
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 
 export const actions: Actions = {
@@ -8,18 +9,20 @@ export const actions: Actions = {
     const password: string = formData.get("password")?.toString() || "";
 
     if (!email || email === "") {
-      return fail(400, { email, missing: true });
+      return fail(400, { password, message: 'Please fill out all fields' });
     }
 
     if (!password || password === "") {
-      return fail(400, { password, missing: true });
+      return fail(400, { email, message: 'Please fill out all fields' });
     }
 
     try {
-      await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
+      if (error)
+        return fail(400, { email, password, message: error.message })
     } catch (e) {
       throw error(500, { message: "Internal server error" });
     }
