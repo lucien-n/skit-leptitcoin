@@ -19,6 +19,7 @@
 
 	$: {
 		userStore.set(session ? session.user : null);
+		updateSupaUser(session?.user.id);
 	}
 
 	onMount(() => {
@@ -27,11 +28,15 @@
 				invalidate('supabase:auth');
 			}
 			userStore.set(_session ? _session.user : null);
-			if (_session && _session.user) supaUserStore.set(await getSupaUser(_session.user.id));
+			updateSupaUser(session?.user.id);
 		});
 
 		return () => data.subscription.unsubscribe();
 	});
+
+	async function updateSupaUser(user_uid: string | undefined) {
+		supaUserStore.set(user_uid ? await getSupaUser(user_uid) : null);
+	}
 </script>
 
 <Toast position="tr" />
