@@ -80,7 +80,11 @@
 							{/if}
 							<button class="flex flex-col items-center" on:click={toggleUserDrawer}>
 								<UserSvg />
-								<p class="text-sm">{$supaUserStore?.username}</p>
+								{#if $supaUserStore}
+									<p class="text-sm">{$supaUserStore.username}</p>
+								{:else}
+									<div class="placeholder animate-bounce mt-1 h-2 w-8 variant-ghost-primary" />
+								{/if}
 							</button>
 						{:else}
 							<a
