@@ -1,5 +1,4 @@
 <svg
-	class="with-icon_icon__aLCKg"
 	data-testid="geist-icon"
 	fill="none"
 	height="24"
