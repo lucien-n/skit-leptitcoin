@@ -9,12 +9,12 @@
 	$: ({ listings } = data);
 </script>
 
-<section id="admin-dashboard" class="w-full md:w-[70%] mt-4 h-full flex flex-col mx-auto">
+<section id="admin-dashboard" class="w-full md:w-[70%] h-full flex flex-col mx-auto m-2 gap-2">
 	<h3 class="h3 mx-auto">
 		Admin Dashboard - {$supaUserStore?.username}
 	</h3>
 
-	<div class="flex flex-col gap-2 mt-5">
+	<div class="flex flex-col">
 		{#if listings}
 			{#each listings as listing}
 				<ListingRow {listing} />

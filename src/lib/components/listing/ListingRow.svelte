@@ -12,19 +12,19 @@
 	const maxDescriptionLength: number = 30;
 </script>
 
-<div class="card p-2 h-14 flex">
+<div class="card p-1 md:p-2 h-fit flex break-words">
 	<a href="/l/{listing.uid}" class="flex items-center w-full justify-between group/listing-row">
 		<div class="flex items-end gap-1 group-hover/listing-row:underline">
 			<h4 class="h4">
 				{listing.title}
 			</h4>
-			<p class="font-normal">
+			<p class="font-normal hidden md:visible">
 				{listing.description.length > maxDescriptionLength
 					? listing.description.slice(0, maxDescriptionLength) + '...'
 					: listing.description}
 			</p>
 		</div>
-		<div class="flex gap-2">
+		<div class="gap-2 hidden md:flex">
 			<ConditionBadge condition={listing.condition} />
 		</div>
 		<div class="flex items-center gap-2">
