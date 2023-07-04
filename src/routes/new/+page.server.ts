@@ -15,9 +15,8 @@ export const actions: Actions = {
     const description = formData.get("description")?.toString() || "";
     const price = parseFloat(formData.get("price")?.toString() || "0");
     const category = formData.get("category")?.toString() || "misc";
-    const picture = `https://placehold.co/300x200/orange/white?text=${
-      title.split(" ")[0]
-    }`;
+    const picture = `https://placehold.co/300x200/black/white?text=${title.split(" ")[0]
+      }`;
     const condition =
       parseInt(formData.get("listing_condition")?.toString() || "2") || 2;
 
@@ -42,13 +41,12 @@ export const actions: Actions = {
         category,
         picture,
         condition,
-        message: `Description length must be ${
-          description.length < 3
-            ? "greater than 3"
-            : description.length > 512
+        message: `Description length must be ${description.length < 3
+          ? "greater than 3"
+          : description.length > 512
             ? "lesser than 512"
             : ""
-        }`,
+          }`,
         subject: "description",
       });
     }
@@ -78,11 +76,12 @@ export const actions: Actions = {
     } satisfies SupaListing;
 
     try {
-      await supabase.from("listings").insert(listing);
+      const { error } = await supabase.from("listings").insert(listing);
+      if (error) return fail(400, { title, description, price, category, condition, picture, message: error.message, subject: '' })
     } catch (e) {
       console.error(e);
     }
 
-    throw redirect(303, "/");
+    throw redirect(303, "/new/success");
   },
 };

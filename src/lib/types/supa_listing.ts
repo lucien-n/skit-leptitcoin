@@ -11,7 +11,7 @@ export type SupaListing = {
 	condition: number;
 	author?: SupaUser;
 	createdAt?: number;
-	isValidated: boolean;
-	validatedAt: number;
-	validatedBy: string;
+	isValidated?: boolean;
+	validatedAt?: number;
+	validatedBy?: string;
 };

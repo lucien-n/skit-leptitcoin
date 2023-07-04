@@ -10,13 +10,7 @@
 	let showPassword: boolean = false;
 	let loading = false;
 
-	const handleSubmit: SubmitFunction = ({
-		formElement,
-		formData,
-		action,
-		cancel,
-		submitter,
-	}) => {
+	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
 		return async ({ update }: { update: any }) => {
 			loading = false;
@@ -28,16 +22,16 @@
 <svelte:head>
 	<title>{TITLE} Sign In</title>
 </svelte:head>
-<section id="signin" class="w-full h-full flex md:items-center justify-center">
-	{#if form?.missing}
-		<p>Please fill out all fields</p>
-	{/if}
+<section id="signin" class="flex h-full w-full justify-center md:items-center">
 	<form
 		action="/auth/signin"
 		method="post"
-		class="flex flex-col gap-6 card w-full h-fit mt-3 md:mt-0 mx-2 p-5 md:w-2/3 lg:w-1/3"
+		class="card mx-2 mt-3 flex h-fit w-full flex-col gap-6 p-5 md:mt-0 md:w-2/3 lg:w-1/3"
 		use:enhance={handleSubmit}
 	>
+		{#if form?.message}
+			<p class="mx-auto text-error-500">{form.message}</p>
+		{/if}s
 		<p class="text-center">
 			Don't have an account yet? <a
 				href="/auth/signup"
@@ -86,17 +80,15 @@
 					{/if}
 				</button>
 			</div>
-			<a
-				href="/auth/forgot-password"
-				class="anchor"
-				aria-label="forgot password?">Forgot password ?</a
+			<a href="/auth/forgot-password" class="anchor" aria-label="forgot password?"
+				>Forgot password ?</a
 			>
 		</section>
 
 		<button
 			type="submit"
 			aria-label="sign in"
-			class="btn variant-ghost-surface w-fit mx-auto"
+			class="btn variant-ghost-surface mx-auto w-fit"
 			disabled={loading}>{loading ? 'Loading... ' : 'Sign In'}</button
 		>
 	</form>

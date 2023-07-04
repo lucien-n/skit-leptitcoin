@@ -14,8 +14,7 @@ export const GET: RequestHandler = async ({
 	if (currentUserRole < roles.ADMIN) throw error(401, { message: 'Unauthorized' });
 
 	try {
-		console.log(currentUser.id);
-		const resp = await supabase
+		const { error } = await supabase
 			.from('listings')
 			.upsert({
 				uid: listing_uid,
@@ -23,8 +22,8 @@ export const GET: RequestHandler = async ({
 				validated_at: new Date(),
 				validated_by: currentUser.id
 			})
-			.eq('uid', listing_uid);
-		console.log(resp);
+			.match({ uid: listing_uid });
+		if (error) console.error('Error while validating "', listing_uid, '": ', error);
 	} catch (e) {
 		console.log(e);
 	}

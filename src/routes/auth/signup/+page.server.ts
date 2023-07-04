@@ -9,22 +9,19 @@ export const actions: Actions = {
     const username: string = formData.get("username")?.toString() || "";
 
     if (!email || email === "") {
-      console.log("Missing email");
-      return fail(400, { email, missing: true });
+      return fail(400, { username, password, message: "Missing email" });
     }
 
     if (!password || password === "") {
-      console.log("Missing password");
-      return fail(400, { password, missing: true });
+      return fail(400, { email, username, message: "Missing password" });
     }
 
     if (!username || username === "") {
-      console.log("Missing username");
-      return fail(400, { username, missing: true });
+      return fail(400, { email, password, message: "Missing username" });
     }
 
     try {
-      await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: email,
         password: password,
         options: {
@@ -33,6 +30,8 @@ export const actions: Actions = {
           },
         },
       });
+      if (error)
+        return fail(400, { username, email, password, message: error.message })
     } catch (e) {
       throw error(500, { message: "Internal server error" });
     }
