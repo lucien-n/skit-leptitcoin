@@ -44,14 +44,12 @@ export async function getUserListings(user_uid: string, limit = 10) {
 
 export async function getListing(listing_uid: string) {
 	try {
-		const { data: listings } = await supabase
-			.from('listings')
-			.select('*')
-			.eq('uid', listing_uid)
-			.limit(1);
-		if (!listings) return;
+		const {
+			data: [listing]
+		} = await supabase.from('listings').select('*').eq('uid', listing_uid);
+		if (!listing) return;
 
-		return await parseListing(listings[0]);
+		return await parseListing(listing);
 	} catch (e) {
 		console.warn(e);
 	}
@@ -59,9 +57,23 @@ export async function getListing(listing_uid: string) {
 
 export async function getSupaUser(user_uid: string) {
 	try {
-		const { data: user } = await supabase.from('profiles').select('*').eq('uid', user_uid);
+		const {
+			data: [user]
+		} = await supabase.from('profiles').select('*').eq('uid', user_uid);
 		if (!user) return null;
-		return await parseUser(user[0]);
+		return await parseSupaUser(user);
+	} catch (e) {
+		console.warn(e);
+	}
+}
+
+export async function getSupaUsers(match?: { limit: number }) {
+	try {
+		const { data: users } = await supabase
+			.from('profiles')
+			.select('*')
+			.match(match || {});
+		return await parseSupaUsers(users);
 	} catch (e) {
 		console.warn(e);
 	}
@@ -145,7 +157,7 @@ async function parseListings(listings) {
 	return parsedListings;
 }
 
-async function parseUser(userData) {
+async function parseSupaUser(userData) {
 	return {
 		uid: userData.uid,
 		username: userData.username,
@@ -155,4 +167,15 @@ async function parseUser(userData) {
 		createdAt: userData.created_at,
 		role: userData.role
 	} satisfies SupaUser;
+}
+
+async function parseSupaUsers(users) {
+	const parsedSupaUsers: SupaUser[] = [];
+	await Promise.all(
+		users?.map(async (user) => {
+			const parsedSupaUser = await parseSupaUser(user);
+			parsedSupaUsers.push(parsedSupaUser);
+		})
+	);
+	return parsedSupaUsers;
 }

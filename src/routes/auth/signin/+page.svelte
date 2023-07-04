@@ -31,7 +31,7 @@
 	>
 		{#if form?.message}
 			<p class="mx-auto text-error-500">{form.message}</p>
-		{/if}s
+		{/if}
 		<p class="text-center">
 			Don't have an account yet? <a
 				href="/auth/signup"
