@@ -7,47 +7,9 @@
 
 	export let form;
 
-	let title: string;
-	let description: string;
-	let price: number;
-	let category: string;
 	let condition: number;
 
 	let loading = false;
-
-	async function postListing(event: SubmitEvent) {
-		event.preventDefault();
-
-		if (!$userStore) {
-			toastStore.trigger({
-				message: 'You must be logged in',
-				background: 'bg-variant-error',
-				autohide: true
-			});
-			return;
-		}
-
-		if (title === undefined) {
-			toastStore.trigger({
-				message: 'Please enter a title'
-			});
-			return;
-		}
-
-		if (description === undefined) {
-			toastStore.trigger({
-				message: 'Please enter a description'
-			});
-			return;
-		}
-
-		if (price === undefined) {
-			toastStore.trigger({
-				message: 'Please enter a price'
-			});
-			return;
-		}
-	}
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
