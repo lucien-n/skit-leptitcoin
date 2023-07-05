@@ -6,7 +6,6 @@
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import type { SupaUser } from '$lib/types/supa_user';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
 
 	export let data: { listings: SupaListing[] | null; users: SupaUser[] | null };
 

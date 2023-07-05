@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import ListingRow from '$lib/components/listing/ListingRow.svelte';
 	import UserCard from '$lib/components/user/UserCard.svelte';
 	import { TITLE } from '$lib/helper';
@@ -14,6 +15,8 @@
 
 	let { user, anonymous, listings } = data;
 	$: ({ user, anonymous, listings } = data);
+
+	$: anonymous = $page.url.searchParams.has('ano');
 </script>
 
 <svelte:head>

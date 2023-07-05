@@ -23,7 +23,6 @@ export async function getListings(limit = 10, offset = 0, match: any = { is_vali
 		console.warn(e);
 	}
 }
-
 export async function getUserListings(user_uid: string, limit = 10) {
 	try {
 		const userListings: SupaListing[] = [];
@@ -42,17 +41,22 @@ export async function getUserListings(user_uid: string, limit = 10) {
 	}
 }
 
-export async function getListing(listing_uid: string) {
+export async function getListing(listing_uid: string): Promise<SupaListing | undefined> {
 	try {
 		const {
 			data: [listing]
 		} = await supabase.from('listings').select('*').eq('uid', listing_uid);
 		if (!listing) return;
 
-		return await parseListing(listing);
+		const parsedListing = await parseListing(listing);
+
+		console.log('+supabase.ts =>', typeof parsedListing);
+
+		return parsedListing;
 	} catch (e) {
 		console.warn(e);
 	}
+	return;
 }
 
 export async function getSupaUser(user_uid: string) {
@@ -61,13 +65,16 @@ export async function getSupaUser(user_uid: string) {
 			data: [user]
 		} = await supabase.from('profiles').select('*').eq('uid', user_uid);
 		if (!user) return null;
-		return await parseSupaUser(user);
+
+		const parsedUser = await parseSupaUser(user);
+
+		return parsedUser;
 	} catch (e) {
 		console.warn(e);
 	}
 }
 
-export async function getSupaUsers(match?: { limit: number }) {
+export async function getSupaUsers(match?: { limit?: number; }) {
 	try {
 		const { data: users } = await supabase
 			.from('profiles')
@@ -119,7 +126,7 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 
 async function parseListing(listingData) {
 	const author = await getSupaUser(listingData.author_uid);
-	return {
+	const parsedListing = {
 		uid: listingData.uid,
 		author_uid: listingData.author_uid,
 		title: listingData.title,
@@ -144,6 +151,7 @@ async function parseListing(listingData) {
 		validatedBy: listingData.validated_by,
 		validatedAt: listingData.validated_at
 	} satisfies SupaListing;
+	return parsedListing;
 }
 
 async function parseListings(listings) {

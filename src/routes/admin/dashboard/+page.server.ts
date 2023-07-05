@@ -11,7 +11,7 @@ export const load = async ({ locals: { getSession, roles, getRole }, url: { sear
 	const manage = searchParams.get('q') || 'listings';
 
 	if (manage === 'users') {
-		const users = await getSupaUsers();
+		const users = await getSupaUsers({limit: 20});
 		return { users };
 	}
 
