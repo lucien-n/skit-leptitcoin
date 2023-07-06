@@ -12,7 +12,7 @@
 
 {#if user}
 	<div
-		class="card gap-4 flex flex-row w-full border-0 justify-between md:w-fit h-fit items-center group"
+		class="group card flex h-fit w-full flex-row items-center justify-between gap-4 border-0 md:w-fit"
 		class:card={asCard}
 		class:p-5={asCard}
 	>
@@ -20,7 +20,7 @@
 			<Avatar initials={user.username[0]} />
 			<div>
 				<h3 class="h3 group-hover:underline">{user.username}</h3>
-				<Rating rating={user.rating} ratingCount={user.ratingCount} ratedUserUid={user.uid} />
+				<Rating rating={user.rating} rating_count={user.ratingCount} rated_user_uid={user.uid} />
 			</div>
 		</div>
 		{#if !anonymous && showAnonymous && $userStore?.id === user.uid}

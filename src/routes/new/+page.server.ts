@@ -7,18 +7,18 @@ export const actions: Actions = {
     const session = await getSession();
     if (!session) throw error(401, { message: "Unauthorized" });
 
-    const formData = await request.formData();
+    const form_data = await request.formData();
 
     const uid = uuid();
     const author_uid = session.user.id;
-    const title = formData.get("title")?.toString() || "";
-    const description = formData.get("description")?.toString() || "";
-    const price = parseFloat(formData.get("price")?.toString() || "0");
-    const category = formData.get("category")?.toString() || "misc";
+    const title = form_data.get("title")?.toString() || "";
+    const description = form_data.get("description")?.toString() || "";
+    const price = parseFloat(form_data.get("price")?.toString() || "0");
+    const category = form_data.get("category")?.toString() || "misc";
     const picture = `https://placehold.co/300x200/black/white?text=${title.split(" ")[0]
       }`;
     const condition =
-      parseInt(formData.get("listing_condition")?.toString() || "2") || 2;
+      parseInt(form_data.get("listing_condition")?.toString() || "2") || 2;
 
     if (title.length < 3 || title.length > 80) {
       return fail(400, {

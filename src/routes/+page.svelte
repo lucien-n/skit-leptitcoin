@@ -13,19 +13,19 @@
 	let getListings: any;
 
 	async function filterListings(params: SearchParams) {
-		let filteredListings: SupaListing[] = [];
+		let filtered_listings: SupaListing[] = [];
 
-		const searchRegex = new RegExp(`${params.search || ''}`, 'i');
+		const search_regex = new RegExp(`${params.search || ''}`, 'i');
 
-		filteredListings = (await listings).filter((listing) => {
+		filtered_listings = (await listings).filter((listing) => {
 			return (
-				searchRegex.test(listing.title) &&
+				search_regex.test(listing.title) &&
 				(params.price_min ? listing.price > params.price_min : true) &&
 				(params.price_max ? listing.price < params.price_max : true)
 			);
 		});
 
-		return filteredListings;
+		return filtered_listings;
 	}
 
 	const _ = searchStore.subscribe((params: SearchParams) => {
@@ -48,7 +48,7 @@
 			{/each}
 		{:then listings}
 			{#each listings as listing, index}
-				<ListingCard {listing} {index} />
+				<ListingCard {listing} tab_index={index} />
 			{/each}
 		{/await}
 	</section>

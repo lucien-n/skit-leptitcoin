@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { listingStates as listingConditions } from "$lib/helper";
+	import { LISTING_CONDITIONS as listingConditions } from '$lib/helper';
 
-  export let condition: number;
+	export let condition: number;
 
-  let condition_text = listingConditions[condition];
+	let condition_text = listingConditions[condition];
 </script>
 
-<div class="w-fit badge text-sm variant-ghost-secondary">
-  {condition_text}
+<div class="badge variant-ghost-secondary w-fit text-sm">
+	{condition_text}
 </div>

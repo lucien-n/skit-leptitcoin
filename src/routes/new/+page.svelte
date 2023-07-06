@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { TITLE, listingStates } from '$lib/helper';
+	import { TITLE, LISTING_CONDITIONS } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import { RadioGroup, RadioItem, toastStore } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
@@ -86,7 +86,7 @@
 		</section>
 		<section class="mx-auto flex">
 			<RadioGroup>
-				{#each listingStates as state, i}
+				{#each LISTING_CONDITIONS as state, i}
 					<RadioItem bind:group={condition} value={i} name="listing_condition">
 						{state}
 					</RadioItem>

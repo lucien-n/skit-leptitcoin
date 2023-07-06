@@ -7,7 +7,7 @@
 
 	export let form;
 
-	let showPassword: boolean = false;
+	let show_password: boolean = false;
 	let loading = false;
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
@@ -68,7 +68,7 @@
 			<label for="password">Password</label>
 			<div class="input-group flex flex-row">
 				<input
-					type={showPassword ? 'text' : 'password'}
+					type={show_password ? 'text' : 'password'}
 					id="password"
 					name="password"
 					class="w-full"
@@ -79,9 +79,9 @@
 				<button
 					type="button"
 					aria-label="show password"
-					on:click={() => (showPassword = !showPassword)}
+					on:click={() => (show_password = !show_password)}
 				>
-					{#if showPassword}
+					{#if show_password}
 						<EyeClosedSvg />
 					{:else}
 						<EyeOpenedSvg />

@@ -18,37 +18,37 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 export const actions = {
   update: async ({ request, locals: { supabase, getSession } }) => {
-    const formData = await request.formData();
-    const fullName = formData.get("fullName") as string;
-    const username = formData.get("username") as string;
-    const website = formData.get("website") as string;
-    const avatarUrl = formData.get("avatarUrl") as string;
+    const form_data = await request.formData();
+    const full_name = form_data.get("fullName") as string;
+    const username = form_data.get("username") as string;
+    const website = form_data.get("website") as string;
+    const avatar_url = form_data.get("avatarUrl") as string;
 
     const session = await getSession();
 
     const { error } = await supabase.from("profiles").upsert({
       id: session?.user.id,
-      full_name: fullName,
+      full_name: full_name,
       username,
       website,
-      avatar_url: avatarUrl,
+      avatar_url: avatar_url,
       updated_at: new Date(),
     });
 
     if (error) {
       return fail(500, {
-        fullName,
+        fullName: full_name,
         username,
         website,
-        avatarUrl,
+        avatarUrl: avatar_url,
       });
     }
 
     return {
-      fullName,
+      fullName: full_name,
       username,
       website,
-      avatarUrl,
+      avatarUrl: avatar_url,
     };
   },
   signout: async ({ locals: { supabase, getSession } }) => {

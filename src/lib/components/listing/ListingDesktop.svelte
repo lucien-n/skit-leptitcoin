@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate, listingStates } from '$lib/helper';
+	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import LikeButton from '$lib/components/widgets/LikeButton.svelte';
 	import { userStore } from '$lib/store';
@@ -13,8 +13,8 @@
 	}
 </script>
 
-<div class="card flex-col gap-2 m-2 lg:w-[80%] xl:w-[70%] lg:mx-auto hidden md:flex">
-	<header class="w-full flex overflow-hidden">
+<div class="card m-2 hidden flex-col gap-2 md:flex lg:mx-auto lg:w-[80%] xl:w-[70%]">
+	<header class="flex w-full overflow-hidden">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -22,8 +22,8 @@
 			alt="listing"
 			class="w-2/3 object-cover"
 		/>
-		<div class="flex flex-col w-1/3 h-full m-4 gap-3">
-			<div class="flex justify-between w-full">
+		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
+			<div class="flex w-full justify-between">
 				<a
 					href="/u/{listing.author_uid}"
 					class="flex gap-3"
@@ -33,7 +33,7 @@
 					<UserCard user={listing.author} asCard={false} showAnonymous={false} />
 				</a>
 				<button
-					class="btn h-fit self-center variant-ghost-success"
+					class="btn variant-ghost-success h-fit self-center"
 					aria-label="contact {listing.author?.username}"
 				>
 					Contact
@@ -44,7 +44,7 @@
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">
-					<button on:click={buy} class="variant-ghost-tertiary btn w-full text-lg" aria-label="buy"
+					<button on:click={buy} class="btn variant-ghost-tertiary w-full text-lg" aria-label="buy"
 						>Buy</button
 					>
 					<LikeButton listing_uid={listing.uid} />
@@ -56,7 +56,7 @@
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
-			<h3 class="text-lg badge variant-ghost">
+			<h3 class="badge variant-ghost text-lg">
 				{listing.price}€
 			</h3>
 		</div>

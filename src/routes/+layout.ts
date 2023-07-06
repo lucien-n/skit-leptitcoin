@@ -1,4 +1,3 @@
-// src/routes/+layout.ts
 import { createSupabaseLoadClient } from "@supabase/auth-helpers-sveltekit";
 
 export const load = async ({ fetch, data, depends }) => {

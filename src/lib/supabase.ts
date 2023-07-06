@@ -9,14 +9,14 @@ export const supabase = createClient(
 
 export async function getListings(limit = 10, offset = 0, match: any = { is_validated: true }) {
 	try {
-		const supaListings: SupaListing[] = [];
+		const supa_listings: SupaListing[] = [];
 		const { data: listings } = await supabase
 			.from('listings')
 			.select('*')
 			.range(offset, limit)
 			.match(match);
 
-		if (!listings) return supaListings;
+		if (!listings) return supa_listings;
 
 		return await parseListings(listings);
 	} catch (e) {
@@ -25,7 +25,7 @@ export async function getListings(limit = 10, offset = 0, match: any = { is_vali
 }
 export async function getUserListings(user_uid: string, limit = 10) {
 	try {
-		const userListings: SupaListing[] = [];
+		const user_listings: SupaListing[] = [];
 
 		const { data: listings } = await supabase
 			.from('listings')
@@ -33,7 +33,7 @@ export async function getUserListings(user_uid: string, limit = 10) {
 			.eq('author_uid', user_uid)
 			.limit(limit);
 
-		if (!listings) return userListings;
+		if (!listings) return user_listings;
 
 		return await parseListings(listings);
 	} catch (e) {
@@ -48,11 +48,9 @@ export async function getListing(listing_uid: string): Promise<SupaListing | und
 		} = await supabase.from('listings').select('*').eq('uid', listing_uid);
 		if (!listing) return;
 
-		const parsedListing = await parseListing(listing);
+		const parsed_listing = await parseListing(listing);
 
-		console.log('+supabase.ts =>', typeof parsedListing);
-
-		return parsedListing;
+		return parsed_listing;
 	} catch (e) {
 		console.warn(e);
 	}
@@ -66,9 +64,9 @@ export async function getSupaUser(user_uid: string) {
 		} = await supabase.from('profiles').select('*').eq('uid', user_uid);
 		if (!user) return null;
 
-		const parsedUser = await parseSupaUser(user);
+		const parsed_user = await parseSupaUser(user);
 
-		return parsedUser;
+		return parsed_user;
 	} catch (e) {
 		console.warn(e);
 	}
@@ -124,18 +122,18 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 	}
 }
 
-async function parseListing(listingData) {
-	const author = await getSupaUser(listingData.author_uid);
+async function parseListing(listing_data) {
+	const author = await getSupaUser(listing_data.author_uid);
 	const parsedListing = {
-		uid: listingData.uid,
-		author_uid: listingData.author_uid,
-		title: listingData.title,
-		description: listingData.description,
-		price: listingData.price,
-		category: listingData.category,
-		picture: listingData.picture,
-		condition: listingData.condition,
-		createdAt: listingData.created_at,
+		uid: listing_data.uid,
+		author_uid: listing_data.author_uid,
+		title: listing_data.title,
+		description: listing_data.description,
+		price: listing_data.price,
+		category: listing_data.category,
+		picture: listing_data.picture,
+		condition: listing_data.condition,
+		createdAt: listing_data.created_at,
 		author:
 			author ||
 			({
@@ -147,43 +145,43 @@ async function parseListing(listingData) {
 				createdAt: new Date().getTime(),
 				role: -1
 			} satisfies SupaUser),
-		isValidated: listingData.is_validated,
-		validatedBy: listingData.validated_by,
-		validatedAt: listingData.validated_at
+		isValidated: listing_data.is_validated,
+		validatedBy: listing_data.validated_by,
+		validatedAt: listing_data.validated_at
 	} satisfies SupaListing;
 	return parsedListing;
 }
 
 async function parseListings(listings) {
-	const parsedListings: SupaListing[] = [];
+	const parsed_listings: SupaListing[] = [];
 	await Promise.all(
 		listings?.map(async (listing) => {
-			const parsedListing = await parseListing(listing);
-			parsedListings.push(parsedListing);
+			const parsed_listing = await parseListing(listing);
+			parsed_listings.push(parsed_listing);
 		})
 	);
-	return parsedListings;
+	return parsed_listings;
 }
 
-async function parseSupaUser(userData) {
+async function parseSupaUser(user_data) {
 	return {
-		uid: userData.uid,
-		username: userData.username,
-		picture: userData.picture,
-		rating: userData.rating,
-		ratingCount: userData.rating_count,
-		createdAt: userData.created_at,
-		role: userData.role
+		uid: user_data.uid,
+		username: user_data.username,
+		picture: user_data.picture,
+		rating: user_data.rating,
+		ratingCount: user_data.rating_count,
+		createdAt: user_data.created_at,
+		role: user_data.role
 	} satisfies SupaUser;
 }
 
 async function parseSupaUsers(users) {
-	const parsedSupaUsers: SupaUser[] = [];
+	const parsed_supa_users: SupaUser[] = [];
 	await Promise.all(
 		users?.map(async (user) => {
-			const parsedSupaUser = await parseSupaUser(user);
-			parsedSupaUsers.push(parsedSupaUser);
+			const parsed_supa_user = await parseSupaUser(user);
+			parsed_supa_users.push(parsed_supa_user);
 		})
 	);
-	return parsedSupaUsers;
+	return parsed_supa_users;
 }

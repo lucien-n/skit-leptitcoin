@@ -4,15 +4,15 @@
 	import StarSvg from '$lib/components/svgs/StarSvg.svelte';
 
 	export let rating: number;
-	export let ratedUserUid: string;
-	export let ratingCount: number = 0;
+	export let rated_user_uid: string;
+	export let rating_count: number = 0;
 
 	const dispatch = createEventDispatcher();
 
 	const rate = async (i: number) => {
 		rating = i + 1;
 		dispatch('click');
-		if (0 < rating && rating <= 5) fetch(`/u/${ratedUserUid}/rate/${rating}`);
+		if (0 < rating && rating <= 5) fetch(`/u/${rated_user_uid}/rate/${rating}`);
 	};
 </script>
 
@@ -27,8 +27,8 @@
 		</button>
 	{/each}
 	<p class="ml-1">
-		{#if ratingCount > -1}
-			({ratingCount})
+		{#if rating_count > -1}
+			({rating_count})
 		{/if}
 	</p>
 </section>

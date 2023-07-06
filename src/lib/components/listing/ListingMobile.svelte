@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate, listingStates } from '$lib/helper';
+	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import type { SupaUser } from '$lib/types/supa_user';
 	import LikeButton from '$lib/components/widgets/LikeButton.svelte';
@@ -14,7 +14,7 @@
 </script>
 
 <div class="card flex flex-col gap-2 md:hidden">
-	<header class="w-full relative">
+	<header class="relative w-full">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -31,7 +31,7 @@
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
-			<h3 class="text-lg badge variant-ghost">
+			<h3 class="badge variant-ghost text-lg">
 				{listing.price}€
 			</h3>
 		</div>
@@ -40,12 +40,12 @@
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
 		<hr />
-		<div class="w-fit text-sm badge variant-ghost-secondary">
-			{listingStates[listing.condition]}
+		<div class="badge variant-ghost-secondary w-fit text-sm">
+			{LISTING_CONDITIONS[listing.condition]}
 		</div>
 		<hr />
-		<div class="flex flex-col w-full p-4 gap-3">
-			<div class="flex justify-between w-full">
+		<div class="flex w-full flex-col gap-3 p-4">
+			<div class="flex w-full justify-between">
 				<a
 					href="/u/{listing.author_uid}"
 					class="flex gap-3 hover:underline"
@@ -55,7 +55,7 @@
 					<UserCard user={listing.author} showAnonymous={false} />
 				</a>
 				<button
-					class="btn h-fit self-center variant-ghost-success"
+					class="btn variant-ghost-success h-fit self-center"
 					aria-label="contact {listing.author?.username}"
 				>
 					Contact
@@ -66,7 +66,7 @@
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">
-					<button on:click={buy} class="variant-ghost-tertiary btn w-full text-lg" aria-label="buy"
+					<button on:click={buy} class="btn variant-ghost-tertiary w-full text-lg" aria-label="buy"
 						>Buy</button
 					>
 					<LikeButton listing_uid={listing.uid} />

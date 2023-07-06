@@ -9,29 +9,29 @@
 
 	export let listing: SupaListing;
 
-	const maxDescriptionLength: number = 30;
+	const MAX_DESCRIPTION_LENGTH: number = 30;
 </script>
 
-<div class="card p-1 md:p-2 h-fit flex break-words">
-	<a href="/l/{listing.uid}" class="flex items-center w-full justify-between group/listing-row">
+<div class="card flex h-fit break-words p-1 md:p-2">
+	<a href="/l/{listing.uid}" class="group/listing-row flex w-full items-center justify-between">
 		<div class="flex items-end gap-1 group-hover/listing-row:underline">
 			<h4 class="h4">
 				{listing.title}
 			</h4>
-			<p class="font-normal hidden md:visible">
-				{listing.description.length > maxDescriptionLength
-					? listing.description.slice(0, maxDescriptionLength) + '...'
+			<p class="hidden font-normal md:visible">
+				{listing.description.length > MAX_DESCRIPTION_LENGTH
+					? listing.description.slice(0, MAX_DESCRIPTION_LENGTH) + '...'
 					: listing.description}
 			</p>
 		</div>
-		<div class="gap-2 hidden md:flex">
+		<div class="hidden gap-2 md:flex">
 			<ConditionBadge condition={listing.condition} />
 		</div>
 		<div class="flex items-center gap-2">
 			<p class="italic opacity-70">
 				{formatDate(listing.createdAt || new Date().getTime())}
 			</p>
-			<div class="badge italic variant-ghost text-base">
+			<div class="badge variant-ghost text-base italic">
 				{listing.price} €
 			</div>
 			<!-- edit & delete - only visible to author & admins -->
@@ -43,7 +43,7 @@
 		</div>
 	</a>
 	<div
-		class="flex self-end gap-2"
+		class="flex gap-2 self-end"
 		class:hidden={$supaUserStore &&
 			$supaUserStore.uid !== listing.author_uid &&
 			$supaUserStore?.role < 8}

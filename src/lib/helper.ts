@@ -10,11 +10,11 @@ export function formatDate(milliseconds: number): string {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  const formattedDate = `${month} ${day} ${hours
+  const formatted_date = `${month} ${day} ${hours
     .toString()
     .padStart(2, "0")}h${minutes.toString().padStart(2, "0")}`;
 
-  return formattedDate;
+  return formatted_date;
 }
 
 export function warn(message: string, autohide = false) {
@@ -41,7 +41,7 @@ export function info(message: string, autohide = true) {
   });
 }
 
-export const listingStates = [
+export const LISTING_CONDITIONS = [
   "New",
   "Very good condition",
   "Good condition",

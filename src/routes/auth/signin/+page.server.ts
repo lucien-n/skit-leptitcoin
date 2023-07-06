@@ -2,10 +2,10 @@ import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
 	default: async ({ request, locals: { supabase } }) => {
-		const formData = await request.formData();
+		const form_data = await request.formData();
 
-		const email: string = formData.get('email')?.toString() || '';
-		const password: string = formData.get('password')?.toString() || '';
+		const email: string = form_data.get('email')?.toString() || '';
+		const password: string = form_data.get('password')?.toString() || '';
 
 		if (!email || email === '') {
 			return fail(400, { password, message: 'Please fill out all fields' });

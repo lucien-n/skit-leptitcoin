@@ -2,11 +2,11 @@ import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 
 export const actions: Actions = {
   default: async ({ request, locals: { supabase } }) => {
-    const formData = await request.formData();
+    const form_data = await request.formData();
 
-    const email: string = formData.get("email")?.toString() || "";
-    const password: string = formData.get("password")?.toString() || "";
-    const username: string = formData.get("username")?.toString() || "";
+    const email: string = form_data.get("email")?.toString() || "";
+    const password: string = form_data.get("password")?.toString() || "";
+    const username: string = form_data.get("username")?.toString() || "";
 
     if (!email || email === "") {
       return fail(400, { username, password, message: "Missing email" });
