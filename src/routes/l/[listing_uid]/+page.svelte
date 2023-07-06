@@ -3,29 +3,31 @@
 	import ListingDesktopGhost from '$lib/components/listing/ListingDesktopGhost.svelte';
 	import ListingMobile from '$lib/components/listing/ListingMobile.svelte';
 	import { TITLE } from '$lib/helper';
+	import { getListing } from '$lib/supabase';
+	import type { SupaListing } from '$lib/types/supa_listing';
 	import { onMount } from 'svelte';
 
-	export let data: { listing };
+	export let data: { listing_uid: string };
 
-	let { listing } = data;
-	$: ({ listing } = data);
+	let { listing_uid } = data;
+	$: ({ listing_uid } = data);
 
-	let loading = true;
-
-	onMount(() => (loading = false));
-
-	console.log(listing);
+	let get_listing = getListing(listing_uid);
 </script>
 
 <svelte:head>
 	<title>{TITLE} Listing</title>
 </svelte:head>
 
-{#if !listing}
+{#await get_listing}
 	<ListingDesktopGhost />
-{:else}
-	<section id="listing-{listing.uid}" class="h-full w-full">
-		<ListingMobile {listing} />
-		<ListingDesktop {listing} />
-	</section>
-{/if}
+{:then listing}
+	{#if listing}
+		<section id="listing-{listing.uid}" class="h-full w-full">
+			<ListingMobile {listing} />
+			<ListingDesktop {listing} />
+		</section>
+	{:else}
+		<h2 class="h2 flex h-full w-full items-center justify-center">Listing not found</h2>
+	{/if}
+{/await}
