@@ -33,19 +33,20 @@
 		<AppBar padding="p-0 py-4 md:p-2">
 			<svelte:fragment slot="lead">
 				<a href="/#main" aria-label="skip to content" class="absolute -top-40 focus:top-0">
-					<div class="flex flex-row items-center md:gap-2">
-						<button class="btn btn-sm md:hidden" aria-label="toggle menu" on:click={openDrawer}>
-							<span>
-								<HamburgerSvg />
-							</span>
-						</button>
-						<a href="/" class="hidden items-center gap-1 md:flex" aria-label="homepage">
-							<HomeSvg />
-							<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
-						</a>
-					</div>
-				</a></svelte:fragment
-			>
+					skip to content
+				</a>
+				<div class="flex flex-row items-center md:gap-2">
+					<button class="btn btn-sm md:hidden" aria-label="toggle menu" on:click={openDrawer}>
+						<span>
+							<HamburgerSvg />
+						</span>
+					</button>
+					<a href="/" class="hidden items-center gap-1 md:flex" aria-label="homepage">
+						<HomeSvg />
+						<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
+					</a>
+				</div>
+			</svelte:fragment>
 
 			<SearchDesktop />
 			<SearchMobile />
