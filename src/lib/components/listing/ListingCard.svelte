@@ -7,8 +7,6 @@
 	import { fade } from 'svelte/transition';
 
 	export let listing: SupaListing;
-	export let tab_index: number;
-	tab_index += 1;
 </script>
 
 <div in:fade={{ duration: 100, delay: 100 }} class="card relative flex h-full w-full flex-col">
@@ -22,17 +20,16 @@
 		/>
 		<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
 			{#if listing.author_uid === $userStore?.id}
-				<EditButton listing_uid={listing.uid} index={tab_index + 0.1} />
+				<EditButton listing_uid={listing.uid} />
 			{/if}
 			{#if $userStore && listing.author_uid !== $userStore.id}
-				<LikeButton listing_uid={listing.uid} index={tab_index + 0.2} />
+				<LikeButton listing_uid={listing.uid} />
 			{/if}
 		</div>
 	</header>
 	<a
 		href="/l/{listing.uid}"
 		id="listing-{listing.uid}"
-		tabindex={tab_index}
 		class="group/listing-card flex h-full flex-col justify-between"
 		aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
 	>

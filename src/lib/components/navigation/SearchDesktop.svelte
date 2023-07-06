@@ -23,12 +23,9 @@
 
 <svelte:window on:keydown={handleKeyPress} />
 
-<div id="search" class="w-full xl:w-4/5 mx-auto hidden md:flex">
+<div id="search-desktop" class="mx-auto hidden w-full md:flex xl:w-4/5">
 	<!-- Search fields -->
-	<div
-		id="search-input-field"
-		class="input-group input-group-divider grid-cols-9 lg:grid-cols-7"
-	>
+	<div id="search-input-field" class="input-group input-group-divider grid-cols-9 lg:grid-cols-7">
 		<!-- svelte-ignore a11y-autofocus -->
 		<section class="col-span-5 flex w-full">
 			<div class="input-group-shim">
@@ -42,10 +39,9 @@
 				aria-label="search query"
 				bind:this={searchInputElement}
 				bind:value={$searchStore.search}
-				tabindex={1.1}
 			/>
 		</section>
-		<section class="col-span-2 lg:col-span-1 flex w-full">
+		<section class="col-span-2 flex w-full lg:col-span-1">
 			<div class="input-group-shim">
 				<label for="minimum-price">Min</label>
 			</div>
@@ -56,10 +52,9 @@
 				aria-label="search min price"
 				placeholder="Min €"
 				class="w-full"
-				tabindex={1.2}
 			/>
 		</section>
-		<section class="col-span-2 lg:col-span-1 flex w-full">
+		<section class="col-span-2 flex w-full lg:col-span-1">
 			<div class="input-group-shim">
 				<label for="maximum-price">Max</label>
 			</div>
@@ -70,17 +65,11 @@
 				aria-label="search max price"
 				placeholder="Max €"
 				class="w-full"
-				tabindex={1.3}
 			/>
 		</section>
 	</div>
 	<!-- Execute Search Button -->
-	<button
-		class="btn px-3"
-		on:click={executeSearch}
-		aria-label="execute search"
-		tabindex={1.4}
-	>
+	<button class="btn px-3" on:click={executeSearch} aria-label="execute search">
 		<SearchSvg />
 	</button>
 </div>

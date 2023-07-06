@@ -48,7 +48,7 @@
 			{/each}
 		{:then listings}
 			{#each listings as listing, index}
-				<ListingCard {listing} tab_index={index} />
+				<ListingCard {listing} />
 			{/each}
 		{/await}
 	</section>

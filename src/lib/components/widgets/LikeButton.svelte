@@ -7,7 +7,6 @@
 	import HeartSvg from '$lib/components/svgs/HeartSvg.svelte';
 
 	export let listing_uid: string;
-	export let index: number = 1;
 	let liked = false;
 
 	const unsubscribe = userStore.subscribe(async (user) => {
@@ -37,7 +36,6 @@
 	on:click|stopPropagation={toggleLike}
 	class="btn variant-glass-secondary aspect-square p-2"
 	aria-label={liked ? 'dislike' : 'like'}
-	tabindex={index}
 >
 	{#if liked}
 		<HeartFillSvg />

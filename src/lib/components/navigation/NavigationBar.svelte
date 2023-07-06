@@ -32,29 +32,20 @@
 	<nav id="navigation-bar">
 		<AppBar padding="p-0 py-4 md:p-2">
 			<svelte:fragment slot="lead">
-				<a
-					href="/#main"
-					aria-label="skip to content"
-					class="absolute -top-40 focus:top-0"
-					tabindex={1.01}>skip to content</a
-				>
-				<div class="flex flex-row items-center md:gap-2">
-					<button class="btn btn-sm md:hidden" on:click={openDrawer}>
-						<span>
-							<HamburgerSvg />
-						</span>
-					</button>
-					<a
-						href="/"
-						class="hidden items-center gap-1 md:flex"
-						aria-label="homepage"
-						tabindex={1.02}
-					>
-						<HomeSvg />
-						<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
-					</a>
-				</div>
-			</svelte:fragment>
+				<a href="/#main" aria-label="skip to content" class="absolute -top-40 focus:top-0">
+					<div class="flex flex-row items-center md:gap-2">
+						<button class="btn btn-sm md:hidden" aria-label="toggle menu" on:click={openDrawer}>
+							<span>
+								<HamburgerSvg />
+							</span>
+						</button>
+						<a href="/" class="hidden items-center gap-1 md:flex" aria-label="homepage">
+							<HomeSvg />
+							<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
+						</a>
+					</div>
+				</a></svelte:fragment
+			>
 
 			<SearchDesktop />
 			<SearchMobile />
@@ -63,12 +54,7 @@
 				<div class="flex w-full gap-2">
 					<div class="hidden flex-row items-center gap-3 md:flex">
 						{#if $userStore}
-							<a
-								href="/new"
-								class="flex flex-col items-center"
-								aria-label="new listing"
-								tabindex={1.91}
-							>
+							<a href="/new" class="flex flex-col items-center" aria-label="new listing">
 								<PlusSvg />
 								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>New</p>
 							</a>
@@ -87,12 +73,7 @@
 								{/if}
 							</button>
 						{:else}
-							<a
-								href="/auth/signin"
-								class="flex flex-col items-center"
-								aria-label="sign in"
-								tabindex={1.91}
-							>
+							<a href="/auth/signin" class="flex flex-col items-center" aria-label="sign in">
 								<LogInSvg />
 								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>Sign In</p>
 							</a>

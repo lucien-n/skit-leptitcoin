@@ -3,7 +3,6 @@
 	import CheckSvg from '$lib/components/svgs/CheckSvg.svelte';
 
 	export let listing_uid: string;
-	export let index: number = 0;
 
 	const dispatch = createEventDispatcher();
 
@@ -13,11 +12,6 @@
 	};
 </script>
 
-<button
-	on:click={validateListing}
-	class="variant-glass-success btn p-2"
-	aria-label="validate"
-	tabindex={index}
->
+<button on:click={validateListing} class="btn variant-glass-success p-2" aria-label="validate">
 	<CheckSvg />
 </button>
