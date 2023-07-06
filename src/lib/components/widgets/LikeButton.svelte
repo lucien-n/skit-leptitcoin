@@ -11,12 +11,15 @@
 	let liked = false;
 
 	const unsubscribe = userStore.subscribe(async (user) => {
-		if (!user) return;
+		if (!user || listing_uid === 'none') return;
 		if (await isListingLikedByUser(listing_uid, user.id)) liked = true;
 	});
+
 	onMount(() => unsubscribe());
 
 	async function toggleLike() {
+		if (listing_uid === 'none') return;
+
 		if (!$userStore) {
 			toastStore.trigger({
 				message: 'You must be signed in',

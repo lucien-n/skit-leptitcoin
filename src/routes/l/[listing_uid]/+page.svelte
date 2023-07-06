@@ -2,25 +2,24 @@
 	import ListingDesktop from '$lib/components/listing/ListingDesktop.svelte';
 	import ListingDesktopGhost from '$lib/components/listing/ListingDesktopGhost.svelte';
 	import ListingMobile from '$lib/components/listing/ListingMobile.svelte';
+	import ListingMobileGhost from '$lib/components/listing/ListingMobileGhost.svelte';
 	import { TITLE } from '$lib/helper';
 	import { getListing } from '$lib/supabase';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import { onMount } from 'svelte';
 
 	export let data: { listing_uid: string };
 
 	let { listing_uid } = data;
 	$: ({ listing_uid } = data);
-
-	let get_listing = getListing(listing_uid);
 </script>
 
 <svelte:head>
 	<title>{TITLE} Listing</title>
 </svelte:head>
 
-{#await get_listing}
+{#await getListing(listing_uid)}
 	<ListingDesktopGhost />
+	<ListingMobileGhost />
 {:then listing}
 	{#if listing}
 		<section id="listing-{listing.uid}" class="h-full w-full">

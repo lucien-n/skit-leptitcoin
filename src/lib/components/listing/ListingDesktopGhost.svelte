@@ -1,5 +1,6 @@
 <script>
 	import LikeButton from '$lib/components/widgets/LikeButton.svelte';
+	import UserCardGhost from '../user/UserCardGhost.svelte';
 </script>
 
 <div class="card m-2 hidden flex-col gap-2 md:flex lg:mx-auto lg:w-[80%] xl:w-[70%]">
@@ -9,13 +10,7 @@
 		</div>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
 			<div class="flex w-full justify-between">
-				<div class="flex gap-3 hover:underline">
-					<div class="placeholder-circle w-12 animate-pulse" />
-					<div class="flex animate-pulse flex-col gap-2">
-						<div class="placeholder w-28 self-center" />
-						<div class="placeholder w-12" />
-					</div>
-				</div>
+				<UserCardGhost />
 				<button class="btn variant-ghost-success h-12 self-center"
 					><div class="placeholder variant-glass w-24 animate-pulse" /></button
 				>
