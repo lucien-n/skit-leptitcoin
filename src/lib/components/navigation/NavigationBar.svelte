@@ -10,7 +10,7 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import LayoutSvg from '../svgs/LayoutSvg.svelte';
 
-	const hideActionText = false;
+	const HIDE_ACTION_TEXT = false;
 
 	function openDrawer(): void {
 		drawerStore.open();
@@ -46,12 +46,12 @@
 					</button>
 					<a
 						href="/"
-						class="items-center gap-1 hidden md:flex"
+						class="hidden items-center gap-1 md:flex"
 						aria-label="homepage"
 						tabindex={1.02}
 					>
 						<HomeSvg />
-						<h4 class="h4" class:hidden={hideActionText}>LePtitCoin</h4>
+						<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
 					</a>
 				</div>
 			</svelte:fragment>
@@ -60,8 +60,8 @@
 			<SearchMobile />
 
 			<svelte:fragment slot="trail">
-				<div class="flex gap-2 w-full">
-					<div class="hidden md:flex flex-row items-center gap-3">
+				<div class="flex w-full gap-2">
+					<div class="hidden flex-row items-center gap-3 md:flex">
 						{#if $userStore}
 							<a
 								href="/new"
@@ -70,7 +70,7 @@
 								tabindex={1.91}
 							>
 								<PlusSvg />
-								<p class="text-sm" class:hidden={hideActionText}>New</p>
+								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>New</p>
 							</a>
 							{#if $supaUserStore?.role && $supaUserStore.role % 8 === 0}
 								<a href="/admin/dashboard" class="flex flex-col items-center">
@@ -83,7 +83,7 @@
 								{#if $supaUserStore}
 									<p class="text-sm">{$supaUserStore.username}</p>
 								{:else}
-									<div class="placeholder animate-bounce mt-1 h-2 w-8 variant-ghost-primary" />
+									<div class="placeholder variant-ghost-primary mt-1 h-2 w-8 animate-bounce" />
 								{/if}
 							</button>
 						{:else}
@@ -94,7 +94,7 @@
 								tabindex={1.91}
 							>
 								<LogInSvg />
-								<p class="text-sm" class:hidden={hideActionText}>Sign In</p>
+								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>Sign In</p>
 							</a>
 						{/if}
 					</div>

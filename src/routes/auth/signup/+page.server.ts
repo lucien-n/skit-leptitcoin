@@ -33,7 +33,7 @@ export const actions: Actions = {
       if (error)
         return fail(400, { username, email, password, message: error.message })
     } catch (e) {
-      throw error(500, { message: "Internal server error" });
+      throw error(500, { message: "Internal Server Error" });
     }
 
     throw redirect(303, "/");
