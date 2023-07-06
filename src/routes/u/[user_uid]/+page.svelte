@@ -21,11 +21,15 @@
 
 <svelte:head>
 	<title>{TITLE} User - {user.username}</title>
+	<meta
+		name="description"
+		content="{user.username}'s profile, listings, rating, profile picture."
+	/>
 </svelte:head>
 
 <section
 	id="user-profile-{user.uid}"
-	class="md:w-[70%] h-full flex flex-col md:m-4 md:mx-auto gap-4"
+	class="flex h-full flex-col gap-4 md:m-4 md:mx-auto md:w-[70%]"
 >
 	<UserCard {user} {anonymous} />
 	<section id="user-listings">

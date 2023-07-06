@@ -22,6 +22,10 @@
 
 <svelte:head>
 	<title>{TITLE} New</title>
+	<meta
+		name="description"
+		content="Create a new listing of any category. Your listing will need to be validated by a moderator before being public."
+	/>
 </svelte:head>
 <div class="flex h-full w-full justify-center md:items-center">
 	<form

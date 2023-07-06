@@ -39,7 +39,14 @@
 	});
 </script>
 
-<svelte:head><title>{TITLE}</title></svelte:head>
+<svelte:head>
+	<title>{TITLE}</title>
+	<meta
+		name="description"
+		content="Find and sell your goods. Vehicles, housing, recreational, multimedia, find anything you need, sell everything you don't."
+	/>
+</svelte:head>
+
 <main id="main" class="container mx-auto mt-10 flex h-full">
 	<section id="listings" class="grid h-fit w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 		{#await getListings}

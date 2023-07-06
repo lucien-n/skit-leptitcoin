@@ -1,19 +1,20 @@
 <script lang="ts">
-  import { TITLE } from "$lib/helper";
-  import type { SupaListing } from "$lib/types/supa_listing";
+	import { TITLE } from '$lib/helper';
+	import type { SupaListing } from '$lib/types/supa_listing';
 
-  export let data: { listing: SupaListing };
+	export let data: { listing: SupaListing };
 
-  let { listing } = data;
-  $: ({ listing } = data);
+	let { listing } = data;
+	$: ({ listing } = data);
 </script>
 
 <svelte:head>
-  <title>{TITLE} Edit "{listing.title}"</title>
+	<title>{TITLE} Edit "{listing.title}"</title>
+	<meta name="description" content="Edit a listing, only for the listing author." />
 </svelte:head>
 
-<div class="w-full h-full flex items-center justify-center">
-  <h1>
-    {listing.title}
-  </h1>
+<div class="flex h-full w-full items-center justify-center">
+	<h1>
+		{listing.title}
+	</h1>
 </div>

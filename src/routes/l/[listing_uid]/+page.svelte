@@ -15,6 +15,10 @@
 
 <svelte:head>
 	<title>{TITLE} Listing</title>
+	<meta
+		name="description"
+		content="See a particular listing. More information about it and it's author."
+	/>
 </svelte:head>
 
 {#await getListing(listing_uid)}

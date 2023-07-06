@@ -21,7 +21,12 @@
 
 <svelte:head>
 	<title>{TITLE} Sign In</title>
+	<meta
+		name="description"
+		content="SignIn to LePtitCoin to see your published and liked listings."
+	/>
 </svelte:head>
+
 <section id="signin" class="flex h-full w-full justify-center md:items-center">
 	<form
 		action="/auth/signin"

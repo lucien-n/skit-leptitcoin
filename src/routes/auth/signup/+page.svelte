@@ -21,7 +21,12 @@
 
 <svelte:head>
 	<title>{TITLE} Sign Up</title>
+	<meta
+		name="description"
+		content="SignUp on LePtitCoin in a few clicks. You will then be able to create, like and edit listings."
+	/>
 </svelte:head>
+
 <section id="signup" class="flex h-full w-full items-center justify-center self-center">
 	<form
 		action="/auth/signup"
