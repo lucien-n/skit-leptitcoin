@@ -18,7 +18,7 @@
 
 <section id="rating" class="flex">
 	{#each { length: 5 } as _, i}
-		<button on:click={() => rate(i)}>
+		<button on:click={() => rate(i)} aria-label="rate {i}">
 			{#if rating > i}
 				<StarFilledSvg />
 			{:else}
