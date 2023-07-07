@@ -1,5 +1,5 @@
 <script>
-	import LikeButton from '$lib/components/widgets/LikeButton.svelte';
+	import LikeButton from '$lib/components/widgets/LikeListingButton.svelte';
 	import UserCard from '../user/UserCard.svelte';
 	import UserCardGhost from '../user/UserCardGhost.svelte';
 </script>

@@ -2,10 +2,10 @@
 	import { formatDate } from '$lib/helper';
 	import { supaUserStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import DeleteButton from '$lib/components/widgets/DeleteButton.svelte';
-	import EditButton from '$lib/components/widgets/EditButton.svelte';
 	import ConditionBadge from '$lib/components/listing/ConditionBadge.svelte';
-	import ValidateButton from '../widgets/ValidateButton.svelte';
+	import DeleteListingButton from '$lib/components/widgets/DeleteListingButton.svelte';
+	import EditListingButton from '$lib/components/widgets/EditListingButton.svelte';
+	import ValidateListingButton from '../widgets/ValidateButton.svelte';
 
 	export let listing: SupaListing;
 
@@ -48,15 +48,15 @@
 			$supaUserStore.uid !== listing.author_uid &&
 			$supaUserStore?.role < 8}
 	>
-		<EditButton listing_uid={listing.uid} />
-		<DeleteButton
+		<EditListingButton listing_uid={listing.uid} />
+		<DeleteListingButton
 			listing_uid={listing.uid}
 			on:click={() => {
 				// window.location.href = window.location.href;
 			}}
 		/>
 		{#if !listing.isValidated && $supaUserStore && $supaUserStore?.role >= 8}
-			<ValidateButton listing_uid={listing.uid} />
+			<ValidateListingButton listing_uid={listing.uid} />
 		{/if}
 	</div>
 </div>

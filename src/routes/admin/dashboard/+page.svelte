@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import ListingRow from '$lib/components/listing/ListingRow.svelte';
 	import UserCard from '$lib/components/user/UserCard.svelte';
+	import UserCardAdmin from '$lib/components/user/UserCardAdmin.svelte';
 	import { TITLE } from '$lib/helper';
 	import { supaUserStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
@@ -50,7 +51,7 @@
 		{:else if users}
 			<section id="users" class="grid gap-4 md:grid-cols-3 xl:grid-cols-4">
 				{#each users as user}
-					<UserCard {user} />
+					<UserCardAdmin {user} />
 				{/each}
 			</section>
 		{/if}

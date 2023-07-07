@@ -9,8 +9,6 @@
 	stroke-width="1.5"
 	viewBox="0 0 24 24"
 	width="24"
-	style="color:var(--geist-foreground)"
-	><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" /><path d="M10 17l5-5-5-5" /><path
-		d="M15 12H3"
-	/></svg
+	style="color:var(--geist-foreground);width:24px;height:24px"
+	><circle cx="12" cy="12" r="10" /><path d="M4.93 4.93l14.14 14.14" /></svg
 >

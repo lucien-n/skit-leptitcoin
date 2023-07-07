@@ -5,7 +5,6 @@
 	import ListingMobileGhost from '$lib/components/listing/ListingMobileGhost.svelte';
 	import { TITLE } from '$lib/helper';
 	import { getListing } from '$lib/supabase';
-	import type { SupaListing } from '$lib/types/supa_listing';
 
 	export let data: { listing_uid: string };
 
