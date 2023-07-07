@@ -1,23 +1,72 @@
 <script lang="ts">
 	import type { SupaUser } from '$lib/types/supa_user';
-	import { Avatar } from '@skeletonlabs/skeleton';
+	import { Avatar, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import TrashSvg from '../svgs/TrashSvg.svelte';
 	import SlashSvg from '../svgs/SlashSvg.svelte';
+	import { successToast, warnToast } from '$lib/helper';
 
 	export let user: SupaUser;
 
-	function disableUser() {
-		fetch(`/admin/delete/user/${user.uid}`);
+	const modal: ModalSettings = {
+		// Provide arbitrary classes to the backdrop and modal elements:
+		backdropClasses: '!bg-green-500',
+		modalClasses: '!bg-red-500',
+		type: 'confirm',
+
+		// Provide arbitrary metadata to your modal instance:
+		meta: { foo: 'bar', fizz: 'buzz' }
+	};
+
+	async function disableUser() {
+		const confirm = await new Promise<boolean>((resolve) => {
+			modalStore.trigger({
+				type: 'confirm',
+				title: 'Please Confirm',
+				body: `Disable user <u>${user.username}</u>?<br>This action is <strong>reversible</strong>`,
+				response: (r: boolean) => {
+					resolve(r);
+				}
+			});
+		});
+		if (!confirm) return;
+		const { status, body } = await fetch(`/admin/user/disable/${user.uid}`);
+
+		console.log(body);
+
+		if (status === 200) {
+			successToast(`User <u>${user.username}</u> disabled`);
+		} else {
+			warnToast(`Error while disabling user <u>${user.username}</u>`);
+		}
 	}
 
-	function deleteUser() {
-		fetch(`/admin/delete/user/${user.uid}`);
+	async function deleteUser() {
+		const confirm = await new Promise<boolean>((resolve) => {
+			modalStore.trigger({
+				type: 'confirm',
+				title: 'Please Confirm',
+				body: `Delete user <u>${user.username}</u>?<br>This action is <strong>irreversible</strong>`,
+				response: (r: boolean) => {
+					resolve(r);
+				}
+			});
+		});
+		if (!confirm) return;
+		const { status, body } = await fetch(`/admin/user/delete/${user.uid}`);
+
+		console.log(body);
+
+		if (status === 200) {
+			successToast(`User <u>${user.username}</u> deleted`);
+		} else {
+			warnToast(`Error while deleting user <u>${user.username}</u>`);
+		}
 	}
 </script>
 
 {#if user}
 	<div class="group card flex h-fit w-full flex-row items-center justify-between gap-4 p-2">
-		<div class="flex flex-row gap-4 m-1">
+		<div class="m-1 flex flex-row gap-4">
 			<Avatar initials={user.username[0]} />
 			<div>
 				<a href="/u/{user.uid}" class="h3 hover:underline">

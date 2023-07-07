@@ -17,15 +17,15 @@ export function formatDate(milliseconds: number): string {
   return formatted_date;
 }
 
-export function warn(message: string, autohide = false) {
+export function warnToast(message: string, autohide = false) {
   toastStore.trigger({
     message: message,
-    background: "variant-glass-warn",
+    background: "variant-glass-warning",
     autohide: autohide,
   });
 }
 
-export function success(message: string, autohide = true) {
+export function successToast(message: string, autohide = true) {
   toastStore.trigger({
     message: message,
     background: "variant-glass-success",
@@ -33,7 +33,7 @@ export function success(message: string, autohide = true) {
   });
 }
 
-export function info(message: string, autohide = true) {
+export function infoToast(message: string, autohide = true) {
   toastStore.trigger({
     message: message,
     background: "variant-glass-info",

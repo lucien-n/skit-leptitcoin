@@ -4,25 +4,21 @@ export const GET: RequestHandler = async ({
 	params,
 	locals: { supabase, isUserAllowed, roles, currentUser }
 }) => {
-	const listing_uid = params.listing_uid;
-	if (!listing_uid) throw error(422, { message: 'Missing listing_uid' });
+	const user_uid = params.user_uid;
+	if (!user_uid) throw error(422, { message: 'Missing user_uid' });
 
 	const is_allowed = await isUserAllowed(roles.ADMIN);
 	if (!is_allowed) throw error(422, { message: 'Insuficient permission' });
 
 	const current_user_uid = currentUser?.id;
+	if (!current_user_uid) throw error(500, { message: 'Internal server error' });
 
 	try {
-		const { error } = await supabase
-			.from('listings')
-			.upsert({
-				uid: listing_uid,
-				is_validated: 1,
-				validated_at: new Date(),
-				validated_by: current_user_uid
-			})
-			.match({ uid: listing_uid });
-		if (error) console.error('Error while validating "', listing_uid, '": ', error);
+		const { error: err } = await supabase
+			.from('profiles')
+			.upsert({ restricted: true, restricted_by: current_user_uid, restricted_at: '' })
+			.eq('uid', user_uid + 'i');
+		if (err) throw error(404, { message: err.message });
 	} catch (e) {
 		console.warn(e);
 	}
