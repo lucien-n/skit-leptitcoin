@@ -48,13 +48,13 @@
 </svelte:head>
 
 <main id="main" class="container mx-auto mt-10 flex h-full">
-	<section id="listings" class="grid h-fit w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+	<section id="listings" class="mx-auto flex h-fit w-full flex-col gap-8 lg:w-[70%]">
 		{#await getListings}
 			{#each { length: 6 } as _}
 				<ListingCardGhost />
 			{/each}
 		{:then listings}
-			{#each listings as listing, index}
+			{#each listings as listing}
 				<ListingCard {listing} />
 			{/each}
 		{/await}

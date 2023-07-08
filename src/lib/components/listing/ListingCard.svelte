@@ -9,54 +9,55 @@
 	export let listing: SupaListing;
 </script>
 
-<div in:fade={{ duration: 100, delay: 100 }} class="card relative flex h-full w-full flex-col">
-	<header class="relative z-30 h-2/3">
+<div in:fade={{ duration: 100, delay: 100 }} class="card relative flex h-64 w-full">
+	<header class="relative z-30 h-full w-1/3">
 		<img
 			src={listing.picture
 				? listing.picture
 				: 'https://placehold.co/30x20/000000/FFFFFF?text=' + listing.title.split(' ')[0]}
 			alt="listing"
-			class="h-full w-full rounded-t-[4px] object-cover"
+			class="aspect-[4/5] h-full w-full rounded-l-[4px] border border-r-0 border-b-surface-500 border-l-surface-500 border-t-surface-500 object-cover"
 		/>
-		<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
-			{#if listing.author_uid === $userStore?.id}
-				<EditButton listing_uid={listing.uid} />
-			{/if}
-			{#if $userStore && listing.author_uid !== $userStore.id}
-				<LikeButton listing_uid={listing.uid} />
-			{/if}
-		</div>
 	</header>
-	<a
-		href="/l/{listing.uid}"
-		id="listing-{listing.uid}"
-		class="group/listing-card flex h-full flex-col justify-between"
-		aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
-	>
-		<div class="card-header">
-			<div class="flex w-full justify-between">
-				<h3 class="h3 group-hover/listing-card:underline">
-					{listing.title}
-				</h3>
-				<p class="badge variant-ghost text-base italic">
-					{listing.price} €
+	<div class="flex w-full flex-col">
+		<a
+			href="/l/{listing.uid}"
+			id="listing-{listing.uid}"
+			class="group/listing-card flex h-full w-full flex-col justify-between"
+			aria-label="title: {listing.title} category: {listing.category} price: {listing.price}€"
+		>
+			<div class="card-header">
+				<div class="flex w-full justify-between">
+					<h3 class="h3 group-hover/listing-card:underline">
+						{listing.title}
+					</h3>
+					<p class="badge variant-ghost text-base italic">
+						{listing.price} €
+					</p>
+				</div>
+				<p>
+					{listing.description}
 				</p>
 			</div>
-			<p>
-				{listing.description}
-			</p>
-		</div>
-
+		</a>
 		<div class="card-footer">
-			<div class="flex flex-row justify-between italic opacity-70">
-				<p class="">
+			<div class="flex flex-row justify-between font-bold italic opacity-70">
+				<p class="flex gap-2">
 					{listing.category}
-				</p>
-				<p>
+					<span class="self-center text-[12px]"> ● </span>
 					{listing.author?.username}
+					<span class="self-center text-[12px]"> ● </span>
 					{formatDate(listing.createdAt || new Date().getTime())}
 				</p>
 			</div>
+			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
+				{#if listing.author_uid === $userStore?.id}
+					<EditButton listing_uid={listing.uid} />
+				{/if}
+				{#if $userStore && listing.author_uid !== $userStore.id}
+					<LikeButton listing_uid={listing.uid} />
+				{/if}
+			</div>
 		</div>
-	</a>
+	</div>
 </div>
