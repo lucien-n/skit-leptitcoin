@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
 	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';
+	import CrossCircleSvg from '../svgs/CrossCircleSvg.svelte';
 
 	let searchInputElement: HTMLInputElement;
 
@@ -30,7 +31,7 @@
 		class="input-group input-group-divider grid-cols-12 xl:grid-cols-9 2xl:grid-cols-7"
 	>
 		<!-- svelte-ignore a11y-autofocus -->
-		<section class="col-span-5 flex w-full">
+		<section class="relative col-span-5 flex w-full">
 			<div class="input-group-shim">
 				<label for="search" class="w-fit">Search</label>
 			</div>
@@ -43,6 +44,19 @@
 				bind:this={searchInputElement}
 				bind:value={$searchStore.search}
 			/>
+			{#if $searchStore.category !== undefined && $searchStore.category !== ''}
+				<button
+					class="badge variant-ghost-primary absolute right-1 flex self-center"
+					on:click={() => ($searchStore.category = '')}
+				>
+					<span class="flex h-5 w-5 items-center">
+						<CrossCircleSvg />
+					</span>
+					<p>
+						{$searchStore.category}
+					</p>
+				</button>
+			{/if}
 		</section>
 		<section class="col-span-3 flex w-full xl:col-span-2 2xl:col-span-1">
 			<div class="input-group-shim">
