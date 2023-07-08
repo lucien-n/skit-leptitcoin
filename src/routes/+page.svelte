@@ -50,7 +50,7 @@
 <main id="main" class="container mx-auto mt-10 flex h-full">
 	<section id="listings" class="mx-auto flex h-fit w-full flex-col gap-8 lg:w-[70%]">
 		{#await getListings}
-			{#each { length: 6 } as _}
+			{#each { length: 5 } as _}
 				<ListingCardGhost />
 			{/each}
 		{:then listings}
