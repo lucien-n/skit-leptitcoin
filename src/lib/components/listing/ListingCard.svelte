@@ -2,7 +2,7 @@
 	import EditButton from '$lib/components/widgets/EditListingButton.svelte';
 	import LikeButton from '$lib/components/widgets/LikeListingButton.svelte';
 	import { formatDate } from '$lib/helper';
-	import { userStore } from '$lib/store';
+	import { searchStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
 	import { fade } from 'svelte/transition';
 
@@ -43,11 +43,18 @@
 		<div class="card-footer">
 			<div class="flex flex-row justify-between font-bold italic opacity-70">
 				<p class="flex gap-2">
-					{listing.category}
+					<button
+						on:click={() => ($searchStore.category = listing.category)}
+						class="hover:underline"
+					>
+						{listing.category}
+					</button>
 					<span class="self-center text-[12px]"> ● </span>
-					{listing.author?.username}
+					<a href="/u/{listing.author?.uid}" class="hover:underline">
+						{listing.author?.username}
+					</a>
 					<span class="self-center text-[12px]"> ● </span>
-					{formatDate(listing.createdAt || new Date().getTime())}
+					{formatDate(listing.createdAt?.getTime() || 0)}
 				</p>
 			</div>
 			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">

@@ -14,7 +14,8 @@ export async function getListings(limit = 10, offset = 0, match: any = { is_vali
 			.from('listings')
 			.select('*')
 			.range(offset, limit)
-			.match(match);
+			.match(match)
+			.order('created_at');
 
 		if (!listings) return supa_listings;
 
@@ -72,7 +73,7 @@ export async function getSupaUser(user_uid: string) {
 	}
 }
 
-export async function getSupaUsers(match?: { limit?: number; }) {
+export async function getSupaUsers(match?: { limit?: number }) {
 	try {
 		const { data: users } = await supabase
 			.from('profiles')
@@ -122,7 +123,7 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 	}
 }
 
-async function parseListing(listing_data) {
+async function parseListing(listing_data): Promise<SupaListing> {
 	const author = await getSupaUser(listing_data.author_uid);
 	const parsedListing = {
 		uid: listing_data.uid,
@@ -133,7 +134,7 @@ async function parseListing(listing_data) {
 		category: listing_data.category,
 		picture: listing_data.picture,
 		condition: listing_data.condition,
-		createdAt: listing_data.created_at,
+		createdAt: new Date(listing_data.created_at),
 		author:
 			author ||
 			({

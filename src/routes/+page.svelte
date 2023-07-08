@@ -4,6 +4,7 @@
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types/supa_listing';
+	import { filter } from '@skeletonlabs/skeleton';
 
 	export let data: { listings: Promise<SupaListing[]> };
 
@@ -17,13 +18,20 @@
 
 		const search_regex = new RegExp(`${params.search || ''}`, 'i');
 
-		filtered_listings = (await listings).filter((listing) => {
-			return (
-				search_regex.test(listing.title) &&
-				(params.price_min ? listing.price > params.price_min : true) &&
-				(params.price_max ? listing.price < params.price_max : true)
-			);
-		});
+		filtered_listings = (await listings)
+			.filter((listing) => {
+				return (
+					search_regex.test(listing.title) &&
+					(params.price_min ? listing.price > params.price_min : true) &&
+					(params.price_max ? listing.price < params.price_max : true)
+				);
+			})
+			.sort((a: SupaListing, b: SupaListing) => {
+				if (a.createdAt && b.createdAt) {
+					return b.createdAt.getTime() - a.createdAt.getTime();
+				}
+				return 0;
+			});
 
 		return filtered_listings;
 	}

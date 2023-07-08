@@ -10,7 +10,7 @@ export type SupaListing = {
 	category: string;
 	condition: number;
 	author?: SupaUser;
-	createdAt?: number;
+	createdAt?: Date;
 	isValidated?: boolean;
 	validatedAt?: number;
 	validatedBy?: string;
