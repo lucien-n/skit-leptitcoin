@@ -23,7 +23,8 @@
 				return (
 					search_regex.test(listing.title) &&
 					(params.price_min ? listing.price > params.price_min : true) &&
-					(params.price_max ? listing.price < params.price_max : true)
+					(params.price_max ? listing.price < params.price_max : true) &&
+					(params.category ? listing.category === params.category : true)
 				);
 			})
 			.sort((a: SupaListing, b: SupaListing) => {
