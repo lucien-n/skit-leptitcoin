@@ -23,9 +23,12 @@
 
 <svelte:window on:keydown={handleKeyPress} />
 
-<div id="search-desktop" class="mx-auto hidden w-full md:flex xl:w-4/5">
+<div id="search-desktop" class="mx-auto hidden w-full lg:flex xl:w-4/5">
 	<!-- Search fields -->
-	<div id="search-input-field" class="input-group input-group-divider grid-cols-9 lg:grid-cols-7">
+	<div
+		id="search-input-field"
+		class="input-group input-group-divider grid-cols-12 xl:grid-cols-9 2xl:grid-cols-7"
+	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<section class="col-span-5 flex w-full">
 			<div class="input-group-shim">
@@ -41,7 +44,7 @@
 				bind:value={$searchStore.search}
 			/>
 		</section>
-		<section class="col-span-2 flex w-full lg:col-span-1">
+		<section class="col-span-3 flex w-full xl:col-span-2 2xl:col-span-1">
 			<div class="input-group-shim">
 				<label for="minimum-price">Min</label>
 			</div>
@@ -54,7 +57,7 @@
 				class="w-full"
 			/>
 		</section>
-		<section class="col-span-2 flex w-full lg:col-span-1">
+		<section class="col-span-3 flex w-full xl:col-span-2 2xl:col-span-1">
 			<div class="input-group-shim">
 				<label for="maximum-price">Max</label>
 			</div>

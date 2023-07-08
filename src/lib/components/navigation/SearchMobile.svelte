@@ -19,7 +19,7 @@
 </script>
 
 <!-- svelte-ignore a11y-positive-tabindex -->
-<div id="search-mobile" class="mx-auto flex w-full flex-col md:hidden">
+<div id="search-mobile" class="mx-auto flex w-full flex-col lg:hidden">
 	<div id="search-input-fields" class="flex">
 		<!-- Search fields -->
 		<div class="input-group input-group-divider flex">
