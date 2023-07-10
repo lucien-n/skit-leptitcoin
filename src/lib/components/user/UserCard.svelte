@@ -29,13 +29,20 @@
 		<div class="flex flex-row gap-4">
 			<Avatar initials={user.username[0]} />
 			<div>
-				<h3 class="h3 group-hover:underline">{user.username}</h3>
-				<!-- <Rating rating={user.rating} rating_count={user.ratingCount} rated_user_uid={user.uid} /> -->
-				<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
-					<svelte:fragment slot="empty"><StarSvg /></svelte:fragment>
-					<svelte:fragment slot="half"><StarHalfSvg /></svelte:fragment>
-					<svelte:fragment slot="full"><StarFilledSvg /></svelte:fragment>
-				</Ratings>
+				<a
+					href="/u/{user.uid}"
+					class="flex gap-3"
+					aria-label="{user.username}'s profile - rated {user.rating} out of 5"
+				>
+					<h3 class="h3 hover:underline">{user.username}</h3>
+				</a>
+				<div class="flex gap-2">
+					<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
+						<svelte:fragment slot="empty"><StarSvg /></svelte:fragment>
+						<svelte:fragment slot="half"><StarHalfSvg /></svelte:fragment>
+						<svelte:fragment slot="full"><StarFilledSvg /></svelte:fragment>
+					</Ratings>
+				</div>
 			</div>
 		</div>
 		{#if !anonymous && showAnonymous && $userStore?.id === user.uid}

@@ -141,7 +141,7 @@ async function parseListing(listing_data): Promise<SupaListing> {
 				username: 'unknown',
 				uid: 'unknown',
 				rating: 0.0,
-				ratingCount: 0,
+				rating_count: 0,
 				picture: 'unknown',
 				createdAt: new Date().getTime(),
 				role: -1
@@ -170,7 +170,7 @@ async function parseSupaUser(user_data) {
 		username: user_data.username,
 		picture: user_data.picture,
 		rating: user_data.rating,
-		ratingCount: user_data.rating_count,
+		rating_count: user_data.rating_count,
 		createdAt: user_data.created_at,
 		role: user_data.role
 	} satisfies SupaUser;

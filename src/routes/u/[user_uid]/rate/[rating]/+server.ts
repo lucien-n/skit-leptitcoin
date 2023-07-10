@@ -18,16 +18,10 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
   if (user_uid !== rated_user_uid) throw error(404, { message: "User Not Found" });
 
   try {
-    let resp = await supabase
+    const { error } = await supabase
       .from("ratings")
       .upsert({ rated: rated_user_uid, rater: user.id, value: rating });
-    console.log(resp)
-
-    let resp2 = await supabase
-      .rpc('calculate_average_rating', {
-        profile_uid: rated_user_uid,
-      })
-    console.log(resp2)
+    if (error) console.warn(error)
   } catch (e) {
     console.warn(e);
     throw error(500, { message: "Internal Error" });
