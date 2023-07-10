@@ -35,7 +35,7 @@
 				{listing.price}€
 			</h3>
 		</div>
-		<p>{formatDate(listing.createdAt || 0)}</p>
+		<p>{formatDate(listing.createdAt?.getTime() || 0)}</p>
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
@@ -44,7 +44,7 @@
 			{LISTING_CONDITIONS[listing.condition]}
 		</div>
 		<hr />
-		<div class="flex w-full flex-col gap-3 p-4">
+		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
 					href="/u/{listing.author_uid}"
@@ -52,7 +52,7 @@
 					aria-label="{listing.author?.username}'s profile - rated {listing.author
 						?.rating} out of 5"
 				>
-					<UserCard user={listing.author} showAnonymous={false} />
+					<UserCard user={listing.author} showAnonymous={false} asCard={false} />
 				</a>
 				<button
 					class="btn variant-ghost-success h-fit self-center"
