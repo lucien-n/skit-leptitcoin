@@ -15,6 +15,7 @@
 	let rating = { current: user?.rating, max: 5.0 };
 
 	function iconClick(event: CustomEvent<{ index: number }>): void {
+		if (rating.current === event.detail.index) return;
 		rating.current = event.detail.index;
 		fetch(`/u/${user?.uid}/rate/${rating.current}`);
 	}
