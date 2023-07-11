@@ -34,7 +34,12 @@ def main():
         for import_path in imports:
             f.write(f"   {import_path}\n")
         f.write("\n")
-        f.write("   export let name: string;\n")
+        f.write("   export let name: ")
+        for index, name in enumerate(icons):
+            f.write(f"'{name}'")
+            if not index + 1 == len(icons):
+                f.write(" | ")
+        f.write(";\n")
         f.write("\n")
         f.write("    const ICONS = {\n")
         for name in icons:
