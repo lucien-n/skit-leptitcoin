@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { TITLE, LISTING_CONDITIONS } from '$lib/helper';
+	import { TITLE, LISTING_CONDITIONS, LISTING_CATEGORIES } from '$lib/helper';
 	import { userStore } from '$lib/store';
 	import { RadioGroup, RadioItem, toastStore } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
@@ -81,11 +81,9 @@
 		<section>
 			<label for="category">Category</label>
 			<select id="category" name="category" class="select" value={form?.category || ''}>
-				<option value="vehicles">Vehicles</option>
-				<option value="fashion">Fashion</option>
-				<option value="housing">Housing</option>
-				<option value="multimedia">Multimedia</option>
-				<option value="recreational">Recreational</option>
+				{#each LISTING_CATEGORIES as category}
+					<option value={category.charAt(0).toUpperCase() + category.slice(1)}>{category}</option>
+				{/each}
 			</select>
 		</section>
 		<section class="mx-auto flex">
