@@ -1,8 +1,8 @@
-import { getListings } from "$lib/supabase";
+import { getListings } from '$lib/supabase';
 
 export const load = async () => {
-  const listings = getListings();
-  return {
-    listings: listings,
-  };
+	const listings = getListings();
+	return {
+		listings: listings
+	};
 };

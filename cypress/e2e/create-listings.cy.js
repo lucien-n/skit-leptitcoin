@@ -49,17 +49,18 @@ describe('Create listing', () => {
 		cy.visit('/new');
 
 		const LISTING = LISTINGS[Math.floor(Math.random() * Object.keys(LISTINGS).length)];
-        const PRICE = Math.floor(Math.random() * 10_000)
-		const CATEGORY_INDEX =Math.floor(Math.random() * CATEGORIES.length);
+		const PRICE = Math.floor(Math.random() * 10_000);
+		const CATEGORY_INDEX = Math.floor(Math.random() * CATEGORIES.length);
 		const CONDITION_INDEX = Math.floor(Math.random() * CONDITIONS.length);
 
 		cy.get('#title').type(LISTING.title, { force: true });
 		cy.get('#description').type(LISTING.description, { force: true });
 		cy.get('#price').type(PRICE, { force: true });
 		cy.get('#category').select(CATEGORY_INDEX, { force: true });
-		cy.get(`:nth-child(${CONDITION_INDEX+1}) > [data-testid="radio-item"]`).click({ force: true });
+		cy.get(`:nth-child(${CONDITION_INDEX + 1}) > [data-testid="radio-item"]`).click({
+			force: true
+		});
 
-        cy.get('#submit').click({force:true})
-
+		cy.get('#submit').click({ force: true });
 	});
 });
