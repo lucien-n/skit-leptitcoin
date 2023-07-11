@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import TrashSvg from '../svgs/TrashSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 
@@ -13,5 +13,5 @@
 </script>
 
 <button on:click={deleteListing} class="btn variant-glass-error p-2" aria-label="delete">
-	<TrashSvg />
+	<Icon name="trash" />
 </button>

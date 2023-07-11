@@ -1,12 +1,12 @@
 <script lang="ts">
 	import NavText from '$lib/components/nav/NavLinkText.svelte';
-	import NavIcon from '$lib/components/nav/NavLinkIcon.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 	import NavLink from '$lib/components/nav/NavLink.svelte';
 
 	const N = {
 		Link: NavLink,
 		Text: NavText,
-		Icon: NavIcon
+		Icon: Icon
 	};
 </script>
 

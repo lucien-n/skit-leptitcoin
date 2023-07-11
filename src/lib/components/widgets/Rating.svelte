@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import StarFilledSvg from '$lib/components/svgs/StarFilledSvg.svelte';
-	import StarSvg from '$lib/components/svgs/StarSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let rating: number;
 	export let rated_user_uid: string;
@@ -20,9 +19,9 @@
 	{#each { length: 5 } as _, i}
 		<button on:click={() => rate(i)} aria-label="rate {i}">
 			{#if rating > i}
-				<StarFilledSvg />
+				<Icon name="star_filled" />
 			{:else}
-				<StarSvg />
+				<Icon name="star" />
 			{/if}
 		</button>
 	{/each}

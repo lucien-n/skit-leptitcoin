@@ -3,8 +3,7 @@
 	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import HeartFillSvg from '$lib/components/svgs/HeartFillSvg.svelte';
-	import HeartSvg from '$lib/components/svgs/HeartSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 	let liked = false;
@@ -38,8 +37,8 @@
 	aria-label={liked ? 'dislike' : 'like'}
 >
 	{#if liked}
-		<HeartFillSvg />
+		<Icon name="heart_fill" />
 	{:else}
-		<HeartSvg />
+		<Icon name="heart" />
 	{/if}
 </button>

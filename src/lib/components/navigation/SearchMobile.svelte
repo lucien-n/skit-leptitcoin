@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
 	import CategorySelector from '$lib/components/navigation/CategorySelector.svelte';
-	import ChevronUpSvg from '$lib/components/svgs/ChevronUpSvg.svelte';
-	import ChevronDownSvg from '$lib/components/svgs/ChevronDownSvg.svelte';
-	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let showAdvancedSearchOption: boolean = false;
 
@@ -31,15 +29,15 @@
 				on:click={() => (showAdvancedSearchOption = !showAdvancedSearchOption)}
 			>
 				{#if showAdvancedSearchOption}
-					<ChevronUpSvg />
+					<Icon name="chevron_up" />
 				{:else}
-					<ChevronDownSvg />
+					<Icon name="chevron_down" />
 				{/if}
 			</button>
 		</div>
 		<!-- Execute Search Button -->
 		<button class="btn px-3" on:click={executeSearch} aria-label="execute search">
-			<SearchSvg />
+			<Icon name="search" />
 		</button>
 	</div>
 	<div id="advanced-search-options">

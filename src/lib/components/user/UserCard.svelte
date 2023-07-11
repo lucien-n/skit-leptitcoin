@@ -1,11 +1,8 @@
 <script lang="ts">
-	import Rating from '$lib/components/widgets/Rating.svelte';
 	import { userStore } from '$lib/store';
 	import type { SupaUser } from '$lib/types/supa_user';
 	import { Avatar, Ratings } from '@skeletonlabs/skeleton';
-	import StarFilledSvg from '../svgs/StarFilledSvg.svelte';
-	import StarSvg from '../svgs/StarSvg.svelte';
-	import StarHalfSvg from '../svgs/StarHalfSvg.svelte';
+	import Icon from '../widgets/Icon.svelte';
 
 	export let user: SupaUser | undefined;
 	export let anonymous = true;
@@ -39,9 +36,9 @@
 				</a>
 				<div class="flex gap-2">
 					<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
-						<svelte:fragment slot="empty"><StarSvg /></svelte:fragment>
-						<svelte:fragment slot="half"><StarHalfSvg /></svelte:fragment>
-						<svelte:fragment slot="full"><StarFilledSvg /></svelte:fragment>
+						<svelte:fragment slot="empty"><Icon name="star" /></svelte:fragment>
+						<svelte:fragment slot="half"><Icon name="star_half" /></svelte:fragment>
+						<svelte:fragment slot="full"><Icon name="star_filled" /></svelte:fragment>
 					</Ratings>
 				</div>
 			</div>

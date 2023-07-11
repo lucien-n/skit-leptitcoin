@@ -1,9 +1,9 @@
 <script lang="ts">
-	import EditSvg from '$lib/components/svgs/EditSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 </script>
 
 <a href="/e/{listing_uid}" class="btn variant-glass-tertiary p-2" aria-label="edit">
-	<EditSvg />
+	<Icon name="edit" />
 </a>

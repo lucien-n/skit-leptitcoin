@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import CheckSvg from '$lib/components/svgs/CheckSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 
@@ -13,5 +13,5 @@
 </script>
 
 <button on:click={validateListing} class="btn variant-glass-success p-2" aria-label="validate">
-	<CheckSvg />
+	<Icon name="check" />
 </button>

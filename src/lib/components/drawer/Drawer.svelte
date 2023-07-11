@@ -1,13 +1,13 @@
 <script lang="ts">
 	import DrawerLink from '$lib/components/drawer/DrawerLink.svelte';
-	import DrawerLinkIcon from '$lib/components/drawer/DrawerLinkIcon.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 	import DrawerLinkText from '$lib/components/drawer/DrawerLinkText.svelte';
 	import DrawerLinkGroup from './DrawerLinkGroup.svelte';
 
 	const D = {
 		Group: DrawerLinkGroup,
 		Link: DrawerLink,
-		Icon: DrawerLinkIcon,
+		Icon: Icon,
 		Text: DrawerLinkText
 	};
 </script>

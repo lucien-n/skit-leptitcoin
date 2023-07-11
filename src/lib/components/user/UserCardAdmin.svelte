@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { SupaUser } from '$lib/types/supa_user';
 	import { Avatar, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	import TrashSvg from '../svgs/TrashSvg.svelte';
-	import SlashSvg from '../svgs/SlashSvg.svelte';
 	import { successToast, warnToast } from '$lib/helper';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let user: SupaUser;
 
@@ -79,10 +78,10 @@
 		</div>
 		<div class="flex flex-col gap-1">
 			<button on:click={deleteUser} class="btn variant-glass-error aspect-square p-2">
-				<TrashSvg />
+				<Icon name="trash" />
 			</button>
 			<button on:click={disableUser} class="btn variant-glass-secondary aspect-square p-2">
-				<SlashSvg />
+				<Icon name="slash" />
 			</button>
 		</div>
 	</div>

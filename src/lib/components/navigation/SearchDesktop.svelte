@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import SearchSvg from '$lib/components/svgs/SearchSvg.svelte';
-	import CrossCircleSvg from '../svgs/CrossCircleSvg.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	let searchInputElement: HTMLInputElement;
 
@@ -50,7 +49,7 @@
 					on:click={() => ($searchStore.category = '')}
 				>
 					<span class="flex h-5 w-5 items-center">
-						<CrossCircleSvg />
+						<Icon name="cross_circle" />
 					</span>
 					<p>
 						{$searchStore.category}
@@ -87,6 +86,6 @@
 	</div>
 	<!-- Execute Search Button -->
 	<button class="btn px-3" on:click={executeSearch} aria-label="execute search">
-		<SearchSvg />
+		<Icon name="search" />
 	</button>
 </div>

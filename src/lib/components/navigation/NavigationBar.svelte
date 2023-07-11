@@ -1,16 +1,10 @@
 <script lang="ts">
+	import NavigationLinkGroup from '$lib/components/nav/NavLinkGroup.svelte';
 	import SearchDesktop from '$lib/components/navigation/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/navigation/SearchMobile.svelte';
-	import HamburgerSvg from '$lib/components/svgs/HamburgerSvg.svelte';
-	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
-	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
-	import PlusSvg from '$lib/components/svgs/PlusSvg.svelte';
-	import UserSvg from '$lib/components/svgs/UserSvg.svelte';
+	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
-	import LayoutSvg from '$lib/components/svgs/LayoutSvg.svelte';
-	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
-	import NavigationLinkGroup from '$lib/components/nav/NavLinkGroup.svelte';
 
 	function openNavigationDrawer(): void {
 		drawerStore.open({
@@ -39,12 +33,10 @@
 					<N.Text>skip to content</N.Text>
 				</N.Link>
 				<N.Link on:click={openNavigationDrawer} cc="btn btn-sm md:hidden">
-					<N.Icon>
-						<HamburgerSvg />
-					</N.Icon>
+					<N.Icon name="hamburger" />
 				</N.Link>
 				<N.Link href="/" cc="hidden md:flex">
-					<N.Icon><HomeSvg /></N.Icon>
+					<N.Icon name="home" />
 					<N.Text>LePtitCoin</N.Text>
 				</N.Link>
 			</NavigationLinkGroup>
@@ -58,17 +50,17 @@
 				<NavigationLinkGroup let:N>
 					{#if $userStore}
 						<N.Link href="/new">
-							<N.Icon><PlusSvg /></N.Icon>
+							<N.Icon name="plus" />
 							<N.Text>New</N.Text>
 						</N.Link>
 						{#if $supaUserStore?.role && $supaUserStore.role % 8 === 0}
 							<N.Link href="/admin/dashboard">
-								<N.Icon><LayoutSvg /></N.Icon>
+								<N.Icon name="layout" />
 								<N.Text>Dashboard</N.Text>
 							</N.Link>
 						{/if}
 						<N.Link on:click={openUserDrawer}>
-							<N.Icon><UserSvg /></N.Icon>
+							<N.Icon name="user" />
 							<N.Text>
 								{#if $supaUserStore}
 									{$supaUserStore.username}
@@ -79,7 +71,7 @@
 						</N.Link>
 					{:else}
 						<N.Link href="/auth/signin" aria_label="sign in">
-							<N.Icon><LogInSvg /></N.Icon>
+							<N.Icon name="log_in" />
 							<N.Text>Sign In</N.Text>
 						</N.Link>
 					{/if}
