@@ -95,8 +95,13 @@
 			</div>
 		</section>
 
-		<button type="submit" class="btn variant-ghost-surface mx-auto w-fit" disabled={loading}
-			>{loading ? 'Loading...' : 'Sign Up'}</button
+		<button
+			type="submit"
+			id="submit"
+			class="btn variant-ghost-surface mx-auto w-fit"
+			disabled={loading}
 		>
+			{loading ? 'Loading...' : 'Sign Up'}
+		</button>
 	</form>
 </section>

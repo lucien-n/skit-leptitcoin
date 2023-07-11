@@ -95,7 +95,7 @@
 				{/each}
 			</RadioGroup>
 		</section>
-		<button type="submit" class="btn variant-ghost-surface mx-auto w-fit" disabled={loading}
+		<button type="submit" id="submit" class="btn variant-ghost-surface mx-auto w-fit" disabled={loading}
 			>{loading ? 'Creating... ' : 'Create'}</button
 		>
 	</form>

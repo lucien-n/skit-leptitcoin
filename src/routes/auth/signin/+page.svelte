@@ -92,6 +92,7 @@
 
 		<button
 			type="submit"
+			id="submit"
 			aria-label="sign in"
 			class="btn variant-ghost-surface mx-auto w-fit"
 			disabled={loading}>{loading ? 'Loading... ' : 'Sign In'}</button

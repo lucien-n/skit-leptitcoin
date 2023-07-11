@@ -54,5 +54,7 @@
 	<svelte:fragment slot="header">
 		<NavigationBar />
 	</svelte:fragment>
-	<slot />
+	<div class="h-full w-full">
+		<slot />
+	</div>
 </AppShell>
