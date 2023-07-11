@@ -8,9 +8,9 @@
 	import UserSvg from '$lib/components/svgs/UserSvg.svelte';
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
-	import LayoutSvg from '../svgs/LayoutSvg.svelte';
-
-	const HIDE_ACTION_TEXT = false;
+	import LayoutSvg from '$lib/components/svgs/LayoutSvg.svelte';
+	import NavigationLink from '$lib/components/navigation/NavigationLink.svelte';
+	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
 
 	function openDrawer(): void {
 		drawerStore.open();
@@ -19,69 +19,63 @@
 	const toggleUserDrawer = () => {
 		drawerStore.open({
 			id: 'user',
-			bgDrawer: 'variant-glass',
 			width: 'w-[280px] md:w-[480px]',
-			padding: 'p-4',
-			rounded: 'rounded-xl',
+			rounded: 'rounded-0',
 			position: 'right'
 		});
 	};
 </script>
 
 {#key $userStore}
-	<nav id="navigation-bar">
-		<AppBar padding="p-0 py-4 md:p-2">
-			<svelte:fragment slot="lead">
-				<a href="/#main" aria-label="skip to content" class="absolute -top-40 focus:top-0">
-					skip to content
-				</a>
-				<div class="flex flex-row items-center md:gap-2">
-					<button class="btn btn-sm md:hidden" aria-label="toggle menu" on:click={openDrawer}>
-						<span>
-							<HamburgerSvg />
-						</span>
-					</button>
-					<a href="/" class="hidden items-center gap-1 md:flex" aria-label="homepage">
-						<HomeSvg />
-						<h4 class="h4" class:hidden={HIDE_ACTION_TEXT}>LePtitCoin</h4>
-					</a>
-				</div>
-			</svelte:fragment>
+	<AppBar padding="p-1" spacing="space-y-0">
+		<svelte:fragment slot="lead">
+			<NavigationLink href="#main" aria_label="skip to content" cc="absolute -top-40 focus:top-0">
+				skip to content
+			</NavigationLink>
+			<NavigationLink on:click={openDrawer} cc="btn btn-sm md:hidden" let:N>
+				<N.Icon>
+					<HamburgerSvg />
+				</N.Icon>
+			</NavigationLink>
+			<NavigationLink href="/" cc="hidden md:flex" let:N>
+				<HomeSvg />
+				LePtitCoin
+			</NavigationLink>
+		</svelte:fragment>
 
-			<SearchDesktop />
-			<SearchMobile />
+		<SearchDesktop />
+		<SearchMobile />
 
-			<svelte:fragment slot="trail">
-				<div class="flex w-full gap-2">
-					<div class="hidden flex-row items-center gap-3 md:flex">
-						{#if $userStore}
-							<a href="/new" class="flex flex-col items-center" aria-label="new listing">
-								<PlusSvg />
-								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>New</p>
-							</a>
-							{#if $supaUserStore?.role && $supaUserStore.role % 8 === 0}
-								<a href="/admin/dashboard" class="flex flex-col items-center">
-									<LayoutSvg />
-									<p class="text-sm">Dashboard</p>
-								</a>
+		<svelte:fragment slot="trail">
+			<div class="hidden h-full flex-row items-center md:flex">
+				{#if $userStore}
+					<NavigationLink href="/new" let:N>
+						<PlusSvg />
+						<N.Text>New</N.Text>
+					</NavigationLink>
+					{#if $supaUserStore?.role && $supaUserStore.role % 8 === 0}
+						<NavigationLink href="/admin/dashboard" let:N>
+							<LayoutSvg />
+							<N.Text>Dashboard</N.Text>
+						</NavigationLink>
+					{/if}
+					<NavigationLink on:click={toggleUserDrawer} let:N>
+						<UserSvg />
+						<N.Text>
+							{#if $supaUserStore}
+								{$supaUserStore.username}
+							{:else}
+								<LinePlaceholder w={16} />
 							{/if}
-							<button class="flex flex-col items-center" on:click={toggleUserDrawer}>
-								<UserSvg />
-								{#if $supaUserStore}
-									<p class="text-sm">{$supaUserStore.username}</p>
-								{:else}
-									<div class="placeholder variant-ghost-primary mt-1 h-2 w-8 animate-bounce" />
-								{/if}
-							</button>
-						{:else}
-							<a href="/auth/signin" class="flex flex-col items-center" aria-label="sign in">
-								<LogInSvg />
-								<p class="text-sm" class:hidden={HIDE_ACTION_TEXT}>Sign In</p>
-							</a>
-						{/if}
-					</div>
-				</div>
-			</svelte:fragment>
-		</AppBar>
-	</nav>
+						</N.Text>
+					</NavigationLink>
+				{:else}
+					<NavigationLink href="/auth/signin" aria_label="sign in" let:N>
+						<LogInSvg />
+						<N.Text>Sign In</N.Text>
+					</NavigationLink>
+				{/if}
+			</div>
+		</svelte:fragment>
+	</AppBar>
 {/key}

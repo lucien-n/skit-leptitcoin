@@ -2,7 +2,7 @@
 	import { invalidate } from '$app/navigation';
 	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import UserDrawer from '$lib/components/navigation/UserDrawer.svelte';
+	import UserDrawer from '$lib/components/user/UserDrawer.svelte';
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
