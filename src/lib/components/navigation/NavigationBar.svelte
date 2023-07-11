@@ -9,9 +9,8 @@
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import LayoutSvg from '$lib/components/svgs/LayoutSvg.svelte';
-	import NavigationLink from '$lib/components/navigation/NavigationLink.svelte';
 	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
-	import NavigationLinkGroup from './NavigationLinkGroup.svelte';
+	import NavigationLinkGroup from '$lib/components/nav/NavLinkGroup.svelte';
 
 	function openNavigationDrawer(): void {
 		drawerStore.open({

@@ -1,9 +1,5 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
-	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
-	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import UserDrawer from '$lib/components/user/UserDrawer.svelte';
-	import { supaUserStore, userStore } from '$lib/store';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
@@ -11,6 +7,10 @@
 	import '../app.postcss';
 	import '../dark-theme.postcss';
 	import { getSupaUser } from '$lib/supabase';
+	import { supaUserStore, userStore } from '$lib/store';
+	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
+	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
+	import UserDrawer from '$lib/components/user/UserDrawer.svelte';
 
 	export let data;
 
