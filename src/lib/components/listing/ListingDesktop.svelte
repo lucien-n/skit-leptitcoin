@@ -14,7 +14,7 @@
 </script>
 
 <div class="card m-2 hidden flex-col gap-2 md:flex lg:mx-auto lg:w-[80%] xl:w-[70%]">
-	<header class="flex w-full overflow-hidden">
+	<header class="flex w-full overflow-hidden rounded-tl-[4px]">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -24,14 +24,7 @@
 		/>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
 			<div class="flex w-full justify-between">
-				<a
-					href="/u/{listing.author_uid}"
-					class="flex gap-3"
-					aria-label="{listing.author?.username}'s profile - rated {listing.author
-						?.rating} out of 5"
-				>
-					<UserCard user={listing.author} asCard={false} showAnonymous={false} />
-				</a>
+				<UserCard user={listing.author} asCard={false} showAnonymous={false} />
 				<button
 					class="btn variant-ghost-success h-fit self-center"
 					aria-label="contact {listing.author?.username}"
@@ -60,7 +53,7 @@
 				{listing.price}€
 			</h3>
 		</div>
-		<p>{formatDate(listing.createdAt || 0)}</p>
+		<p>{formatDate(listing.createdAt?.getTime() || 0)}</p>
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
