@@ -1,20 +1,19 @@
 <script lang="ts">
-  import LogOutSvg from "../svgs/LogOutSvg.svelte";
-  import DrawerLink from "$lib/components/drawer/DrawerLink.svelte";
-  import DrawerLinkGroup from "$lib/components/drawer/DrawerLinkGroup.svelte";
-  import { userStore } from "$lib/store";
+	import { userStore } from '$lib/store';
+	import LogOutSvg from '$lib/components/svgs/LogOutSvg.svelte';
+	import Drawer from '$lib/components/drawer/Drawer.svelte';
 </script>
 
-<section class="list-nav h-full w-full p-4 flex flex-col justify-between">
-  <DrawerLinkGroup>
-    <DrawerLink href="/u/{$userStore?.id}">
-      <h4 class="h4">My Profile</h4>
-    </DrawerLink>
-  </DrawerLinkGroup>
-  <DrawerLinkGroup>
-    <DrawerLink href="/auth/signout" reload={true}>
-      <LogOutSvg />
-      <h4 class="h4">Sign Out</h4>
-    </DrawerLink>
-  </DrawerLinkGroup>
-</section>
+<Drawer>
+	<svelte:fragment slot="lead" let:D>
+		<D.Link href="/u/{$userStore?.id}">
+			<D.Text>My Profile</D.Text>
+		</D.Link>
+	</svelte:fragment>
+	<svelte:fragment slot="tail" let:D>
+		<D.Link href="/auth/signout">
+			<D.Icon><LogOutSvg /></D.Icon>
+			<D.Text>Sign Out</D.Text>
+		</D.Link>
+	</svelte:fragment>
+</Drawer>

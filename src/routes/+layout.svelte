@@ -43,10 +43,10 @@
 <Modal />
 
 <Drawer>
-	{#if $drawerStore.id === 'user'}
-		<UserDrawer />
-	{:else}
+	{#if $drawerStore.id === 'navigation'}
 		<NavigationDrawer />
+	{:else if $drawerStore.id === 'user'}
+		<UserDrawer />
 	{/if}
 </Drawer>
 

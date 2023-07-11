@@ -1,36 +1,35 @@
 <script lang="ts">
-	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
 	import { userStore } from '$lib/store';
+	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
 	import LogInSvg from '$lib/components/svgs/LogInSvg.svelte';
 	import LogOutSvg from '$lib/components/svgs/LogInSvg.svelte';
-	import DrawerLink from '$lib/components/drawer/DrawerLink.svelte';
-	import DrawerLinkGroup from '$lib/components/drawer/DrawerLinkGroup.svelte';
-	import UserSvg from '../svgs/UserSvg.svelte';
+	import UserSvg from '$lib/components/svgs/UserSvg.svelte';
+	import Drawer from '$lib/components/drawer/Drawer.svelte';
 </script>
 
-<nav id="navigation-drawer" class="list-nav h-full p-4 flex flex-col justify-between">
-	<DrawerLinkGroup>
-		<DrawerLink href="/">
-			<HomeSvg />
-			<h4 class="h4">LePtitCoin</h4>
-		</DrawerLink>
-	</DrawerLinkGroup>
-	<DrawerLinkGroup>
-		<hr />
+<!-- <nav id="navigation-drawer" class="list-nav flex h-full flex-col justify-between p-4"> -->
+<Drawer>
+	<svelte:fragment slot="lead" let:D>
+		<D.Link href="/">
+			<D.Icon><HomeSvg /></D.Icon>
+			<D.Text>LePtitCoin</D.Text>
+		</D.Link>
+	</svelte:fragment>
+	<svelte:fragment slot="tail" let:D>
 		{#if $userStore}
-			<DrawerLink href="/u/{$userStore.id}">
-				<UserSvg />
-				<h4 class="h4">My Profile</h4>
-			</DrawerLink>
-			<DrawerLink href="/auth/signout">
+			<D.Link href="/u/{$userStore.id}">
+				<D.Icon><UserSvg /></D.Icon>
+				<D.Text>My Profile</D.Text>
+			</D.Link>
+			<D.Link href="/auth/signout">
 				<LogOutSvg />
-				<h4 class="h4">Sign Out</h4>
-			</DrawerLink>
+				<D.Text>Sign Out</D.Text>
+			</D.Link>
 		{:else}
-			<DrawerLink href="/auth/signin">
-				<LogInSvg />
-				<h4 class="h4">Sign In</h4>
-			</DrawerLink>
+			<D.Link href="/auth/signin">
+				<D.Icon><LogInSvg /></D.Icon>
+				<D.Text>Sign In</D.Text>
+			</D.Link>
 		{/if}
-	</DrawerLinkGroup>
-</nav>
+	</svelte:fragment>
+</Drawer>
