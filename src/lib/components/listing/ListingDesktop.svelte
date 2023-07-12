@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
+	import { formatDate } from '$lib/helper';
 	import type { SupaListing } from '$lib/types/supa_listing';
-	import LikeButton from '$lib/components/widgets/LikeListingButton.svelte';
+	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
 	import { userStore } from '$lib/store';
 	import ConditionBadge from './ConditionBadge.svelte';
 	import UserCard from '$lib/components/user/UserCard.svelte';
@@ -23,10 +23,10 @@
 			class="w-2/3 object-cover"
 		/>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
-			<div class="flex w-full justify-between">
+			<div class="flex w-full flex-col justify-between gap-2">
 				<UserCard user={listing.author} asCard={false} showAnonymous={false} />
 				<button
-					class="btn variant-ghost-success h-fit self-center"
+					class="btn variant-ghost-success h-fit w-full self-center"
 					aria-label="contact {listing.author?.username}"
 				>
 					Contact

@@ -1,7 +1,6 @@
 <script>
-	import LikeButton from '$lib/components/widgets/LikeListingButton.svelte';
-	import UserCard from '../user/UserCard.svelte';
-	import UserCardGhost from '../user/UserCardGhost.svelte';
+	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
+	import UserCardGhost from '$lib/components/user/UserCardGhost.svelte';
 </script>
 
 <div class="card flex flex-col gap-2 md:hidden">
@@ -41,22 +40,3 @@
 	</div>
 	<br />
 </div>
-
-<!-- 
-<div class="card flex flex-col gap-2 md:hidden">
-	<div class="card-header flex flex-col gap-3">
-		<div class="flex w-full flex-col gap-3 p-4">
-			{#if $userStore?.id === listing.author_uid}
-				<h3 class="h3 text-center">You are the author of this listing</h3>
-			{:else}
-				<div class="flex w-full gap-3">
-					<button on:click={buy} class="btn variant-ghost-tertiary w-full text-lg" aria-label="buy"
-						>Buy</button
-					>
-					<LikeButton listing_uid={listing.uid} />
-				</div>
-			{/if}
-		</div>
-		<br />
-	</div>
-</div> -->
