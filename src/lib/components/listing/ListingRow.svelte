@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { formatDate } from '$lib/helper';
 	import { supaUserStore, userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types/supa_listing';
+	import type { SupaListing } from '$lib/types';
 	import ConditionBadge from '$lib/components/listing/ConditionBadge.svelte';
-	import DeleteListingButton from '$lib/components/widgets/DeleteListingButton.svelte';
-	import EditListingButton from '$lib/components/widgets/EditListingButton.svelte';
-	import ValidateListingButton from '../widgets/ValidateButton.svelte';
+	import DeleteListingButton from '$lib/components/listing/DeleteListingButton.svelte';
+	import EditListingButton from '$lib/components/listing/EditListingButton.svelte';
+	import ValidateListingButton from '$lib/components/widgets/ValidateButton.svelte';
 
 	export let listing: SupaListing;
 
@@ -29,7 +29,7 @@
 		</div>
 		<div class="flex items-center gap-2">
 			<p class="italic opacity-70">
-				{formatDate(listing.createdAt || new Date().getTime())}
+				{formatDate(listing.createdAt?.getTime() || new Date().getTime())}
 			</p>
 			<div class="badge variant-ghost text-base italic">
 				{listing.price} €

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { userStore } from '$lib/store';
-	import type { SupaUser } from '$lib/types/supa_user';
+	import type { SupaUser } from '$lib/types';
 	import { Avatar, Ratings } from '@skeletonlabs/skeleton';
-	import Icon from '../widgets/Icon.svelte';
+	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let user: SupaUser | undefined;
 	export let anonymous = true;

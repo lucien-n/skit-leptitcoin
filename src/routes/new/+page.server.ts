@@ -1,4 +1,4 @@
-import type { SupaListing } from '$lib/types/supa_listing';
+import type { SupaListing } from '$lib/types';
 import { error, redirect, type Actions, fail } from '@sveltejs/kit';
 import { v4 as uuid } from 'uuid';
 

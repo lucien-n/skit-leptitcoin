@@ -3,7 +3,7 @@
 	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
 	import { formatDate } from '$lib/helper';
 	import { searchStore, userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types/supa_listing';
+	import type { SupaListing } from '$lib/types';
 	import { fade } from 'svelte/transition';
 
 	export let listing: SupaListing;

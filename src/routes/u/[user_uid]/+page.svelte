@@ -3,9 +3,7 @@
 	import ListingRow from '$lib/components/listing/ListingRow.svelte';
 	import UserCard from '$lib/components/user/UserCard.svelte';
 	import { TITLE } from '$lib/helper';
-	import { userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types/supa_listing';
-	import type { SupaUser } from '$lib/types/supa_user';
+	import type { SupaListing, SupaUser } from '$lib/types';
 
 	export let data: {
 		user: SupaUser;

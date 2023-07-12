@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SupaUser } from '$lib/types/supa_user';
+	import type { SupaUser } from '$lib/types';
 	import { Avatar, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { successToast, warnToast } from '$lib/helper';
 	import Icon from '$lib/components/widgets/Icon.svelte';

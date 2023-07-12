@@ -3,8 +3,7 @@
 	import ListingCardGhost from '$lib/components/listing/ListingCardGhost.svelte';
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types/supa_listing';
-	import { filter } from '@skeletonlabs/skeleton';
+	import type { SearchParams, SupaListing } from '$lib/types';
 
 	export let data: { listings: Promise<SupaListing[]> };
 

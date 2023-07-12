@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { TITLE } from '$lib/helper';
-	import type { SupaListing } from '$lib/types/supa_listing';
+	import type { SupaListing } from '$lib/types';
 
 	export let data: { listing: SupaListing };
 
