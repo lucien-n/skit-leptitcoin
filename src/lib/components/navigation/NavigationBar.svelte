@@ -17,13 +17,13 @@
 </script>
 
 {#key $userStore}
-	<AppBar padding="p-1" spacing="space-y-0">
+	<AppBar padding="p-1">
 		<svelte:fragment slot="lead">
 			<NavigationLinkGroup let:N>
 				<N.Link href="#main" aria_label="skip to content" cc="absolute -top-40 focus:top-0">
 					<N.Text>skip to content</N.Text>
 				</N.Link>
-				<N.Link on:click={openNavigationDrawer} cc="btn btn-sm md:hidden">
+				<N.Link on:click={openNavigationDrawer} cc="btn px-1 h-full md:hidden">
 					<N.Icon name="hamburger" />
 				</N.Link>
 				<N.Link href="/" cc="hidden md:flex">

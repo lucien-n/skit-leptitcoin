@@ -31,7 +31,7 @@
 					<h3 class="h3 group-hover/listing-card:underline">
 						{listing.title}
 					</h3>
-					<p class="badge variant-ghost text-base italic">
+					<p class="badge variant-ghost h-fit text-base italic">
 						{listing.price} €
 					</p>
 				</div>

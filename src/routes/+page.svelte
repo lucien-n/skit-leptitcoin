@@ -56,7 +56,7 @@
 </svelte:head>
 
 <main id="main" class="container mx-auto mt-10 flex h-full w-full">
-	<section id="listings" class="mx-auto flex h-fit w-full flex-col gap-8 lg:w-[70%]">
+	<section id="listings" class="mx-auto flex h-fit w-full flex-col gap-8 lg:w-[90%] 2xl:w-[70%]">
 		{#await getListings}
 			{#each { length: 5 } as _}
 				<ListingCardGhost />

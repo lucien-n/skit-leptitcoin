@@ -17,29 +17,29 @@
 </script>
 
 <!-- svelte-ignore a11y-positive-tabindex -->
-<div id="search-mobile" class="mx-auto flex w-full flex-col lg:hidden">
+<div id="search-mobile" class="flex w-full flex-col lg:hidden">
 	<div id="search-input-fields" class="flex">
-		<!-- Search fields -->
-		<div class="input-group input-group-divider flex">
-			<input type="search" placeholder="Search" class="w-full" bind:value={$searchStore.search} />
-			<button
-				type="button"
-				aria-label="toggle advanced search options"
-				class="btn mx-auto"
-				on:click={() => (showAdvancedSearchOption = !showAdvancedSearchOption)}
-			>
-				{#if showAdvancedSearchOption}
-					<Icon name="chevron_up" />
-				{:else}
-					<Icon name="chevron_down" />
-				{/if}
-			</button>
+		<div class="input-group flex justify-between">
+			<input type="search" placeholder="Search" class="w-max" bind:value={$searchStore.search} />
+			<div>
+				<button
+					type="button"
+					aria-label="toggle advanced search options"
+					on:click={() => (showAdvancedSearchOption = !showAdvancedSearchOption)}
+				>
+					{#if showAdvancedSearchOption}
+						<Icon name="chevron_up" />
+					{:else}
+						<Icon name="chevron_down" />
+					{/if}
+				</button>
+				<button on:click={executeSearch} aria-label="execute search">
+					<Icon name="search" />
+				</button>
+			</div>
 		</div>
-		<!-- Execute Search Button -->
-		<button class="btn px-3" on:click={executeSearch} aria-label="execute search">
-			<Icon name="search" />
-		</button>
 	</div>
+
 	<div id="advanced-search-options">
 		{#if showAdvancedSearchOption}
 			<div class="visible mt-4 gap-4 p-2 md:hidden">
@@ -76,15 +76,14 @@
 				<section id="category">
 					<CategorySelector bind:value={$searchStore.category} />
 				</section>
-			</div>
-			<hr />
-			<div class="mt-2 flex w-full items-center justify-center">
-				<button
-					type="button"
-					aria-label="execute search"
-					class="btn variant-ghost-surface"
-					on:click={executeSearch}>Search</button
-				>
+				<div class="mt-2 flex w-full items-center justify-center">
+					<button
+						type="button"
+						aria-label="execute search"
+						class="btn variant-ghost-surface"
+						on:click={executeSearch}>Search</button
+					>
+				</div>
 			</div>
 		{/if}
 	</div>
