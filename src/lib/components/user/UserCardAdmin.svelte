@@ -6,16 +6,6 @@
 
 	export let user: SupaUser;
 
-	const modal: ModalSettings = {
-		// Provide arbitrary classes to the backdrop and modal elements:
-		backdropClasses: '!bg-green-500',
-		modalClasses: '!bg-red-500',
-		type: 'confirm',
-
-		// Provide arbitrary metadata to your modal instance:
-		meta: { foo: 'bar', fizz: 'buzz' }
-	};
-
 	async function disableUser() {
 		const confirm = await new Promise<boolean>((resolve) => {
 			modalStore.trigger({
