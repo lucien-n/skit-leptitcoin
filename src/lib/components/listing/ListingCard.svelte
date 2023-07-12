@@ -41,21 +41,21 @@
 			</div>
 		</a>
 		<div class="card-footer">
-			<div class="flex flex-row justify-between font-bold italic opacity-70">
-				<p class="flex gap-2">
-					<button
-						on:click={() => ($searchStore.category = listing.category)}
-						class="hover:underline"
-					>
-						{listing.category}
-					</button>
-					<span class="self-center text-[12px]"> ● </span>
+			<div class="flex flex-col gap-2 font-bold italic opacity-70 lg:flex-row">
+				<button
+					on:click={() => ($searchStore.category = listing.category)}
+					class="self-start hover:underline"
+				>
+					{listing.category}
+				</button>
+				<span class="hidden self-center text-[8px] not-italic lg:flex"> ● </span>
+				<div class="flex gap-2">
 					<a href="/u/{listing.author?.uid}" class="hover:underline">
 						{listing.author?.username}
 					</a>
-					<span class="self-center text-[12px]"> ● </span>
+					<span class="flex self-center text-[8px] not-italic"> ● </span>
 					{formatDate(listing.createdAt?.getTime() || 0)}
-				</p>
+				</div>
 			</div>
 			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
 				{#if listing.author_uid === $userStore?.id}
