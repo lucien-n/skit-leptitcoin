@@ -3,25 +3,16 @@
 	import SearchDesktop from '$lib/components/navigation/SearchDesktop.svelte';
 	import SearchMobile from '$lib/components/navigation/SearchMobile.svelte';
 	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
+	import { navigation_drawer, user_drawer } from '$lib/drawers';
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 
 	function openNavigationDrawer(): void {
-		drawerStore.open({
-			id: 'navigation',
-			width: 'w-[280px] md:w-[480px]',
-			rounded: 'rounded-0',
-			position: 'left'
-		});
+		drawerStore.open(navigation_drawer);
 	}
 
 	const openUserDrawer = () => {
-		drawerStore.open({
-			id: 'user',
-			width: 'w-[280px] md:w-[480px]',
-			rounded: 'rounded-0',
-			position: 'right'
-		});
+		drawerStore.open(user_drawer);
 	};
 </script>
 
