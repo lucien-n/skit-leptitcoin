@@ -143,7 +143,8 @@ async function parseListing(listing_data): Promise<SupaListing> {
 				rating_count: 0,
 				picture: 'unknown',
 				createdAt: new Date().getTime(),
-				role: -1
+				role: -1,
+				restricted: true
 			} satisfies SupaUser),
 		isValidated: listing_data.is_validated,
 		validatedBy: listing_data.validated_by,
@@ -171,7 +172,8 @@ async function parseSupaUser(user_data) {
 		rating: user_data.rating,
 		rating_count: user_data.rating_count,
 		createdAt: user_data.created_at,
-		role: user_data.role
+		role: user_data.role,
+		restricted: user_data.restricted
 	} satisfies SupaUser;
 }
 

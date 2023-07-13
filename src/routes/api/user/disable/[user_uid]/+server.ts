@@ -16,11 +16,16 @@ export const GET: RequestHandler = async ({
 	try {
 		const { error: err } = await supabase
 			.from('profiles')
-			.upsert({ restricted: true, restricted_by: current_user_uid, restricted_at: '' })
-			.eq('uid', user_uid + 'i');
+			.update({
+				restricted: true,
+				restricted_by: current_user_uid,
+				restricted_at: new Date()
+			})
+			.eq('uid', user_uid);
 		if (err) throw error(404, { message: err.message });
 	} catch (e) {
 		console.warn(e);
+		throw error(500);
 	}
 
 	return new Response();

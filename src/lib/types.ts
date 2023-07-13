@@ -6,6 +6,7 @@ export type SupaUser = {
 	picture: string;
 	createdAt: number;
 	role: number;
+	restricted: boolean;
 };
 
 export type SupaListing = {
