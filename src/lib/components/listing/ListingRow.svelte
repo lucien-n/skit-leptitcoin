@@ -11,7 +11,7 @@
 	const MAX_DESCRIPTION_LENGTH: number = 30;
 </script>
 
-<div class="card flex h-fit break-words p-1 md:p-2">
+<div class="card flex h-fit w-full break-words p-1 md:p-2">
 	<a href="/l/{listing.uid}" class="group/listing-row flex w-full items-center justify-between">
 		<div class="flex items-end gap-1 group-hover/listing-row:underline">
 			<h4 class="h4">
@@ -48,11 +48,6 @@
 			$supaUserStore?.role < 8}
 	>
 		<EditListingButton listing_uid={listing.uid} />
-		<DeleteListingButton
-			listing_uid={listing.uid}
-			on:click={() => {
-				// window.location.href = window.location.href;
-			}}
-		/>
+		<DeleteListingButton listing_uid={listing.uid} />
 	</div>
 </div>

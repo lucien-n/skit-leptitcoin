@@ -18,7 +18,7 @@
 			});
 		});
 		if (!confirm) return;
-		const { status, body } = await fetch(`/admin/user/disable/${user.uid}`);
+		const { status, body } = await fetch(`/api/user/disable/${user.uid}`);
 
 		console.log(body);
 
@@ -41,7 +41,7 @@
 			});
 		});
 		if (!confirm) return;
-		const { status, body } = await fetch(`/admin/user/delete/${user.uid}`);
+		const { status, body } = await fetch(`/api/user/delete/${user.uid}`);
 
 		console.log(body);
 

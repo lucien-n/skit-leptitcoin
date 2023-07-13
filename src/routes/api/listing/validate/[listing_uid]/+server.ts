@@ -1,4 +1,4 @@
-import { error, type RequestHandler } from '@sveltejs/kit';
+import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
@@ -23,6 +23,7 @@ export const GET: RequestHandler = async ({
 			})
 			.match({ uid: listing_uid });
 		if (error) console.error('Error while validating "', listing_uid, '": ', error);
+		else return json(true);
 	} catch (e) {
 		console.warn(e);
 	}

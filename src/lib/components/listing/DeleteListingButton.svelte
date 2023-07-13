@@ -7,8 +7,10 @@
 	const dispatch = createEventDispatcher();
 
 	const deleteListing = () => {
-		fetch(`/d/${listing_uid}`);
 		dispatch('click');
+		fetch(`/api/delete/${listing_uid}`).then((success) => {
+			dispatch('success', { success });
+		});
 	};
 </script>
 

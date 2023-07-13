@@ -14,7 +14,7 @@
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
 		rating.current = event.detail.index;
-		fetch(`/u/${user?.uid}/rate/${rating.current}`);
+		fetch(`/api/user/${user?.uid}/rate/${rating.current}`);
 	}
 </script>
 
