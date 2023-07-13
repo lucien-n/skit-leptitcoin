@@ -1,6 +1,6 @@
 <script>
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
-	import UserCardGhost from '$lib/components/user/UserCardGhost.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
+	import UserCardGhost from '$comp/user/UserCardGhost.svelte';
 </script>
 
 <div class="card flex flex-col gap-2 md:hidden">

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import ListingDesktop from '$lib/components/listing/ListingDesktop.svelte';
-	import ListingDesktopGhost from '$lib/components/listing/ListingDesktopGhost.svelte';
-	import ListingMobile from '$lib/components/listing/ListingMobile.svelte';
-	import ListingMobileGhost from '$lib/components/listing/ListingMobileGhost.svelte';
+	import ListingDesktop from '$comp/listing/ListingDesktop.svelte';
+	import ListingDesktopGhost from '$comp/listing/ListingDesktopGhost.svelte';
+	import ListingMobile from '$comp/listing/ListingMobile.svelte';
+	import ListingMobileGhost from '$comp/listing/ListingMobileGhost.svelte';
 	import { TITLE } from '$lib/helper';
 	import { getListing } from '$lib/supabase';
 

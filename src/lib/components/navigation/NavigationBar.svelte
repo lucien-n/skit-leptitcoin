@@ -1,8 +1,8 @@
 <script lang="ts">
-	import NavigationLinkGroup from '$lib/components/nav/NavLinkGroup.svelte';
-	import SearchDesktop from '$lib/components/navigation/SearchDesktop.svelte';
-	import SearchMobile from '$lib/components/navigation/SearchMobile.svelte';
-	import LinePlaceholder from '$lib/components/widgets/LinePlaceholder.svelte';
+	import NavigationLinkGroup from '$comp/nav/NavLinkGroup.svelte';
+	import SearchDesktop from '$comp/navigation/SearchDesktop.svelte';
+	import SearchMobile from '$comp/navigation/SearchMobile.svelte';
+	import LinePlaceholder from '$comp/widgets/LinePlaceholder.svelte';
 	import { navigation_drawer, user_drawer } from '$lib/drawers';
 	import { supaUserStore, userStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';

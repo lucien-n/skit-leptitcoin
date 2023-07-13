@@ -3,7 +3,7 @@
 	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import Icon from '$lib/components/widgets/Icon.svelte';
+	import Icon from '$comp/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 	let liked = false;

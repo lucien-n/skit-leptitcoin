@@ -2,9 +2,9 @@
 	import { formatDate } from '$lib/helper';
 	import { supaUserStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types';
-	import ConditionBadge from '$lib/components/listing/ConditionBadge.svelte';
-	import DeleteListingButton from '$lib/components/listing/DeleteListingButton.svelte';
-	import EditListingButton from '$lib/components/listing/EditListingButton.svelte';
+	import ConditionBadge from '$comp/listing/ConditionBadge.svelte';
+	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
+	import EditListingButton from '$comp/listing/EditListingButton.svelte';
 
 	export let listing: SupaListing;
 

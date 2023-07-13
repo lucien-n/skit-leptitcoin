@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { searchStore } from '$lib/store';
-	import CategorySelector from '$lib/components/navigation/CategorySelector.svelte';
-	import Icon from '$lib/components/widgets/Icon.svelte';
+	import CategorySelector from '$comp/navigation/CategorySelector.svelte';
+	import Icon from '$comp/widgets/Icon.svelte';
 
 	export let showAdvancedSearchOption: boolean = false;
 

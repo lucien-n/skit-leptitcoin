@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import Icon from '$lib/components/widgets/Icon.svelte';
+	import Icon from '$comp/widgets/Icon.svelte';
 
 	export let rating: number;
 	export let rated_user_uid: string;

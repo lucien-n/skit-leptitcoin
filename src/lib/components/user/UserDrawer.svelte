@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { userStore } from '$lib/store';
-	import Drawer from '$lib/components/drawer/Drawer.svelte';
+	import Drawer from '$comp/drawer/Drawer.svelte';
 </script>
 
 <Drawer>

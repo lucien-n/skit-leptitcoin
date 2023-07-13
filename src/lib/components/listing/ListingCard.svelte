@@ -1,6 +1,6 @@
 <script lang="ts">
-	import EditButton from '$lib/components/listing/EditListingButton.svelte';
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
+	import EditButton from '$comp/listing/EditListingButton.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate } from '$lib/helper';
 	import { searchStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types';

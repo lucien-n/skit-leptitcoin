@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import type { SupaListing } from '$lib/types';
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { userStore } from '$lib/store';
 	import UserCard from '../user/UserCard.svelte';
 

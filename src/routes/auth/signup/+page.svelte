@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { TITLE } from '$lib/helper.js';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import Icon from '$lib/components/widgets/Icon.svelte';
+	import Icon from '$comp/widgets/Icon.svelte';
 
 	export let form;
 

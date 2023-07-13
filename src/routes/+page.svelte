@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ListingCard from '$lib/components/listing/ListingCard.svelte';
-	import ListingCardGhost from '$lib/components/listing/ListingCardGhost.svelte';
+	import ListingCard from '$comp/listing/ListingCard.svelte';
+	import ListingCardGhost from '$comp/listing/ListingCardGhost.svelte';
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SearchParams, SupaListing } from '$lib/types';

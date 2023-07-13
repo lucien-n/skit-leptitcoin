@@ -8,9 +8,9 @@
 	import '../dark-theme.postcss';
 	import { getSupaUser } from '$lib/supabase';
 	import { supaUserStore, userStore } from '$lib/store';
-	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
-	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import UserDrawer from '$lib/components/user/UserDrawer.svelte';
+	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
+	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
+	import UserDrawer from '$comp/user/UserDrawer.svelte';
 
 	export let data;
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Drawer from '$lib/components/drawer/Drawer.svelte';
+	import Drawer from '$comp/drawer/Drawer.svelte';
 	import { userStore } from '$lib/store';
 </script>
 
