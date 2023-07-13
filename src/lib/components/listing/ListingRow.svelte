@@ -5,7 +5,6 @@
 	import ConditionBadge from '$lib/components/listing/ConditionBadge.svelte';
 	import DeleteListingButton from '$lib/components/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$lib/components/listing/EditListingButton.svelte';
-	import ValidateListingButton from '$lib/components/widgets/ValidateButton.svelte';
 
 	export let listing: SupaListing;
 
@@ -55,8 +54,5 @@
 				// window.location.href = window.location.href;
 			}}
 		/>
-		{#if !listing.isValidated && $supaUserStore && $supaUserStore?.role >= 8}
-			<ValidateListingButton listing_uid={listing.uid} />
-		{/if}
 	</div>
 </div>
