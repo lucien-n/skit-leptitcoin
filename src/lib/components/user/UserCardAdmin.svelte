@@ -3,23 +3,18 @@
 	import { Avatar, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { successToast, warnToast } from '$lib/helper';
 	import Icon from '$comp/widgets/Icon.svelte';
+	import { confirmModal } from '$lib/modals';
 
 	export let user: SupaUser;
 
 	$: user = user;
 
 	async function disableUser() {
-		const confirm = await new Promise<boolean>((resolve) => {
-			modalStore.trigger({
-				type: 'confirm',
-				title: 'Please Confirm',
-				body: `Disable user <u>${user.username}</u>?<br>This action is <strong>reversible</strong>`,
-				response: (r: boolean) => {
-					resolve(r);
-				}
-			});
+		const confirm = await confirmModal({
+			body: `Disable user <u>${user.username}</u>?`
 		});
 		if (!confirm) return;
+
 		const { status } = await fetch(`/api/user/disable/${user.uid}`);
 
 		if (status === 200) {
@@ -31,17 +26,11 @@
 	}
 
 	async function deleteUser() {
-		const confirm = await new Promise<boolean>((resolve) => {
-			modalStore.trigger({
-				type: 'confirm',
-				title: 'Please Confirm',
-				body: `Delete user <u>${user.username}</u>?<br>This action is <strong>irreversible</strong>`,
-				response: (r: boolean) => {
-					resolve(r);
-				}
-			});
+		const confirm = await confirmModal({
+			body: `Delete user <u>${user.username}</u>?<br>This action is <strong>irreversible</strong>`
 		});
 		if (!confirm) return;
+
 		const { status } = await fetch(`/api/user/delete/${user.uid}`);
 
 		if (status === 200) {
@@ -52,16 +41,7 @@
 	}
 
 	async function enableUser() {
-		const confirm = await new Promise<boolean>((resolve) => {
-			modalStore.trigger({
-				type: 'confirm',
-				title: 'Please Confirm',
-				body: `Enable user <u>${user.username}</u>?`,
-				response: (r: boolean) => {
-					resolve(r);
-				}
-			});
-		});
+		const confirm = await confirmModal({ body: `Enable user <u>${user.username}</u>?` });
 		if (!confirm) return;
 
 		const { status } = await fetch(`/api/user/enable/${user.uid}`);
