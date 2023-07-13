@@ -12,8 +12,9 @@
 
 <a
 	{href}
-	class="flex flex-col items-center rounded-[4px] p-1 px-2 {$settingsStore.high_contrast ??
-		'hover:variant-ghost-success'} {cc}"
+	class="flex flex-col items-center rounded-[4px] p-1 px-2 {$settingsStore.high_contrast
+		? 'hover:variant-ghost-success'
+		: ''} {cc}"
 	aria-label={aria_label}
 	on:click={() => dispatch('click')}
 >

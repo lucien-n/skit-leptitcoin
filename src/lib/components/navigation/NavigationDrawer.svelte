@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Drawer from '$comp/drawer/Drawer.svelte';
-	import { userStore } from '$lib/store';
+	import { settingsStore, userStore } from '$lib/store';
+	import { SlideToggle } from '@skeletonlabs/skeleton';
 </script>
 
 <!-- <nav id="navigation-drawer" class="list-nav flex h-full flex-col justify-between p-4"> -->
@@ -27,5 +28,9 @@
 				<D.Text>Sign In</D.Text>
 			</D.Link>
 		{/if}
+		<D.Link keep_opened>
+			<SlideToggle name="hight-contrast" bind:checked={$settingsStore.high_contrast} />
+			<D.Text>Hight Contrast</D.Text>
+		</D.Link>
 	</svelte:fragment>
 </Drawer>
