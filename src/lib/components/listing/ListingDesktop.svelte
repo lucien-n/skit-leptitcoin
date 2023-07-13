@@ -13,7 +13,7 @@
 	}
 </script>
 
-<div class="card m-2 hidden w-full flex-col gap-2">
+<div class="card m-2 mx-auto hidden w-full flex-col gap-2 md:flex xl:w-[70%]">
 	<header class="flex w-full overflow-hidden rounded-tl-[4px]">
 		<img
 			src={listing.picture
