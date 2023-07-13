@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { SupaListing } from './types/supa_listing';
-import type { SupaUser } from './types/supa_user';
+import type { SupaListing, SupaUser } from './types';
 
 export const supabase = createClient(
 	'https://zcxdsoyihrxxudqdnvwu.supabase.co',

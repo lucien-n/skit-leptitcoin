@@ -6,6 +6,7 @@
 	import { supaUserStore } from '$lib/store';
 	import type { SupaListing, SupaUser } from '$lib/types';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import ValidateListingButton from '$lib/components/widgets/ValidateButton.svelte';
 
 	export let data: { listings: SupaListing[] | null; users: SupaUser[] | null };
 
@@ -44,6 +45,9 @@
 			<section id="listings" class="flex flex-col gap-2">
 				{#each listings as listing}
 					<ListingRow {listing} />
+					{#if !listing.isValidated && $supaUserStore && $supaUserStore?.role >= 8}
+						<ValidateListingButton listing_uid={listing.uid} />
+					{/if}
 				{/each}
 			</section>
 		{:else if users}
