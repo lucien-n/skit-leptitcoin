@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Drawer from '$comp/drawer/Drawer.svelte';
-	import { settingsStore, userStore } from '$lib/store';
+	import { settingsStore, supaUserStore, userStore } from '$lib/store';
 	import { SlideToggle } from '@skeletonlabs/skeleton';
 </script>
 
@@ -14,7 +14,7 @@
 	</svelte:fragment>
 	<svelte:fragment slot="tail" let:D>
 		{#if $userStore}
-			<D.Link href="/u/{$userStore.id}">
+			<D.Link href="/u/{$supaUserStore?.username}">
 				<D.Icon name="user" />
 				<D.Text>My Profile</D.Text>
 			</D.Link>

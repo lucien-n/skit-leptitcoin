@@ -63,7 +63,7 @@
 		<div class="m-1 flex flex-row gap-4">
 			<Avatar initials={user.username[0]} />
 			<div>
-				<a href="/u/{user.uid}" class="h3 hover:underline">
+				<a href="/u/{user.username}" class="h3 hover:underline">
 					<h3>{user.username}</h3>
 				</a>
 				<div>

@@ -57,11 +57,11 @@ export async function getListing(listing_uid: string): Promise<SupaListing | und
 	return;
 }
 
-export async function getSupaUser(user_uid: string) {
+export async function getSupaUser(user_info: { uid?: string; username?: string }) {
 	try {
 		const {
 			data: [user]
-		} = await supabase.from('profiles').select('*').eq('uid', user_uid);
+		} = await supabase.from('profiles').select('*').match(user_info);
 		if (!user) return null;
 
 		const parsed_user = await parseSupaUser(user);
@@ -123,7 +123,7 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 }
 
 async function parseListing(listing_data): Promise<SupaListing> {
-	const author = await getSupaUser(listing_data.author_uid);
+	const author = await getSupaUser({ uid: listing_data.author_uid });
 	const parsedListing = {
 		uid: listing_data.uid,
 		author_uid: listing_data.author_uid,

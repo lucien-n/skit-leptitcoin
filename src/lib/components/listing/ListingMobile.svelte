@@ -46,7 +46,7 @@
 		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
-					href="/u/{listing.author_uid}"
+					href="/u/{listing.author?.username}"
 					class="flex gap-3 hover:underline"
 					aria-label="{listing.author?.username}'s profile - rated {listing.author
 						?.rating} out of 5"

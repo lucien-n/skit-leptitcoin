@@ -50,7 +50,7 @@
 				</button>
 				<span class="hidden self-center text-[8px] not-italic lg:flex"> ● </span>
 				<div class="flex gap-2">
-					<a href="/u/{listing.author?.uid}" class="hover:underline">
+					<a href="/u/{listing.author?.username}" class="hover:underline">
 						{listing.author?.username}
 					</a>
 					<span class="flex self-center text-[8px] not-italic"> ● </span>

@@ -35,7 +35,7 @@
 	});
 
 	async function updateSupaUser(user_uid: string | undefined) {
-		supaUserStore.set(user_uid ? await getSupaUser(user_uid) : null);
+		supaUserStore.set(user_uid ? await getSupaUser({ uid: user_uid }) : null);
 	}
 </script>
 

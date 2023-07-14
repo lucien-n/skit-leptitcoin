@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { settingsStore, userStore } from '$lib/store';
+	import { settingsStore, supaUserStore, userStore } from '$lib/store';
 	import Drawer from '$comp/drawer/Drawer.svelte';
 	import { LightSwitch, SlideToggle } from '@skeletonlabs/skeleton';
 </script>
 
 <Drawer>
 	<svelte:fragment slot="lead" let:D>
-		<D.Link href="/u/{$userStore?.id}">
+		<D.Link href="/u/{$supaUserStore?.username}">
 			<D.Icon name="user" />
 			<D.Text>My Profile</D.Text>
 		</D.Link>
