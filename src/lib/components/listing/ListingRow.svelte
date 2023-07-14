@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { formatDate } from '$lib/helper';
-	import { supaUserStore, userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types';
 	import ConditionBadge from '$comp/listing/ConditionBadge.svelte';
 	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
+	import { formatDate } from '$lib/helper';
+	import { supaUserStore, userStore } from '$lib/store';
+	import type { SupaListing } from '$lib/types';
 
 	export let listing: SupaListing;
 
-	const MAX_DESCRIPTION_LENGTH: number = 30;
+	const MAX_DESCRIPTION_LENGTH = 30;
 </script>
 
 <div class="card flex h-fit w-full break-words p-1 md:p-2">

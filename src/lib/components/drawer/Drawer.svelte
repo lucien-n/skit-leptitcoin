@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DrawerLink from '$comp/drawer/DrawerLink.svelte';
-	import Icon from '$comp/widgets/Icon.svelte';
 	import DrawerLinkText from '$comp/drawer/DrawerLinkText.svelte';
+	import Icon from '$comp/widgets/Icon.svelte';
 	import DrawerLinkGroup from './DrawerLinkGroup.svelte';
 
 	const D = {

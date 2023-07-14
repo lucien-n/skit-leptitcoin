@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { SupaUser } from '$lib/types';
-	import { Avatar, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	import { successToast, warnToast } from '$lib/helper';
 	import Icon from '$comp/widgets/Icon.svelte';
+	import { successToast, warnToast } from '$lib/helper';
 	import { confirmModal } from '$lib/modals';
+	import type { SupaUser } from '$lib/types';
+	import { Avatar } from '@skeletonlabs/skeleton';
 
 	export let user: SupaUser;
 

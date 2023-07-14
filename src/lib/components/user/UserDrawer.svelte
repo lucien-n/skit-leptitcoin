@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { settingsStore, supaUserStore, userStore } from '$lib/store';
 	import Drawer from '$comp/drawer/Drawer.svelte';
-	import { LightSwitch, SlideToggle } from '@skeletonlabs/skeleton';
+	import { settingsStore, supaUserStore } from '$lib/store';
+	import { SlideToggle } from '@skeletonlabs/skeleton';
 </script>
 
 <Drawer>

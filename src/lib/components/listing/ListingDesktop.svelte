@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { formatDate } from '$lib/helper';
-	import type { SupaListing } from '$lib/types';
-	import LikeButton from '$comp/listing/LikeListingButton.svelte';
-	import { userStore } from '$lib/store';
 	import ConditionBadge from '$comp/listing/ConditionBadge.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import UserCard from '$comp/user/UserCard.svelte';
+	import { formatDate } from '$lib/helper';
+	import { userStore } from '$lib/store';
+	import type { SupaListing } from '$lib/types';
 
 	export let listing: SupaListing;
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import Icon from '$comp/widgets/Icon.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let listing_uid: string;
 

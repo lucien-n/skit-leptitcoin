@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { searchStore } from '$lib/store';
 	import CategorySelector from '$comp/navigation/CategorySelector.svelte';
 	import Icon from '$comp/widgets/Icon.svelte';
+	import { searchStore } from '$lib/store';
 
-	export let showAdvancedSearchOption: boolean = false;
+	export let showAdvancedSearchOption = false;
 
 	function executeSearch(): void {
 		showAdvancedSearchOption = false;

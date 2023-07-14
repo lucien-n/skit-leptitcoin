@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
+	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
+	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
+	import UserDrawer from '$comp/user/UserDrawer.svelte';
+	import { supaUserStore, userStore } from '$lib/store';
+	import { getSupaUser } from '$lib/supabase';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 	import '../dark-theme.postcss';
-	import { getSupaUser } from '$lib/supabase';
-	import { supaUserStore, userStore } from '$lib/store';
-	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
-	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
-	import UserDrawer from '$comp/user/UserDrawer.svelte';
 
 	export let data;
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import Icon from '$comp/widgets/Icon.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let rating: number;
-	export let rating_count: number = 0;
+	export let rating_count = 0;
 
 	const dispatch = createEventDispatcher();
 

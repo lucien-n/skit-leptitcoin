@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let margin: string = '';
+	export let margin = '';
 </script>
 
 <ul class="flex flex-col gap-1 {margin}">

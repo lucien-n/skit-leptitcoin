@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { userStore } from '$lib/store';
 	import type { SupaUser } from '$lib/types';
 	import { Avatar, Ratings } from '@skeletonlabs/skeleton';
-	import Icon from '$comp/widgets/Icon.svelte';
 
 	export let user: SupaUser | undefined;
 	export let anonymous = true;

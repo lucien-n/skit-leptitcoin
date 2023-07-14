@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import ListingRow from '$comp/listing/ListingRow.svelte';
+	import ValidateListingButton from '$comp/listing/ValidateListingButton.svelte';
 	import UserCardAdmin from '$comp/user/UserCardAdmin.svelte';
 	import { TITLE } from '$lib/helper';
 	import { supaUserStore } from '$lib/store';
 	import type { SupaListing, SupaUser } from '$lib/types';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import ValidateListingButton from '$comp/listing/ValidateListingButton.svelte';
 
 	export let data: { listings: SupaListing[] | null; users: SupaUser[] | null };
 

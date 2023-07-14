@@ -1,6 +1,6 @@
 import { toastStore } from '@skeletonlabs/skeleton';
 
-export const TITLE: string = 'LePtitCoin';
+export const TITLE = 'LePtitCoin';
 
 export const LISTING_CONDITIONS = [
 	'New',

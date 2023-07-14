@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { drawerStore } from '@skeletonlabs/skeleton';
 
-	export let href: string = '';
-	export let reload: boolean = false;
-	export let keep_opened: boolean = false;
+	export let href = '';
+	export let reload = false;
+	export let keep_opened = false;
 
 	function closeDrawer(): void {
 		if (!keep_opened) drawerStore.close();
