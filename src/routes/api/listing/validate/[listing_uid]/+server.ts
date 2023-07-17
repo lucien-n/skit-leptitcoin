@@ -2,7 +2,7 @@ import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
-	locals: { supabase, isUserAllowed, roles, currentUser }
+	locals: { supabase, isUserAllowed, roles, getUser }
 }) => {
 	const listing_uid = params.listing_uid;
 	if (!listing_uid) throw error(422, { message: 'Missing listing_uid' });
@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({
 	const is_allowed = await isUserAllowed(roles.ADMIN);
 	if (!is_allowed) throw error(422, { message: 'Insuficient permission' });
 
-	const current_user_uid = currentUser?.id;
+	const current_user_uid = (await getUser())?.id;
 
 	try {
 		const { error } = await supabase

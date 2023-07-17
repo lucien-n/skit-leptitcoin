@@ -1,5 +1,5 @@
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import { error, type Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createSupabaseServerClient({
@@ -36,11 +36,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return current_user_role >= level;
 	};
 
-	event.locals.currentUser = (await event.locals.getSession())?.user;
+	event.locals.getUser = async () => {
+		return (await event.locals.getSession())?.user;
+	};
 
 	event.locals.roles = {
 		ADMIN: 8
 	};
+
+	if (event.url.pathname.split('/')[1] === 'api' && !(await event.locals.getSession())) {
+		throw error(401, { message: 'Unauthorized' });
+	}
 
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {
