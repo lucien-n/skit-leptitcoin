@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { settingsStore } from '$lib/store';
+	import { createEventDispatcher } from 'svelte';
 
-	export let cc: string = '';
+	export let cc = '';
 
 	const dispatch = createEventDispatcher();
 
-	export let href: string = '';
-	export let aria_label: string = '';
+	export let href = '';
+	export let aria_label = '';
 </script>
 
 <a
 	{href}
-	class="flex flex-col items-center rounded-[4px] p-1 px-2 {$settingsStore.high_contrast ??
-		'hover:variant-ghost-success'} {cc}"
+	class="flex flex-col items-center rounded-[4px] p-1 px-2 {$settingsStore.high_contrast
+		? 'hover:variant-ghost-success'
+		: ''} {cc}"
 	aria-label={aria_label}
 	on:click={() => dispatch('click')}
 >

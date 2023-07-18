@@ -1,17 +1,15 @@
 <script lang="ts">
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let rating: number;
-	export let rated_user_uid: string;
-	export let rating_count: number = 0;
+	export let rating_count = 0;
 
 	const dispatch = createEventDispatcher();
 
 	const rate = async (i: number) => {
 		rating = i + 1;
 		dispatch('click');
-		if (0 < rating && rating <= 5) fetch(`/u/${rated_user_uid}/rate/${rating}`);
 	};
 </script>
 

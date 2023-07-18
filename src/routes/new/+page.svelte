@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { TITLE, LISTING_CONDITIONS, LISTING_CATEGORIES } from '$lib/helper';
-	import { userStore } from '$lib/store';
-	import { RadioGroup, RadioItem, toastStore } from '@skeletonlabs/skeleton';
+	import { LISTING_CATEGORIES, LISTING_CONDITIONS, TITLE } from '$lib/helper';
+	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
 	export let form;
@@ -95,8 +94,11 @@
 				{/each}
 			</RadioGroup>
 		</section>
-		<button type="submit" id="submit" class="btn variant-ghost-surface mx-auto w-fit" disabled={loading}
-			>{loading ? 'Creating... ' : 'Create'}</button
+		<button
+			type="submit"
+			id="submit"
+			class="btn variant-ghost-surface mx-auto w-fit"
+			disabled={loading}>{loading ? 'Creating... ' : 'Create'}</button
 		>
 	</form>
 </div>

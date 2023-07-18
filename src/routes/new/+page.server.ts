@@ -1,5 +1,5 @@
 import type { SupaListing } from '$lib/types';
-import { error, redirect, type Actions, fail } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { v4 as uuid } from 'uuid';
 
 export const actions: Actions = {

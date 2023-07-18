@@ -1,6 +1,6 @@
 <script lang="ts">
-	import EditButton from '$lib/components/listing/EditListingButton.svelte';
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
+	import EditButton from '$comp/listing/EditListingButton.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate } from '$lib/helper';
 	import { searchStore, userStore } from '$lib/store';
 	import type { SupaListing } from '$lib/types';
@@ -50,7 +50,7 @@
 				</button>
 				<span class="hidden self-center text-[8px] not-italic lg:flex"> ● </span>
 				<div class="flex gap-2">
-					<a href="/u/{listing.author?.uid}" class="hover:underline">
+					<a href="/u/{listing.author?.username}" class="hover:underline">
 						{listing.author?.username}
 					</a>
 					<span class="flex self-center text-[8px] not-italic"> ● </span>

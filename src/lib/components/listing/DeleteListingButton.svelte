@@ -1,14 +1,16 @@
 <script lang="ts">
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let listing_uid: string;
 
 	const dispatch = createEventDispatcher();
 
 	const deleteListing = () => {
-		fetch(`/d/${listing_uid}`);
 		dispatch('click');
+		fetch(`/api/delete/${listing_uid}`).then((success) => {
+			dispatch('success', { success });
+		});
 	};
 </script>
 

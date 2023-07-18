@@ -1,8 +1,8 @@
 <script lang="ts">
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
-	import type { SupaListing } from '$lib/types/supa_listing';
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
 	import { userStore } from '$lib/store';
+	import type { SupaListing } from '$lib/types';
 	import UserCard from '../user/UserCard.svelte';
 
 	export let listing: SupaListing;
@@ -46,7 +46,7 @@
 		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
-					href="/u/{listing.author_uid}"
+					href="/u/{listing.author?.username}"
 					class="flex gap-3 hover:underline"
 					aria-label="{listing.author?.username}'s profile - rated {listing.author
 						?.rating} out of 5"

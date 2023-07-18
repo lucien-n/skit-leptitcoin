@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { TITLE } from '$lib/helper.js';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let form;
 
-	let show_password: boolean = false;
+	let show_password = false;
 	let loading = false;
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {

@@ -1,10 +1,10 @@
 <script lang="ts">
+	import ConditionBadge from '$comp/listing/ConditionBadge.svelte';
+	import LikeButton from '$comp/listing/LikeListingButton.svelte';
+	import UserCard from '$comp/user/UserCard.svelte';
 	import { formatDate } from '$lib/helper';
-	import type { SupaListing } from '$lib/types';
-	import LikeButton from '$lib/components/listing/LikeListingButton.svelte';
 	import { userStore } from '$lib/store';
-	import ConditionBadge from '$lib/components/listing/ConditionBadge.svelte';
-	import UserCard from '$lib/components/user/UserCard.svelte';
+	import type { SupaListing } from '$lib/types';
 
 	export let listing: SupaListing;
 
@@ -13,7 +13,7 @@
 	}
 </script>
 
-<div class="card m-2 hidden w-full flex-col gap-2">
+<div class="card m-2 mx-auto hidden w-full flex-col gap-2 md:flex xl:w-[70%]">
 	<header class="flex w-full overflow-hidden rounded-tl-[4px]">
 		<img
 			src={listing.picture

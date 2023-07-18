@@ -1,4 +1,4 @@
-import { error, type Cookies } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const GET = async ({ params, locals: { supabase, getSession, getRole, roles } }) => {
 	const listing_uid = params.listing_uid;

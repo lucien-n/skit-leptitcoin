@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { searchStore } from '$lib/store';
-	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	let searchInputElement: HTMLInputElement;
 
@@ -29,7 +29,6 @@
 		id="search-input-field"
 		class="input-group input-group-divider grid-cols-12 xl:grid-cols-9 2xl:grid-cols-7"
 	>
-		<!-- svelte-ignore a11y-autofocus -->
 		<section class="relative col-span-5 flex w-full">
 			<div class="input-group-shim">
 				<label for="search" class="w-fit">Search</label>

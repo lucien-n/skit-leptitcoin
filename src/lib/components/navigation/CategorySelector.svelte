@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let value: string = '';
+	export let value = '';
 </script>
 
 <select id="category" name="category" class="select" bind:value>

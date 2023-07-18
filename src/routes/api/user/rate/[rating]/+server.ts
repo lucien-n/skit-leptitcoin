@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const GET = async ({ params, locals: { supabase, getSession } }) => {
 	const rating_str = params.rating;

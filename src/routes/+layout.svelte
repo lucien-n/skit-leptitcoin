@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
+	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
+	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
+	import UserDrawer from '$comp/user/UserDrawer.svelte';
+	import { supaUserStore, userStore } from '$lib/store';
+	import { getSupaUser } from '$lib/supabase';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 	import '../dark-theme.postcss';
-	import { getSupaUser } from '$lib/supabase';
-	import { supaUserStore, userStore } from '$lib/store';
-	import NavigationBar from '$lib/components/navigation/NavigationBar.svelte';
-	import NavigationDrawer from '$lib/components/navigation/NavigationDrawer.svelte';
-	import UserDrawer from '$lib/components/user/UserDrawer.svelte';
 
 	export let data;
 
@@ -35,7 +35,7 @@
 	});
 
 	async function updateSupaUser(user_uid: string | undefined) {
-		supaUserStore.set(user_uid ? await getSupaUser(user_uid) : null);
+		supaUserStore.set(user_uid ? await getSupaUser({ uid: user_uid }) : null);
 	}
 </script>
 
@@ -54,7 +54,7 @@
 	<svelte:fragment slot="header">
 		<NavigationBar />
 	</svelte:fragment>
-	<div class="h-full w-full">
+	<div class="h-full w-full overflow-hidden">
 		<slot />
 	</div>
 </AppShell>

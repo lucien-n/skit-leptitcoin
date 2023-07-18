@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Icon from '$comp/widgets/Icon.svelte';
 	import { userStore } from '$lib/store';
 	import type { SupaUser } from '$lib/types';
 	import { Avatar, Ratings } from '@skeletonlabs/skeleton';
-	import Icon from '$lib/components/widgets/Icon.svelte';
 
 	export let user: SupaUser | undefined;
 	export let anonymous = true;
@@ -14,7 +14,7 @@
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
 		rating.current = event.detail.index;
-		fetch(`/u/${user?.uid}/rate/${rating.current}`);
+		fetch(`/api/user/${user?.uid}/rate/${rating.current}`);
 	}
 </script>
 
@@ -28,7 +28,7 @@
 			<Avatar initials={user.username[0]} />
 			<div>
 				<a
-					href="/u/{user.uid}"
+					href="/u/{user.username}"
 					class="flex gap-3"
 					aria-label="{user.username}'s profile - rated {user.rating} out of 5"
 				>

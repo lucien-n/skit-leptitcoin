@@ -13,7 +13,7 @@ declare global {
 			roles: {
 				ADMIN: number;
 			};
-			currentUser: User | undefined;
+			getUser(): Promise<User | undefined>;
 		}
 		interface PageData {
 			session: Session | null;

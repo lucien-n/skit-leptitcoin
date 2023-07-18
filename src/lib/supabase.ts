@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { SupaListing } from './types/supa_listing';
-import type { SupaUser } from './types/supa_user';
+import type { SupaListing, SupaUser } from './types';
 
 export const supabase = createClient(
 	'https://zcxdsoyihrxxudqdnvwu.supabase.co',
@@ -58,11 +57,11 @@ export async function getListing(listing_uid: string): Promise<SupaListing | und
 	return;
 }
 
-export async function getSupaUser(user_uid: string) {
+export async function getSupaUser(user_info: { uid?: string; username?: string }) {
 	try {
 		const {
 			data: [user]
-		} = await supabase.from('profiles').select('*').eq('uid', user_uid);
+		} = await supabase.from('profiles').select('*').match(user_info);
 		if (!user) return null;
 
 		const parsed_user = await parseSupaUser(user);
@@ -124,7 +123,7 @@ export async function toggleListingLike(listing_uid: string, user_uid: string) {
 }
 
 async function parseListing(listing_data): Promise<SupaListing> {
-	const author = await getSupaUser(listing_data.author_uid);
+	const author = await getSupaUser({ uid: listing_data.author_uid });
 	const parsedListing = {
 		uid: listing_data.uid,
 		author_uid: listing_data.author_uid,
@@ -144,7 +143,8 @@ async function parseListing(listing_data): Promise<SupaListing> {
 				rating_count: 0,
 				picture: 'unknown',
 				createdAt: new Date().getTime(),
-				role: -1
+				role: -1,
+				restricted: true
 			} satisfies SupaUser),
 		isValidated: listing_data.is_validated,
 		validatedBy: listing_data.validated_by,
@@ -172,7 +172,8 @@ async function parseSupaUser(user_data) {
 		rating: user_data.rating,
 		rating_count: user_data.rating_count,
 		createdAt: user_data.created_at,
-		role: user_data.role
+		role: user_data.role,
+		restricted: user_data.restricted
 	} satisfies SupaUser;
 }
 
