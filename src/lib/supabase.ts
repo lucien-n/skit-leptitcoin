@@ -33,3 +33,14 @@ export async function getListing(match: any = { is_validated: true }): Promise<S
 		console.warn(e);
 	}
 }
+
+export async function getProfile(match: any): Promise<SupaProfile | void> {
+	try {
+		const {
+			data: [profile]
+		} = await supabase.from('profiles').select('*').match(match);
+		return profile as SupaProfile;
+	} catch (e) {
+		console.warn(e);
+	}
+}
