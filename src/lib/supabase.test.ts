@@ -1,4 +1,11 @@
-import { getListing, getListings, getProfile, isLikedByUser } from '$lib/supabase';
+import {
+	dislikeListing,
+	getListing,
+	getListings,
+	getProfile,
+	isLikedByUser,
+	likeListing
+} from '$lib/supabase';
 import { assert, describe, it } from 'vitest';
 
 describe('listings', () => {
@@ -33,6 +40,24 @@ describe('profiles', () => {
 describe('likes', () => {
 	it('check if listing is liked by user', async () => {
 		const resp = await isLikedByUser(
+			'f3541a94-cf9b-4096-935c-165363be8d89',
+			'ae86c595-e879-4125-8d13-a3734122e2bc'
+		);
+
+		assert.isTrue(resp);
+	});
+
+	it('like listing', async () => {
+		const resp = await likeListing(
+			'f3541a94-cf9b-4096-935c-165363be8d89',
+			'ae86c595-e879-4125-8d13-a3734122e2bc'
+		);
+
+		assert.isTrue(resp);
+	});
+
+	it('dislike listing', async () => {
+		const resp = await dislikeListing(
 			'f3541a94-cf9b-4096-935c-165363be8d89',
 			'ae86c595-e879-4125-8d13-a3734122e2bc'
 		);
