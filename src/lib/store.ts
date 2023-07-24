@@ -10,3 +10,5 @@ export const supaUserStore: Writable<SupaUser | undefined | null> = writable();
 export const settingsStore: Writable<Settings> = localStorageStore('settings', {
 	high_contrast: false
 });
+
+export const pagesVisitedStore: Writable<string[]> = writable(['/'])

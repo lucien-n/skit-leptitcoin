@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
 	import UserDrawer from '$comp/user/UserDrawer.svelte';
-	import { supaUserStore, userStore } from '$lib/store';
+	import { pagesVisitedStore, supaUserStore, userStore } from '$lib/store';
 	import { getSupaUser } from '$lib/supabase';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
@@ -37,6 +37,13 @@
 	async function updateSupaUser(user_uid: string | undefined) {
 		supaUserStore.set(user_uid ? await getSupaUser({ uid: user_uid }) : null);
 	}
+
+	function goBack() {
+		console.log('Before: ', $pagesVisitedStore);
+		goto($pagesVisitedStore[0]);
+		$pagesVisitedStore.slice(0, 1);
+		console.log('After: ', $pagesVisitedStore);
+	}
 </script>
 
 <Toast position="tr" />
@@ -55,6 +62,12 @@
 		<NavigationBar />
 	</svelte:fragment>
 	<div class="h-full w-full overflow-hidden">
+		<button
+			class="btn variant-glass-primary absolute m-4 hidden aspect-square rounded-full md:flex"
+			on:click={goBack}
+		>
+			{'<'}
+		</button>
 		<slot />
 	</div>
 </AppShell>
