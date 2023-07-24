@@ -4,7 +4,6 @@
 	import UserCard from '$comp/user/UserCard.svelte';
 	import { formatDate } from '$lib/helper';
 	import { userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types';
 
 	export let listing: SupaListing;
 
@@ -18,7 +17,7 @@
 		<img
 			src={listing.picture
 				? listing.picture
-				: 'https://placehold.co/600x400/000000/FFFFFF?text=' + listing.title.split(' ')[0]}
+				: 'https://placehold.co/600x400/000000/FFFFFF?text=' + listing.title?.split(' ')[0]}
 			alt="listing"
 			class="w-2/3 object-cover"
 		/>

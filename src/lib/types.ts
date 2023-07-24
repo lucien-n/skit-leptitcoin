@@ -9,21 +9,21 @@ export type SupaUser = {
 	restricted: boolean;
 };
 
-export type SupaListing = {
-	uid: string;
-	author_uid: string;
-	title: string;
-	description: string;
-	price: number;
-	picture: string;
-	category: string;
-	condition: number;
-	author?: SupaUser;
-	createdAt?: Date;
-	isValidated?: boolean;
-	validatedAt?: number;
-	validatedBy?: string;
-};
+// export type SupaListing = {
+// 	uid: string;
+// 	author_uid: string;
+// 	title: string;
+// 	description: string;
+// 	price: number;
+// 	picture: string;
+// 	category: string;
+// 	condition: number;
+// 	author?: SupaUser;
+// 	createdAt?: Date;
+// 	isValidated?: boolean;
+// 	validatedAt?: number;
+// 	validatedBy?: string;
+// };
 
 export type Settings = {
 	high_contrast: boolean;

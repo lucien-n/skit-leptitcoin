@@ -1,4 +1,4 @@
-import type { SearchParams, Settings, SupaListing, SupaUser } from '$lib/types';
+import type { SearchParams, Settings } from '$lib/types';
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import type { User } from '@supabase/supabase-js';
 import { writable, type Writable } from 'svelte/store';
@@ -11,4 +11,4 @@ export const settingsStore: Writable<Settings> = localStorageStore('settings', {
 	high_contrast: false
 });
 
-export const pagesVisitedStore: Writable<string[]> = writable(['/'])
+export const pagesVisitedStore: Writable<string[]> = writable(['/']);
