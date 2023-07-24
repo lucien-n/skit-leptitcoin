@@ -44,3 +44,16 @@ export async function getProfile(match: any): Promise<SupaProfile | void> {
 		console.warn(e);
 	}
 }
+
+export async function isLikedByUser(listing_uid: string, user_uid: string): Promise<boolean> {
+	try {
+		const {
+			data: [{ listing_uid: fetched_uid }]
+		} = await supabase.from('likes').select('listing_uid').match({ listing_uid, user_uid });
+		return listing_uid === fetched_uid;
+	} catch (e) {
+		console.warn(e);
+	}
+
+	return false;
+}
