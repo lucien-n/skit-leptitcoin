@@ -57,3 +57,21 @@ export async function isLikedByUser(listing_uid: string, user_uid: string): Prom
 
 	return false;
 }
+
+export async function dislikeListing(listing_uid: string, user_uid: string): Promise<void> {
+	try {
+		const { error: err } = await supabase.from('likes').delete().match({ listing_uid, user_uid });
+		if (err) console.warn(err);
+	} catch (e) {
+		console.warn(e);
+	}
+}
+
+export async function likeListing(listing_uid: string, user_uid: string): Promise<void> {
+	try {
+		const { error: err } = await supabase.from('likes').insert({ listing_uid, user_uid });
+		if (err) console.warn(err);
+	} catch (e) {
+		console.warn(e);
+	}
+}
