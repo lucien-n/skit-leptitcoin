@@ -6,7 +6,7 @@ export async function getListings({
 	sb = supabase,
 	limit = 10,
 	offset = 0,
-	match
+	match = {}
 }: {
 	sb?: SupabaseClient;
 	limit?: number;
@@ -27,7 +27,7 @@ export async function getListings({
 
 export async function getListing({
 	sb = supabase,
-	match
+	match = {}
 }: {
 	sb?: SupabaseClient;
 	match?: any;

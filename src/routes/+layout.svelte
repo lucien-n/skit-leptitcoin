@@ -4,7 +4,7 @@
 	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
 	import UserDrawer from '$comp/user/UserDrawer.svelte';
 	import { pagesVisitedStore, supaUserStore, userStore } from '$lib/store';
-	import { getSupaUser } from '$lib/supabase';
+	import { getProfile } from '$supa/supabase';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
@@ -35,7 +35,7 @@
 	});
 
 	async function updateSupaUser(user_uid: string | undefined) {
-		supaUserStore.set(user_uid ? await getSupaUser({ uid: user_uid }) : null);
+		supaUserStore.set(user_uid ? await getProfile({ uid: user_uid }) : null);
 	}
 
 	function goBack() {

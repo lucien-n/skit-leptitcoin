@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$comp/widgets/Icon.svelte';
 	import { userStore } from '$lib/store';
-	import { isListingLikedByUser, toggleListingLike } from '$lib/supabase';
+	import { dislikeListing, isLikedByUser, likeListing } from '$supa/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
@@ -10,7 +10,7 @@
 
 	const unsubscribe = userStore.subscribe(async (user) => {
 		if (!user || listing_uid === 'none') return;
-		if (await isListingLikedByUser(listing_uid, user.id)) liked = true;
+		if (await isLikedByUser({ listing_uid, user_uid: user.id })) liked = true;
 	});
 
 	onMount(() => unsubscribe());
@@ -27,7 +27,8 @@
 		}
 
 		liked = !liked;
-		await toggleListingLike(listing_uid, $userStore.id);
+		if (liked) await likeListing({ listing_uid, user_uid: $userStore.id });
+		else await dislikeListing({ listing_uid, user_uid: $userStore.id });
 	}
 </script>
 
