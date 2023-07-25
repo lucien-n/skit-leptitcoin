@@ -11,14 +11,14 @@
 	export let showAnonymous = true;
 	export let asCard = true;
 
-	let get_profile;
-	$: get_profile;
+	let profile;
+	$: profile;
 
 	onMount(async () => {
-		if (!get_profile) get_profile = await getProfile({ uid });
+		if (!profile) profile = await getProfile({ uid });
 	});
 
-	let rating = { current: get_profile?.rating, max: 5.0 };
+	let rating = { current: profile?.rating, max: 5.0 };
 
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
@@ -27,40 +27,36 @@
 	}
 </script>
 
-{#await get_profile}
-	<UserCardGhost />
-{:then profile}
-	{#if profile}
-		<div
-			class="group card flex h-fit w-full flex-row items-center justify-between gap-4 border-0 md:w-fit"
-			class:card={asCard}
-			class:p-5={asCard}
-		>
-			<div class="flex flex-row gap-4">
-				<Avatar initials={profile.username[0]} />
-				<div>
-					<a
-						href="/u/{profile.username}"
-						class="flex gap-3"
-						aria-label="{profile.username}'s profile - rated {profile.rating} out of 5"
-					>
-						<h3 class="h3 hover:underline">{profile.username}</h3>
-					</a>
-					<div class="flex gap-2">
-						<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
-							<svelte:fragment slot="empty"><Icon name="star" /></svelte:fragment>
-							<svelte:fragment slot="half"><Icon name="star_half" /></svelte:fragment>
-							<svelte:fragment slot="full"><Icon name="star_filled" /></svelte:fragment>
-						</Ratings>
-					</div>
+{#if profile}
+	<div
+		class="group card flex h-fit w-full flex-row items-center justify-between gap-4 border-0 md:w-fit"
+		class:card={asCard}
+		class:p-5={asCard}
+	>
+		<div class="flex flex-row gap-4">
+			<Avatar initials={profile.username[0]} />
+			<div>
+				<a
+					href="/u/{profile.username}"
+					class="flex gap-3"
+					aria-label="{profile.username}'s profile - rated {profile.rating} out of 5"
+				>
+					<h3 class="h3 hover:underline">{profile.username}</h3>
+				</a>
+				<div class="flex gap-2">
+					<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
+						<svelte:fragment slot="empty"><Icon name="star" /></svelte:fragment>
+						<svelte:fragment slot="half"><Icon name="star_half" /></svelte:fragment>
+						<svelte:fragment slot="full"><Icon name="star_filled" /></svelte:fragment>
+					</Ratings>
 				</div>
 			</div>
-			{#if !anonymous && showAnonymous && $profileStore?.id === uid}
-				<span class="md:mx-8" />
-				<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
-			{/if}
 		</div>
-	{:else}
-		<p class="text-error-500">Cannot find user</p>
-	{/if}
-{/await}
+		{#if !anonymous && showAnonymous && $profileStore?.id === uid}
+			<span class="md:mx-8" />
+			<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
+		{/if}
+	</div>
+{:else}
+	<UserCardGhost />
+{/if}
