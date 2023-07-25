@@ -17,10 +17,6 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	// $: {
-	// 	profileStore.refresh(session?.user.id);
-	// }
-
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange(async (event: any, _session: any) => {
 			if (_session?.expires_at !== session?.expires_at) {
