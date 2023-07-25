@@ -1,11 +1,18 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-export async function getListings(
-	sb: SupabaseClient,
+import { supabase } from '$supa/supabase';
+
+export async function getListings({
+	sb = supabase,
 	limit = 10,
 	offset = 0,
-	match: any = { is_validated: true }
-): Promise<SupaListing[] | void> {
+	match
+}: {
+	sb: SupabaseClient;
+	limit: number;
+	offset: number;
+	match: any;
+}): Promise<SupaListing[] | void> {
 	try {
 		const { data } = await sb
 			.from('listings')
@@ -18,10 +25,13 @@ export async function getListings(
 	}
 }
 
-export async function getListing(
-	sb: SupabaseClient,
-	match: any = { is_validated: true }
-): Promise<SupaListing | void> {
+export async function getListing({
+	sb = supabase,
+	match
+}: {
+	sb: SupabaseClient;
+	match: any;
+}): Promise<SupaListing | void> {
 	try {
 		const {
 			data: [listing]

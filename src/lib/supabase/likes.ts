@@ -1,10 +1,16 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-export async function isLikedByUser(
-	sb: SupabaseClient,
-	listing_uid: string,
-	user_uid: string
-): Promise<boolean> {
+import { supabase } from '$supa/supabase';
+
+export async function isLikedByUser({
+	sb = supabase,
+	listing_uid,
+	user_uid
+}: {
+	sb: SupabaseClient;
+	listing_uid: string;
+	user_uid: string;
+}): Promise<boolean> {
 	try {
 		const {
 			data: [{ listing_uid: fetched_uid }]
@@ -17,11 +23,15 @@ export async function isLikedByUser(
 	return false;
 }
 
-export async function dislikeListing(
-	sb: SupabaseClient,
-	listing_uid: string,
-	user_uid: string
-): Promise<boolean> {
+export async function dislikeListing({
+	sb = supabase,
+	listing_uid,
+	user_uid
+}: {
+	sb: SupabaseClient;
+	listing_uid: string;
+	user_uid: string;
+}): Promise<boolean> {
 	try {
 		const { error: err } = await sb.from('likes').delete().match({ listing_uid, user_uid });
 		if (err) console.warn(err);
@@ -33,11 +43,15 @@ export async function dislikeListing(
 	return false;
 }
 
-export async function likeListing(
-	sb: SupabaseClient,
-	listing_uid: string,
-	user_uid: string
-): Promise<boolean> {
+export async function likeListing({
+	sb = supabase,
+	listing_uid,
+	user_uid
+}: {
+	sb: SupabaseClient;
+	listing_uid: string;
+	user_uid: string;
+}): Promise<boolean> {
 	try {
 		const { error: err } = await sb.from('likes').insert({ listing_uid, user_uid });
 		if (err) console.warn(err);

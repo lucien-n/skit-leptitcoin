@@ -1,6 +1,14 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-export async function getProfile(sb: SupabaseClient, match: any): Promise<SupaProfile | void> {
+import { supabase } from '$supa/supabase';
+
+export async function getProfile({
+	sb = supabase,
+	match
+}: {
+	sb: SupabaseClient;
+	match: any;
+}): Promise<SupaProfile | void> {
 	try {
 		const {
 			data: [profile]
