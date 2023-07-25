@@ -1,13 +1,13 @@
-import { getListings, getSupaUsers } from '$lib/supabase';
+import { getListings, getProfiles } from '$supa/supabase';
 
-export const load = async ({ locals: { getSession, roles, getRole }, url: { searchParams } }) => {
+export const load = async ({ url: { searchParams } }) => {
 	const manage = searchParams.get('q') || 'listings';
 
-	if (manage === 'users') {
-		const users = await getSupaUsers({ limit: 20 });
-		return { users };
+	if (manage === 'profiles') {
+		const profiles = await getProfiles({ limit: 20 });
+		return { profiles };
 	}
 
-	const listings = await getListings(15, 0, {});
+	const listings = await getListings({ limit: 15, offset: 0 });
 	return { listings };
 };

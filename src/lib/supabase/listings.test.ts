@@ -1,9 +1,9 @@
-import { getListing, getListings } from '$supa/listings';
+import { getListing, getProfiles } from '$supa/listings';
 import { assert, describe, it } from 'vitest';
 
 describe('listings', () => {
 	it('fetches 2 non-validated listings where category', async () => {
-		const resp = await getListings({
+		const resp = await getProfiles({
 			limit: 1,
 			offset: 0,
 			match: { is_validated: false, category: 'misc' }

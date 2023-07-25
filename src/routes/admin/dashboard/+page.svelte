@@ -17,11 +17,12 @@
 
 	$: manageWhat = $page.url.searchParams.get('q') || 'listings';
 
-	let { listings, profiles: profiles } = data;
-	$: ({ listings, profiles: profiles } = data);
+	let { listings, profiles } = data;
+	$: ({ listings, profiles } = data);
 
 	let filtered_listings = listings;
 	let filtered_profiles = profiles;
+
 	$: filtered_listings = listings;
 	$: filtered_profiles = profiles;
 
@@ -31,7 +32,7 @@
 		if (type === 'listings' && listings) {
 			filtered_listings = listings.filter((listing) => listing.title.match(search_regex));
 		} else if (type === 'profiles' && profiles) {
-			filtered_profiles = profiles.filter((user) => user.username.match(search_regex));
+			filtered_profiles = profiles.filter((profile) => profile.username.match(search_regex));
 		}
 	});
 </script>
@@ -52,18 +53,10 @@
 	<div class="mx-auto">
 		<RadioGroup>
 			<RadioItem bind:group={manageWhat} value="listings" name="listings"
-				><a
-					href="?q=listings"
-					data-sveltekit-preload-data
-					on:click={() => ($search.type = 'listings')}>Listings</a
-				></RadioItem
+				><a href="?q=listings" on:click={() => ($search.type = 'listings')}>Listings</a></RadioItem
 			>
 			<RadioItem bind:group={manageWhat} value="profiles" name="profiles"
-				><a
-					href="?q=profiles"
-					data-sveltekit-preload-data
-					on:click={() => ($search.type = 'profiles')}>Users</a
-				></RadioItem
+				><a href="?q=profiles" on:click={() => ($search.type = 'profiles')}>Profiles</a></RadioItem
 			>
 		</RadioGroup>
 	</div>

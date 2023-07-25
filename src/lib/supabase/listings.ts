@@ -17,7 +17,7 @@ export async function getListings({
 		const { data } = await sb
 			.from('listings')
 			.select('*')
-			.match(match)
+			.match(match ?? {})
 			.range(offset, offset + limit);
 		return data as SupaListing[];
 	} catch (e) {
@@ -35,7 +35,10 @@ export async function getListing({
 	try {
 		const {
 			data: [listing]
-		} = await sb.from('listings').select('*').match(match);
+		} = await sb
+			.from('listings')
+			.select('*')
+			.match(match ?? {});
 		return listing as SupaListing;
 	} catch (e) {
 		console.warn(e);

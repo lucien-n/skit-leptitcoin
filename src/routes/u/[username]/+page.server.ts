@@ -1,4 +1,4 @@
-import { getListings } from '$supa/listings';
+import { getProfiles } from '$supa/listings';
 import { getProfile } from '$supa/profiles';
 
 export const load = async ({
@@ -10,7 +10,7 @@ export const load = async ({
 }) => {
 	const user = await getProfile({ match: { username } });
 
-	const user_listings = await getListings({ match: { author_uid: user?.uid } });
+	const user_listings = await getProfiles({ match: { author_uid: user?.uid } });
 
 	return {
 		user: user,
