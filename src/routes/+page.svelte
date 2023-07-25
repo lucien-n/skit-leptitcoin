@@ -4,7 +4,6 @@
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SearchParams } from '$lib/types';
-
 	export let data: { listings: Promise<SupaListing[]> };
 
 	let { listings } = data;
