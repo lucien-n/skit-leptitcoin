@@ -1,10 +1,9 @@
-import { getListing } from '$lib/supabase';
-import type { Cookies } from '@sveltejs/kit';
+import { getListing } from '$supa/supabase';
 
-export const load = async (event: { params: { listing_uid: string }; cookies: Cookies }) => {
-	const listing_uid = event.params.listing_uid;
+export const load = async ({ locals: { supabase }, params }) => {
+	const listing_uid = params.listing_uid;
 
-	const listing = await getListing(listing_uid);
+	const listing = await getListing({ sb: supabase, match: { uid: listing_uid } });
 
 	return {
 		listing: listing

@@ -1,20 +1,16 @@
-import { getProfiles } from '$supa/listings';
-import { getProfile } from '$supa/profiles';
+import { getListings, getProfile } from '$supa/supabase';
 
-export const load = async ({
-	params: { username },
-	url: { search }
-}: {
-	params: { username: string };
-	url: { search: string };
-}) => {
-	const user = await getProfile({ match: { username } });
+export const load = async ({ locals: { supabase }, params: { username }, url: { search } }) => {
+	const user_profile = await getProfile({ sb: supabase, match: { username } });
 
-	const user_listings = await getProfiles({ match: { author_uid: user?.uid } });
+	const user_listings = await getListings({
+		sb: supabase,
+		match: { author_uid: user_profile?.uid }
+	});
 
 	return {
-		user: user,
-		anonymous: search === '?ano',
-		listings: user_listings
+		user_profile,
+		user_listings,
+		anonymous: search === '?ano'
 	};
 };

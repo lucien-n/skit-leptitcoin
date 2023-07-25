@@ -28,5 +28,5 @@ export const GET: RequestHandler = async ({
 		console.warn(e);
 	}
 
-	return new Response();
+	return json(false);
 };

@@ -43,7 +43,6 @@
 </script>
 
 <Toast position="tr" />
-<Modal />
 
 <Drawer>
 	{#if $drawerStore.id === 'navigation'}
@@ -61,3 +60,5 @@
 		<slot />
 	</div>
 </AppShell>
+
+<Modal />
