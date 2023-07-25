@@ -2,10 +2,17 @@
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import { userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types';
+	import { onMount } from 'svelte';
 	import UserCard from '../user/UserCard.svelte';
+	import { getProfile } from '$supa/profiles';
 
 	export let listing: SupaListing;
+
+	let author: SupaProfile;
+
+	onMount(async () => {
+		author = await getProfile({ uid: listing.author_uid });
+	});
 
 	function buy() {
 		console.log('buy ', listing.uid);
@@ -46,16 +53,15 @@
 		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
-					href="/u/{listing.author?.username}"
+					href="/u/{listing.author_username}"
 					class="flex gap-3 hover:underline"
-					aria-label="{listing.author?.username}'s profile - rated {listing.author
-						?.rating} out of 5"
+					aria-label="{listing.author_username}'s profile - rated {listing.author?.rating} out of 5"
 				>
-					<UserCard user={listing.author} showAnonymous={false} asCard={false} />
+					<UserCard uid={listing.author} showAnonymous={false} asCard={false} />
 				</a>
 				<button
 					class="btn variant-ghost-success h-fit self-center"
-					aria-label="contact {listing.author?.username}"
+					aria-label="contact {listing.author_username}"
 				>
 					Contact
 				</button>

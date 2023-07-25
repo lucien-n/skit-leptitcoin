@@ -1,4 +1,5 @@
-import { getSupaUser, getUserListings } from '$lib/supabase';
+import { getListings } from '$supa/listings';
+import { getProfile } from '$supa/profiles';
 
 export const load = async ({
 	params: { username },
@@ -7,9 +8,9 @@ export const load = async ({
 	params: { username: string };
 	url: { search: string };
 }) => {
-	const user = await getSupaUser({ username });
+	const user = await getProfile({ match: { username } });
 
-	const user_listings = await getUserListings(user?.uid);
+	const user_listings = await getListings({ match: { author_uid: user?.uid } });
 
 	return {
 		user: user,

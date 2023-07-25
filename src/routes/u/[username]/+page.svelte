@@ -29,7 +29,7 @@
 	id="user-profile-{user.uid}"
 	class="flex h-full flex-col gap-4 md:m-4 md:mx-auto md:w-[70%]"
 >
-	<UserCard {user} {anonymous} />
+	<UserCard uid={user} {anonymous} />
 	<section id="user-listings">
 		{#each listings as listing}
 			<ListingRow {listing} />

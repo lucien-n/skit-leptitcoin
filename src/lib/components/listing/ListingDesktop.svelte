@@ -23,10 +23,10 @@
 		/>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
 			<div class="flex w-full flex-col justify-between gap-2">
-				<UserCard user={listing.author} asCard={false} showAnonymous={false} />
+				<UserCard uid={listing.author_uid} asCard={false} showAnonymous={false} />
 				<button
 					class="btn variant-ghost-success h-fit w-full self-center"
-					aria-label="contact {listing.author?.username}"
+					aria-label="contact {listing.author_username}"
 				>
 					Contact
 				</button>

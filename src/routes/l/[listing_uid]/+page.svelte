@@ -4,7 +4,7 @@
 	import ListingMobile from '$comp/listing/ListingMobile.svelte';
 	import ListingMobileGhost from '$comp/listing/ListingMobileGhost.svelte';
 	import { TITLE } from '$lib/helper';
-	import { getListing } from '$lib/supabase';
+	import { getListing } from '$supa/listings';
 
 	export let data: { listing_uid: string };
 

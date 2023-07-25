@@ -1,38 +1,45 @@
 <script lang="ts">
 	import Icon from '$comp/widgets/Icon.svelte';
 	import { userStore } from '$lib/store';
-	import type { SupaUser } from '$lib/types';
+	import { getProfile } from '$supa/profiles';
 	import { Avatar, Ratings } from '@skeletonlabs/skeleton';
+	import { onMount } from 'svelte';
 
-	export let user: SupaUser | undefined;
+	export let uid: string;
 	export let anonymous = true;
 	export let showAnonymous = true;
 	export let asCard = true;
 
-	let rating = { current: user?.rating, max: 5.0 };
+	let profile;
+
+	onMount(async () => {
+		profile = await getProfile({ uid });
+	});
+
+	let rating = { current: profile?.rating, max: 5.0 };
 
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
 		rating.current = event.detail.index;
-		fetch(`/api/user/${user?.uid}/rate/${rating.current}`);
+		fetch(`/api/user/${uid}/rate/${rating.current}`);
 	}
 </script>
 
-{#if user}
+{#if uid}
 	<div
 		class="group card flex h-fit w-full flex-row items-center justify-between gap-4 border-0 md:w-fit"
 		class:card={asCard}
 		class:p-5={asCard}
 	>
 		<div class="flex flex-row gap-4">
-			<Avatar initials={user.username[0]} />
+			<Avatar initials={profile.username[0]} />
 			<div>
 				<a
-					href="/u/{user.username}"
+					href="/u/{profile.username}"
 					class="flex gap-3"
-					aria-label="{user.username}'s profile - rated {user.rating} out of 5"
+					aria-label="{profile.username}'s profile - rated {profile.rating} out of 5"
 				>
-					<h3 class="h3 hover:underline">{user.username}</h3>
+					<h3 class="h3 hover:underline">{profile.username}</h3>
 				</a>
 				<div class="flex gap-2">
 					<Ratings bind:value={rating.current} max={rating.max} interactive on:icon={iconClick}>
@@ -43,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-		{#if !anonymous && showAnonymous && $userStore?.id === user.uid}
+		{#if !anonymous && showAnonymous && $userStore?.id === uid}
 			<span class="md:mx-8" />
 			<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
 		{/if}
