@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$comp/widgets/Icon.svelte';
-	import { userStore } from '$lib/store';
+	import { profileStore, sessionStore } from '$lib/store';
 	import { dislikeListing, isLikedByUser, likeListing } from '$supa/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
@@ -8,9 +8,9 @@
 	export let listing_uid: string;
 	let liked = false;
 
-	const unsubscribe = userStore.subscribe(async (user) => {
-		if (!user || listing_uid === 'none') return;
-		if (await isLikedByUser({ listing_uid, user_uid: user.id })) liked = true;
+	const unsubscribe = sessionStore.subscribe(async (session) => {
+		if (!session || !session.user || listing_uid === 'none') return;
+		if (await isLikedByUser({ listing_uid, user_uid: session.user.id })) liked = true;
 	});
 
 	onMount(() => unsubscribe());
@@ -18,7 +18,7 @@
 	async function toggleLike() {
 		if (listing_uid === 'none') return;
 
-		if (!$userStore) {
+		if (!$profileStore) {
 			toastStore.trigger({
 				message: 'You must be signed in',
 				background: 'variant-glass-warn'
@@ -27,8 +27,8 @@
 		}
 
 		liked = !liked;
-		if (liked) await likeListing({ listing_uid, user_uid: $userStore.id });
-		else await dislikeListing({ listing_uid, user_uid: $userStore.id });
+		if (liked) await likeListing({ listing_uid, user_uid: $profileStore.id });
+		else await dislikeListing({ listing_uid, user_uid: $profileStore.id });
 	}
 </script>
 

@@ -4,7 +4,7 @@
 	import SearchMobile from '$comp/navigation/SearchMobile.svelte';
 	import LinePlaceholder from '$comp/widgets/LinePlaceholder.svelte';
 	import { navigation_drawer, user_drawer } from '$lib/drawers';
-	import { supaUserStore, userStore } from '$lib/store';
+	import { profileStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 
 	function openNavigationDrawer(): void {
@@ -16,7 +16,7 @@
 	};
 </script>
 
-{#key $userStore}
+{#key $profileStore}
 	<AppBar padding="p-1">
 		<svelte:fragment slot="lead">
 			<NavigationLinkGroup let:N>
@@ -39,12 +39,12 @@
 		<svelte:fragment slot="trail">
 			<div class="hidden h-full flex-row items-center md:flex">
 				<NavigationLinkGroup let:N>
-					{#if $userStore}
+					{#if $profileStore}
 						<N.Link href="/new">
 							<N.Icon name="plus" />
 							<N.Text>New</N.Text>
 						</N.Link>
-						{#if $supaUserStore?.role && $supaUserStore.role % 8 === 0}
+						{#if $profileStore?.role && $profileStore.role % 8 === 0}
 							<N.Link href="/admin/dashboard">
 								<N.Icon name="layout" />
 								<N.Text>Dashboard</N.Text>
@@ -53,8 +53,8 @@
 						<N.Link on:click={openUserDrawer}>
 							<N.Icon name="user" />
 							<N.Text>
-								{#if $supaUserStore}
-									{$supaUserStore.username}
+								{#if $profileStore}
+									{$profileStore.username}
 								{:else}
 									<LinePlaceholder w={16} />
 								{/if}

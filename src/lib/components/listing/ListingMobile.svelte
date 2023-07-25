@@ -1,7 +1,7 @@
 <script lang="ts">
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
-	import { userStore } from '$lib/store';
+	import { profileStore } from '$lib/store';
 	import { onMount } from 'svelte';
 	import UserCard from '../user/UserCard.svelte';
 	import { getProfile } from '$supa/profiles';
@@ -28,7 +28,7 @@
 			alt="listing"
 			class="w-full object-cover"
 		/>
-		{#if $userStore?.id !== listing.author_uid}
+		{#if $profileStore?.id !== listing.author_uid}
 			<div class="absolute bottom-3 right-3">
 				<LikeButton listing_uid={listing.uid} />
 			</div>
@@ -55,9 +55,9 @@
 				<a
 					href="/u/{listing.author_username}"
 					class="flex gap-3 hover:underline"
-					aria-label="{listing.author_username}'s profile - rated {listing.author?.rating} out of 5"
+					aria-label="{listing.author_username}'s profile"
 				>
-					<UserCard uid={listing.author} showAnonymous={false} asCard={false} />
+					<UserCard uid={listing.author_uid} showAnonymous={false} asCard={false} />
 				</a>
 				<button
 					class="btn variant-ghost-success h-fit self-center"
@@ -67,7 +67,7 @@
 				</button>
 			</div>
 			<hr />
-			{#if $userStore?.id === listing.author_uid}
+			{#if $profileStore?.id === listing.author_uid}
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">

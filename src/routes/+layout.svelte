@@ -3,7 +3,6 @@
 	import NavigationBar from '$comp/navigation/NavigationBar.svelte';
 	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
 	import UserDrawer from '$comp/user/UserDrawer.svelte';
-	import { pagesVisitedStore, supaUserStore, userStore } from '$lib/store';
 	import { getProfile } from '$supa/supabase';
 	import { AppShell, Drawer, Modal, Toast, drawerStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
@@ -11,39 +10,27 @@
 	import { onMount } from 'svelte';
 	import '../app.postcss';
 	import '../dark-theme.postcss';
+	import { profileStore } from '$lib/store';
 
 	export let data;
 
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	$: {
-		userStore.set(session ? session.user : null);
-		updateSupaUser(session?.user.id);
-	}
+	// $: {
+	// 	profileStore.refresh(session?.user.id);
+	// }
 
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange(async (event: any, _session: any) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
-			userStore.set(_session ? _session.user : null);
-			updateSupaUser(session?.user.id);
 		});
 
+		profileStore.refresh(session?.user.id);
 		return () => data.subscription.unsubscribe();
 	});
-
-	async function updateSupaUser(user_uid: string | undefined) {
-		supaUserStore.set(user_uid ? await getProfile({ uid: user_uid }) : null);
-	}
-
-	function goBack() {
-		console.log('Before: ', $pagesVisitedStore);
-		goto($pagesVisitedStore[0]);
-		$pagesVisitedStore.slice(0, 1);
-		console.log('After: ', $pagesVisitedStore);
-	}
 </script>
 
 <Toast position="tr" />
@@ -62,12 +49,6 @@
 		<NavigationBar />
 	</svelte:fragment>
 	<div class="h-full w-full overflow-hidden">
-		<button
-			class="btn variant-glass-primary absolute m-4 hidden aspect-square rounded-full md:flex"
-			on:click={goBack}
-		>
-			{'<'}
-		</button>
 		<slot />
 	</div>
 </AppShell>

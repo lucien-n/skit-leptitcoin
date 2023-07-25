@@ -3,8 +3,7 @@
 	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
 	import { formatDate } from '$lib/helper';
-	import { supaUserStore, userStore } from '$lib/store';
-	import type { SupaListing } from '$lib/types';
+	import { profileStore } from '$lib/store';
 
 	export let listing: SupaListing;
 
@@ -35,17 +34,17 @@
 			</div>
 			<!-- edit & delete - only visible to author & admins -->
 			<div
-				class:hidden={listing.author_uid !== $userStore?.id &&
-					$supaUserStore &&
-					$supaUserStore.role % 8 !== 0}
+				class:hidden={listing.author_uid !== $profileStore?.id &&
+					$profileStore &&
+					$profileStore.role % 8 !== 0}
 			/>
 		</div>
 	</a>
 	<div
 		class="flex gap-2 self-end"
-		class:hidden={$supaUserStore &&
-			$supaUserStore.uid !== listing.author_uid &&
-			$supaUserStore?.role < 8}
+		class:hidden={$profileStore &&
+			$profileStore.uid !== listing.author_uid &&
+			$profileStore?.role < 8}
 	>
 		<EditListingButton listing_uid={listing.uid} />
 		<DeleteListingButton listing_uid={listing.uid} />

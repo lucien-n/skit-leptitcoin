@@ -2,7 +2,7 @@
 	import EditButton from '$comp/listing/EditListingButton.svelte';
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate } from '$lib/helper';
-	import { searchStore, userStore } from '$lib/store';
+	import { profileStore, searchStore } from '$lib/store';
 	import { fade } from 'svelte/transition';
 
 	export let listing: SupaListing;
@@ -57,10 +57,10 @@
 				</div>
 			</div>
 			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
-				{#if listing.author_uid === $userStore?.id}
+				{#if listing.author_uid === $profileStore?.id}
 					<EditButton listing_uid={listing.uid} />
 				{/if}
-				{#if $userStore && listing.author_uid !== $userStore.id}
+				{#if $profileStore && listing.author_uid !== $profileStore.id}
 					<LikeButton listing_uid={listing.uid} />
 				{/if}
 			</div>

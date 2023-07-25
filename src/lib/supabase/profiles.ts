@@ -8,7 +8,7 @@ export async function getProfile({
 	match
 }: {
 	sb?: SupabaseClient;
-	uid?;
+	uid?: string;
 	match?: any;
 }): Promise<SupaProfile | void> {
 	try {
@@ -17,7 +17,7 @@ export async function getProfile({
 		} = await sb
 			.from('profiles')
 			.select('*')
-			.match(match ?? uid ?? {});
+			.match(match ?? { uid } ?? {});
 		return profile as SupaProfile;
 	} catch (e) {
 		console.warn(e);

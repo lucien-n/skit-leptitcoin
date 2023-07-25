@@ -3,7 +3,7 @@
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import UserCard from '$comp/user/UserCard.svelte';
 	import { formatDate } from '$lib/helper';
-	import { userStore } from '$lib/store';
+	import { profileStore, sessionStore } from '$lib/store';
 
 	export let listing: SupaListing;
 
@@ -32,7 +32,7 @@
 				</button>
 			</div>
 			<hr />
-			{#if $userStore?.id === listing.author_uid}
+			{#if $profileStore?.id === listing.author_uid}
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">
