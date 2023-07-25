@@ -10,10 +10,7 @@ export const settingsStore: Writable<Settings> = localStorageStore('settings', {
 	high_contrast: false
 });
 export const sessionStore: Writable<Session> = writable();
-export const acknowledgedInDevStore: Writable<boolean> = localStorageStore(
-	'acknowledgeInDev',
-	false
-);
+export const acknowledgedInDevStore = localStorageStore('acknowledgeInDev', false);
 
 function createCounterStore() {
 	const { subscribe, set, update } = writable(0);

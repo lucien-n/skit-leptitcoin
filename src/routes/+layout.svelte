@@ -19,7 +19,7 @@
 	$: ({ supabase, session } = data);
 
 	if (!$acknowledgedInDevStore) {
-		showInDevModal();
+		setTimeout(showInDevModal, 1_000);
 	}
 
 	async function showInDevModal() {
@@ -27,6 +27,7 @@
 			title: 'In-Dev Website',
 			body: 'This website is currently in-dev and may have issues<br/>Feel free to report them on <a class="hover:underline" href="github.com/lucien-neuhoff/skit-lepticoin/issues">github</a>'
 		});
+		if ($acknowledgedInDevStore) modalStore.close();
 	}
 
 	onMount(() => {
