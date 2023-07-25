@@ -8,7 +8,7 @@
 	export let listing: SupaListing;
 </script>
 
-<div in:fade={{ duration: 100, delay: 100 }} class="card relative flex h-64 w-full">
+<div in:fade={{ duration: 100, delay: 100 }} class="card relative hidden h-64 w-full md:flex">
 	<header class="relative z-30 h-full w-3/5 xl:w-1/3">
 		<img
 			src={listing.picture

@@ -1,6 +1,7 @@
 <script lang="ts">
-	import ListingCard from '$comp/listing/ListingCard.svelte';
-	import ListingCardGhost from '$comp/listing/ListingCardGhost.svelte';
+	import ListingCardDesktop from '$comp/listing/ListingCardDesktop.svelte';
+	import ListingCardDesktopGhost from '$comp/listing/ListingCardDesktopGhost.svelte';
+	import ListingCardMobile from '$comp/listing/ListingCardMobile.svelte';
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SearchParams } from '$lib/types';
@@ -55,14 +56,18 @@
 </svelte:head>
 
 <main id="main" class="container mx-auto mt-10 flex h-full w-full">
-	<section id="listings" class="mx-auto flex h-fit w-full flex-col gap-8 lg:w-[90%] 2xl:w-[70%]">
+	<section
+		id="listings"
+		class="mx-auto flex h-fit w-full flex-col gap-8 p-3 lg:w-[90%] 2xl:w-[70%]"
+	>
 		{#await getListings}
 			{#each { length: 5 } as _}
-				<ListingCardGhost />
+				<ListingCardDesktopGhost />
 			{/each}
 		{:then listings}
 			{#each listings as listing}
-				<ListingCard {listing} />
+				<ListingCardDesktop {listing} />
+				<ListingCardMobile {listing} />
 			{/each}
 		{/await}
 	</section>
