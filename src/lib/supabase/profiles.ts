@@ -4,10 +4,10 @@ import { supabase } from '$supa/supabase';
 
 export async function getProfile({
 	sb = supabase,
-	match
+	uid
 }: {
-	sb: SupabaseClient;
-	match: any;
+	sb?: SupabaseClient;
+	uid: string;
 }): Promise<SupaProfile | void> {
 	try {
 		const {

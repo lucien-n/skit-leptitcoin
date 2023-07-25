@@ -8,10 +8,10 @@ export async function getListings({
 	offset = 0,
 	match
 }: {
-	sb: SupabaseClient;
-	limit: number;
-	offset: number;
-	match: any;
+	sb?: SupabaseClient;
+	limit?: number;
+	offset?: number;
+	match?: any;
 }): Promise<SupaListing[] | void> {
 	try {
 		const { data } = await sb
@@ -29,8 +29,8 @@ export async function getListing({
 	sb = supabase,
 	match
 }: {
-	sb: SupabaseClient;
-	match: any;
+	sb?: SupabaseClient;
+	match?: any;
 }): Promise<SupaListing | void> {
 	try {
 		const {

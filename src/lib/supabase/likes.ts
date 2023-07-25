@@ -7,7 +7,7 @@ export async function isLikedByUser({
 	listing_uid,
 	user_uid
 }: {
-	sb: SupabaseClient;
+	sb?: SupabaseClient;
 	listing_uid: string;
 	user_uid: string;
 }): Promise<boolean> {
@@ -28,7 +28,7 @@ export async function dislikeListing({
 	listing_uid,
 	user_uid
 }: {
-	sb: SupabaseClient;
+	sb?: SupabaseClient;
 	listing_uid: string;
 	user_uid: string;
 }): Promise<boolean> {
@@ -48,7 +48,7 @@ export async function likeListing({
 	listing_uid,
 	user_uid
 }: {
-	sb: SupabaseClient;
+	sb?: SupabaseClient;
 	listing_uid: string;
 	user_uid: string;
 }): Promise<boolean> {
