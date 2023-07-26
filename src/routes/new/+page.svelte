@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { LISTING_CATEGORIES, LISTING_CONDITIONS, TITLE } from '$lib/helper';
+	import { profileStore } from '$lib/store.js';
+	import { supabase } from '$supa/supabase.js';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
@@ -9,13 +11,29 @@
 	let condition: number;
 
 	let loading = false;
+	let picture;
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
+		formData.set('picture', picture);
 		return async ({ update }: { update: any }) => {
 			loading = false;
 			update();
+
+			// Upload picture
+			if (form?.listing_uid) {
+				const path = `${$profileStore.uid}/${form.listing_uid}.jpg`;
+				console.log(path);
+				const { data, error } = await supabase.storage
+					.from('listings_pictures')
+					.upload(path, picture);
+				if (error) console.warn(error);
+			}
 		};
+	};
+
+	const handlePicture = (event) => {
+		picture = event.target.files[0];
 	};
 </script>
 
@@ -105,7 +123,7 @@
 				alt="listing miniature"
 				accept=".png,.jpg,.jpeg"
 				class="btn variant-ghost-surface hover:cursor-pointer"
-				value={form?.picture || ''}
+				on:change={handlePicture}
 			/>
 		</section>
 		<button

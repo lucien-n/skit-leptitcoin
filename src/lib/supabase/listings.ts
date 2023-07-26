@@ -44,3 +44,23 @@ export async function getListing({
 		console.warn(e);
 	}
 }
+
+export async function getListingPicture({
+	sb = supabase,
+	listing_uid,
+	author_uid
+}: {
+	sb: SupabaseClient;
+	listing_uid: string;
+	author_uid: string;
+}) {
+	try {
+		const { data, error } = await sb.storage
+			.from('listings_pictures')
+			.download(`${author_uid}/${listing_uid}.jpg`);
+		if (error) console.warn(error);
+		else return data;
+	} catch (e) {
+		console.warn(e);
+	}
+}
