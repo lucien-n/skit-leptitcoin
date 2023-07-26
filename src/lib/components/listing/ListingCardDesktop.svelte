@@ -14,7 +14,9 @@
 			src={listing.picture
 				? listing.picture
 				: 'https://placehold.co/30x20/000000/FFFFFF?text=' + listing.title.split(' ')[0]}
-			alt="listing"
+			alt={listing.title}
+			loading="lazy"
+			decoding="async"
 			class="aspect-[4/5] h-full w-full rounded-l-[4px] border border-r-0 border-b-surface-500 border-l-surface-500 border-t-surface-500 object-cover"
 		/>
 	</header>

@@ -19,6 +19,8 @@
 				? listing.picture
 				: 'https://placehold.co/600x400/000000/FFFFFF?text=' + listing.title?.split(' ')[0]}
 			alt="listing"
+			loading="lazy"
+			decoding="async"
 			class="w-2/3 object-cover"
 		/>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
