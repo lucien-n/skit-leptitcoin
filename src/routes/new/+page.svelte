@@ -94,6 +94,20 @@
 				{/each}
 			</RadioGroup>
 		</section>
+		<section class="mx-auto flex">
+			<p class="text-xl text-error-500">
+				{form?.subject === 'picture' ? '*' : ''}
+			</p>
+			<input
+				type="file"
+				name="picture"
+				id="picture"
+				alt="listing miniature"
+				accept=".png,.jpg,.jpeg"
+				class="btn variant-ghost-surface hover:cursor-pointer"
+				value={form?.picture || ''}
+			/>
+		</section>
 		<button
 			type="submit"
 			id="submit"
