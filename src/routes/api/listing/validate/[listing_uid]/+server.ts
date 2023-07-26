@@ -2,7 +2,7 @@ import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
-	locals: { supabase, isUserAllowed, roles, getUser }
+	locals: { supabase, isUserAllowed, roles, getProfile: getUser }
 }) => {
 	const listing_uid = params.listing_uid;
 	if (!listing_uid) throw error(422, { message: 'Missing listing_uid' });
@@ -15,11 +15,10 @@ export const GET: RequestHandler = async ({
 	try {
 		const { error } = await supabase
 			.from('listings')
-			.upsert({
-				uid: listing_uid,
-				is_validated: 1,
-				validated_at: new Date(),
-				validated_by: current_user_uid
+			.update({
+				is_validated: true,
+				validated_at: new Date().toUTCString(),
+				validated_by: current_user_uid ?? 'unknown'
 			})
 			.match({ uid: listing_uid });
 		if (error) console.error('Error while validating "', listing_uid, '": ', error);

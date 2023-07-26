@@ -8,7 +8,7 @@
 
 	export let listing: SupaListing;
 
-	let author: SupaProfile;
+	let author: SupaProfile | null;
 
 	onMount(async () => {
 		author = await getProfile({ uid: listing.author_uid });
@@ -30,7 +30,7 @@
 			decoding="async"
 			class="w-full object-cover"
 		/>
-		{#if $profileStore?.id !== listing.author_uid}
+		{#if $profileStore?.uid !== listing.author_uid}
 			<div class="absolute bottom-3 right-3">
 				<LikeButton listing_uid={listing.uid} />
 			</div>
@@ -43,7 +43,7 @@
 				{listing.price}€
 			</h3>
 		</div>
-		<p>{formatDate(listing.createdAt?.getTime() || 0)}</p>
+		<p>{formatDate(new Date(listing.created_at ?? 0).getTime() || 0)}</p>
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>
@@ -69,7 +69,7 @@
 				</button>
 			</div>
 			<hr />
-			{#if $profileStore?.id === listing.author_uid}
+			{#if $profileStore.uid === listing.author_uid}
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">

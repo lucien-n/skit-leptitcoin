@@ -55,14 +55,14 @@
 						{listing.author_username}
 					</a>
 					<span class="flex self-center text-[8px] not-italic"> ● </span>
-					{formatDate(listing.createdAt?.getTime() || 0)}
+					{formatDate(new Date(listing.created_at ?? 0).getTime() || 0)}
 				</div>
 			</div>
 			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
-				{#if listing.author_uid === $profileStore?.id}
+				{#if listing.author_uid === $profileStore.uid}
 					<EditButton listing_uid={listing.uid} />
 				{/if}
-				{#if $profileStore && listing.author_uid !== $profileStore.id}
+				{#if $profileStore && listing.author_uid !== $profileStore.uid}
 					<LikeButton listing_uid={listing.uid} />
 				{/if}
 			</div>

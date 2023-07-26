@@ -34,7 +34,7 @@
 				</button>
 			</div>
 			<hr />
-			{#if $profileStore?.id === listing.author_uid}
+			{#if $profileStore.uid === listing.author_uid}
 				<h3 class="h3 text-center">You are the author of this listing</h3>
 			{:else}
 				<div class="flex w-full gap-3">
@@ -54,7 +54,7 @@
 				{listing.price}€
 			</h3>
 		</div>
-		<p>{formatDate(listing.createdAt?.getTime() || 0)}</p>
+		<p>{formatDate(new Date(listing.created_at ?? 0).getTime() || 0)}</p>
 		<hr />
 		<h4 class="h4">Description</h4>
 		<p class="ts-lg">{listing.description}</p>

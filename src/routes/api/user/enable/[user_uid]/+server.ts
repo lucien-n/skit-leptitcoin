@@ -2,7 +2,7 @@ import { error, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
-	locals: { supabase, isUserAllowed, roles, getUser }
+	locals: { supabase, isUserAllowed, roles, getProfile: getUser }
 }) => {
 	const user_uid = params.user_uid;
 	if (!user_uid) throw error(422, { message: 'Missing user_uid' });

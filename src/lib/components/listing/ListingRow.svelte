@@ -27,14 +27,14 @@
 		</div>
 		<div class="flex items-center gap-2">
 			<p class="italic opacity-70">
-				{formatDate(listing.createdAt?.getTime() || new Date().getTime())}
+				{formatDate(new Date(listing.created_at ?? 0).getTime() || 0)}
 			</p>
 			<div class="badge variant-ghost text-base italic">
 				{listing.price} €
 			</div>
 			<!-- edit & delete - only visible to author & admins -->
 			<div
-				class:hidden={listing.author_uid !== $profileStore?.id &&
+				class:hidden={listing.author_uid !== $profileStore?.uid &&
 					$profileStore &&
 					$profileStore.role % 8 !== 0}
 			/>

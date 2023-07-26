@@ -1,3 +1,4 @@
+import { supabase } from '$supa/supabase';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 import { error, type Handle } from '@sveltejs/kit';
 
@@ -36,8 +37,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return current_user_role >= level;
 	};
 
-	event.locals.getUser = async () => {
-		return (await event.locals.getSession())?.user;
+	event.locals.getProfile = async () => {
+		const profile_uid = (await event.locals.getSession())?.user.id;
+		const {
+			data: [profile]
+		} = await supabase.from('profiles').select('*').eq('uid', profile_uid);
+		return profile;
 	};
 
 	event.locals.roles = {

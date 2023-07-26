@@ -118,6 +118,9 @@ export interface Database {
           created_at: string | null
           rating: number
           rating_count: number
+          restricted: boolean
+          restricted_at: string | null
+          restricted_by: string | null
           role: number
           uid: string
           updated_at: string | null
@@ -127,6 +130,9 @@ export interface Database {
           created_at?: string | null
           rating?: number
           rating_count?: number
+          restricted?: boolean
+          restricted_at?: string | null
+          restricted_by?: string | null
           role?: number
           uid: string
           updated_at?: string | null
@@ -136,12 +142,21 @@ export interface Database {
           created_at?: string | null
           rating?: number
           rating_count?: number
+          restricted?: boolean
+          restricted_at?: string | null
+          restricted_by?: string | null
           role?: number
           uid?: string
           updated_at?: string | null
           username?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "profiles_restricted_by_fkey"
+            columns: ["restricted_by"]
+            referencedRelation: "profiles"
+            referencedColumns: ["uid"]
+          },
           {
             foreignKeyName: "profiles_uid_fkey"
             columns: ["uid"]

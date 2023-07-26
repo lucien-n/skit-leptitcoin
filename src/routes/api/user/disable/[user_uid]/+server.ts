@@ -2,7 +2,7 @@ import { error, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
-	locals: { supabase, isUserAllowed, roles, getUser }
+	locals: { supabase, isUserAllowed, roles, getProfile: getUser }
 }) => {
 	const user_uid = params.user_uid;
 	if (!user_uid) throw error(422, { message: 'Missing user_uid' });
@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({
 	const is_allowed = await isUserAllowed(roles.ADMIN);
 	if (!is_allowed) throw error(422, { message: 'Insuficient permission' });
 
-	const current_user_uid = (await getUser())?.id;
+	const current_user_uid = (await getUser())?.uid;
 	if (!current_user_uid) throw error(500, { message: 'Internal server error' });
 
 	try {
@@ -19,7 +19,7 @@ export const GET: RequestHandler = async ({
 			.update({
 				restricted: true,
 				restricted_by: current_user_uid,
-				restricted_at: new Date()
+				restricted_at: new Date().toUTCString()
 			})
 			.eq('uid', user_uid);
 		if (err) throw error(404, { message: err.message });

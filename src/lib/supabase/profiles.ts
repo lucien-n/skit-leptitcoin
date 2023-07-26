@@ -33,7 +33,7 @@ export async function getProfile({
 	sb?: SupabaseClient;
 	uid?: string;
 	match?: any;
-}): Promise<SupaProfile | void> {
+}): Promise<SupaProfile | null> {
 	try {
 		const {
 			data: [profile]
@@ -45,4 +45,6 @@ export async function getProfile({
 	} catch (e) {
 		console.warn(e);
 	}
+
+	return null;
 }
