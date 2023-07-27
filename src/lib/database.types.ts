@@ -58,7 +58,7 @@ export interface Database {
           uid: string
           updated_at: string | null
           validated_at: string | null
-          validated_by: string
+          validated_by: string | null
         }
         Insert: {
           author_uid: string
@@ -74,7 +74,7 @@ export interface Database {
           uid: string
           updated_at?: string | null
           validated_at?: string | null
-          validated_by: string
+          validated_by?: string | null
         }
         Update: {
           author_uid?: string
@@ -90,7 +90,7 @@ export interface Database {
           uid?: string
           updated_at?: string | null
           validated_at?: string | null
-          validated_by?: string
+          validated_by?: string | null
         }
         Relationships: [
           {
