@@ -27,8 +27,8 @@
 				);
 			})
 			.sort((a: SupaListing, b: SupaListing) => {
-				if (a.createdAt && b.createdAt) {
-					return b.createdAt.getTime() - a.createdAt.getTime();
+				if (a.created_at && b.created_at) {
+					return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
 				}
 				return 0;
 			});
