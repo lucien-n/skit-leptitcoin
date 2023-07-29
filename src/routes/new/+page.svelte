@@ -15,20 +15,9 @@
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
-		formData.set('picture', picture);
 		return async ({ update }: { update: any }) => {
 			loading = false;
 			update();
-
-			// Upload picture
-			if (form?.listing_uid) {
-				const path = `${$profileStore.uid}/${form.listing_uid}.jpg`;
-				console.log(path);
-				const { data, error } = await supabase.storage
-					.from('listings_pictures')
-					.upload(path, picture);
-				if (error) console.warn(error);
-			}
 		};
 	};
 

@@ -77,10 +77,6 @@ export const actions: Actions = {
 					message: error.message,
 					subject: ''
 				});
-			else
-				return fail(-1, {
-					listing_uid
-				});
 		} catch (e) {
 			console.error(e);
 		}
