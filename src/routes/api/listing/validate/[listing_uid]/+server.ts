@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({
 	const is_allowed = await isUserAllowed(roles.ADMIN);
 	if (!is_allowed) throw error(422, { message: 'Insuficient permission' });
 
-	const current_user_uid = (await getUser())?.id;
+	const current_user_uid = (await getUser())?.uid;
 
 	try {
 		const { error } = await supabase

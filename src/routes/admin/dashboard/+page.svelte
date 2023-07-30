@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import ValidateListingButton from '$comp/listing/ValidateListingButton.svelte';
 	import ListingRow from '$lib/components/listing/ListingRow.svelte';
 	import UserCardAdmin from '$lib/components/user/UserCardAdmin.svelte';
 	import { TITLE } from '$lib/helper';
@@ -66,7 +67,15 @@
 		{#if filtered_listings}
 			<section id="listings" class="flex flex-col gap-2">
 				{#each filtered_listings as listing}
-					<ListingRow {listing} />
+					<div class="flex w-full gap-2 transition-all duration-200 ease-in-out">
+						<ListingRow {listing} />
+						{#if !listing.is_validated && $profileStore && $profileStore?.role >= 8}
+							<ValidateListingButton
+								listing_uid={listing.uid}
+								on:validated={(event) => (listing.is_validated = event.detail.success)}
+							/>
+						{/if}
+					</div>
 				{/each}
 			</section>
 		{:else if filtered_profiles}

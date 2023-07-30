@@ -44,7 +44,7 @@
 		class="flex gap-2 self-end"
 		class:hidden={$profileStore &&
 			$profileStore.uid !== listing.author_uid &&
-			$profileStore?.role < 8}
+			$profileStore.role < 8}
 	>
 		<EditListingButton listing_uid={listing.uid} />
 		<DeleteListingButton listing_uid={listing.uid} />
