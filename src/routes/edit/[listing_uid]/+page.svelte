@@ -16,7 +16,7 @@
 
 	const handleSubmit: SubmitFunction = ({ formElement, formData, action, cancel, submitter }) => {
 		loading = true;
-		formData.set('uid', listing.uid)
+		formData.set('uid', listing.uid);
 		return async ({ update }: { update: any }) => {
 			loading = false;
 			update();
@@ -85,6 +85,9 @@
 				id="price"
 				name="price"
 				class="input"
+				step="0.01"
+				min="0"
+				max="999999"
 				value={form?.price || listing.price || ''}
 			/>
 		</section>
