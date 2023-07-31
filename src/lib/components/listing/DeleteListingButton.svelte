@@ -14,6 +14,6 @@
 	};
 </script>
 
-<button on:click={deleteListing} class="btn variant-glass-error p-2" aria-label="delete">
+<button on:click={deleteListing} class="btn variant-ghost-error m-1 p-1" aria-label="delete">
 	<Icon name="trash" />
 </button>
