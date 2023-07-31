@@ -20,7 +20,7 @@
 	/>
 </svelte:head>
 
-{#await getListing(listing_uid)}
+{#await getListing({ match: { uid: listing_uid } })}
 	<ListingDesktopGhost />
 	<ListingMobileGhost />
 {:then listing}
