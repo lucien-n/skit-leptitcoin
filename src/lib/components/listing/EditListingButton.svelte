@@ -4,6 +4,6 @@
 	export let listing_uid: string;
 </script>
 
-<a href="/edit/{listing_uid}" class="btn variant-glass-tertiary p-2" aria-label="edit">
+<a href="/edit/{listing_uid}" class="btn variant-ghost-tertiary m-1 p-1" aria-label="edit">
 	<Icon name="edit" />
 </a>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import AdminListingList from '$comp/admin/AdminListingList.svelte';
-	import AdminProfileList from '$comp/admin/AdminProfileList.svelte';
+	import AdminListingTable from '$comp/admin/AdminListingTable.svelte';
+	import AdminProfileTable from '$comp/admin/AdminProfileTable.svelte';
 	import { TITLE } from '$lib/helper';
 	import { profileStore } from '$lib/store';
 	import { RadioGroup, RadioItem, Tab, TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
@@ -34,9 +34,9 @@
 		</Tab>
 		<svelte:fragment slot="panel">
 			{#if tabSet === 'listings'}
-				<AdminListingList {listings} />
+				<AdminListingTable {listings} />
 			{:else if tabSet === 'profiles'}
-				<AdminProfileList {profiles} />
+				<AdminProfileTable {profiles} />
 			{/if}
 		</svelte:fragment>
 	</TabGroup>

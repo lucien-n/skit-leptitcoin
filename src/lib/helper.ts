@@ -2,13 +2,7 @@ import { toastStore } from '@skeletonlabs/skeleton';
 
 export const TITLE = 'LePtitCoin';
 
-export const LISTING_CONDITIONS = [
-	'New',
-	'Very good condition',
-	'Good condition',
-	'Satisfactory condition',
-	'For parts'
-];
+export const LISTING_CONDITIONS = ['New', 'Very good', 'Good', 'Satisfactory', 'For parts'];
 
 export const LISTING_CATEGORIES = ['Vehicles', 'Fashion', 'Housing', 'Multimedia', 'Recreational'];
 
