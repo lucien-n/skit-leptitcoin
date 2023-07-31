@@ -10,7 +10,7 @@
 	const MAX_DESCRIPTION_LENGTH = 30;
 </script>
 
-<div class="card flex h-fit w-full break-words p-1 md:p-2">
+<div class="card flex h-fit w-full p-1 md:p-2">
 	<a href="/l/{listing.uid}" class="group/listing-row flex w-full items-center justify-between">
 		<div class="flex items-end gap-1 group-hover/listing-row:underline">
 			<h4 class="h4">
@@ -27,17 +27,13 @@
 		</div>
 		<div class="flex items-center gap-2">
 			<p class="italic opacity-70">
+				{listing.author_username}
+				-
 				{formatDate(new Date(listing.created_at ?? 0).getTime() || 0)}
 			</p>
 			<div class="badge variant-ghost text-base italic">
 				{listing.price} €
 			</div>
-			<!-- edit & delete - only visible to author & admins -->
-			<div
-				class:hidden={listing.author_uid !== $profileStore?.uid &&
-					$profileStore &&
-					$profileStore.role % 8 !== 0}
-			/>
 		</div>
 	</a>
 	<div

@@ -35,3 +35,5 @@ export type SearchParams = {
 	price_min?: number;
 	price_max?: number;
 };
+
+export type AdminSearch = { search: string; type: 'profiles' | 'listings' };
