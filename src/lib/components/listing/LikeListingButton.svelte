@@ -3,17 +3,15 @@
 	import { profileStore, sessionStore } from '$lib/store';
 	import { dislikeListing, isLikedByUser, likeListing } from '$supa/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
 
 	export let listing_uid: string;
-	let liked = false;
+	$: liked = false;
 
+	// TODO: Update listing like
 	const unsubscribe = sessionStore.subscribe(async (session) => {
 		if (!session || !session.user || listing_uid === 'none') return;
 		if (await isLikedByUser({ listing_uid, user_uid: session.user.id })) liked = true;
 	});
-
-	onMount(() => unsubscribe());
 
 	async function toggleLike() {
 		if (listing_uid === 'none') return;
@@ -27,8 +25,8 @@
 		}
 
 		liked = !liked;
-		if (liked) await likeListing({ listing_uid, user_uid: $profileStore.id });
-		else await dislikeListing({ listing_uid, user_uid: $profileStore.id });
+		if (liked) await likeListing({ listing_uid, user_uid: $profileStore.uid });
+		else await dislikeListing({ listing_uid, user_uid: $profileStore.uid });
 	}
 </script>
 

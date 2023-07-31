@@ -15,6 +15,7 @@ export async function isLikedByUser({
 		const {
 			data: [{ listing_uid: fetched_uid }]
 		} = await sb.from('likes').select('listing_uid').match({ listing_uid, user_uid });
+		console.log(fetched_uid);
 		return listing_uid === fetched_uid;
 	} catch (e) {
 		console.warn(e);
