@@ -7,7 +7,6 @@ export const actions: Actions = {
 		if (!session) throw error(401, { message: 'Unauthorized' });
 
 		const form_data = await request.formData();
-
 		const author_uid = session.user.id;
 		const title = form_data.get('title')?.toString() || '';
 		const description = form_data.get('description')?.toString() || '';
