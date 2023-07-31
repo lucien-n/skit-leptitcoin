@@ -11,7 +11,10 @@
 </script>
 
 <div class="card flex h-fit w-full p-1 md:p-2">
-	<a href="/l/{listing.uid}" class="group/listing-row flex w-full items-center justify-between">
+	<a
+		href="/listing/{listing.uid}"
+		class="group/listing-row flex w-full items-center justify-between"
+	>
 		<div class="flex items-end gap-1 group-hover/listing-row:underline">
 			<h4 class="h4">
 				{listing.title}

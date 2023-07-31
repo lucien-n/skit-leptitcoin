@@ -37,7 +37,7 @@
 			<Avatar initials={profile.username[0]} />
 			<div>
 				<a
-					href="/u/{profile.username}"
+					href="/user/{profile.username}"
 					class="flex gap-3"
 					aria-label="{profile.username}'s profile - rated {profile.rating} out of 5"
 				>

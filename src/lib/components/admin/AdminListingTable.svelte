@@ -72,7 +72,7 @@
 						<td class="text-center">{listing.price}</td>
 						<td class="text-center">{LISTING_CONDITIONS[listing.condition]}</td>
 						<td class="text-center"
-							><a href="/u/{listing.author_uid}">{listing.author_username}</a></td
+							><a href="/user/{listing.author_uid}">{listing.author_username}</a></td
 						>
 						<td class="text-center">{formatDate(new Date(listing.created_at || 0).getTime())}</td>
 						<td class="text-center">
