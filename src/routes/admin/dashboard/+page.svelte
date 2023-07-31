@@ -5,7 +5,7 @@
 	import UserCardAdmin from '$lib/components/user/UserCardAdmin.svelte';
 	import { TITLE } from '$lib/helper';
 	import { profileStore } from '$lib/store';
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import { RadioGroup, RadioItem, SlideToggle } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
 
 	export let data: { listings: SupaListing[] | null; profiles: SupaProfile[] | null };
@@ -72,7 +72,7 @@
 						{#if !listing.is_validated && $profileStore && $profileStore?.role >= 8}
 							<ValidateListingButton
 								listing_uid={listing.uid}
-								on:validated={(event) => (listing.is_validated = event.detail.success)}
+								on:success={() => (listing.is_validated = true)}
 							/>
 						{/if}
 					</div>

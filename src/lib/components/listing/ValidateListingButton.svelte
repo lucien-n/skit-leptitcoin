@@ -9,9 +9,9 @@
 
 	const validateListing = async () => {
 		dispatch('click');
-		await fetch(`/api/listing/validate/${listing_uid}`)
-			.then((res) => res.json())
-			.then((success) => dispatch('success', { success }));
+		const res = await fetch(`/api/listing/validate/${listing_uid}`);
+		const success = await res.json();
+		dispatch('success', { success });
 	};
 </script>
 
