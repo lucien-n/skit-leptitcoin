@@ -87,6 +87,8 @@
 				id="price"
 				name="price"
 				step="0.01"
+				min="0"
+				max="999999"
 				class="input"
 				value={form?.price || ''}
 			/>
