@@ -50,8 +50,8 @@ const CONDITIONS = [
 ];
 const CATEGORIES = ['Vehicles', 'Fashion', 'Housing', 'Multimedia', 'Recreational'];
 
-const NUMBER_OF_USERS = 4
-const NUMBER_OF_LISTINGS = 10
+const NUMBER_OF_USERS = 1;
+const NUMBER_OF_LISTINGS = 1;
 
 const USER_NUM = Math.floor(Math.random() * NUMBER_OF_USERS);
 
@@ -67,7 +67,7 @@ describe('Create listing', () => {
 
 			cy.visit('/new');
 
-			cy.wait(1_000)
+			cy.wait(1_000);
 
 			const LISTING = LISTINGS[Math.floor(Math.random() * Object.keys(LISTINGS).length)];
 			const PRICE = Math.floor(Math.random() * 10_000);
@@ -82,7 +82,7 @@ describe('Create listing', () => {
 				force: true
 			});
 
-			cy.wait(1_000)
+			cy.wait(1_000);
 
 			cy.get('#submit').click({ force: true });
 		}

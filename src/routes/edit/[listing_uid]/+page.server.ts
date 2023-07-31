@@ -13,7 +13,7 @@ export const load = async ({ locals: { supabase }, params }) => {
 };
 
 export const actions: Actions = {
-	edit: async ({ request, locals: { supabase, getSession } }) => {
+	edit: async ({ request, locals: { supabase, getSession }, fetch }) => {
 		const session = await getSession();
 		if (!session) throw error(401, { message: 'Unauthorized' });
 
@@ -87,17 +87,22 @@ export const actions: Actions = {
 		} as SupaListing;
 
 		try {
-			const { error } = await supabase.from('listings').update(listing).eq('uid', listing_uid);
-			if (error) {
-				console.log(error);
+			const { status } = await fetch('/api/listing/update', {
+				method: 'PUT',
+				body: JSON.stringify(listing),
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			});
+			if (status !== 200)
 				return fail(400, {
 					...entries,
-					message: error.message,
+					message: 'An error occured',
 					subject: ''
 				});
-			}
 		} catch (e) {
-			console.error(e);
+			console.warn(e);
 		}
 
 		throw redirect(303, '/edit/success');

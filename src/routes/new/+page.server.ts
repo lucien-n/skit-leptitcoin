@@ -2,7 +2,7 @@ import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { v4 as uuid } from 'uuid';
 
 export const actions: Actions = {
-	new: async ({ request, locals: { supabase, getSession } }) => {
+	new: async ({ request, locals: { supabase, getSession }, fetch }) => {
 		const session = await getSession();
 		if (!session) throw error(401, { message: 'Unauthorized' });
 
@@ -66,19 +66,33 @@ export const actions: Actions = {
 		} as SupaListing;
 
 		try {
-			const {
-				data: [{ uid: listing_uid }],
-				error
-			} = await supabase.from('listings').insert(listing).select('uid');
-			if (error)
-				return fail(400, {
-					...entries,
-					message: error.message,
-					subject: ''
-				});
+			const {body} = await fetch('/api/listing/create', {
+				method: 'POST',
+				body: JSON.stringify(listing),
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			});
+			console.log(body);
 		} catch (e) {
-			console.error(e);
+			console.warn(e);
 		}
+
+		// try {
+		// 	const {
+		// 		data: [{ uid: listing_uid }],
+		// 		error
+		// 	} = await supabase.from('listings').insert(listing).select('uid');
+		// 	if (error)
+		// 		return fail(400, {
+		// 			...entries,
+		// 			message: error.message,
+		// 			subject: ''
+		// 		});
+		// } catch (e) {
+		// 	console.error(e);
+		// }
 
 		throw redirect(303, '/new/success');
 	}
