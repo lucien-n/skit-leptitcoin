@@ -1,6 +1,4 @@
-import { type RequestHandler } from '@sveltejs/kit';
-
-export const GET: RequestHandler = async ({
+export const GET = async ({
 	params,
 	locals: { supabase, isUserAllowed, roles, getProfile: getUser }
 }) => {
