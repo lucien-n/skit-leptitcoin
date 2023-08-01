@@ -2,30 +2,38 @@
 	import Icon from '$comp/widgets/Icon.svelte';
 	import { formatDate, successToast, warnToast } from '$lib/helper';
 	import { confirmModal } from '$lib/modals';
-	import { Avatar, SlideToggle } from '@skeletonlabs/skeleton';
+	import { Avatar, RadioGroup, RadioItem, SlideToggle, filter } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
+	import Table from './Table.svelte';
+	import { getContext } from 'svelte';
 
 	export let profiles: SupaProfile[] | null;
 
 	type Search = {
 		search: string;
 		profile: string;
-		toggleRestricted: boolean;
+		showWhat: 'all' | 'restricted' | 'non-restricted';
 	};
 
-	let search: Writable<Search> = writable({ search: '', profile: '', toggleRestricted: false });
+	let search: Writable<Search> = writable({
+		search: '',
+		profile: '',
+		showWhat: 'all'
+	});
 
 	$: filtered_profiles = profiles;
 
-	let columns = ['Picture', 'Username', 'Rating', 'Created', 'Actions'];
+	let columns = ['picture', 'username', 'rating', 'created_at'];
 
-	search.subscribe(({ search, toggleRestricted, profile }: Search) => {
+	search.subscribe(({ search, showWhat, profile }: Search) => {
 		const search_regex = new RegExp(`${search || ''}`, 'i');
 		const profile_regex = new RegExp(`${profile || ''}`, 'i');
 
 		if (profiles)
 			filtered_profiles = profiles.filter(
-				(profile) => profile.username.match(search_regex) && profile.restricted == toggleRestricted
+				(profile) =>
+					profile.username.match(search_regex) &&
+					(showWhat === 'all' ? true : (showWhat === 'restricted') === profile.restricted)
 			);
 	});
 
@@ -73,14 +81,22 @@
 			warnToast(`Error while enabling user <u>${profile.username}</u>`);
 		}
 	}
+
+	const getProfileRow = () => getContext('RowContext') as SupaProfile;
 </script>
 
 <section class="flex flex-col gap-4">
 	<input type="text" class="input" placeholder="Search" bind:value={$search.search} />
 	<section class="flex items-center gap-3">
-		<SlideToggle bind:checked={$search.toggleRestricted} name="toggleShowRestricted"
-			>Toggle Show Restricted</SlideToggle
-		>
+		<RadioGroup>
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="all">All</RadioItem>
+			<RadioItem bind:group={$search.showWhat} name="$search.showWhat" value="restricted"
+				>Restricted</RadioItem
+			>
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="non-restricted"
+				>Non Restricted</RadioItem
+			>
+		</RadioGroup>
 		<input
 			type="text"
 			id="filterProfile"
@@ -89,48 +105,31 @@
 			bind:value={$search.profile}
 		/>
 	</section>
-	<table id="listings" class="w-full overflow-y-auto">
-		<thead class="sticky top-0 bg-surface-900">
-			<tr>
-				{#each columns as col}
-					<th class="p-3">{col}</th>
-				{/each}
-			</tr>
-		</thead>
-		{#if filtered_profiles}
-			<tbody>
-				{#each filtered_profiles as profile}
-					<tr class="even:bg-surface-700">
-						<td><Avatar initials={profile.username[0]} /></td>
-						<td class="text-center">{profile.username}</td>
-						<td class="text-center">{profile.rating}</td>
-						<td class="text-center">{formatDate(new Date(profile.created_at || 0).getTime())}</td>
-						<td class="text-center">
-							<button
-								on:click={() => deleteProfile(profile)}
-								class="btn variant-ghost-error m-1 aspect-square p-1"
-							>
-								<Icon name="trash" />
-							</button>
-							{#if profile.restricted}
-								<button
-									on:click={() => enableProfile(profile)}
-									class="btn variant-ghost-success m-1 aspect-square p-1"
-								>
-									<Icon name="check" />
-								</button>
-							{:else}
-								<button
-									on:click={() => disableProfile(profile)}
-									class="btn variant-ghost-secondary m-1 aspect-square p-1"
-								>
-									<Icon name="slash" />
-								</button>
-							{/if}
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		{/if}
-	</table>
+	{#if filtered_profiles}
+		<Table elements={filtered_profiles} {columns}>
+			<svelte:fragment slot="actions">
+				<button
+					on:click={() => deleteProfile(getProfileRow())}
+					class="btn variant-ghost-error m-1 aspect-square p-1"
+				>
+					<Icon name="trash" />
+				</button>
+				{#if getProfileRow().restricted}
+					<button
+						on:click={() => enableProfile(getProfileRow())}
+						class="btn variant-ghost-success m-1 aspect-square p-1"
+					>
+						<Icon name="check" />
+					</button>
+				{:else}
+					<button
+						on:click={() => disableProfile(getProfileRow())}
+						class="btn variant-ghost-secondary m-1 aspect-square p-1"
+					>
+						<Icon name="slash" />
+					</button>
+				{/if}
+			</svelte:fragment>
+		</Table>
+	{/if}
 </section>

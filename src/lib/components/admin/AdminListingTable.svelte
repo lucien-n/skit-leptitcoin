@@ -1,12 +1,14 @@
 <script lang="ts">
 	import ListingRow from '$comp/listing/ListingRow.svelte';
 	import { profileStore } from '$lib/store';
-	import { SlideToggle } from '@skeletonlabs/skeleton';
+	import { filter, SlideToggle } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
 	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
+	import Table from './Table.svelte';
+	import { getContext } from 'svelte';
 
 	export let listings: SupaListing[] | null;
 
@@ -24,7 +26,7 @@
 		author: ''
 	});
 
-	let columns = ['Category', 'Title', 'Price', 'Condition', 'Author', 'Created', 'Actions'];
+	let columns = ['category', 'title', 'price', 'condition', 'author_username', 'created_at'];
 
 	search.subscribe(({ search, toggleValids, author }: Search) => {
 		const search_regex = new RegExp(`${search || ''}`, 'i');
@@ -39,6 +41,8 @@
 				);
 			});
 	});
+
+	const listingRow = () => getContext('RowContext') as SupaListing;
 </script>
 
 <section class="flex flex-col gap-4">
@@ -55,47 +59,18 @@
 			bind:value={$search.author}
 		/>
 	</section>
-	<table id="listings" class="w-full overflow-y-auto">
-		<thead class="sticky top-0 bg-surface-900">
-			<tr>
-				{#each columns as col}
-					<th class="p-3">{col}</th>
-				{/each}
-			</tr>
-		</thead>
-		{#if filtered_listings}
-			<tbody>
-				{#each filtered_listings as listing}
-					<tr class="even:bg-surface-700">
-						<td class="text-center">{listing.category}</td>
-						<td class="text-center">{listing.title}</td>
-						<td class="text-center">{listing.price}</td>
-						<td class="text-center">{LISTING_CONDITIONS[listing.condition]}</td>
-						<td class="text-center"
-							><a href="/user/{listing.author_uid}">{listing.author_username}</a></td
-						>
-						<td class="text-center">{formatDate(new Date(listing.created_at || 0).getTime())}</td>
-						<td class="text-center">
-							<DeleteListingButton listing_uid={listing.uid} />
-							<EditListingButton listing_uid={listing.uid} />
-							{#if !listing.is_validated && $profileStore && $profileStore?.role >= 8}
-								<ValidateListingButton
-									listing_uid={listing.uid}
-									on:success={() => (listing.is_validated = true)}
-								/>
-							{/if}
-						</td>
-					</tr>
-					<!-- <div class="flex w-full gap-2 transition-all duration-200 ease-in-out">
-					<ListingRow {listing} />
-					{#if !listing.is_validated && $profileStore && $profileStore?.role >= 8}
+	{#if filtered_listings}
+		<Table elements={filtered_listings} {columns}>
+			<svelte:fragment slot="actions">
+				<DeleteListingButton listing_uid={listingRow().uid} />
+				<EditListingButton listing_uid={listingRow().uid} />
+				{#if !listingRow().is_validated && $profileStore && $profileStore?.role >= 8}
 					<ValidateListingButton
-					listing_uid={listing.uid}
+						listing_uid={listingRow().uid}
+						on:success={() => (listingRow().is_validated = true)}
 					/>
-					{/if}
-				</div> -->
-				{/each}
-			</tbody>
-		{/if}
-	</table>
+				{/if}
+			</svelte:fragment>
+		</Table>
+	{/if}
 </section>

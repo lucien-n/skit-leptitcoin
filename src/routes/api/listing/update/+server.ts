@@ -1,3 +1,4 @@
+import { isListingValid } from '$lib/server/helper';
 import type { Session } from '@supabase/supabase-js';
 import { json } from '@sveltejs/kit';
 
@@ -12,12 +13,16 @@ export const PUT = async ({ request, locals: { getSession, supabase } }) => {
 	if (!session?.user) return json({ status: 401, statusText: 'Unauthorized' });
 
 	try {
-		const { data, error: err } = await supabase
+		const {
+			data: [{ uid: listing_uid }],
+			error: err
+		} = await supabase
 			.from('listings')
-			.update(listing)
-			.eq('uid', listing.uid);
+			.update({ ...listing, is_validated: false, validated_by: null, validated_at: null })
+			.eq('uid', listing.uid)
+			.select('uid');
 		if (err) console.warn(err);
-		else json({ status: 200 });
+		else json({ status: 200, statusText: listing_uid });
 	} catch (e) {
 		console.warn(e);
 	}

@@ -7,7 +7,6 @@ import { Session, SupabaseClient } from '@supabase/supabase-js';
 declare global {
 	type SupaListing = Database['public']['Tables']['listings']['Row'];
 	type SupaProfile = Database['public']['Tables']['profiles']['Row'];
-
 	declare namespace App {
 		interface Locals {
 			supabase: SupabaseClient<Database>;

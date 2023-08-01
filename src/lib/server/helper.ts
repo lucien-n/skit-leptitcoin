@@ -1,4 +1,4 @@
-const isListingValid = (listing_data: any): any => {
+export const isListingValid = (listing_data: any): any => {
 	if (!(listing_data as SupaListing)) return [null, 'Invalid data'];
 
 	const listing = listing_data as SupaListing;

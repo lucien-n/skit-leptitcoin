@@ -87,7 +87,7 @@ export const actions: Actions = {
 		} as SupaListing;
 
 		try {
-			const { status } = await fetch('/api/listing/update', {
+			const { status, statusText } = await fetch('/api/listing/update', {
 				method: 'PUT',
 				body: JSON.stringify(listing),
 				headers: {
@@ -101,6 +101,7 @@ export const actions: Actions = {
 					message: 'An error occured',
 					subject: ''
 				});
+			else console.log(status, statusText);
 		} catch (e) {
 			console.warn(e);
 		}
