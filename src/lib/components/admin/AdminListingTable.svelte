@@ -1,14 +1,12 @@
 <script lang="ts">
-	import ListingRow from '$comp/listing/ListingRow.svelte';
-	import { profileStore } from '$lib/store';
-	import { filter, SlideToggle } from '@skeletonlabs/skeleton';
-	import { writable, type Writable } from 'svelte/store';
-	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
-	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
-	import Table from './Table.svelte';
+	import { profileStore } from '$lib/store';
+	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { getContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
+	import Table from './Table.svelte';
 
 	export let listings: SupaListing[] | null;
 
@@ -16,19 +14,19 @@
 
 	type Search = {
 		search: string;
-		toggleValids: boolean;
 		author: string;
+		showWhat: 'all' | 'valids' | 'non-valids';
 	};
 
 	let search: Writable<Search> = writable({
 		search: '',
-		toggleValids: false,
-		author: ''
+		author: '',
+		showWhat: 'all'
 	});
 
 	let columns = ['category', 'title', 'price', 'condition', 'author_username', 'created_at'];
 
-	search.subscribe(({ search, toggleValids, author }: Search) => {
+	search.subscribe(({ search, showWhat, author }: Search) => {
 		const search_regex = new RegExp(`${search || ''}`, 'i');
 		const author_regex = new RegExp(`${author || ''}`, 'i');
 
@@ -37,7 +35,7 @@
 				return (
 					listing.title.match(search_regex) &&
 					listing.author_username?.match(author_regex) &&
-					toggleValids == listing.is_validated
+					(showWhat === 'all' ? true : (showWhat === 'valids') === listing.is_validated)
 				);
 			});
 	});
@@ -48,9 +46,13 @@
 <section class="flex flex-col gap-4">
 	<input type="text" class="input" placeholder="Search" bind:value={$search.search} />
 	<section class="flex items-center gap-3">
-		<SlideToggle bind:checked={$search.toggleValids} name="toggleShowValids"
-			>Toggle Show Valids</SlideToggle
-		>
+		<RadioGroup>
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="all">All</RadioItem>
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="valids">Valids</RadioItem>
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="non-valids"
+				>Non Valids</RadioItem
+			>
+		</RadioGroup>
 		<input
 			type="text"
 			id="filterAuthorUsername"

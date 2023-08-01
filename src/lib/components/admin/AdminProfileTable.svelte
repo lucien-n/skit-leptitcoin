@@ -90,7 +90,7 @@
 	<section class="flex items-center gap-3">
 		<RadioGroup>
 			<RadioItem bind:group={$search.showWhat} name="showWhat" value="all">All</RadioItem>
-			<RadioItem bind:group={$search.showWhat} name="$search.showWhat" value="restricted"
+			<RadioItem bind:group={$search.showWhat} name="showWhat" value="restricted"
 				>Restricted</RadioItem
 			>
 			<RadioItem bind:group={$search.showWhat} name="showWhat" value="non-restricted"
