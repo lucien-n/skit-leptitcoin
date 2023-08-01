@@ -2,10 +2,14 @@ import type { Session } from '@supabase/supabase-js';
 import { json } from '@sveltejs/kit';
 
 export const POST = async ({ request, locals: { getSession, supabase } }) => {
-	const listing = await request.json();
+	const listing_data = await request.json();
 
-	const session: Session = await getSession();
-	if (!session.user) return json({ status: 401, statusText: 'Unauthorized' });
+	const [listing, message] = isListingValid(listing_data);
+
+	if (message) return json({ status: 422, statusText: message });
+
+	const session: Session | null = await getSession();
+	if (!session?.user) return json({ status: 401, statusText: 'Unauthorized' });
 
 	try {
 		const { data, error: err } = await supabase.from('listings').insert(listing);
