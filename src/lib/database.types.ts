@@ -228,6 +228,12 @@ export interface Database {
         }
         Returns: string
       }
+      get_role: {
+        Args: {
+          profile_uid: string
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
