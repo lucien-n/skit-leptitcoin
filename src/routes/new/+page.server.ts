@@ -66,7 +66,7 @@ export const actions: Actions = {
 		} as SupaListing;
 
 		try {
-			const {body} = await fetch('/api/listing/create', {
+			const { status, statusText } = await fetch('/api/listing/create', {
 				method: 'POST',
 				body: JSON.stringify(listing),
 				headers: {
@@ -74,7 +74,7 @@ export const actions: Actions = {
 					'Content-Type': 'application/json'
 				}
 			});
-			console.log(body);
+			console.log(status, statusText);
 		} catch (e) {
 			console.warn(e);
 		}

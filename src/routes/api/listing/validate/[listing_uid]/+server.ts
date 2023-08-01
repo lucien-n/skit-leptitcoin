@@ -1,19 +1,19 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({
 	params,
 	locals: { supabase, isUserAllowed, roles, getProfile: getUser }
 }) => {
 	const listing_uid = params.listing_uid;
-	if (!listing_uid) throw error(422, { message: 'Missing listing_uid' });
+	if (!listing_uid) return new Response(null, { status: 422, statusText: 'Missing listing_uid' });
 
 	const is_allowed = await isUserAllowed(roles.ADMIN);
-	if (!is_allowed) throw error(422, { message: 'Insuficient permission' });
+	if (!is_allowed) return new Response(null, { status: 401, statusText: 'Unauthorized' });
 
 	const current_user_uid = (await getUser())?.uid;
 
 	try {
-		const { error } = await supabase
+		const { error: err } = await supabase
 			.from('listings')
 			.update({
 				is_validated: true,
@@ -21,11 +21,10 @@ export const GET: RequestHandler = async ({
 				validated_by: current_user_uid ?? 'unknown'
 			})
 			.match({ uid: listing_uid });
-		if (error) console.error('Error while validating "', listing_uid, '": ', error);
-		else return json(true);
+		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
+		else return new Response(JSON.stringify(true), { status: 200, statusText: 'Success' });
 	} catch (e) {
 		console.warn(e);
+		return new Response(null, { status: 500, statusText: 'Internal Server Error' });
 	}
-
-	return json(false);
 };
