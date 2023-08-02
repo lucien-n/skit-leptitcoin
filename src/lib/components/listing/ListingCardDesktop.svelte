@@ -60,11 +60,13 @@
 				</div>
 			</div>
 			<div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
-				{#if listing.author_uid === $profileStore.uid}
-					<EditButton listing_uid={listing.uid} />
-				{/if}
-				{#if $profileStore && listing.author_uid !== $profileStore.uid}
-					<LikeButton listing_uid={listing.uid} />
+				{#if listing && $profileStore}
+					{#if listing.author_uid === $profileStore.uid}
+						<EditButton listing_uid={listing.uid} />
+					{/if}
+					{#if listing.author_uid !== $profileStore.uid}
+						<LikeButton listing_uid={listing.uid} />
+					{/if}
 				{/if}
 			</div>
 		</div>
