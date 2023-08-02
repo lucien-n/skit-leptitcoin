@@ -6,7 +6,7 @@
 	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
-	import Table from './Table.svelte';
+	import Table from '$comp/widgets/Table.svelte';
 
 	export let listings: SupaListing[] | null;
 

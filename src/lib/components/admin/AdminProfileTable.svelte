@@ -4,7 +4,7 @@
 	import { confirmModal } from '$lib/modals';
 	import { Avatar, RadioGroup, RadioItem, SlideToggle, filter } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
-	import Table from './Table.svelte';
+	import Table from '$comp/widgets/Table.svelte';
 	import { getContext } from 'svelte';
 
 	export let profiles: SupaProfile[] | null;
