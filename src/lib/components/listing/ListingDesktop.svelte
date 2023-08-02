@@ -3,7 +3,7 @@
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import UserCard from '$comp/user/UserCard.svelte';
 	import { formatDate } from '$lib/helper';
-	import { profileStore, sessionStore } from '$lib/store';
+	import { profileStore } from '$lib/store';
 
 	export let listing: SupaListing;
 
@@ -50,7 +50,7 @@
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
-			<h3 class="badge variant-ghost text-lg">
+			<h3 class="variant-ghost badge text-lg">
 				{listing.price}€
 			</h3>
 		</div>

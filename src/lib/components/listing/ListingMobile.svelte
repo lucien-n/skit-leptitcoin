@@ -2,9 +2,9 @@
 	import LikeButton from '$comp/listing/LikeListingButton.svelte';
 	import { formatDate, LISTING_CONDITIONS } from '$lib/helper';
 	import { profileStore } from '$lib/store';
+	import { getProfile } from '$supa/profiles';
 	import { onMount } from 'svelte';
 	import UserCard from '../user/UserCard.svelte';
-	import { getProfile } from '$supa/profiles';
 
 	export let listing: SupaListing;
 

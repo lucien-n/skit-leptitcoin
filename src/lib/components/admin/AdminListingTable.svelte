@@ -1,12 +1,12 @@
 <script lang="ts">
 	import DeleteListingButton from '$comp/listing/DeleteListingButton.svelte';
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
+	import Table from '$comp/widgets/Table.svelte';
 	import { profileStore } from '$lib/store';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import { getContext, setContext } from 'svelte';
+	import { getContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
-	import Table from '$comp/widgets/Table.svelte';
 
 	export let listings: SupaListing[] | null;
 

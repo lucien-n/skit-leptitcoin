@@ -1,8 +1,4 @@
 <script lang="ts">
-	import EditButton from '$comp/listing/EditListingButton.svelte';
-	import LikeButton from '$comp/listing/LikeListingButton.svelte';
-	import { formatDate } from '$lib/helper';
-	import { profileStore, searchStore } from '$lib/store';
 	import { fade } from 'svelte/transition';
 
 	export let listing: SupaListing;

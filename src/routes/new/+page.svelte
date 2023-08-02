@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { LISTING_CATEGORIES, LISTING_CONDITIONS, TITLE } from '$lib/helper';
-	import { profileStore } from '$lib/store.js';
-	import { supabase } from '$supa/supabase.js';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
 

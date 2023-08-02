@@ -1,6 +1,6 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-
 import { supabase } from '$supa/supabase';
+
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 export async function getProfiles({
 	sb = supabase,

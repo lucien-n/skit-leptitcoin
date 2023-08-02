@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Icon from '$comp/widgets/Icon.svelte';
-	import { formatDate, successToast, warnToast } from '$lib/helper';
-	import { confirmModal } from '$lib/modals';
-	import { Avatar, RadioGroup, RadioItem, SlideToggle, filter } from '@skeletonlabs/skeleton';
-	import { writable, type Writable } from 'svelte/store';
 	import Table from '$comp/widgets/Table.svelte';
+	import { successToast, warnToast } from '$lib/helper';
+	import { confirmModal } from '$lib/modals';
+	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { getContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 
 	export let profiles: SupaProfile[] | null;
 
