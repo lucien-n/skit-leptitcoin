@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Drawer from '$comp/drawer/Drawer.svelte';
+	import Drawer from '$comp/widgets/drawer/Drawer.svelte';
 	import { profileStore, settingsStore } from '$lib/store';
 	import { SlideToggle } from '@skeletonlabs/skeleton';
 </script>

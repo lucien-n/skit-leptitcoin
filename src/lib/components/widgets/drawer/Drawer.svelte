@@ -1,6 +1,6 @@
 <script lang="ts">
-	import DrawerLink from '$comp/drawer/DrawerLink.svelte';
-	import DrawerLinkText from '$comp/drawer/DrawerLinkText.svelte';
+	import DrawerLink from '$comp/widgets/drawer/DrawerLink.svelte';
+	import DrawerLinkText from '$comp/widgets/drawer/DrawerLinkText.svelte';
 	import Icon from '$comp/widgets/Icon.svelte';
 	import DrawerLinkGroup from './DrawerLinkGroup.svelte';
 
