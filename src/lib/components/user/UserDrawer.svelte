@@ -16,7 +16,7 @@
 			<SlideToggle name="hight-contrast" bind:checked={$settingsStore.high_contrast} />
 			<D.Text>Hight Contrast</D.Text>
 		</D.Link>
-		<D.Link href="/auth/signout">
+		<D.Link href="/auth/signout" reload>
 			<D.Icon name="log_out" />
 			<D.Text>Sign Out</D.Text>
 		</D.Link>
