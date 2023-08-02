@@ -50,7 +50,7 @@ function createProfileStore() {
 		refresh: (uid?: string) =>
 			update((profile: SupaProfile) => {
 				const func = async () => {
-					const new_profile = await getProfile({ uid: uid ?? profile.uid });
+					const new_profile = await getProfile({ uid: uid ?? profile?.uid });
 					authCounterStore.incr();
 					if (new_profile) set(new_profile);
 				};

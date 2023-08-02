@@ -17,10 +17,6 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	if (!$acknowledgedInDevStore) {
-		setTimeout(showInDevModal, 1_000);
-	}
-
 	async function showInDevModal() {
 		$acknowledgedInDevStore = await confirmModal({
 			title: 'In-Dev Website',
@@ -31,12 +27,15 @@
 
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange(async (event: any, _session: any) => {
+			profileStore.refresh(session?.user.id);
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
 		});
 
-		profileStore.refresh(session?.user.id);
+		if (!$acknowledgedInDevStore) {
+			setTimeout(showInDevModal, 1_000);
+		}
 		return () => data.subscription.unsubscribe();
 	});
 </script>
