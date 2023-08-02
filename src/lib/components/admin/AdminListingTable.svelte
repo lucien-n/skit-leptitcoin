@@ -3,7 +3,7 @@
 	import EditListingButton from '$comp/listing/EditListingButton.svelte';
 	import { profileStore } from '$lib/store';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import { getContext } from 'svelte';
+	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
 	import Table from './Table.svelte';
@@ -11,6 +11,7 @@
 	export let listings: SupaListing[] | null;
 
 	$: filtered_listings = listings;
+	let refresh_table = 0;
 
 	type Search = {
 		search: string;
@@ -62,14 +63,18 @@
 		/>
 	</section>
 	{#if filtered_listings}
-		<Table elements={filtered_listings} {columns}>
+		<Table elements={filtered_listings} {columns} bind:refresh={refresh_table}>
 			<svelte:fragment slot="actions">
 				<DeleteListingButton listing_uid={listingRow().uid} />
 				<EditListingButton listing_uid={listingRow().uid} />
 				{#if !listingRow().is_validated && $profileStore && $profileStore?.role >= 8}
+					{@const listing = listingRow()}
 					<ValidateListingButton
 						listing_uid={listingRow().uid}
-						on:success={() => (listingRow().is_validated = true)}
+						on:success={({ detail: { success } }) => {
+							if (listings && success) listings[listings?.indexOf(listing)].is_validated = true;
+							refresh_table++;
+						}}
 					/>
 				{/if}
 			</svelte:fragment>

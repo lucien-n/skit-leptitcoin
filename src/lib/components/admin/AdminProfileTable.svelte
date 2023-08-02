@@ -22,6 +22,7 @@
 	});
 
 	$: filtered_profiles = profiles;
+	let refresh_table = 0;
 
 	let columns = ['picture', 'username', 'rating', 'created_at'];
 
@@ -106,7 +107,7 @@
 		/>
 	</section>
 	{#if filtered_profiles}
-		<Table elements={filtered_profiles} {columns}>
+		<Table elements={filtered_profiles} {columns} bind:refresh={refresh_table}>
 			<svelte:fragment slot="actions">
 				<button
 					on:click={() => deleteProfile(getProfileRow())}

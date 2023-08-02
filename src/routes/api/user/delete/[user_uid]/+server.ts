@@ -11,7 +11,7 @@ export const GET = async ({ params, locals: { supabase, isUserAllowed, roles } }
 			.delete()
 			.eq('uid', user_uid + 'i');
 		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
-		else return new Response(null, { status: 202, statusText: 'Success' });
+		else return new Response(null, { status: 200, statusText: 'Success' });
 	} catch (e) {
 		console.warn(e);
 		return new Response(null, { status: 500, statusText: 'Internal Server Error' });

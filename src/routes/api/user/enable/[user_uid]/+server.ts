@@ -18,7 +18,7 @@ export const GET = async ({
 			.update({ restricted: false, restricted_by: null, restricted_at: null })
 			.eq('uid', user_uid);
 		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
-		else return new Response(null, { status: 202, statusText: 'Success' });
+		else return new Response(null, { status: 200, statusText: 'Success' });
 	} catch (e) {
 		console.warn(e);
 		new Response(null, { status: 500, statusText: 'Internal Server Error' });

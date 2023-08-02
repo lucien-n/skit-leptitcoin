@@ -95,7 +95,8 @@ export const actions: Actions = {
 					'Content-Type': 'application/json'
 				}
 			});
-			if (status !== 200)
+			console.log(status, statusText);
+			if (status != 200)
 				return fail(400, {
 					...entries,
 					message: 'An error occured',

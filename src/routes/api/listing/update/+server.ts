@@ -22,7 +22,7 @@ export const PUT = async ({ request, locals: { getSession, supabase } }) => {
 			.select('uid');
 		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
 		else
-			return new Response(JSON.stringify({ listing_uid }), { status: 204, statusText: 'Success' });
+			return new Response(JSON.stringify({ listing_uid }), { status: 200, statusText: 'Success' });
 	} catch (e) {
 		console.warn(e);
 		return new Response(null, { status: 500, statusText: 'Internal Server Error' });
