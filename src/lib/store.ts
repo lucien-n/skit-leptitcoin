@@ -12,41 +12,50 @@ export const settingsStore: Writable<Settings> = localStorageStore('settings', {
 export const sessionStore: Writable<Session> = writable();
 export const acknowledgedInDevStore = localStorageStore('acknowledgeInDev', false);
 
-function createCounterStore() {
-	const { subscribe, set, update } = writable(0);
+function createCounterStore(name: string, log_on_update: boolean) {
+	const { subscribe, set, update }: Writable<{ name: string; value: number }> = writable({
+		name,
+		value: 0
+	});
 
 	return {
 		subscribe,
 		incr: (value?: number) =>
-			update((current_value: number) => {
-				const new_value = (current_value += value ?? 1);
-				console.log(new_value);
-				return new_value;
+			update((curr) => {
+				curr.value += value ?? 1;
+				log_on_update && console.log(`${curr.name}-Counter:`, curr.value);
+				return curr;
 			}),
 		decr: (value?: number) =>
-			update((current_value: number) => {
-				const new_value = (current_value -= value ?? 1);
-				console.log(new_value);
-				return new_value;
+			update((curr) => {
+				curr.value -= value ?? 1;
+				log_on_update && console.log(`${curr.name}-Counter:`, curr.value);
+				return curr;
 			}),
 		clear: () =>
-			update((_) => {
-				return 0;
+			update((curr) => {
+				log_on_update && console.log(`${curr.name}-Counter: reset`);
+				return { name: curr.name, value: 0 };
 			})
 	};
 }
-export const counter = createCounterStore();
+
+const authCounterStore = createCounterStore('Auth', true);
 
 function createProfileStore() {
-	const { subscribe, set, update }: Writable<SupaProfile> = writable({});
+	const { subscribe, set, update }: Writable<SupaProfile> = writable();
 
 	return {
 		subscribe,
 		refresh: (uid?: string) =>
-			update(async (profile: SupaProfile) => {
-				const new_profile = await getProfile({ uid: uid ?? profile.id });
-				set(new_profile);
-				counter.incr();
+			update((profile: SupaProfile) => {
+				const func = async () => {
+					const new_profile = await getProfile({ uid: uid ?? profile.uid });
+					authCounterStore.incr();
+					if (new_profile) set(new_profile);
+				};
+				func();
+				return profile;
 			})
 	};
 }
