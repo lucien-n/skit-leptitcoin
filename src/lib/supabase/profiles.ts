@@ -17,7 +17,7 @@ export async function getProfiles({
 		const { data } = await sb
 			.from('profiles')
 			.select('*')
-			.match(match ?? {})
+			.match(match || {})
 			.range(offset, offset + limit);
 		return data as SupaProfile[];
 	} catch (e) {
@@ -40,7 +40,7 @@ export async function getProfile({
 		} = await sb
 			.from('profiles')
 			.select('*')
-			.match(match ?? { uid } ?? {});
+			.match(match || { uid } || {});
 		return profile as SupaProfile;
 	} catch (e) {
 		console.warn(e);

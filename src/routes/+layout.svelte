@@ -4,7 +4,7 @@
 	import NavigationDrawer from '$comp/navigation/NavigationDrawer.svelte';
 	import UserDrawer from '$comp/user/UserDrawer.svelte';
 	import { confirmModal } from '$lib/modals';
-	import { acknowledgedInDevStore, profileStore } from '$lib/store';
+	import { acknowledgedInDevStore } from '$lib/store';
 	import { AppShell, Drawer, Modal, Toast, drawerStore, modalStore } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '@skeletonlabs/skeleton/themes/theme-modern.css';
@@ -27,7 +27,6 @@
 
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange(async (event: any, _session: any) => {
-			profileStore.refresh(session?.user.id);
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
