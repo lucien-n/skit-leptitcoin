@@ -25,8 +25,13 @@
 		}
 
 		liked = !liked;
-		if (liked) await likeListing({ listing_uid, user_uid: $profileStore.uid });
-		else await dislikeListing({ listing_uid, user_uid: $profileStore.uid });
+		if (liked) {
+			const { status } = await fetch(`/api/listing/like/${listing_uid}`);
+			if (status === 200) liked = true;
+		} else {
+			const { status } = await fetch(`/api/listing/dislike/${listing_uid}`);
+			if (status === 200) liked = false;
+		}
 	}
 </script>
 
