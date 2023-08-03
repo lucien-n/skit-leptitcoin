@@ -14,7 +14,11 @@
 	});
 
 	onMount(async () => {
-		if ($profileStore && (await isLikedByUser({ listing_uid, user_uid: $profileStore.uid })))
+		if (
+			listing_uid &&
+			$profileStore?.uid &&
+			(await isLikedByUser({ listing_uid, user_uid: $profileStore.uid }))
+		)
 			liked = true;
 	});
 
