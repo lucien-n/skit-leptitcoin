@@ -10,13 +10,11 @@
 	export let profiles: SupaProfile[] | null;
 
 	type Search = {
-		search: string;
 		profile: string;
 		showWhat: 'all' | 'restricted' | 'non-restricted';
 	};
 
 	let search: Writable<Search> = writable({
-		search: '',
 		profile: '',
 		showWhat: 'all'
 	});
@@ -26,16 +24,16 @@
 
 	let columns = ['picture', 'username', 'rating', 'created_at'];
 
-	search.subscribe(({ search, showWhat, profile }: Search) => {
-		const search_regex = new RegExp(`${search || ''}`, 'i');
+	search.subscribe(({ showWhat, profile }: Search) => {
 		const profile_regex = new RegExp(`${profile || ''}`, 'i');
 
 		if (profiles)
 			filtered_profiles = profiles.filter(
 				(profile) =>
-					profile.username.match(search_regex) &&
+					profile.username.match(profile_regex) &&
 					(showWhat === 'all' ? true : (showWhat === 'restricted') === profile.restricted)
 			);
+		refresh_table++;
 	});
 
 	async function disableProfile(profile: SupaProfile) {
@@ -87,7 +85,6 @@
 </script>
 
 <section class="flex flex-col gap-4">
-	<input type="text" class="input" placeholder="Search" bind:value={$search.search} />
 	<section class="flex items-center gap-3">
 		<RadioGroup>
 			<RadioItem bind:group={$search.showWhat} name="showWhat" value="all">All</RadioItem>
