@@ -43,12 +43,13 @@ function createCounterStore(name: string, log_on_update: boolean) {
 const authCounterStore = createCounterStore('Auth', true);
 
 function createProfileStore() {
-	const { subscribe, set, update }: Writable<SupaProfile> = writable();
+	const { subscribe, set, update }: Writable<SupaProfile | null> = writable();
 
 	return {
 		subscribe,
 		refresh: (uid?: string) =>
-			update((profile: SupaProfile) => {
+			update((profile: SupaProfile | null) => {
+				if (!profile) return {} as SupaProfile
 				const func = async () => {
 					const new_profile = await getProfile({ uid: uid ?? profile?.uid });
 					authCounterStore.incr();
@@ -59,4 +60,4 @@ function createProfileStore() {
 			})
 	};
 }
-export const profileStore = createProfileStore();
+export const profileStore: Writable<SupaProfile | null> = createProfileStore();

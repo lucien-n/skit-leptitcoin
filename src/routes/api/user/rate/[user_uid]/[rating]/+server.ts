@@ -23,7 +23,7 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
 	try {
 		const { error: err } = await supabase
 			.from('ratings')
-			.upsert({ rated: rated_user_uid, rater: user.id, value: rating });
+			.insert({ rated: rated_user_uid, rater: user.id, value: rating });
 		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
 		else return new Response(null, { status: 200, statusText: 'Success' });
 	} catch (e) {
