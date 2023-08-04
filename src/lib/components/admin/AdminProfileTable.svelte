@@ -42,7 +42,7 @@
 		});
 		if (!confirm) return;
 
-		const { status } = await fetch(`/api/user/disable/${profile.uid}`);
+		const { status } = await fetch(`/api/profile/disable/${profile.uid}`);
 
 		if (status === 200) {
 			successToast(`User <u>${profile.username}</u> disabled`);
@@ -58,7 +58,7 @@
 		});
 		if (!confirm) return;
 
-		const { status } = await fetch(`/api/user/delete/${profile.uid}`);
+		const { status } = await fetch(`/api/profile/delete/${profile.uid}`);
 
 		if (status === 200) {
 			successToast(`User <u>${profile.username}</u> deleted`);
@@ -71,7 +71,7 @@
 		const confirm = await confirmModal({ body: `Enable user <u>${profile.username}</u>?` });
 		if (!confirm) return;
 
-		const { status } = await fetch(`/api/user/enable/${profile.uid}`);
+		const { status } = await fetch(`/api/profile/enable/${profile.uid}`);
 
 		if (status === 200) {
 			successToast(`User <u>${profile.username}</u> enabled`);
