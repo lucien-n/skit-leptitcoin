@@ -34,11 +34,13 @@ export async function getListing({
 }): Promise<SupaListing | void> {
 	try {
 		const {
-			data: [listing]
+			data
 		} = await sb
 			.from('listings')
 			.select('*')
 			.match(match ?? {});
+		const listing = data![0]
+
 		return listing as SupaListing;
 	} catch (e) {
 		console.warn(e);

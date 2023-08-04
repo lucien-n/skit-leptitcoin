@@ -36,11 +36,13 @@ export async function getProfile({
 }): Promise<SupaProfile | null> {
 	try {
 		const {
-			data: [profile]
+			data
 		} = await sb
 			.from('profiles')
 			.select('*')
 			.match(match || { uid } || {});
+		const profile = data![0]
+
 		return profile as SupaProfile;
 	} catch (e) {
 		console.warn(e);

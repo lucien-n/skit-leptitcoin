@@ -14,9 +14,9 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
 	if (rated_user_uid === user.id)
 		return new Response(null, { status: 401, statusText: 'Unauthorized' });
 
-	const {
-		data: [{ uid: user_uid }]
-	} = await supabase.from('profiles').select('uid').eq('uid', rated_user_uid);
+	const { data } = await supabase.from('profiles').select('uid').eq('uid', rated_user_uid);
+	const user_uid = data![0].uid
+
 	if (user_uid !== rated_user_uid)
 		new Response(null, { status: 404, statusText: 'User Not Found' });
 
