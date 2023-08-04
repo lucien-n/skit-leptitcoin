@@ -8,18 +8,16 @@
 	export let listing_uid: string;
 	$: liked = false;
 
+	console.log(listing_uid);
+
 	// TODO: Update listing like
 	const unsubscribe = sessionStore.subscribe(async (session) => {
 		if (!session || !session.user || listing_uid === 'none') return;
 	});
 
 	onMount(async () => {
-		if (
-			listing_uid &&
-			$profileStore &&
-			(await isLikedByUser({ listing_uid, user_uid: $profileStore.uid }))
-		)
-			liked = true;
+		if (!listing_uid || listing_uid === 'none' || !$profileStore) return;
+		liked = await isLikedByUser({ listing_uid, user_uid: $profileStore.uid });
 	});
 
 	async function toggleLike() {
