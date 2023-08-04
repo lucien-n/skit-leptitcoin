@@ -52,9 +52,11 @@
 				</div>
 			</div>
 		</div>
-		{#if !anonymous && showAnonymous && $profileStore.uid === uid}
-			<span class="md:mx-8" />
-			<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
+		{#if $profileStore}
+			{#if !anonymous && showAnonymous && $profileStore.uid === uid}
+				<span class="md:mx-8" />
+				<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
+			{/if}
 		{/if}
 	</div>
 {:else}

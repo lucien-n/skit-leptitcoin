@@ -30,7 +30,7 @@
 			decoding="async"
 			class="w-full object-cover"
 		/>
-		{#if $profileStore?.uid !== listing.author_uid}
+		{#if $profileStore && $profileStore?.uid !== listing.author_uid}
 			<div class="absolute bottom-3 right-3">
 				<LikeButton listing_uid={listing.uid} />
 			</div>
