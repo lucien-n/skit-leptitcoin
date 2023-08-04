@@ -6,7 +6,7 @@
 
 <Drawer>
 	<svelte:fragment slot="lead" let:D>
-		<D.Link href="/user/{$profileStore?.username}">
+		<D.Link href="/profile/{$profileStore?.username}">
 			<D.Icon name="user" />
 			<D.Text>My Profile</D.Text>
 		</D.Link>

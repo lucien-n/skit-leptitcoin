@@ -55,7 +55,7 @@
 		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
-					href="/user/{listing.author_username}"
+					href="/profile/{listing.author_username}"
 					class="flex gap-3 hover:underline"
 					aria-label="{listing.author_username}'s profile"
 				>
