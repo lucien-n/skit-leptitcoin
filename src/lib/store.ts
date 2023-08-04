@@ -57,9 +57,27 @@ function createProfileStore(): ProfileStore {
 			if (!profile && !uid) return null;
 
 			const func = async () => {
-				const new_profile = await getProfile({ uid: uid ?? profile?.uid });
-				authCounterStore.incr();
-				if (new_profile) set(new_profile);
+				try {
+					const response = await fetch(`/api/profile/${uid || profile?.uid}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
+
+					if (!response.ok) {
+						throw new Error('Failed to fetch profile data.')
+					}
+
+					const data = await response.json()
+					const profile_data = data as SupaProfile
+
+					authCounterStore.incr();
+
+					if (profile_data) set(profile_data);
+				} catch (e) {
+					console.warn(e)
+				}
 			};
 			func();
 
