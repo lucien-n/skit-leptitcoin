@@ -8,8 +8,6 @@
 	export let listing_uid: string;
 	$: liked = false;
 
-	console.log(listing_uid);
-
 	// TODO: Update listing like
 	const unsubscribe = sessionStore.subscribe(async (session) => {
 		if (!session || !session.user || listing_uid === 'none') return;
