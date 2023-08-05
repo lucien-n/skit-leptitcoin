@@ -5,6 +5,7 @@
 	import { TITLE } from '$lib/helper.js';
 	import { searchStore } from '$lib/store';
 	import type { SearchParams } from '$lib/types';
+
 	export let data: { listings: Promise<SupaListing[]> };
 
 	let { listings } = data;
@@ -38,12 +39,6 @@
 
 	const _ = searchStore.subscribe((params: SearchParams) => {
 		getListings = filterListings(params);
-	});
-
-	const testPromise: Promise<SupaListing[]> = new Promise((resolve) => {
-		setTimeout(() => {
-			resolve([]);
-		}, 300000);
 	});
 </script>
 
