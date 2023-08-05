@@ -1,4 +1,6 @@
-export const GET = async ({ params, locals: { supabase, getSession, getRole, roles } }) => {
+import type { RequestHandler } from '@sveltejs/kit';
+
+export const GET = (async ({ params, locals: { supabase, getSession, getRole, roles } }) => {
 	const listing_uid = params.listing_uid;
 
 	const user = (await getSession())?.user;
@@ -22,4 +24,4 @@ export const GET = async ({ params, locals: { supabase, getSession, getRole, rol
 		console.warn(e);
 		return new Response(null, { status: 500, statusText: 'Internal Server Error' });
 	}
-};
+}) satisfies RequestHandler;

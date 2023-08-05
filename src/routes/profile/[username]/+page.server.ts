@@ -1,6 +1,7 @@
 import { getListings, getProfile } from '$supa/supabase';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ locals: { supabase }, params: { username }, url: { search } }) => {
+export const load = (async ({ locals: { supabase }, params: { username }, url: { search } }) => {
 	const user_profile = await getProfile({ sb: supabase, match: { username } });
 
 	const user_listings = await getListings({
@@ -13,4 +14,4 @@ export const load = async ({ locals: { supabase }, params: { username }, url: { 
 		user_listings,
 		anonymous: search === '?ano'
 	};
-};
+}) satisfies PageServerLoad;

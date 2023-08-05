@@ -1,8 +1,9 @@
 import { getListing } from '$supa/supabase';
 
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ locals: { supabase }, params }) => {
+export const load = (async ({ locals: { supabase }, params }) => {
 	const listing_uid = params.listing_uid;
 
 	const listing = await getListing({ sb: supabase, match: { uid: listing_uid } });
@@ -10,7 +11,7 @@ export const load = async ({ locals: { supabase }, params }) => {
 	return {
 		listing: listing
 	};
-};
+}) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	edit: async ({ request, locals: { supabase, getSession }, fetch }) => {

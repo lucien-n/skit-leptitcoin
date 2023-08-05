@@ -1,7 +1,8 @@
 import { isListingValid } from '$lib/server/helper';
 import type { Session } from '@supabase/supabase-js';
+import type { RequestHandler } from '@sveltejs/kit';
 
-export const POST = async ({ request, locals: { getSession, supabase } }) => {
+export const POST = (async ({ request, locals: { getSession, supabase } }) => {
 	const listing_data = await request.json();
 
 	const [listing, message] = isListingValid(listing_data);
@@ -21,4 +22,4 @@ export const POST = async ({ request, locals: { getSession, supabase } }) => {
 	}
 
 	return new Response();
-};
+}) satisfies RequestHandler;

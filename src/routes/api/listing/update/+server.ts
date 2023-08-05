@@ -1,7 +1,8 @@
 import { isListingValid } from '$lib/server/helper';
 import type { Session } from '@supabase/supabase-js';
+import type { RequestHandler } from '@sveltejs/kit';
 
-export const PUT = async ({ request, locals: { getSession, supabase } }) => {
+export const PUT = (async ({ request, locals: { getSession, supabase } }) => {
 	const listing_data = await request.json();
 
 	const [listing, message] = isListingValid(listing_data);
@@ -27,4 +28,4 @@ export const PUT = async ({ request, locals: { getSession, supabase } }) => {
 		console.warn(e);
 		return new Response(null, { status: 500, statusText: 'Internal Server Error' });
 	}
-};
+}) satisfies RequestHandler;
