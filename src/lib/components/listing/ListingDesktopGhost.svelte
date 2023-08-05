@@ -4,7 +4,7 @@
 </script>
 
 <div class="card m-2 hidden flex-col gap-2 md:flex lg:mx-auto lg:w-[80%] xl:w-[70%]">
-	<header class="flex w-full overflow-hidden">
+	<section class="flex w-full overflow-hidden">
 		<div class="h-full w-2/3 animate-pulse bg-surface-600">
 			<div class="aspect-[3/2] object-cover" />
 		</div>
@@ -23,7 +23,7 @@
 				<LikeButton listing_uid="none" />
 			</div>
 		</div>
-	</header>
+	</section>
 
 	<div class="card-header flex animate-pulse flex-col gap-3">
 		<div class="flex gap-4">

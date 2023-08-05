@@ -13,7 +13,7 @@
 </script>
 
 <div class="card m-2 mx-auto hidden w-full flex-col gap-2 md:flex xl:w-[70%]">
-	<header class="flex w-full overflow-hidden rounded-tl-[4px]">
+	<section class="flex w-full overflow-hidden rounded-tl-[4px]">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -49,12 +49,12 @@
 				{/if}
 			{/if}
 		</div>
-	</header>
+	</section>
 
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
-			<h3 class="variant-ghost badge text-lg">
+			<h3 class="badge variant-ghost text-lg">
 				{listing.price}€
 			</h3>
 		</div>

@@ -3,13 +3,13 @@
 </script>
 
 <div out:fade={{ duration: 100 }} class="card hidden h-64 w-full md:flex">
-	<header class="z-30 h-full w-1/3">
+	<section class="z-30 h-full w-1/3">
 		<div
 			class="aspect-[4/5] h-full w-full animate-pulse rounded-l-[4px] border border-r-0 border-b-surface-500 border-l-surface-500 border-t-surface-500 bg-surface-700 object-cover"
 		>
 			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 		</div>
-	</header>
+	</section>
 	<div
 		class="group/listing-card flex h-full w-full animate-pulse flex-col justify-between gap-2"
 		aria-label="listing placeholder"

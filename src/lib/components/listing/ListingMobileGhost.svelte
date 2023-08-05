@@ -4,11 +4,11 @@
 </script>
 
 <div class="card flex flex-col gap-2 md:hidden">
-	<header class="flex w-full overflow-hidden">
+	<section class="flex w-full overflow-hidden">
 		<div class="h-full w-full animate-pulse bg-surface-600">
 			<div class="aspect-[3/2] object-cover" />
 		</div>
-	</header>
+	</section>
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex animate-pulse gap-4">
 			<div class="placeholder h-9 w-48" />

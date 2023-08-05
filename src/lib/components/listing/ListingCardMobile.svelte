@@ -5,7 +5,7 @@
 </script>
 
 <div in:fade={{ duration: 100, delay: 100 }} class="relative flex h-64 w-full rounded-md md:hidden">
-	<header class="flex w-full">
+	<section class="flex w-full">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -26,5 +26,5 @@
 				{listing.price} €
 			</span>
 		</footer>
-	</header>
+	</section>
 </div>

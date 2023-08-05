@@ -9,7 +9,7 @@
 </script>
 
 <div in:fade={{ duration: 100, delay: 100 }} class="card relative hidden h-64 w-full md:flex">
-	<header class="relative z-30 h-full w-3/5 xl:w-1/3">
+	<section class="relative z-30 h-full w-3/5 xl:w-1/3">
 		<!-- TODO: get listing picture from storage  -->
 		<img
 			src={listing.picture
@@ -20,7 +20,7 @@
 			decoding="async"
 			class="aspect-[4/5] h-full w-full rounded-l-[4px] border border-r-0 border-b-surface-500 border-l-surface-500 border-t-surface-500 object-cover"
 		/>
-	</header>
+	</section>
 	<div class="flex w-full flex-col">
 		<a
 			href="/listing/{listing.uid}"

@@ -20,7 +20,7 @@
 </script>
 
 <div class="card flex flex-col gap-2 md:hidden">
-	<header class="relative w-full">
+	<section class="relative w-full">
 		<img
 			src={listing.picture
 				? listing.picture
@@ -35,7 +35,8 @@
 				<LikeButton listing_uid={listing.uid} />
 			</div>
 		{/if}
-	</header>
+	</section>
+
 	<div class="card-header flex flex-col gap-3">
 		<div class="flex gap-4">
 			<h2 class="h2">{listing.title}</h2>
