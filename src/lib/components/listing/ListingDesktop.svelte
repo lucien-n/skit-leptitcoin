@@ -34,15 +34,19 @@
 				</button>
 			</div>
 			<hr />
-			{#if $profileStore.uid === listing.author_uid}
-				<h3 class="h3 text-center">You are the author of this listing</h3>
-			{:else}
-				<div class="flex w-full gap-3">
-					<button on:click={buy} class="btn variant-ghost-tertiary w-full text-lg" aria-label="buy"
-						>Buy</button
-					>
-					<LikeButton listing_uid={listing.uid} />
-				</div>
+			{#if $profileStore}
+				{#if $profileStore.uid === listing.author_uid}
+					<h3 class="h3 text-center">You are the author of this listing</h3>
+				{:else}
+					<div class="flex w-full gap-3">
+						<button
+							on:click={buy}
+							class="btn variant-ghost-tertiary w-full text-lg"
+							aria-label="buy">Buy</button
+						>
+						<LikeButton listing_uid={listing.uid} />
+					</div>
+				{/if}
 			{/if}
 		</div>
 	</header>

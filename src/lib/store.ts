@@ -2,7 +2,7 @@ import type { SearchParams, Settings } from '$lib/types';
 import { getProfile } from '$supa/profiles';
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import type { Session } from '@supabase/supabase-js';
-import { writable, type Writable } from 'svelte/store';
+import { writable, type Subscriber, type Writable, type Invalidator } from 'svelte/store';
 
 export const searchStore: Writable<SearchParams> = writable({});
 export const listingsStore: Writable<SupaListing[]> = writable([]);
@@ -42,21 +42,37 @@ function createCounterStore(name: string, log_on_update: boolean) {
 
 const authCounterStore = createCounterStore('Auth', true);
 
-function createProfileStore() {
-	const { subscribe, set, update }: Writable<SupaProfile> = writable();
+type ProfileStore = {
+	subscribe: (this: void, run: Subscriber<SupaProfile | null>, invalidate?: Invalidator<SupaProfile | null>) => () => void;
+	set: (value: SupaProfile | null) => void;
+	update: (updater: (value: SupaProfile | null) => SupaProfile | null) => void;
+	refresh: (uid?: string) => void;
+};
+
+function createProfileStore(): ProfileStore {
+	const { subscribe, set, update } = writable<SupaProfile | null>(null);
+
+	const refresh = async (uid?: string) => {
+		update((profile: SupaProfile | null) => {
+			if (!profile && !uid) return null;
+
+			const func = async () => {
+				const new_profile = await getProfile({ uid: uid ?? profile?.uid });
+				authCounterStore.incr();
+				if (new_profile) set(new_profile);
+			};
+			func();
+
+			return profile;
+		});
+	};
 
 	return {
 		subscribe,
-		refresh: (uid?: string) =>
-			update((profile: SupaProfile) => {
-				const func = async () => {
-					const new_profile = await getProfile({ uid: uid ?? profile?.uid });
-					authCounterStore.incr();
-					if (new_profile) set(new_profile);
-				};
-				func();
-				return profile;
-			})
+		set,
+		update,
+		refresh,
 	};
 }
-export const profileStore = createProfileStore();
+
+export const profileStore: ProfileStore = createProfileStore();

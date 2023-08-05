@@ -55,13 +55,12 @@ export const actions: Actions = {
 		if (description.length < 3 || description.length > 512) {
 			return fail(400, {
 				...entries,
-				message: `Description length must be ${
-					description.length < 3
-						? 'greater than 3'
-						: description.length > 512
+				message: `Description length must be ${description.length < 3
+					? 'greater than 3'
+					: description.length > 512
 						? 'lesser than 512'
 						: ''
-				}`,
+					}`,
 				subject: 'description'
 			});
 		}
@@ -96,14 +95,12 @@ export const actions: Actions = {
 					'Content-Type': 'application/json'
 				}
 			});
-			console.log(status, statusText);
 			if (status != 200)
 				return fail(400, {
 					...entries,
 					message: 'An error occured',
 					subject: ''
 				});
-			else console.log(status, statusText);
 		} catch (e) {
 			console.warn(e);
 		}

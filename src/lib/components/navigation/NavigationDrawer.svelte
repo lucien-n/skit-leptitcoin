@@ -14,7 +14,7 @@
 	</svelte:fragment>
 	<svelte:fragment slot="tail" let:D>
 		{#if $profileStore}
-			<D.Link href="/user/{$profileStore?.username}">
+			<D.Link href="/profile/{$profileStore?.username}">
 				<D.Icon name="user" />
 				<D.Text>My Profile</D.Text>
 			</D.Link>

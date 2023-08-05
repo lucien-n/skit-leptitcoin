@@ -23,7 +23,7 @@
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
 		rating.current = event.detail.index;
-		fetch(`/api/user/${uid}/rate/${rating.current}`);
+		fetch(`/api/profile/rate/${uid}/${rating.current}`);
 	}
 </script>
 
@@ -37,7 +37,7 @@
 			<Avatar initials={profile.username[0]} />
 			<div>
 				<a
-					href="/user/{profile.username}"
+					href="/profile/{profile.username}"
 					class="flex gap-3"
 					aria-label="{profile.username}'s profile - rated {profile.rating} out of 5"
 				>
@@ -52,9 +52,11 @@
 				</div>
 			</div>
 		</div>
-		{#if !anonymous && showAnonymous && $profileStore.uid === uid}
-			<span class="md:mx-8" />
-			<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
+		{#if $profileStore}
+			{#if !anonymous && showAnonymous && $profileStore.uid === uid}
+				<span class="md:mx-8" />
+				<a href="?ano" class="btn variant-ghost-primary">See my public profile</a>
+			{/if}
 		{/if}
 	</div>
 {:else}

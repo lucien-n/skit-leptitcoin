@@ -14,38 +14,34 @@
 	let refresh_table = 0;
 
 	type Search = {
-		search: string;
 		author: string;
 		showWhat: 'all' | 'valids' | 'non-valids';
 	};
 
 	let search: Writable<Search> = writable({
-		search: '',
 		author: '',
 		showWhat: 'all'
 	});
 
 	let columns = ['category', 'title', 'price', 'condition', 'author_username', 'created_at'];
 
-	search.subscribe(({ search, showWhat, author }: Search) => {
-		const search_regex = new RegExp(`${search || ''}`, 'i');
+	search.subscribe(({ showWhat, author }: Search) => {
 		const author_regex = new RegExp(`${author || ''}`, 'i');
 
 		if (listings)
 			filtered_listings = listings.filter((listing) => {
 				return (
-					listing.title.match(search_regex) &&
 					listing.author_username?.match(author_regex) &&
 					(showWhat === 'all' ? true : (showWhat === 'valids') === listing.is_validated)
 				);
 			});
+		refresh_table++;
 	});
 
 	const listingRow = () => getContext('RowContext') as SupaListing;
 </script>
 
 <section class="flex flex-col gap-4">
-	<input type="text" class="input" placeholder="Search" bind:value={$search.search} />
 	<section class="flex items-center gap-3">
 		<RadioGroup>
 			<RadioItem bind:group={$search.showWhat} name="showWhat" value="all">All</RadioItem>

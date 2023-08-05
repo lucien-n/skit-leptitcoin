@@ -30,7 +30,7 @@
 			decoding="async"
 			class="w-full object-cover"
 		/>
-		{#if $profileStore?.uid !== listing.author_uid}
+		{#if $profileStore && $profileStore?.uid !== listing.author_uid}
 			<div class="absolute bottom-3 right-3">
 				<LikeButton listing_uid={listing.uid} />
 			</div>
@@ -55,7 +55,7 @@
 		<div class="flex w-full flex-col gap-3">
 			<div class="flex w-full justify-between">
 				<a
-					href="/user/{listing.author_username}"
+					href="/profile/{listing.author_username}"
 					class="flex gap-3 hover:underline"
 					aria-label="{listing.author_username}'s profile"
 				>
@@ -69,15 +69,19 @@
 				</button>
 			</div>
 			<hr />
-			{#if $profileStore.uid === listing.author_uid}
-				<h3 class="h3 text-center">You are the author of this listing</h3>
-			{:else}
-				<div class="flex w-full gap-3">
-					<button on:click={buy} class="btn variant-ghost-tertiary w-full text-lg" aria-label="buy"
-						>Buy</button
-					>
-					<LikeButton listing_uid={listing.uid} />
-				</div>
+			{#if $profileStore}
+				{#if $profileStore.uid === listing.author_uid}
+					<h3 class="h3 text-center">You are the author of this listing</h3>
+				{:else}
+					<div class="flex w-full gap-3">
+						<button
+							on:click={buy}
+							class="btn variant-ghost-tertiary w-full text-lg"
+							aria-label="buy">Buy</button
+						>
+						<LikeButton listing_uid={listing.uid} />
+					</div>
+				{/if}
 			{/if}
 		</div>
 		<br />

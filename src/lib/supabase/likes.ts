@@ -12,10 +12,16 @@ export async function isLikedByUser({
 	user_uid: string;
 }): Promise<boolean> {
 	try {
+		if (!listing_uid || !user_uid) return false
+
 		const {
-			data: [{ listing_uid: fetched_uid }]
+			data
 		} = await sb.from('likes').select('listing_uid').match({ listing_uid, user_uid });
-		console.log(fetched_uid);
+
+		if (!data || !data[0] || !data[0]) return false
+
+		const { listing_uid: fetched_uid } = data[0]
+
 		return listing_uid === fetched_uid;
 	} catch (e) {
 		console.warn(e);

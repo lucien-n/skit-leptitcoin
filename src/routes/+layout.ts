@@ -1,3 +1,5 @@
+import { profileStore } from '$lib/store';
+import { getProfile } from '$supa/supabase';
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit';
 
 export const load = async ({ fetch, data, depends }) => {
@@ -14,6 +16,8 @@ export const load = async ({ fetch, data, depends }) => {
 	const {
 		data: { session }
 	} = await supabase.auth.getSession();
+
+	profileStore.refresh(session?.user.id)
 
 	return { supabase, session };
 };

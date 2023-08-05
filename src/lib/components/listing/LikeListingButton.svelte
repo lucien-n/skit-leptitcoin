@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Icon from '$comp/widgets/Icon.svelte';
 	import { profileStore, sessionStore } from '$lib/store';
-	import { dislikeListing, isLikedByUser, likeListing } from '$supa/supabase';
+	import { isLikedByUser } from '$supa/supabase';
 	import { toastStore } from '@skeletonlabs/skeleton';
+	import { onMount } from 'svelte';
 
 	export let listing_uid: string;
 	$: liked = false;
@@ -10,7 +11,11 @@
 	// TODO: Update listing like
 	const unsubscribe = sessionStore.subscribe(async (session) => {
 		if (!session || !session.user || listing_uid === 'none') return;
-		if (await isLikedByUser({ listing_uid, user_uid: session.user.id })) liked = true;
+	});
+
+	onMount(async () => {
+		if (!listing_uid || listing_uid === 'none' || !$profileStore) return;
+		liked = await isLikedByUser({ listing_uid, user_uid: $profileStore.uid });
 	});
 
 	async function toggleLike() {
@@ -25,8 +30,13 @@
 		}
 
 		liked = !liked;
-		if (liked) await likeListing({ listing_uid, user_uid: $profileStore.uid });
-		else await dislikeListing({ listing_uid, user_uid: $profileStore.uid });
+		if (liked) {
+			const { status } = await fetch(`/api/listing/like/${listing_uid}`);
+			if (status === 200) liked = true;
+		} else {
+			const { status } = await fetch(`/api/listing/dislike/${listing_uid}`);
+			if (status === 200) liked = false;
+		}
 	}
 </script>
 

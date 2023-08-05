@@ -33,13 +33,12 @@ export const actions: Actions = {
 		if (description.length < 3 || description.length > 512) {
 			return fail(400, {
 				...entries,
-				message: `Description length must be ${
-					description.length < 3
+				message: `Description length must be ${description.length < 3
 						? 'greater than 3'
 						: description.length > 512
-						? 'lesser than 512'
-						: ''
-				}`,
+							? 'lesser than 512'
+							: ''
+					}`,
 				subject: 'description'
 			});
 		}
@@ -74,25 +73,9 @@ export const actions: Actions = {
 					'Content-Type': 'application/json'
 				}
 			});
-			console.log(status, statusText);
 		} catch (e) {
 			console.warn(e);
 		}
-
-		// try {
-		// 	const {
-		// 		data: [{ uid: listing_uid }],
-		// 		error
-		// 	} = await supabase.from('listings').insert(listing).select('uid');
-		// 	if (error)
-		// 		return fail(400, {
-		// 			...entries,
-		// 			message: error.message,
-		// 			subject: ''
-		// 		});
-		// } catch (e) {
-		// 	console.error(e);
-		// }
 
 		throw redirect(303, '/new/success');
 	}
