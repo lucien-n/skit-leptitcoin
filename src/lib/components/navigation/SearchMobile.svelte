@@ -17,7 +17,7 @@
 </script>
 
 <!-- svelte-ignore a11y-positive-tabindex -->
-<div id="search-mobile" class="flex w-full flex-col lg:hidden">
+<div id="search-mobile" class="mx-0 flex w-full flex-col px-0 lg:hidden">
 	<div id="search-input-fields" class="flex">
 		<div class="input-group flex justify-between">
 			<input type="search" placeholder="Search" class="w-max" bind:value={$searchStore.search} />

@@ -12,7 +12,7 @@
 
 <a
 	{href}
-	class="flex flex-col items-center rounded-[4px] p-1 px-2 {$settingsStore.high_contrast
+	class="flex flex-col items-center rounded-[4px] md:p-1 md:px-2 {$settingsStore.high_contrast
 		? 'hover:variant-ghost-success'
 		: ''} {cc}"
 	aria-label={aria_label}

@@ -33,8 +33,10 @@
 			</NavigationLinkGroup>
 		</svelte:fragment>
 
-		<SearchDesktop />
-		<SearchMobile />
+		<section>
+			<SearchDesktop />
+			<SearchMobile />
+		</section>
 
 		<svelte:fragment slot="trail">
 			<div class="hidden h-full flex-row items-center md:flex">
