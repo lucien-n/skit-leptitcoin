@@ -9,9 +9,9 @@
 			<div class="aspect-[3/2] object-cover" />
 		</div>
 		<div class="m-4 flex h-full w-1/3 flex-col gap-3">
-			<div class="flex w-full justify-between">
+			<div class="flex w-full flex-col justify-between gap-2">
 				<UserCardGhost />
-				<button class="btn variant-ghost-success h-12 self-center"
+				<button class="btn variant-ghost-success h-12 w-full self-center"
 					><div class="placeholder variant-glass w-24 animate-pulse" /></button
 				>
 			</div>
