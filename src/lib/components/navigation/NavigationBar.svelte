@@ -6,6 +6,7 @@
 	import { navigation_drawer, user_drawer } from '$lib/drawers';
 	import { profileStore } from '$lib/store';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
+	import Search from './Search.svelte';
 
 	function openNavigationDrawer(): void {
 		drawerStore.open(navigation_drawer);
@@ -33,10 +34,7 @@
 			</NavigationLinkGroup>
 		</svelte:fragment>
 
-		<section>
-			<SearchDesktop />
-			<SearchMobile />
-		</section>
+		<Search/>
 
 		<svelte:fragment slot="trail">
 			<div class="hidden h-full flex-row items-center md:flex">
