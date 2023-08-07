@@ -18,21 +18,23 @@
 
 		const search_regex = new RegExp(`${params.search || ''}`, 'i');
 
-		filtered_listings = (await listings)
-			.filter((listing) => {
-				return (
-					search_regex.test(listing.title) &&
-					(params.price_min ? listing.price > params.price_min : true) &&
-					(params.price_max ? listing.price < params.price_max : true) &&
-					(params.category ? listing.category === params.category : true)
-				);
-			})
-			.sort((a: SupaListing, b: SupaListing) => {
-				if (a.created_at && b.created_at) {
-					return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-				}
-				return 0;
-			});
+		filtered_listings = listings
+			? (await listings)
+					.filter((listing) => {
+						return (
+							search_regex.test(listing.title) &&
+							(params.price_min ? listing.price > params.price_min : true) &&
+							(params.price_max ? listing.price < params.price_max : true) &&
+							(params.category ? listing.category === params.category : true)
+						);
+					})
+					.sort((a: SupaListing, b: SupaListing) => {
+						if (a.created_at && b.created_at) {
+							return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+						}
+						return 0;
+					})
+			: [];
 
 		return filtered_listings;
 	}

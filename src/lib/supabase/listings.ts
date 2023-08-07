@@ -6,18 +6,24 @@ export async function getListings({
 	sb = supabase,
 	limit = 10,
 	offset = 0,
-	match = {}
+	match = {},
+	price_min = 0,
+	price_max = 999999
 }: {
 	sb?: SupabaseClient;
 	limit?: number;
 	offset?: number;
 	match?: any;
+	price_min?: number;
+	price_max?: number;
 }): Promise<SupaListing[] | void> {
 	try {
 		const { data } = await sb
 			.from('listings')
 			.select('*')
-			.match(match ?? {})
+			.match(match || {})
+			.gte('price', price_min)
+			.lte('price', price_max)
 			.range(offset, offset + limit);
 		return data as SupaListing[];
 	} catch (e) {
@@ -33,13 +39,11 @@ export async function getListing({
 	match?: any;
 }): Promise<SupaListing | void> {
 	try {
-		const {
-			data
-		} = await sb
+		const { data } = await sb
 			.from('listings')
 			.select('*')
 			.match(match ?? {});
-		const listing = data![0]
+		const listing = data![0];
 
 		return listing as SupaListing;
 	} catch (e) {
