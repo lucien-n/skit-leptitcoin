@@ -12,7 +12,7 @@
 	}
 </script>
 
-<div class="card m-2 mx-auto hidden w-full flex-col gap-2 md:flex xl:w-[70%]">
+<article class="card m-2 mx-auto hidden w-full flex-col gap-2 md:flex xl:w-[70%]">
 	<section class="flex w-full overflow-hidden rounded-tl-[4px]">
 		<img
 			src={listing.picture
@@ -66,4 +66,4 @@
 		<ConditionBadge condition={listing.condition} />
 		<br />
 	</div>
-</div>
+</article>
