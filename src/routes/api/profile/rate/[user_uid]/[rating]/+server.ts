@@ -15,17 +15,31 @@ export const GET = async ({ params, locals: { supabase, getSession } }) => {
 		return new Response(null, { status: 401, statusText: 'Unauthorized' });
 
 	const { data } = await supabase.from('profiles').select('uid').eq('uid', rated_user_uid);
-	const user_uid = data![0].uid
+	const user_uid = data![0].uid;
 
 	if (user_uid !== rated_user_uid)
 		new Response(null, { status: 404, statusText: 'User Not Found' });
 
 	try {
-		const { error: err } = await supabase
+		const { data, error: err } = await supabase
 			.from('ratings')
-			.insert({ rated: rated_user_uid, rater: user.id, value: rating });
+			.upsert(
+				{ rated: rated_user_uid, rater: user.id, value: rating },
+				{ onConflict: 'rated, rater' }
+			)
+			.select('uid');
 		if (err) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
-		else return new Response(null, { status: 200, statusText: 'Success' });
+
+		const rating_uid = data![0].uid;
+		if (!rating_uid) return new Response(null, { status: 500, statusText: 'Internal Error' });
+
+		const { error: err2 } = await supabase
+			.from('ratings')
+			.update({ rated: rated_user_uid, rater: user.id, value: rating })
+			.eq('uid', rating_uid);
+		if (err2) return new Response(null, { status: 400, statusText: JSON.stringify(err) });
+
+		return new Response(null, { status: 200, statusText: 'Success' });
 	} catch (e) {
 		console.warn(e);
 		new Response(null, { status: 500, statusText: 'Internal Server Error' });
