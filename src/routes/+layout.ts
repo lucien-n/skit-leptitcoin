@@ -1,6 +1,8 @@
 import { profileStore } from '$lib/store';
 import { getProfile } from '$supa/supabase';
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit';
+import { dev } from '$app/environment';
+import { inject } from '@vercel/analytics';
 
 export const load = async ({ fetch, data, depends }) => {
 	depends('supabase:auth');
@@ -17,7 +19,9 @@ export const load = async ({ fetch, data, depends }) => {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	profileStore.refresh(session?.user.id)
+	profileStore.refresh(session?.user.id);
 
 	return { supabase, session };
 };
+
+inject({ mode: dev ? 'development' : 'production' });
