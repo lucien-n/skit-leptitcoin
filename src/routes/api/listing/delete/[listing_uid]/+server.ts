@@ -6,9 +6,8 @@ export const GET = (async ({ params, locals: { supabase, getSession, getRole, ro
 	const user = (await getSession())?.user;
 	if (!user) return new Response(null, { status: 401, statusText: 'Unauthorized' });
 
-	const {
-		data: [{ authorUid: author_uid }]
-	} = await supabase.from('listings').select('authorUid').eq('uid', listing_uid);
+	const { data } = await supabase.from('listings').select('author_uid').eq('uid', listing_uid);
+	const author_uid = data![0].author_uid;
 
 	const user_uid = (await getSession())?.user.id;
 
