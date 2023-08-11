@@ -48,6 +48,7 @@
     "@supabase/auth-helpers-sveltekit": "^0.10.2",
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/auth-ui-svelte": "^0.2.2",
+    "@vercel/analytics": "^1.0.2",
     "supabase": "^1.82.6",
     "uuid": "^9.0.0"
   }
