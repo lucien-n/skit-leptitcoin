@@ -11,14 +11,17 @@
 	export let showAnonymous = true;
 	export let asCard = true;
 
-	let profile;
+	let profile: SupaProfile;
 	$: profile;
+	let rating;
 
 	onMount(async () => {
-		if (!profile) profile = await getProfile({ uid });
+		if (profile) return;
+		const fetched_profile = await getProfile({ uid });
+		if (!fetched_profile) return;
+		profile = fetched_profile;
+		rating = { current: profile?.rating, max: 5.0 };
 	});
-
-	let rating = { current: profile?.rating, max: 5.0 };
 
 	function iconClick(event: CustomEvent<{ index: number }>): void {
 		if (rating.current === event.detail.index) return;
