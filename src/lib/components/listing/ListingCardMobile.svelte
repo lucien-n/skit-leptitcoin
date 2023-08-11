@@ -4,7 +4,10 @@
 	export let listing: SupaListing;
 </script>
 
-<div in:fade={{ duration: 100, delay: 100 }} class="relative flex h-64 w-full rounded-md md:hidden">
+<article
+	in:fade={{ duration: 100, delay: 100 }}
+	class="relative flex h-64 w-full rounded-md md:hidden"
+>
 	<section class="flex w-full">
 		<img
 			src={listing.picture
@@ -27,4 +30,4 @@
 			</span>
 		</footer>
 	</section>
-</div>
+</article>

@@ -19,7 +19,7 @@
 	}
 </script>
 
-<div class="card flex flex-col gap-2 md:hidden">
+<article class="card flex flex-col gap-2 md:hidden">
 	<section class="relative w-full">
 		<img
 			src={listing.picture
@@ -87,4 +87,4 @@
 		</div>
 		<br />
 	</div>
-</div>
+</article>
