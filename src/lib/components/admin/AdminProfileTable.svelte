@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Search from '$comp/navigation/Search.svelte';
 	import Icon from '$comp/widgets/Icon.svelte';
 	import Table from '$comp/widgets/Table.svelte';
 	import { successToast, warnToast } from '$lib/helper';
@@ -11,28 +12,36 @@
 
 	type Search = {
 		profile: string;
+		rating_min: number;
+		rating_max: number;
 		showWhat: 'all' | 'restricted' | 'non-restricted';
 	};
 
 	let search: Writable<Search> = writable({
-		profile: '',
 		showWhat: 'all'
-	});
+	} as Search);
 
 	$: filtered_profiles = profiles;
 	let refresh_table = 0;
 
 	let columns = ['picture', 'username', 'rating', 'created_at'];
 
-	search.subscribe(({ showWhat, profile }: Search) => {
+	search.subscribe(({ showWhat, profile, rating_min, rating_max }: Search) => {
 		const profile_regex = new RegExp(`${profile || ''}`, 'i');
 
 		if (profiles)
-			filtered_profiles = profiles.filter(
-				(profile) =>
+			filtered_profiles = profiles.filter((profile) => {
+				let is_in_rating_range = true;
+
+				if (rating_min && profile.rating < rating_min) is_in_rating_range = false;
+				if (rating_max && profile.rating > rating_max) is_in_rating_range = false;
+
+				return (
 					profile.username.match(profile_regex) &&
+					is_in_rating_range &&
 					(showWhat === 'all' ? true : (showWhat === 'restricted') === profile.restricted)
-			);
+				);
+			});
 		refresh_table++;
 	});
 
@@ -101,6 +110,20 @@
 			placeholder="Profile"
 			class="input w-fit"
 			bind:value={$search.profile}
+		/>
+		<input
+			type="number"
+			id="filterRatingMin"
+			placeholder="Rating Min"
+			class="input w-fit"
+			bind:value={$search.rating_min}
+		/>
+		<input
+			type="number"
+			id="filterRatingMax"
+			placeholder="Rating Max"
+			class="input w-fit"
+			bind:value={$search.rating_max}
 		/>
 	</section>
 	{#if filtered_profiles}
