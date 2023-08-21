@@ -9,6 +9,7 @@
 	import ValidateListingButton from '../listing/ValidateListingButton.svelte';
 	import { confirmModal } from '$lib/modals';
 	import { successToast, warnToast } from '$lib/helper';
+	import Search from '$comp/navigation/Search.svelte';
 
 	export let listings: SupaListing[] | null;
 
@@ -17,23 +18,31 @@
 
 	type Search = {
 		author: string;
+		title: string;
+		price_min: number;
+		price_max: number;
 		showWhat: 'all' | 'valids' | 'non-valids';
 	};
 
-	let search: Writable<Search> = writable({
-		author: '',
-		showWhat: 'all'
-	});
+	let search: Writable<Search> = writable({ showWhat: 'all' } as Search);
 
 	let columns = ['category', 'title', 'price', 'condition', 'author_username', 'created_at'];
 
-	search.subscribe(({ showWhat, author }: Search) => {
+	search.subscribe(({ showWhat, author, title, price_min, price_max }: Search) => {
 		const author_regex = new RegExp(`${author || ''}`, 'i');
+		const title_regex = new RegExp(`${title || ''}`, 'i');
 
 		if (listings)
 			filtered_listings = listings.filter((listing) => {
+				let is_in_price_range = true;
+
+				if (price_min && listing.price <= price_min) is_in_price_range = false;
+				if (price_max && listing.price >= price_max) is_in_price_range = false;
+
 				return (
 					listing.author_username?.match(author_regex) &&
+					listing.title?.match(title_regex) &&
+					is_in_price_range &&
 					(showWhat === 'all' ? true : (showWhat === 'valids') === listing.is_validated)
 				);
 			});
@@ -58,6 +67,27 @@
 			placeholder="Author"
 			class="input w-fit"
 			bind:value={$search.author}
+		/>
+		<input
+			type="text"
+			id="filterTitle"
+			placeholder="Title"
+			class="input w-fit"
+			bind:value={$search.title}
+		/>
+		<input
+			type="number"
+			id="filterPriceMin"
+			placeholder="Price Min"
+			class="input w-fit"
+			bind:value={$search.price_min}
+		/>
+		<input
+			type="number"
+			id="filterPriceMax"
+			placeholder="Price Max"
+			class="input w-fit"
+			bind:value={$search.price_max}
 		/>
 	</section>
 	{#if filtered_listings}
