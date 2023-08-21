@@ -36,8 +36,8 @@
 			filtered_listings = listings.filter((listing) => {
 				let is_in_price_range = true;
 
-				if (price_min && listing.price <= price_min) is_in_price_range = false;
-				if (price_max && listing.price >= price_max) is_in_price_range = false;
+				if (price_min && listing.price < price_min) is_in_price_range = false;
+				if (price_max && listing.price > price_max) is_in_price_range = false;
 
 				return (
 					listing.author_username?.match(author_regex) &&
