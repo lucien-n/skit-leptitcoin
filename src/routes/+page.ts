@@ -13,8 +13,8 @@ export const load = (async ({ url: { searchParams } }) => {
 	let price_min;
 	let price_max;
 
-	if (param_price_min) price_min = parseInt(price_min) || 0;
-	if (param_price_max) price_max = parseInt(price_max) || 0;
+	if (param_price_min) price_min = parseInt(param_price_min) || 0;
+	if (param_price_max) price_max = parseInt(param_price_max) || 0;
 	if (param_category) match.category = param_category;
 
 	const listings = getListings({ match, price_min, price_max });
